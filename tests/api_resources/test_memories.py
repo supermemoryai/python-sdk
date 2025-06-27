@@ -40,12 +40,12 @@ class TestMemories:
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
             metadata={
-                "source": "web",
                 "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
-                "readingTime": 5,
-                "isPublic": True,
             },
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
@@ -98,7 +98,7 @@ class TestMemories:
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.list(
             container_tags=["user_123", "project_123"],
-            filters='{"AND":[{"key":"group","value":"jira_users","negate":false},{"filterType":"numeric","key":"timestamp","value":"1742745777","negate":false,"numericOperator":">"}]}',
+            filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
             limit=10,
             order="desc",
             page=1,
@@ -186,12 +186,12 @@ class TestMemories:
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
             metadata={
-                "source": "web",
                 "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
-                "readingTime": 5,
-                "isPublic": True,
             },
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
@@ -288,12 +288,12 @@ class TestAsyncMemories:
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
             metadata={
-                "source": "web",
                 "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
-                "readingTime": 5,
-                "isPublic": True,
             },
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
@@ -346,7 +346,7 @@ class TestAsyncMemories:
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.list(
             container_tags=["user_123", "project_123"],
-            filters='{"AND":[{"key":"group","value":"jira_users","negate":false},{"filterType":"numeric","key":"timestamp","value":"1742745777","negate":false,"numericOperator":">"}]}',
+            filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
             limit=10,
             order="desc",
             page=1,
@@ -434,12 +434,12 @@ class TestAsyncMemories:
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
             metadata={
-                "source": "web",
                 "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
-                "readingTime": 5,
-                "isPublic": True,
             },
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])

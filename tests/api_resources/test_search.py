@@ -39,15 +39,15 @@ class TestSearch:
                 "and_": [
                     {
                         "key": "group",
-                        "value": "jira_users",
                         "negate": False,
+                        "value": "jira_users",
                     },
                     {
                         "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
                         "negate": False,
                         "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ],
                 "or_": [{}],
@@ -57,7 +57,7 @@ class TestSearch:
             limit=10,
             only_matching_chunks=False,
             rerank=False,
-            rewrite_query=False,
+            rewrite_query=True,
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
@@ -115,15 +115,15 @@ class TestAsyncSearch:
                 "and_": [
                     {
                         "key": "group",
-                        "value": "jira_users",
                         "negate": False,
+                        "value": "jira_users",
                     },
                     {
                         "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
                         "negate": False,
                         "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ],
                 "or_": [{}],
@@ -133,7 +133,7 @@ class TestAsyncSearch:
             limit=10,
             only_matching_chunks=False,
             rerank=False,
-            rewrite_query=False,
+            rewrite_query=True,
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
