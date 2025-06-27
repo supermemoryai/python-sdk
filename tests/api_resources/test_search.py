@@ -57,7 +57,7 @@ class TestSearch:
             limit=10,
             only_matching_chunks=False,
             rerank=False,
-            rewrite_query=True,
+            rewrite_query=False,
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
@@ -133,7 +133,7 @@ class TestAsyncSearch:
             limit=10,
             only_matching_chunks=False,
             rerank=False,
-            rewrite_query=True,
+            rewrite_query=False,
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
