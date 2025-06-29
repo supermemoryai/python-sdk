@@ -17,10 +17,6 @@ class SettingUpdateParams(TypedDict, total=False):
 
     filter_prompt: Annotated[Optional[str], PropertyInfo(alias="filterPrompt")]
 
-    filter_tags: Annotated[
-        Union[str, float, bool, Dict[str, object], Iterable[object], None], PropertyInfo(alias="filterTags")
-    ]
-
     google_drive_client_id: Annotated[Optional[str], PropertyInfo(alias="googleDriveClientId")]
 
     google_drive_client_secret: Annotated[Optional[str], PropertyInfo(alias="googleDriveClientSecret")]

@@ -49,7 +49,6 @@ class SettingsResource(SyncAPIResource):
         *,
         exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
         filter_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        filter_tags: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
         google_drive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         google_drive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         google_drive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -86,7 +85,6 @@ class SettingsResource(SyncAPIResource):
                 {
                     "exclude_items": exclude_items,
                     "filter_prompt": filter_prompt,
-                    "filter_tags": filter_tags,
                     "google_drive_client_id": google_drive_client_id,
                     "google_drive_client_secret": google_drive_client_secret,
                     "google_drive_custom_key_enabled": google_drive_custom_key_enabled,
@@ -152,7 +150,6 @@ class AsyncSettingsResource(AsyncAPIResource):
         *,
         exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
         filter_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        filter_tags: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
         google_drive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         google_drive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         google_drive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -189,7 +186,6 @@ class AsyncSettingsResource(AsyncAPIResource):
                 {
                     "exclude_items": exclude_items,
                     "filter_prompt": filter_prompt,
-                    "filter_tags": filter_tags,
                     "google_drive_client_id": google_drive_client_id,
                     "google_drive_client_secret": google_drive_client_secret,
                     "google_drive_custom_key_enabled": google_drive_custom_key_enabled,

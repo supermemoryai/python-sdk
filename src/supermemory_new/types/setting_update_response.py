@@ -16,10 +16,6 @@ class Updated(BaseModel):
 
     filter_prompt: Optional[str] = FieldInfo(alias="filterPrompt", default=None)
 
-    filter_tags: Union[str, float, bool, Dict[str, object], List[object], None] = FieldInfo(
-        alias="filterTags", default=None
-    )
-
     google_drive_client_id: Optional[str] = FieldInfo(alias="googleDriveClientId", default=None)
 
     google_drive_client_secret: Optional[str] = FieldInfo(alias="googleDriveClientSecret", default=None)

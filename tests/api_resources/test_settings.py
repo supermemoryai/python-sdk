@@ -29,7 +29,6 @@ class TestSettings:
         setting = client.settings.update(
             exclude_items="string",
             filter_prompt="filterPrompt",
-            filter_tags="string",
             google_drive_client_id="googleDriveClientId",
             google_drive_client_secret="googleDriveClientSecret",
             google_drive_custom_key_enabled=True,
@@ -112,7 +111,6 @@ class TestAsyncSettings:
         setting = await async_client.settings.update(
             exclude_items="string",
             filter_prompt="filterPrompt",
-            filter_tags="string",
             google_drive_client_id="googleDriveClientId",
             google_drive_client_secret="googleDriveClientSecret",
             google_drive_custom_key_enabled=True,
