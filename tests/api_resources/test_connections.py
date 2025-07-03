@@ -14,6 +14,7 @@ from supermemory_new.types import (
     ConnectionCreateResponse,
     ConnectionGetByIDResponse,
     ConnectionGetByTagsResponse,
+    ConnectionDeleteByIDResponse,
     ConnectionListDocumentsResponse,
     ConnectionDeleteByProviderResponse,
 )
@@ -105,6 +106,48 @@ class TestConnections:
             assert_matches_type(ConnectionListResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_delete_by_id(self, client: Supermemory) -> None:
+        connection = client.connections.delete_by_id(
+            "connectionId",
+        )
+        assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_delete_by_id(self, client: Supermemory) -> None:
+        response = client.connections.with_raw_response.delete_by_id(
+            "connectionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = response.parse()
+        assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_delete_by_id(self, client: Supermemory) -> None:
+        with client.connections.with_streaming_response.delete_by_id(
+            "connectionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = response.parse()
+            assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_delete_by_id(self, client: Supermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            client.connections.with_raw_response.delete_by_id(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize
@@ -395,6 +438,48 @@ class TestAsyncConnections:
             assert_matches_type(ConnectionListResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_delete_by_id(self, async_client: AsyncSupermemory) -> None:
+        connection = await async_client.connections.delete_by_id(
+            "connectionId",
+        )
+        assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_delete_by_id(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.connections.with_raw_response.delete_by_id(
+            "connectionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = await response.parse()
+        assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_delete_by_id(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.connections.with_streaming_response.delete_by_id(
+            "connectionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = await response.parse()
+            assert_matches_type(ConnectionDeleteByIDResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_delete_by_id(self, async_client: AsyncSupermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            await async_client.connections.with_raw_response.delete_by_id(
+                "",
+            )
 
     @pytest.mark.skip()
     @parametrize

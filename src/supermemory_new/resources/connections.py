@@ -30,6 +30,7 @@ from ..types.connection_list_response import ConnectionListResponse
 from ..types.connection_create_response import ConnectionCreateResponse
 from ..types.connection_get_by_id_response import ConnectionGetByIDResponse
 from ..types.connection_get_by_tags_response import ConnectionGetByTagsResponse
+from ..types.connection_delete_by_id_response import ConnectionDeleteByIDResponse
 from ..types.connection_list_documents_response import ConnectionListDocumentsResponse
 from ..types.connection_delete_by_provider_response import ConnectionDeleteByProviderResponse
 
@@ -134,6 +135,39 @@ class ConnectionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ConnectionListResponse,
+        )
+
+    def delete_by_id(
+        self,
+        connection_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ConnectionDeleteByIDResponse:
+        """
+        Delete a specific connection by ID
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return self._delete(
+            f"/v3/connections/{connection_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConnectionDeleteByIDResponse,
         )
 
     def delete_by_provider(
@@ -428,6 +462,39 @@ class AsyncConnectionsResource(AsyncAPIResource):
             cast_to=ConnectionListResponse,
         )
 
+    async def delete_by_id(
+        self,
+        connection_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ConnectionDeleteByIDResponse:
+        """
+        Delete a specific connection by ID
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return await self._delete(
+            f"/v3/connections/{connection_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConnectionDeleteByIDResponse,
+        )
+
     async def delete_by_provider(
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
@@ -630,6 +697,9 @@ class ConnectionsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             connections.list,
         )
+        self.delete_by_id = to_raw_response_wrapper(
+            connections.delete_by_id,
+        )
         self.delete_by_provider = to_raw_response_wrapper(
             connections.delete_by_provider,
         )
@@ -656,6 +726,9 @@ class AsyncConnectionsResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             connections.list,
+        )
+        self.delete_by_id = async_to_raw_response_wrapper(
+            connections.delete_by_id,
         )
         self.delete_by_provider = async_to_raw_response_wrapper(
             connections.delete_by_provider,
@@ -684,6 +757,9 @@ class ConnectionsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             connections.list,
         )
+        self.delete_by_id = to_streamed_response_wrapper(
+            connections.delete_by_id,
+        )
         self.delete_by_provider = to_streamed_response_wrapper(
             connections.delete_by_provider,
         )
@@ -710,6 +786,9 @@ class AsyncConnectionsResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             connections.list,
+        )
+        self.delete_by_id = async_to_streamed_response_wrapper(
+            connections.delete_by_id,
         )
         self.delete_by_provider = async_to_streamed_response_wrapper(
             connections.delete_by_provider,

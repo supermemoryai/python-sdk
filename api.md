@@ -52,6 +52,7 @@ Types:
 from supermemory_new.types import (
     ConnectionCreateResponse,
     ConnectionListResponse,
+    ConnectionDeleteByIDResponse,
     ConnectionDeleteByProviderResponse,
     ConnectionGetByIDResponse,
     ConnectionGetByTagsResponse,
@@ -63,6 +64,7 @@ Methods:
 
 - <code title="post /v3/connections/{provider}">client.connections.<a href="./src/supermemory_new/resources/connections.py">create</a>(provider, \*\*<a href="src/supermemory_new/types/connection_create_params.py">params</a>) -> <a href="./src/supermemory_new/types/connection_create_response.py">ConnectionCreateResponse</a></code>
 - <code title="post /v3/connections/list">client.connections.<a href="./src/supermemory_new/resources/connections.py">list</a>(\*\*<a href="src/supermemory_new/types/connection_list_params.py">params</a>) -> <a href="./src/supermemory_new/types/connection_list_response.py">ConnectionListResponse</a></code>
+- <code title="delete /v3/connections/{connectionId}">client.connections.<a href="./src/supermemory_new/resources/connections.py">delete_by_id</a>(connection_id) -> <a href="./src/supermemory_new/types/connection_delete_by_id_response.py">ConnectionDeleteByIDResponse</a></code>
 - <code title="delete /v3/connections/{provider}">client.connections.<a href="./src/supermemory_new/resources/connections.py">delete_by_provider</a>(provider, \*\*<a href="src/supermemory_new/types/connection_delete_by_provider_params.py">params</a>) -> <a href="./src/supermemory_new/types/connection_delete_by_provider_response.py">ConnectionDeleteByProviderResponse</a></code>
 - <code title="get /v3/connections/{connectionId}">client.connections.<a href="./src/supermemory_new/resources/connections.py">get_by_id</a>(connection_id) -> <a href="./src/supermemory_new/types/connection_get_by_id_response.py">ConnectionGetByIDResponse</a></code>
 - <code title="post /v3/connections/{provider}/connection">client.connections.<a href="./src/supermemory_new/resources/connections.py">get_by_tags</a>(provider, \*\*<a href="src/supermemory_new/types/connection_get_by_tags_params.py">params</a>) -> <a href="./src/supermemory_new/types/connection_get_by_tags_response.py">ConnectionGetByTagsResponse</a></code>
