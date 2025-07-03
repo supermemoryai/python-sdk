@@ -25,7 +25,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from supermemory_new import Supermemory
+from supermemory import Supermemory
 
 client = Supermemory(
     api_key=os.environ.get("SUPERMEMORY_API_KEY"),  # This is the default and can be omitted
@@ -49,7 +49,7 @@ Simply import `AsyncSupermemory` instead of `Supermemory` and use `await` with e
 ```python
 import os
 import asyncio
-from supermemory_new import AsyncSupermemory
+from supermemory import AsyncSupermemory
 
 client = AsyncSupermemory(
     api_key=os.environ.get("SUPERMEMORY_API_KEY"),  # This is the default and can be omitted
@@ -84,8 +84,8 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 ```python
 import os
 import asyncio
-from supermemory_new import DefaultAioHttpClient
-from supermemory_new import AsyncSupermemory
+from supermemory import DefaultAioHttpClient
+from supermemory import AsyncSupermemory
 
 
 async def main() -> None:
@@ -113,16 +113,16 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `supermemory_new.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `supermemory.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `supermemory_new.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `supermemory.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `supermemory_new.APIError`.
+All errors inherit from `supermemory.APIError`.
 
 ```python
-import supermemory_new
-from supermemory_new import Supermemory
+import supermemory
+from supermemory import Supermemory
 
 client = Supermemory()
 
@@ -130,12 +130,12 @@ try:
     client.memories.add(
         content="This is a detailed article about machine learning concepts...",
     )
-except supermemory_new.APIConnectionError as e:
+except supermemory.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except supermemory_new.RateLimitError as e:
+except supermemory.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except supermemory_new.APIStatusError as e:
+except supermemory.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -163,7 +163,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from supermemory_new import Supermemory
+from supermemory import Supermemory
 
 # Configure the default for all requests:
 client = Supermemory(
@@ -183,7 +183,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from supermemory_new import Supermemory
+from supermemory import Supermemory
 
 # Configure the default for all requests:
 client = Supermemory(
@@ -237,7 +237,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from supermemory_new import Supermemory
+from supermemory import Supermemory
 
 client = Supermemory()
 response = client.memories.with_raw_response.add(
@@ -249,9 +249,9 @@ memory = response.parse()  # get the object that `memories.add()` would have ret
 print(memory.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory_new/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory_new/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -315,7 +315,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from supermemory_new import Supermemory, DefaultHttpxClient
+from supermemory import Supermemory, DefaultHttpxClient
 
 client = Supermemory(
     # Or use the `SUPERMEMORY_BASE_URL` env var
@@ -338,7 +338,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from supermemory_new import Supermemory
+from supermemory import Supermemory
 
 with Supermemory() as client:
   # make requests here
@@ -366,8 +366,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import supermemory_new
-print(supermemory_new.__version__)
+import supermemory
+print(supermemory.__version__)
 ```
 
 ## Requirements

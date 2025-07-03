@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from supermemory import Supermemory, AsyncSupermemory
 from tests.utils import assert_matches_type
-from supermemory_new import Supermemory, AsyncSupermemory
-from supermemory_new.types import SettingGetResponse, SettingUpdateResponse
+from supermemory.types import SettingGetResponse, SettingUpdateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from supermemory_new._utils import PropertyInfo
-from supermemory_new._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from supermemory_new._models import BaseModel, construct_type
+from supermemory._utils import PropertyInfo
+from supermemory._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from supermemory._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

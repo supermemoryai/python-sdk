@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from supermemory_new import Supermemory, AsyncSupermemory
-from supermemory_new._streaming import Stream, AsyncStream, ServerSentEvent
+from supermemory import Supermemory, AsyncSupermemory
+from supermemory._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

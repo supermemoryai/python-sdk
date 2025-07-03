@@ -21,11 +21,11 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from supermemory_new import Supermemory, AsyncSupermemory, APIResponseValidationError
-from supermemory_new._types import Omit
-from supermemory_new._models import BaseModel, FinalRequestOptions
-from supermemory_new._exceptions import APIStatusError, APITimeoutError, SupermemoryError, APIResponseValidationError
-from supermemory_new._base_client import (
+from supermemory import Supermemory, AsyncSupermemory, APIResponseValidationError
+from supermemory._types import Omit
+from supermemory._models import BaseModel, FinalRequestOptions
+from supermemory._exceptions import APIStatusError, APITimeoutError, SupermemoryError, APIResponseValidationError
+from supermemory._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -232,10 +232,10 @@ class TestSupermemory:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "supermemory_new/_legacy_response.py",
-                        "supermemory_new/_response.py",
+                        "supermemory/_legacy_response.py",
+                        "supermemory/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "supermemory_new/_compat.py",
+                        "supermemory/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -721,7 +721,7 @@ class TestSupermemory:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Supermemory) -> None:
         respx_mock.post("/v3/memories").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -733,7 +733,7 @@ class TestSupermemory:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Supermemory) -> None:
         respx_mock.post("/v3/memories").mock(return_value=httpx.Response(500))
@@ -745,7 +745,7 @@ class TestSupermemory:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -778,7 +778,7 @@ class TestSupermemory:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Supermemory, failures_before_success: int, respx_mock: MockRouter
@@ -804,7 +804,7 @@ class TestSupermemory:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Supermemory, failures_before_success: int, respx_mock: MockRouter
@@ -1055,10 +1055,10 @@ class TestAsyncSupermemory:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "supermemory_new/_legacy_response.py",
-                        "supermemory_new/_response.py",
+                        "supermemory/_legacy_response.py",
+                        "supermemory/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "supermemory_new/_compat.py",
+                        "supermemory/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1548,7 +1548,7 @@ class TestAsyncSupermemory:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncSupermemory
@@ -1562,7 +1562,7 @@ class TestAsyncSupermemory:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncSupermemory
@@ -1576,7 +1576,7 @@ class TestAsyncSupermemory:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1610,7 +1610,7 @@ class TestAsyncSupermemory:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1637,7 +1637,7 @@ class TestAsyncSupermemory:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("supermemory_new._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1674,8 +1674,8 @@ class TestAsyncSupermemory:
         import nest_asyncio
         import threading
 
-        from supermemory_new._utils import asyncify
-        from supermemory_new._base_client import get_platform
+        from supermemory._utils import asyncify
+        from supermemory._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()

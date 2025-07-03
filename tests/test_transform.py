@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from supermemory_new._types import NOT_GIVEN, Base64FileInput
-from supermemory_new._utils import (
+from supermemory._types import NOT_GIVEN, Base64FileInput
+from supermemory._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from supermemory_new._compat import PYDANTIC_V2
-from supermemory_new._models import BaseModel
+from supermemory._compat import PYDANTIC_V2
+from supermemory._models import BaseModel
 
 _T = TypeVar("_T")
 

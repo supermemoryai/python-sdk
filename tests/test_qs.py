@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from supermemory_new._qs import Querystring, stringify
+from supermemory._qs import Querystring, stringify
 
 
 def test_empty() -> None:

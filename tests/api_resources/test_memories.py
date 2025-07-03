@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from supermemory import Supermemory, AsyncSupermemory
 from tests.utils import assert_matches_type
-from supermemory_new import Supermemory, AsyncSupermemory
-from supermemory_new.types import (
+from supermemory.types import (
     MemoryAddResponse,
     MemoryGetResponse,
     MemoryListResponse,

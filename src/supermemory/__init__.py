@@ -89,12 +89,12 @@ _setup_logging()
 # Update the __module__ attribute for exported symbols so that
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
-# supermemory_new._exceptions.NotFoundError -> supermemory_new.NotFoundError
+# supermemory._exceptions.NotFoundError -> supermemory.NotFoundError
 __locals = locals()
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "supermemory_new"
+            __locals[__name].__module__ = "supermemory"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass

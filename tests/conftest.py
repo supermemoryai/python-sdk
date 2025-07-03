@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from supermemory_new import Supermemory, AsyncSupermemory, DefaultAioHttpClient
-from supermemory_new._utils import is_dict
+from supermemory import Supermemory, AsyncSupermemory, DefaultAioHttpClient
+from supermemory._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("supermemory_new").setLevel(logging.DEBUG)
+logging.getLogger("supermemory").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests

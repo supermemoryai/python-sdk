@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/supermemory_new/_version.py"
+    "src/supermemory/_version.py"
   ]
 }

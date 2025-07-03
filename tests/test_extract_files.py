@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from supermemory_new._types import FileTypes
-from supermemory_new._utils import extract_files
+from supermemory._types import FileTypes
+from supermemory._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:
