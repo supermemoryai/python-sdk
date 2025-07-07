@@ -127,9 +127,7 @@ from supermemory import Supermemory
 client = Supermemory()
 
 try:
-    client.memories.add(
-        content="This is a detailed article about machine learning concepts...",
-    )
+    client.memories.add()
 except supermemory.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -172,9 +170,7 @@ client = Supermemory(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).memories.add(
-    content="This is a detailed article about machine learning concepts...",
-)
+client.with_options(max_retries=5).memories.add()
 ```
 
 ### Timeouts
@@ -197,9 +193,7 @@ client = Supermemory(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).memories.add(
-    content="This is a detailed article about machine learning concepts...",
-)
+client.with_options(timeout=5.0).memories.add()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -240,9 +234,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from supermemory import Supermemory
 
 client = Supermemory()
-response = client.memories.with_raw_response.add(
-    content="This is a detailed article about machine learning concepts...",
-)
+response = client.memories.with_raw_response.add()
 print(response.headers.get('X-My-Header'))
 
 memory = response.parse()  # get the object that `memories.add()` would have returned
@@ -260,9 +252,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.memories.with_streaming_response.add(
-    content="This is a detailed article about machine learning concepts...",
-) as response:
+with client.memories.with_streaming_response.add() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

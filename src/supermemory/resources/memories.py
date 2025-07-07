@@ -51,8 +51,8 @@ class MemoriesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        content: str,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
+        content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
         metadata: Dict[str, Union[str, float, bool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -66,6 +66,9 @@ class MemoriesResource(SyncAPIResource):
         Update a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
+          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to group memories.
+
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
 
@@ -74,9 +77,6 @@ class MemoriesResource(SyncAPIResource):
               URL: A URL to a website, PDF, image, or video
 
               We automatically detect the content type from the url's response format.
-
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to group memories.
 
           custom_id: Optional custom ID of the memory. This could be an ID from your database that
               will uniquely identify this memory.
@@ -101,8 +101,8 @@ class MemoriesResource(SyncAPIResource):
             f"/v3/memories/{id}",
             body=maybe_transform(
                 {
-                    "content": content,
                     "container_tags": container_tags,
+                    "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
                 },
@@ -211,8 +211,8 @@ class MemoriesResource(SyncAPIResource):
     def add(
         self,
         *,
-        content: str,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
+        content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
         metadata: Dict[str, Union[str, float, bool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -226,6 +226,9 @@ class MemoriesResource(SyncAPIResource):
         Add a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
+          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to group memories.
+
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
 
@@ -234,9 +237,6 @@ class MemoriesResource(SyncAPIResource):
               URL: A URL to a website, PDF, image, or video
 
               We automatically detect the content type from the url's response format.
-
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to group memories.
 
           custom_id: Optional custom ID of the memory. This could be an ID from your database that
               will uniquely identify this memory.
@@ -259,8 +259,8 @@ class MemoriesResource(SyncAPIResource):
             "/v3/memories",
             body=maybe_transform(
                 {
-                    "content": content,
                     "container_tags": container_tags,
+                    "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
                 },
@@ -330,8 +330,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        content: str,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
+        content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
         metadata: Dict[str, Union[str, float, bool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -345,6 +345,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Update a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
+          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to group memories.
+
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
 
@@ -353,9 +356,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
               URL: A URL to a website, PDF, image, or video
 
               We automatically detect the content type from the url's response format.
-
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to group memories.
 
           custom_id: Optional custom ID of the memory. This could be an ID from your database that
               will uniquely identify this memory.
@@ -380,8 +380,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
             f"/v3/memories/{id}",
             body=await async_maybe_transform(
                 {
-                    "content": content,
                     "container_tags": container_tags,
+                    "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
                 },
@@ -490,8 +490,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
     async def add(
         self,
         *,
-        content: str,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
+        content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
         metadata: Dict[str, Union[str, float, bool]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -505,6 +505,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Add a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
+          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to group memories.
+
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
 
@@ -513,9 +516,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
               URL: A URL to a website, PDF, image, or video
 
               We automatically detect the content type from the url's response format.
-
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to group memories.
 
           custom_id: Optional custom ID of the memory. This could be an ID from your database that
               will uniquely identify this memory.
@@ -538,8 +538,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "/v3/memories",
             body=await async_maybe_transform(
                 {
-                    "content": content,
                     "container_tags": container_tags,
+                    "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
                 },

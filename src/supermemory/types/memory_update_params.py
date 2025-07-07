@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, List, Union
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -11,7 +11,14 @@ __all__ = ["MemoryUpdateParams"]
 
 
 class MemoryUpdateParams(TypedDict, total=False):
-    content: Required[str]
+    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
+    """Optional tags this memory should be containerized by.
+
+    This can be an ID for your user, a project ID, or any other identifier you wish
+    to use to group memories.
+    """
+
+    content: str
     """The content to extract and process into a memory.
 
     This can be a URL to a website, a PDF, an image, or a video.
@@ -21,13 +28,6 @@ class MemoryUpdateParams(TypedDict, total=False):
     URL: A URL to a website, PDF, image, or video
 
     We automatically detect the content type from the url's response format.
-    """
-
-    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
-    """Optional tags this memory should be containerized by.
-
-    This can be an ID for your user, a project ID, or any other identifier you wish
-    to use to group memories.
     """
 
     custom_id: Annotated[str, PropertyInfo(alias="customId")]
