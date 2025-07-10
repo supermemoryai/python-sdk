@@ -62,6 +62,12 @@ class MemoryGetResponse(BaseModel):
     summary: Optional[str] = None
     """Summary of the memory content"""
 
+    summary_embedding_model: Optional[str] = FieldInfo(alias="summaryEmbeddingModel", default=None)
+
+    summary_embedding_model_new: Optional[str] = FieldInfo(alias="summaryEmbeddingModelNew", default=None)
+
+    summary_embedding_new: Optional[List[float]] = FieldInfo(alias="summaryEmbeddingNew", default=None)
+
     title: Optional[str] = None
     """Title of the memory"""
 
@@ -83,9 +89,6 @@ class MemoryGetResponse(BaseModel):
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp"""
 
-    url: Optional[str] = None
-    """URL of the memory"""
-
     container_tags: Optional[List[str]] = FieldInfo(alias="containerTags", default=None)
     """Optional tags this memory should be containerized by.
 
@@ -95,3 +98,6 @@ class MemoryGetResponse(BaseModel):
 
     raw: None = None
     """Raw content of the memory"""
+
+    url: Optional[str] = None
+    """URL of the memory"""
