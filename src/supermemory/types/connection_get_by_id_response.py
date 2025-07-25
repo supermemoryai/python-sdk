@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, Optional
+from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
@@ -12,7 +13,7 @@ __all__ = ["ConnectionGetByIDResponse"]
 class ConnectionGetByIDResponse(BaseModel):
     id: str
 
-    created_at: float = FieldInfo(alias="createdAt")
+    created_at: datetime = FieldInfo(alias="createdAt")
 
     provider: str
 
@@ -20,6 +21,6 @@ class ConnectionGetByIDResponse(BaseModel):
 
     email: Optional[str] = None
 
-    expires_at: Optional[float] = FieldInfo(alias="expiresAt", default=None)
+    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
 
     metadata: Optional[Dict[str, object]] = None
