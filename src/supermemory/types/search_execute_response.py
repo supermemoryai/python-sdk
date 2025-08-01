@@ -40,6 +40,9 @@ class Result(BaseModel):
     title: Optional[str] = None
     """Document title"""
 
+    type: Optional[str] = None
+    """Document type"""
+
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Document last update date"""
 
