@@ -186,7 +186,7 @@ class MemoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete a memory
+        Delete a memory by ID
 
         Args:
           extra_headers: Send extra headers
@@ -465,7 +465,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Delete a memory
+        Delete a memory by ID
 
         Args:
           extra_headers: Send extra headers
