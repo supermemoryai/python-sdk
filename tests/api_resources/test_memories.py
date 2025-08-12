@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMemories:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Supermemory) -> None:
         memory = client.memories.update(
@@ -30,7 +30,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.update(
@@ -49,7 +49,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.update(
@@ -61,7 +61,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.update(
@@ -75,7 +75,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -83,13 +83,13 @@ class TestMemories:
                 id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Supermemory) -> None:
         memory = client.memories.list()
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.list(
@@ -102,7 +102,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.list()
@@ -112,7 +112,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.list() as response:
@@ -124,7 +124,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Supermemory) -> None:
         memory = client.memories.delete(
@@ -132,7 +132,7 @@ class TestMemories:
         )
         assert memory is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.delete(
@@ -144,7 +144,7 @@ class TestMemories:
         memory = response.parse()
         assert memory is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.delete(
@@ -158,7 +158,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -166,13 +166,13 @@ class TestMemories:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_add(self, client: Supermemory) -> None:
         memory = client.memories.add()
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.add(
@@ -190,7 +190,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_add(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.add()
@@ -200,7 +200,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_add(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.add() as response:
@@ -212,7 +212,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_get(self, client: Supermemory) -> None:
         memory = client.memories.get(
@@ -220,7 +220,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.get(
@@ -232,7 +232,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.get(
@@ -246,7 +246,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_get(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -260,7 +260,7 @@ class TestAsyncMemories:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.update(
@@ -268,7 +268,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.update(
@@ -287,7 +287,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.update(
@@ -299,7 +299,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.update(
@@ -313,7 +313,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -321,13 +321,13 @@ class TestAsyncMemories:
                 id="",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.list()
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.list(
@@ -340,7 +340,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.list()
@@ -350,7 +350,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryListResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.list() as response:
@@ -362,7 +362,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.delete(
@@ -370,7 +370,7 @@ class TestAsyncMemories:
         )
         assert memory is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.delete(
@@ -382,7 +382,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert memory is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.delete(
@@ -396,7 +396,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -404,13 +404,13 @@ class TestAsyncMemories:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_add(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.add()
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.add(
@@ -428,7 +428,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.add()
@@ -438,7 +438,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.add() as response:
@@ -450,7 +450,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.get(
@@ -458,7 +458,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.get(
@@ -470,7 +470,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.get(
@@ -484,7 +484,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):

@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSearch:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_execute(self, client: Supermemory) -> None:
         search = client.search.execute(
@@ -25,7 +25,7 @@ class TestSearch:
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_execute_with_all_params(self, client: Supermemory) -> None:
         search = client.search.execute(
@@ -61,7 +61,7 @@ class TestSearch:
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_execute(self, client: Supermemory) -> None:
         response = client.search.with_raw_response.execute(
@@ -73,7 +73,7 @@ class TestSearch:
         search = response.parse()
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_execute(self, client: Supermemory) -> None:
         with client.search.with_streaming_response.execute(
@@ -93,7 +93,7 @@ class TestAsyncSearch:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_execute(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.execute(
@@ -101,7 +101,7 @@ class TestAsyncSearch:
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.execute(
@@ -137,7 +137,7 @@ class TestAsyncSearch:
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.search.with_raw_response.execute(
@@ -149,7 +149,7 @@ class TestAsyncSearch:
         search = await response.parse()
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncSupermemory) -> None:
         async with async_client.search.with_streaming_response.execute(
