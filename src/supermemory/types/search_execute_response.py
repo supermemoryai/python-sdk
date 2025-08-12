@@ -46,6 +46,9 @@ class Result(BaseModel):
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Document last update date"""
 
+    content: Optional[str] = None
+    """Full document content (only included when includeFullDocs=true)"""
+
     summary: Optional[str] = None
     """Document summary"""
 
