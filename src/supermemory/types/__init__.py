@@ -9,11 +9,13 @@ from .memory_get_response import MemoryGetResponse as MemoryGetResponse
 from .memory_list_response import MemoryListResponse as MemoryListResponse
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .setting_get_response import SettingGetResponse as SettingGetResponse
+from .search_execute_params import SearchExecuteParams as SearchExecuteParams
 from .setting_update_params import SettingUpdateParams as SettingUpdateParams
 from .connection_list_params import ConnectionListParams as ConnectionListParams
 from .memory_update_response import MemoryUpdateResponse as MemoryUpdateResponse
 from .search_memories_params import SearchMemoriesParams as SearchMemoriesParams
 from .search_documents_params import SearchDocumentsParams as SearchDocumentsParams
+from .search_execute_response import SearchExecuteResponse as SearchExecuteResponse
 from .setting_update_response import SettingUpdateResponse as SettingUpdateResponse
 from .connection_create_params import ConnectionCreateParams as ConnectionCreateParams
 from .connection_import_params import ConnectionImportParams as ConnectionImportParams
