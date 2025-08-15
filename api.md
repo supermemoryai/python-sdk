@@ -26,12 +26,13 @@ Methods:
 Types:
 
 ```python
-from supermemory.types import SearchExecuteResponse
+from supermemory.types import SearchDocumentsResponse, SearchMemoriesResponse
 ```
 
 Methods:
 
-- <code title="post /v3/search">client.search.<a href="./src/supermemory/resources/search.py">execute</a>(\*\*<a href="src/supermemory/types/search_execute_params.py">params</a>) -> <a href="./src/supermemory/types/search_execute_response.py">SearchExecuteResponse</a></code>
+- <code title="post /v3/search">client.search.<a href="./src/supermemory/resources/search.py">documents</a>(\*\*<a href="src/supermemory/types/search_documents_params.py">params</a>) -> <a href="./src/supermemory/types/search_documents_response.py">SearchDocumentsResponse</a></code>
+- <code title="post /v4/search">client.search.<a href="./src/supermemory/resources/search.py">memories</a>(\*\*<a href="src/supermemory/types/search_memories_params.py">params</a>) -> <a href="./src/supermemory/types/search_memories_response.py">SearchMemoriesResponse</a></code>
 
 # Settings
 

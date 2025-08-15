@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SearchExecuteResponse", "Result", "ResultChunk"]
+__all__ = ["SearchDocumentsResponse", "Result", "ResultChunk"]
 
 
 class ResultChunk(BaseModel):
@@ -53,7 +53,7 @@ class Result(BaseModel):
     """Document summary"""
 
 
-class SearchExecuteResponse(BaseModel):
+class SearchDocumentsResponse(BaseModel):
     results: List[Result]
 
     timing: float

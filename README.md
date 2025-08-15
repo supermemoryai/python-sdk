@@ -32,7 +32,7 @@ client = Supermemory(
     api_key=os.environ.get("SUPERMEMORY_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.search.execute(
+response = client.search.documents(
     q="documents related to python",
 )
 print(response.results)
@@ -58,7 +58,7 @@ client = AsyncSupermemory(
 
 
 async def main() -> None:
-    response = await client.search.execute(
+    response = await client.search.documents(
         q="documents related to python",
     )
     print(response.results)
@@ -93,7 +93,7 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.search.execute(
+        response = await client.search.documents(
             q="documents related to python",
         )
         print(response.results)
@@ -110,6 +110,22 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from supermemory import Supermemory
+
+client = Supermemory()
+
+response = client.search.memories(
+    q="machine learning concepts",
+    include={},
+)
+print(response.include)
+```
 
 ## File uploads
 

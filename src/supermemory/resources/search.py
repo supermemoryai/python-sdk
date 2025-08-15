@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import search_execute_params
+from ..types import search_memories_params, search_documents_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,7 +19,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.search_execute_response import SearchExecuteResponse
+from ..types.search_memories_response import SearchMemoriesResponse
+from ..types.search_documents_response import SearchDocumentsResponse
 
 __all__ = ["SearchResource", "AsyncSearchResource"]
 
@@ -44,7 +45,7 @@ class SearchResource(SyncAPIResource):
         """
         return SearchResourceWithStreamingResponse(self)
 
-    def execute(
+    def documents(
         self,
         *,
         q: str,
@@ -53,7 +54,7 @@ class SearchResource(SyncAPIResource):
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         doc_id: str | NotGiven = NOT_GIVEN,
         document_threshold: float | NotGiven = NOT_GIVEN,
-        filters: search_execute_params.Filters | NotGiven = NOT_GIVEN,
+        filters: search_documents_params.Filters | NotGiven = NOT_GIVEN,
         include_full_docs: bool | NotGiven = NOT_GIVEN,
         include_summary: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
@@ -66,7 +67,7 @@ class SearchResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SearchExecuteResponse:
+    ) -> SearchDocumentsResponse:
         """
         Search memories with advanced filtering
 
@@ -135,12 +136,82 @@ class SearchResource(SyncAPIResource):
                     "rerank": rerank,
                     "rewrite_query": rewrite_query,
                 },
-                search_execute_params.SearchExecuteParams,
+                search_documents_params.SearchDocumentsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchExecuteResponse,
+            cast_to=SearchDocumentsResponse,
+        )
+
+    def memories(
+        self,
+        *,
+        q: str,
+        container_tag: str | NotGiven = NOT_GIVEN,
+        filters: search_memories_params.Filters | NotGiven = NOT_GIVEN,
+        include: search_memories_params.Include | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        rerank: bool | NotGiven = NOT_GIVEN,
+        rewrite_query: bool | NotGiven = NOT_GIVEN,
+        threshold: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SearchMemoriesResponse:
+        """
+        Search memory entries - Low latency for conversational
+
+        Args:
+          q: Search query string
+
+          container_tag: Optional tag this search should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filters: Optional filters to apply to the search
+
+          limit: Maximum number of results to return
+
+          rerank: If true, rerank the results based on the query. This is helpful if you want to
+              ensure the most relevant results are returned.
+
+          rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
+              the latency by about 400ms
+
+          threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
+              most memories, more results), 1 is most sensitive (returns lesser memories,
+              accurate results)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v4/search",
+            body=maybe_transform(
+                {
+                    "q": q,
+                    "container_tag": container_tag,
+                    "filters": filters,
+                    "include": include,
+                    "limit": limit,
+                    "rerank": rerank,
+                    "rewrite_query": rewrite_query,
+                    "threshold": threshold,
+                },
+                search_memories_params.SearchMemoriesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchMemoriesResponse,
         )
 
 
@@ -164,7 +235,7 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return AsyncSearchResourceWithStreamingResponse(self)
 
-    async def execute(
+    async def documents(
         self,
         *,
         q: str,
@@ -173,7 +244,7 @@ class AsyncSearchResource(AsyncAPIResource):
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         doc_id: str | NotGiven = NOT_GIVEN,
         document_threshold: float | NotGiven = NOT_GIVEN,
-        filters: search_execute_params.Filters | NotGiven = NOT_GIVEN,
+        filters: search_documents_params.Filters | NotGiven = NOT_GIVEN,
         include_full_docs: bool | NotGiven = NOT_GIVEN,
         include_summary: bool | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
@@ -186,7 +257,7 @@ class AsyncSearchResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SearchExecuteResponse:
+    ) -> SearchDocumentsResponse:
         """
         Search memories with advanced filtering
 
@@ -255,12 +326,82 @@ class AsyncSearchResource(AsyncAPIResource):
                     "rerank": rerank,
                     "rewrite_query": rewrite_query,
                 },
-                search_execute_params.SearchExecuteParams,
+                search_documents_params.SearchDocumentsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SearchExecuteResponse,
+            cast_to=SearchDocumentsResponse,
+        )
+
+    async def memories(
+        self,
+        *,
+        q: str,
+        container_tag: str | NotGiven = NOT_GIVEN,
+        filters: search_memories_params.Filters | NotGiven = NOT_GIVEN,
+        include: search_memories_params.Include | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        rerank: bool | NotGiven = NOT_GIVEN,
+        rewrite_query: bool | NotGiven = NOT_GIVEN,
+        threshold: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> SearchMemoriesResponse:
+        """
+        Search memory entries - Low latency for conversational
+
+        Args:
+          q: Search query string
+
+          container_tag: Optional tag this search should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filters: Optional filters to apply to the search
+
+          limit: Maximum number of results to return
+
+          rerank: If true, rerank the results based on the query. This is helpful if you want to
+              ensure the most relevant results are returned.
+
+          rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
+              the latency by about 400ms
+
+          threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
+              most memories, more results), 1 is most sensitive (returns lesser memories,
+              accurate results)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v4/search",
+            body=await async_maybe_transform(
+                {
+                    "q": q,
+                    "container_tag": container_tag,
+                    "filters": filters,
+                    "include": include,
+                    "limit": limit,
+                    "rerank": rerank,
+                    "rewrite_query": rewrite_query,
+                    "threshold": threshold,
+                },
+                search_memories_params.SearchMemoriesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchMemoriesResponse,
         )
 
 
@@ -268,8 +409,11 @@ class SearchResourceWithRawResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.execute = to_raw_response_wrapper(
-            search.execute,
+        self.documents = to_raw_response_wrapper(
+            search.documents,
+        )
+        self.memories = to_raw_response_wrapper(
+            search.memories,
         )
 
 
@@ -277,8 +421,11 @@ class AsyncSearchResourceWithRawResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.execute = async_to_raw_response_wrapper(
-            search.execute,
+        self.documents = async_to_raw_response_wrapper(
+            search.documents,
+        )
+        self.memories = async_to_raw_response_wrapper(
+            search.memories,
         )
 
 
@@ -286,8 +433,11 @@ class SearchResourceWithStreamingResponse:
     def __init__(self, search: SearchResource) -> None:
         self._search = search
 
-        self.execute = to_streamed_response_wrapper(
-            search.execute,
+        self.documents = to_streamed_response_wrapper(
+            search.documents,
+        )
+        self.memories = to_streamed_response_wrapper(
+            search.memories,
         )
 
 
@@ -295,6 +445,9 @@ class AsyncSearchResourceWithStreamingResponse:
     def __init__(self, search: AsyncSearchResource) -> None:
         self._search = search
 
-        self.execute = async_to_streamed_response_wrapper(
-            search.execute,
+        self.documents = async_to_streamed_response_wrapper(
+            search.documents,
+        )
+        self.memories = async_to_streamed_response_wrapper(
+            search.memories,
         )

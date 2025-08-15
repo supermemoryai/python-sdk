@@ -7,10 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["SearchExecuteParams", "Filters", "FiltersUnionMember0"]
+__all__ = ["SearchDocumentsParams", "Filters", "FiltersUnionMember0"]
 
 
-class SearchExecuteParams(TypedDict, total=False):
+class SearchDocumentsParams(TypedDict, total=False):
     q: Required[str]
     """Search query string"""
 
