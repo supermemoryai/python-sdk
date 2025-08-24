@@ -36,7 +36,6 @@ class TestMemories:
     def test_method_update_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.update(
             id="id",
-            container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
@@ -178,7 +177,6 @@ class TestMemories:
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.add(
-            container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
@@ -319,7 +317,6 @@ class TestAsyncMemories:
     async def test_method_update_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.update(
             id="id",
-            container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
@@ -461,7 +458,6 @@ class TestAsyncMemories:
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.add(
-            container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
