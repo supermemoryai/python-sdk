@@ -52,6 +52,7 @@ class MemoriesResource(SyncAPIResource):
         self,
         id: str,
         *,
+        container_tag: str | NotGiven = NOT_GIVEN,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
@@ -67,8 +68,12 @@ class MemoriesResource(SyncAPIResource):
         Update a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+          container_tag: Optional tag this memory should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to group memories.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this memory should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group memories.
 
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
@@ -102,6 +107,7 @@ class MemoriesResource(SyncAPIResource):
             f"/v3/memories/{id}",
             body=maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
@@ -212,6 +218,7 @@ class MemoriesResource(SyncAPIResource):
     def add(
         self,
         *,
+        container_tag: str | NotGiven = NOT_GIVEN,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
@@ -227,8 +234,12 @@ class MemoriesResource(SyncAPIResource):
         Add a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+          container_tag: Optional tag this memory should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to group memories.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this memory should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group memories.
 
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
@@ -260,6 +271,7 @@ class MemoriesResource(SyncAPIResource):
             "/v3/memories",
             body=maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
@@ -376,6 +388,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        container_tag: str | NotGiven = NOT_GIVEN,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
@@ -391,8 +404,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Update a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+          container_tag: Optional tag this memory should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to group memories.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this memory should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group memories.
 
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
@@ -426,6 +443,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             f"/v3/memories/{id}",
             body=await async_maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
@@ -536,6 +554,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
     async def add(
         self,
         *,
+        container_tag: str | NotGiven = NOT_GIVEN,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
@@ -551,8 +570,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Add a memory with any content type (text, url, file, etc.) and metadata
 
         Args:
-          container_tags: Optional tags this memory should be containerized by. This can be an ID for your
+          container_tag: Optional tag this memory should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to group memories.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this memory should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group memories.
 
           content: The content to extract and process into a memory. This can be a URL to a
               website, a PDF, an image, or a video.
@@ -584,6 +607,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "/v3/memories",
             body=await async_maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,

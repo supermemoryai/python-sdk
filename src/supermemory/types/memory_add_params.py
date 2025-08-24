@@ -11,11 +11,18 @@ __all__ = ["MemoryAddParams"]
 
 
 class MemoryAddParams(TypedDict, total=False):
-    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
-    """Optional tags this memory should be containerized by.
+    container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
+    """Optional tag this memory should be containerized by.
 
     This can be an ID for your user, a project ID, or any other identifier you wish
     to use to group memories.
+    """
+
+    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
+    """
+    (DEPRECATED: Use containerTag instead) Optional tags this memory should be
+    containerized by. This can be an ID for your user, a project ID, or any other
+    identifier you wish to use to group memories.
     """
 
     content: str
