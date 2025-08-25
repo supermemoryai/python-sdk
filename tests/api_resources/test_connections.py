@@ -271,7 +271,7 @@ class TestConnections:
         connection = client.connections.import_(
             provider="notion",
         )
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -280,7 +280,7 @@ class TestConnections:
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -292,7 +292,7 @@ class TestConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = response.parse()
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -304,7 +304,7 @@ class TestConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = response.parse()
-            assert connection is None
+            assert_matches_type(str, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -603,7 +603,7 @@ class TestAsyncConnections:
         connection = await async_client.connections.import_(
             provider="notion",
         )
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -612,7 +612,7 @@ class TestAsyncConnections:
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -624,7 +624,7 @@ class TestAsyncConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = await response.parse()
-        assert connection is None
+        assert_matches_type(str, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -636,7 +636,7 @@ class TestAsyncConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = await response.parse()
-            assert connection is None
+            assert_matches_type(str, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
