@@ -15,7 +15,7 @@ from ..types import (
     connection_list_documents_params,
     connection_delete_by_provider_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -293,7 +293,7 @@ class ConnectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
         Initiate a manual sync of connections
 
@@ -310,14 +310,14 @@ class ConnectionsResource(SyncAPIResource):
         """
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/v3/connections/{provider}/import",
             body=maybe_transform({"container_tags": container_tags}, connection_import_params.ConnectionImportParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     def list_documents(
@@ -618,7 +618,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> None:
         """
         Initiate a manual sync of connections
 
@@ -635,7 +635,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         """
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/v3/connections/{provider}/import",
             body=await async_maybe_transform(
@@ -644,7 +644,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=NoneType,
         )
 
     async def list_documents(
