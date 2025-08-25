@@ -60,6 +60,7 @@ from supermemory.types import (
     ConnectionDeleteByProviderResponse,
     ConnectionGetByIDResponse,
     ConnectionGetByTagsResponse,
+    ConnectionImportResponse,
     ConnectionListDocumentsResponse,
 )
 ```
@@ -72,5 +73,5 @@ Methods:
 - <code title="delete /v3/connections/{provider}">client.connections.<a href="./src/supermemory/resources/connections.py">delete_by_provider</a>(provider, \*\*<a href="src/supermemory/types/connection_delete_by_provider_params.py">params</a>) -> <a href="./src/supermemory/types/connection_delete_by_provider_response.py">ConnectionDeleteByProviderResponse</a></code>
 - <code title="get /v3/connections/{connectionId}">client.connections.<a href="./src/supermemory/resources/connections.py">get_by_id</a>(connection_id) -> <a href="./src/supermemory/types/connection_get_by_id_response.py">ConnectionGetByIDResponse</a></code>
 - <code title="post /v3/connections/{provider}/connection">client.connections.<a href="./src/supermemory/resources/connections.py">get_by_tags</a>(provider, \*\*<a href="src/supermemory/types/connection_get_by_tags_params.py">params</a>) -> <a href="./src/supermemory/types/connection_get_by_tags_response.py">ConnectionGetByTagsResponse</a></code>
-- <code title="post /v3/connections/{provider}/import">client.connections.<a href="./src/supermemory/resources/connections.py">import\_</a>(provider, \*\*<a href="src/supermemory/types/connection_import_params.py">params</a>) -> None</code>
+- <code title="post /v3/connections/{provider}/import">client.connections.<a href="./src/supermemory/resources/connections.py">import\_</a>(provider, \*\*<a href="src/supermemory/types/connection_import_params.py">params</a>) -> str</code>
 - <code title="post /v3/connections/{provider}/documents">client.connections.<a href="./src/supermemory/resources/connections.py">list_documents</a>(provider, \*\*<a href="src/supermemory/types/connection_list_documents_params.py">params</a>) -> <a href="./src/supermemory/types/connection_list_documents_response.py">ConnectionListDocumentsResponse</a></code>
