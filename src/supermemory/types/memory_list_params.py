@@ -21,6 +21,12 @@ class MemoryListParams(TypedDict, total=False):
     filters: str
     """Optional filters to apply to the search"""
 
+    include_content: Annotated[bool, PropertyInfo(alias="includeContent")]
+    """Whether to include the content field in the response.
+
+    Warning: This can make responses significantly larger.
+    """
+
     limit: Union[str, float]
     """Number of items per page"""
 

@@ -126,6 +126,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         filters: str | NotGiven = NOT_GIVEN,
+        include_content: bool | NotGiven = NOT_GIVEN,
         limit: Union[str, float] | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         page: Union[str, float] | NotGiven = NOT_GIVEN,
@@ -145,6 +146,9 @@ class MemoriesResource(SyncAPIResource):
               user, a project ID, or any other identifier you wish to use to group memories.
 
           filters: Optional filters to apply to the search
+
+          include_content: Whether to include the content field in the response. Warning: This can make
+              responses significantly larger.
 
           limit: Number of items per page
 
@@ -168,6 +172,7 @@ class MemoriesResource(SyncAPIResource):
                 {
                     "container_tags": container_tags,
                     "filters": filters,
+                    "include_content": include_content,
                     "limit": limit,
                     "order": order,
                     "page": page,
@@ -462,6 +467,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         container_tags: List[str] | NotGiven = NOT_GIVEN,
         filters: str | NotGiven = NOT_GIVEN,
+        include_content: bool | NotGiven = NOT_GIVEN,
         limit: Union[str, float] | NotGiven = NOT_GIVEN,
         order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
         page: Union[str, float] | NotGiven = NOT_GIVEN,
@@ -481,6 +487,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
               user, a project ID, or any other identifier you wish to use to group memories.
 
           filters: Optional filters to apply to the search
+
+          include_content: Whether to include the content field in the response. Warning: This can make
+              responses significantly larger.
 
           limit: Number of items per page
 
@@ -504,6 +513,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 {
                     "container_tags": container_tags,
                     "filters": filters,
+                    "include_content": include_content,
                     "limit": limit,
                     "order": order,
                     "page": page,

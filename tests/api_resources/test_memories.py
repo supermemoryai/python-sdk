@@ -97,6 +97,7 @@ class TestMemories:
         memory = client.memories.list(
             container_tags=["user_123", "project_123"],
             filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
+            include_content=False,
             limit=10,
             order="desc",
             page=1,
@@ -380,6 +381,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.list(
             container_tags=["user_123", "project_123"],
             filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
+            include_content=False,
             limit=10,
             order="desc",
             page=1,

@@ -73,6 +73,9 @@ class Memory(BaseModel):
     to use to group memories.
     """
 
+    content: Optional[str] = None
+    """Content of the memory (only included when includeContent=true)"""
+
 
 class Pagination(BaseModel):
     current_page: float = FieldInfo(alias="currentPage")
