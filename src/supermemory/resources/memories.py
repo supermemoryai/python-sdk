@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Mapping, cast
+from typing import Dict, Union, Mapping, cast
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import memory_add_params, memory_list_params, memory_update_params, memory_upload_file_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes
+from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -53,10 +53,10 @@ class MemoriesResource(SyncAPIResource):
         id: str,
         *,
         container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, List[str]]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,7 +124,7 @@ class MemoriesResource(SyncAPIResource):
     def list(
         self,
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         filters: str | NotGiven = NOT_GIVEN,
         include_content: bool | NotGiven = NOT_GIVEN,
         limit: Union[str, float] | NotGiven = NOT_GIVEN,
@@ -224,10 +224,10 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, List[str]]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -394,10 +394,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
         id: str,
         *,
         container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, List[str]]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -465,7 +465,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         filters: str | NotGiven = NOT_GIVEN,
         include_content: bool | NotGiven = NOT_GIVEN,
         limit: Union[str, float] | NotGiven = NOT_GIVEN,
@@ -565,10 +565,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         content: str | NotGiven = NOT_GIVEN,
         custom_id: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, List[str]]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

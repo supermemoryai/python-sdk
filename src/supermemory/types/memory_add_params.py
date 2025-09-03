@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union
+from typing import Dict, Union
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["MemoryAddParams"]
@@ -18,7 +19,7 @@ class MemoryAddParams(TypedDict, total=False):
     to use to group memories.
     """
 
-    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
+    container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
     """
     (DEPRECATED: Use containerTag instead) Optional tags this memory should be
     containerized by. This can be an ID for your user, a project ID, or any other
@@ -43,7 +44,7 @@ class MemoryAddParams(TypedDict, total=False):
     This could be an ID from your database that will uniquely identify this memory.
     """
 
-    metadata: Dict[str, Union[str, float, bool, List[str]]]
+    metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the memory.
 
     This is used to store additional information about the memory. You can use this

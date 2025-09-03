@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Optional
+from typing import Dict, Union, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -15,7 +15,7 @@ from ..types import (
     connection_list_documents_params,
     connection_delete_by_provider_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -61,7 +61,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         document_limit: int | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, Union[str, float, bool]]] | NotGiven = NOT_GIVEN,
         redirect_url: str | NotGiven = NOT_GIVEN,
@@ -106,7 +106,7 @@ class ConnectionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -174,7 +174,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str],
+        container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -247,7 +247,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str],
+        container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -286,7 +286,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -324,7 +324,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -384,7 +384,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         document_limit: int | NotGiven = NOT_GIVEN,
         metadata: Optional[Dict[str, Union[str, float, bool]]] | NotGiven = NOT_GIVEN,
         redirect_url: str | NotGiven = NOT_GIVEN,
@@ -429,7 +429,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -499,7 +499,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str],
+        container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -572,7 +572,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str],
+        container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -611,7 +611,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -651,7 +651,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive"],
         *,
-        container_tags: List[str] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["ConnectionImportParams"]
 
 
 class ConnectionImportParams(TypedDict, total=False):
-    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
+    container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
     """Optional comma-separated list of container tags to filter connections by"""

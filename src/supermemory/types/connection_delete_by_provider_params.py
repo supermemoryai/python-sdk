@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["ConnectionDeleteByProviderParams"]
 
 
 class ConnectionDeleteByProviderParams(TypedDict, total=False):
-    container_tags: Required[Annotated[List[str], PropertyInfo(alias="containerTags")]]
+    container_tags: Required[Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]]
     """Optional comma-separated list of container tags to filter connections by"""

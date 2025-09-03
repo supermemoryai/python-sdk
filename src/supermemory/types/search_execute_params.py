@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, List, Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["SearchExecuteParams", "Filters", "FiltersUnionMember0"]
@@ -26,7 +27,7 @@ class SearchExecuteParams(TypedDict, total=False):
     (returns lesser chunks, accurate results)
     """
 
-    container_tags: Annotated[List[str], PropertyInfo(alias="containerTags")]
+    container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
     """Optional tags this search should be containerized by.
 
     This can be an ID for your user, a project ID, or any other identifier you wish
