@@ -43,7 +43,7 @@ class MemoryUpdateParams(TypedDict, total=False):
     This could be an ID from your database that will uniquely identify this memory.
     """
 
-    metadata: Dict[str, Union[str, float, bool]]
+    metadata: Dict[str, Union[str, float, bool, List[str]]]
     """Optional metadata for the memory.
 
     This is used to store additional information about the memory. You can use this
