@@ -172,16 +172,18 @@ class TestMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_add(self, client: Supermemory) -> None:
-        memory = client.memories.add()
+        memory = client.memories.add(
+            content="This is a detailed article about machine learning concepts...",
+        )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.add(
+            content="This is a detailed article about machine learning concepts...",
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
-            content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
             metadata={
                 "category": "technology",
@@ -197,7 +199,9 @@ class TestMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_add(self, client: Supermemory) -> None:
-        response = client.memories.with_raw_response.add()
+        response = client.memories.with_raw_response.add(
+            content="This is a detailed article about machine learning concepts...",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -207,7 +211,9 @@ class TestMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_add(self, client: Supermemory) -> None:
-        with client.memories.with_streaming_response.add() as response:
+        with client.memories.with_streaming_response.add(
+            content="This is a detailed article about machine learning concepts...",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -456,16 +462,18 @@ class TestAsyncMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_add(self, async_client: AsyncSupermemory) -> None:
-        memory = await async_client.memories.add()
+        memory = await async_client.memories.add(
+            content="This is a detailed article about machine learning concepts...",
+        )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.add(
+            content="This is a detailed article about machine learning concepts...",
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
-            content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
             metadata={
                 "category": "technology",
@@ -481,7 +489,9 @@ class TestAsyncMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
-        response = await async_client.memories.with_raw_response.add()
+        response = await async_client.memories.with_raw_response.add(
+            content="This is a detailed article about machine learning concepts...",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -491,7 +501,9 @@ class TestAsyncMemories:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
-        async with async_client.memories.with_streaming_response.add() as response:
+        async with async_client.memories.with_streaming_response.add(
+            content="This is a detailed article about machine learning concepts...",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
