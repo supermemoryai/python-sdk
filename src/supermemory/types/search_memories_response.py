@@ -71,17 +71,20 @@ class ResultDocument(BaseModel):
     created_at: datetime = FieldInfo(alias="createdAt")
     """Document creation date"""
 
-    metadata: Optional[Dict[str, object]] = None
-    """Document metadata"""
-
-    title: str
-    """Document title"""
-
-    type: str
-    """Document type"""
-
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """Document last update date"""
+
+    metadata: Optional[Dict[str, object]] = None
+    """Document metadata (only included when documents=true)"""
+
+    summary: Optional[str] = None
+    """Document summary (only included when summaries=true)"""
+
+    title: Optional[str] = None
+    """Document title (only included when documents=true)"""
+
+    type: Optional[str] = None
+    """Document type (only included when documents=true)"""
 
 
 class Result(BaseModel):
