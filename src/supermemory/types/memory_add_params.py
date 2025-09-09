@@ -44,6 +44,13 @@ class MemoryAddParams(TypedDict, total=False):
     This could be an ID from your database that will uniquely identify this memory.
     """
 
+    file_type: Annotated[str, PropertyInfo(alias="fileType")]
+    """Optional file type override to force specific processing behavior.
+
+    Valid values: text, pdf, tweet, google_doc, google_slide, google_sheet, image,
+    video, notion_doc, webpage, onedrive
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the memory.
 
@@ -51,4 +58,11 @@ class MemoryAddParams(TypedDict, total=False):
     to store any additional information you need about the memory. Metadata can be
     filtered through. Keys must be strings and are case sensitive. Values can be
     strings, numbers, or booleans. You cannot nest objects.
+    """
+
+    mime_type: Annotated[str, PropertyInfo(alias="mimeType")]
+    """Required when fileType is 'image' or 'video'.
+
+    Specifies the exact MIME type to use (e.g., 'image/png', 'image/jpeg',
+    'video/mp4', 'video/webm')
     """

@@ -40,6 +40,7 @@ class TestMemories:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -48,6 +49,7 @@ class TestMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
@@ -185,6 +187,7 @@ class TestMemories:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -193,6 +196,7 @@ class TestMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
@@ -277,7 +281,9 @@ class TestMemories:
     def test_method_upload_file_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.upload_file(
             file=b"raw file contents",
-            container_tags="containerTags",
+            container_tags='["user_123", "project_123"]',
+            file_type="image",
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUploadFileResponse, memory, path=["response"])
 
@@ -330,6 +336,7 @@ class TestAsyncMemories:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -338,6 +345,7 @@ class TestAsyncMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
@@ -475,6 +483,7 @@ class TestAsyncMemories:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -483,6 +492,7 @@ class TestAsyncMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
@@ -567,7 +577,9 @@ class TestAsyncMemories:
     async def test_method_upload_file_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.upload_file(
             file=b"raw file contents",
-            container_tags="containerTags",
+            container_tags='["user_123", "project_123"]',
+            file_type="image",
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUploadFileResponse, memory, path=["response"])
 
