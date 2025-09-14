@@ -82,7 +82,7 @@ class SearchResource(SyncAPIResource):
               results)
 
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to filter memories.
+              user, a project ID, or any other identifier you wish to use to filter documents.
 
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
@@ -181,7 +181,7 @@ class SearchResource(SyncAPIResource):
               results)
 
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to filter memories.
+              user, a project ID, or any other identifier you wish to use to filter documents.
 
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
@@ -371,7 +371,7 @@ class AsyncSearchResource(AsyncAPIResource):
               results)
 
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to filter memories.
+              user, a project ID, or any other identifier you wish to use to filter documents.
 
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
@@ -470,7 +470,7 @@ class AsyncSearchResource(AsyncAPIResource):
               results)
 
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
-              user, a project ID, or any other identifier you wish to use to filter memories.
+              user, a project ID, or any other identifier you wish to use to filter documents.
 
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.

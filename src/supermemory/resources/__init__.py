@@ -8,14 +8,6 @@ from .search import (
     SearchResourceWithStreamingResponse,
     AsyncSearchResourceWithStreamingResponse,
 )
-from .memories import (
-    MemoriesResource,
-    AsyncMemoriesResource,
-    MemoriesResourceWithRawResponse,
-    AsyncMemoriesResourceWithRawResponse,
-    MemoriesResourceWithStreamingResponse,
-    AsyncMemoriesResourceWithStreamingResponse,
-)
 from .settings import (
     SettingsResource,
     AsyncSettingsResource,
@@ -34,12 +26,6 @@ from .connections import (
 )
 
 __all__ = [
-    "MemoriesResource",
-    "AsyncMemoriesResource",
-    "MemoriesResourceWithRawResponse",
-    "AsyncMemoriesResourceWithRawResponse",
-    "MemoriesResourceWithStreamingResponse",
-    "AsyncMemoriesResourceWithStreamingResponse",
     "SearchResource",
     "AsyncSearchResource",
     "SearchResourceWithRawResponse",

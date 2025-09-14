@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import search, memories, settings, connections
+from .resources import search, settings, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SupermemoryError
 from ._base_client import (
@@ -43,7 +43,6 @@ __all__ = [
 
 
 class Supermemory(SyncAPIClient):
-    memories: memories.MemoriesResource
     search: search.SearchResource
     settings: settings.SettingsResource
     connections: connections.ConnectionsResource
@@ -104,7 +103,6 @@ class Supermemory(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.memories = memories.MemoriesResource(self)
         self.search = search.SearchResource(self)
         self.settings = settings.SettingsResource(self)
         self.connections = connections.ConnectionsResource(self)
@@ -217,7 +215,6 @@ class Supermemory(SyncAPIClient):
 
 
 class AsyncSupermemory(AsyncAPIClient):
-    memories: memories.AsyncMemoriesResource
     search: search.AsyncSearchResource
     settings: settings.AsyncSettingsResource
     connections: connections.AsyncConnectionsResource
@@ -278,7 +275,6 @@ class AsyncSupermemory(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.memories = memories.AsyncMemoriesResource(self)
         self.search = search.AsyncSearchResource(self)
         self.settings = settings.AsyncSettingsResource(self)
         self.connections = connections.AsyncConnectionsResource(self)
@@ -392,7 +388,6 @@ class AsyncSupermemory(AsyncAPIClient):
 
 class SupermemoryWithRawResponse:
     def __init__(self, client: Supermemory) -> None:
-        self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
         self.search = search.SearchResourceWithRawResponse(client.search)
         self.settings = settings.SettingsResourceWithRawResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
@@ -400,7 +395,6 @@ class SupermemoryWithRawResponse:
 
 class AsyncSupermemoryWithRawResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
-        self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
         self.search = search.AsyncSearchResourceWithRawResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithRawResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
@@ -408,7 +402,6 @@ class AsyncSupermemoryWithRawResponse:
 
 class SupermemoryWithStreamedResponse:
     def __init__(self, client: Supermemory) -> None:
-        self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
         self.search = search.SearchResourceWithStreamingResponse(client.search)
         self.settings = settings.SettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
@@ -416,7 +409,6 @@ class SupermemoryWithStreamedResponse:
 
 class AsyncSupermemoryWithStreamedResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
-        self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
         self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)

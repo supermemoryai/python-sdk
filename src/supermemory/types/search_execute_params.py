@@ -31,7 +31,7 @@ class SearchExecuteParams(TypedDict, total=False):
     """Optional tags this search should be containerized by.
 
     This can be an ID for your user, a project ID, or any other identifier you wish
-    to use to filter memories.
+    to use to filter documents.
     """
 
     doc_id: Annotated[str, PropertyInfo(alias="docId")]
