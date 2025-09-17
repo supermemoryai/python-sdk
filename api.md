@@ -1,3 +1,49 @@
+# Memories
+
+Types:
+
+```python
+from supermemory.types import (
+    MemoryUpdateResponse,
+    MemoryListResponse,
+    MemoryAddResponse,
+    MemoryGetResponse,
+    MemoryUploadFileResponse,
+)
+```
+
+Methods:
+
+- <code title="patch /v3/documents/{id}">client.memories.<a href="./src/supermemory/resources/memories.py">update</a>(id, \*\*<a href="src/supermemory/types/memory_update_params.py">params</a>) -> <a href="./src/supermemory/types/memory_update_response.py">MemoryUpdateResponse</a></code>
+- <code title="post /v3/documents/list">client.memories.<a href="./src/supermemory/resources/memories.py">list</a>(\*\*<a href="src/supermemory/types/memory_list_params.py">params</a>) -> <a href="./src/supermemory/types/memory_list_response.py">MemoryListResponse</a></code>
+- <code title="delete /v3/documents/{id}">client.memories.<a href="./src/supermemory/resources/memories.py">delete</a>(id) -> None</code>
+- <code title="post /v3/documents">client.memories.<a href="./src/supermemory/resources/memories.py">add</a>(\*\*<a href="src/supermemory/types/memory_add_params.py">params</a>) -> <a href="./src/supermemory/types/memory_add_response.py">MemoryAddResponse</a></code>
+- <code title="get /v3/documents/{id}">client.memories.<a href="./src/supermemory/resources/memories.py">get</a>(id) -> <a href="./src/supermemory/types/memory_get_response.py">MemoryGetResponse</a></code>
+- <code title="post /v3/documents/file">client.memories.<a href="./src/supermemory/resources/memories.py">upload_file</a>(\*\*<a href="src/supermemory/types/memory_upload_file_params.py">params</a>) -> <a href="./src/supermemory/types/memory_upload_file_response.py">MemoryUploadFileResponse</a></code>
+
+# Documents
+
+Types:
+
+```python
+from supermemory.types import (
+    DocumentUpdateResponse,
+    DocumentListResponse,
+    DocumentAddResponse,
+    DocumentGetResponse,
+    DocumentUploadFileResponse,
+)
+```
+
+Methods:
+
+- <code title="patch /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">update</a>(id, \*\*<a href="src/supermemory/types/document_update_params.py">params</a>) -> <a href="./src/supermemory/types/document_update_response.py">DocumentUpdateResponse</a></code>
+- <code title="post /v3/documents/list">client.documents.<a href="./src/supermemory/resources/documents.py">list</a>(\*\*<a href="src/supermemory/types/document_list_params.py">params</a>) -> <a href="./src/supermemory/types/document_list_response.py">DocumentListResponse</a></code>
+- <code title="delete /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">delete</a>(id) -> None</code>
+- <code title="post /v3/documents">client.documents.<a href="./src/supermemory/resources/documents.py">add</a>(\*\*<a href="src/supermemory/types/document_add_params.py">params</a>) -> <a href="./src/supermemory/types/document_add_response.py">DocumentAddResponse</a></code>
+- <code title="get /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">get</a>(id) -> <a href="./src/supermemory/types/document_get_response.py">DocumentGetResponse</a></code>
+- <code title="post /v3/documents/file">client.documents.<a href="./src/supermemory/resources/documents.py">upload_file</a>(\*\*<a href="src/supermemory/types/document_upload_file_params.py">params</a>) -> <a href="./src/supermemory/types/document_upload_file_response.py">DocumentUploadFileResponse</a></code>
+
 # Search
 
 Types:

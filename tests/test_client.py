@@ -724,20 +724,20 @@ class TestSupermemory:
     @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Supermemory) -> None:
-        respx_mock.post("/v3/search").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.patch("/v3/documents/id").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.search.with_streaming_response.documents(q="machine learning concepts").__enter__()
+            client.memories.with_streaming_response.update(id="id").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("supermemory._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Supermemory) -> None:
-        respx_mock.post("/v3/search").mock(return_value=httpx.Response(500))
+        respx_mock.patch("/v3/documents/id").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.search.with_streaming_response.documents(q="machine learning concepts").__enter__()
+            client.memories.with_streaming_response.update(id="id").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -764,9 +764,9 @@ class TestSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.documents(q="machine learning concepts")
+        response = client.memories.with_raw_response.update(id="id")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -788,11 +788,9 @@ class TestSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.documents(
-            q="machine learning concepts", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.memories.with_raw_response.update(id="id", extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -813,11 +811,9 @@ class TestSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = client.search.with_raw_response.documents(
-            q="machine learning concepts", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.memories.with_raw_response.update(id="id", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1545,10 +1541,10 @@ class TestAsyncSupermemory:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncSupermemory
     ) -> None:
-        respx_mock.post("/v3/search").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.patch("/v3/documents/id").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.search.with_streaming_response.documents(q="machine learning concepts").__aenter__()
+            await async_client.memories.with_streaming_response.update(id="id").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1557,10 +1553,10 @@ class TestAsyncSupermemory:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncSupermemory
     ) -> None:
-        respx_mock.post("/v3/search").mock(return_value=httpx.Response(500))
+        respx_mock.patch("/v3/documents/id").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.search.with_streaming_response.documents(q="machine learning concepts").__aenter__()
+            await async_client.memories.with_streaming_response.update(id="id").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1588,9 +1584,9 @@ class TestAsyncSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.documents(q="machine learning concepts")
+        response = await client.memories.with_raw_response.update(id="id")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1613,10 +1609,10 @@ class TestAsyncSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.documents(
-            q="machine learning concepts", extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.memories.with_raw_response.update(
+            id="id", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1639,10 +1635,10 @@ class TestAsyncSupermemory:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/v3/search").mock(side_effect=retry_handler)
+        respx_mock.patch("/v3/documents/id").mock(side_effect=retry_handler)
 
-        response = await client.search.with_raw_response.documents(
-            q="machine learning concepts", extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.memories.with_raw_response.update(
+            id="id", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
