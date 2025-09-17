@@ -127,6 +127,23 @@ response = client.search.memories(
 print(response.include)
 ```
 
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from supermemory import Supermemory
+
+client = Supermemory()
+
+client.memories.upload_file(
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `supermemory.APIConnectionError` is raised.
@@ -143,8 +160,8 @@ from supermemory import Supermemory
 client = Supermemory()
 
 try:
-    client.search.documents(
-        q="machine learning concepts",
+    client.memories.update(
+        id="id",
     )
 except supermemory.APIConnectionError as e:
     print("The server could not be reached")
@@ -188,8 +205,8 @@ client = Supermemory(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).search.documents(
-    q="machine learning concepts",
+client.with_options(max_retries=5).memories.update(
+    id="id",
 )
 ```
 
@@ -213,8 +230,8 @@ client = Supermemory(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).search.documents(
-    q="machine learning concepts",
+client.with_options(timeout=5.0).memories.update(
+    id="id",
 )
 ```
 
@@ -256,13 +273,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from supermemory import Supermemory
 
 client = Supermemory()
-response = client.search.with_raw_response.documents(
-    q="machine learning concepts",
+response = client.memories.with_raw_response.update(
+    id="id",
 )
 print(response.headers.get('X-My-Header'))
 
-search = response.parse()  # get the object that `search.documents()` would have returned
-print(search.results)
+memory = response.parse()  # get the object that `memories.update()` would have returned
+print(memory.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory/_response.py) object.
@@ -276,8 +293,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.search.with_streaming_response.documents(
-    q="machine learning concepts",
+with client.memories.with_streaming_response.update(
+    id="id",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
