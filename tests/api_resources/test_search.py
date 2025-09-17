@@ -194,6 +194,7 @@ class TestSearch:
             },
             include={
                 "documents": True,
+                "forgotten_memories": False,
                 "related_memories": True,
                 "summaries": True,
             },
@@ -409,6 +410,7 @@ class TestAsyncSearch:
             },
             include={
                 "documents": True,
+                "forgotten_memories": False,
                 "related_memories": True,
                 "summaries": True,
             },
