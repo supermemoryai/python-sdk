@@ -61,6 +61,13 @@ Filters: TypeAlias = Union[FiltersUnionMember0, Dict[str, object]]
 class Include(TypedDict, total=False):
     documents: bool
 
+    forgotten_memories: Annotated[bool, PropertyInfo(alias="forgottenMemories")]
+    """If true, include forgotten memories in search results.
+
+    Forgotten memories are memories that have been explicitly forgotten or have
+    passed their expiration date.
+    """
+
     related_memories: Annotated[bool, PropertyInfo(alias="relatedMemories")]
 
     summaries: bool
