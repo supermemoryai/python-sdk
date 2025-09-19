@@ -98,7 +98,24 @@ class TestDocuments:
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.list(
             container_tags=["user_123", "project_123"],
-            filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
+            filters={
+                "and_": [
+                    {
+                        "key": "group",
+                        "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
+                    },
+                    {
+                        "key": "timestamp",
+                        "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
+                    },
+                ]
+            },
             include_content=False,
             limit=10,
             order="desc",
@@ -394,7 +411,24 @@ class TestAsyncDocuments:
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list(
             container_tags=["user_123", "project_123"],
-            filters='{"AND":[{"key":"group","negate":false,"value":"jira_users"},{"filterType":"numeric","key":"timestamp","negate":false,"numericOperator":">","value":"1742745777"}]}',
+            filters={
+                "and_": [
+                    {
+                        "key": "group",
+                        "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
+                    },
+                    {
+                        "key": "timestamp",
+                        "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
+                    },
+                ]
+            },
             include_content=False,
             limit=10,
             order="desc",

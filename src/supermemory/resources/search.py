@@ -91,7 +91,7 @@ class SearchResource(SyncAPIResource):
               most documents, more results), 1 is most sensitive (returns lesser documents,
               accurate results)
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
               chatbot to know the full context of the document.
@@ -190,7 +190,7 @@ class SearchResource(SyncAPIResource):
               most documents, more results), 1 is most sensitive (returns lesser documents,
               accurate results)
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
               chatbot to know the full context of the document.
@@ -271,7 +271,7 @@ class SearchResource(SyncAPIResource):
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           limit: Maximum number of results to return
 
@@ -380,7 +380,7 @@ class AsyncSearchResource(AsyncAPIResource):
               most documents, more results), 1 is most sensitive (returns lesser documents,
               accurate results)
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
               chatbot to know the full context of the document.
@@ -479,7 +479,7 @@ class AsyncSearchResource(AsyncAPIResource):
               most documents, more results), 1 is most sensitive (returns lesser documents,
               accurate results)
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
               chatbot to know the full context of the document.
@@ -560,7 +560,7 @@ class AsyncSearchResource(AsyncAPIResource):
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           limit: Maximum number of results to return
 
