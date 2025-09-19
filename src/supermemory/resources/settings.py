@@ -7,7 +7,7 @@ from typing import Dict, Union, Iterable, Optional
 import httpx
 
 from ..types import setting_update_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -47,25 +47,25 @@ class SettingsResource(SyncAPIResource):
     def update(
         self,
         *,
-        exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
-        filter_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        include_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
-        notion_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        notion_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        notion_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        onedrive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        onedrive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        onedrive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        should_llm_filter: Optional[bool] | NotGiven = NOT_GIVEN,
+        exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
+        filter_prompt: Optional[str] | Omit = omit,
+        google_drive_client_id: Optional[str] | Omit = omit,
+        google_drive_client_secret: Optional[str] | Omit = omit,
+        google_drive_custom_key_enabled: Optional[bool] | Omit = omit,
+        include_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
+        notion_client_id: Optional[str] | Omit = omit,
+        notion_client_secret: Optional[str] | Omit = omit,
+        notion_custom_key_enabled: Optional[bool] | Omit = omit,
+        onedrive_client_id: Optional[str] | Omit = omit,
+        onedrive_client_secret: Optional[str] | Omit = omit,
+        onedrive_custom_key_enabled: Optional[bool] | Omit = omit,
+        should_llm_filter: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SettingUpdateResponse:
         """
         Update settings for an organization
@@ -113,7 +113,7 @@ class SettingsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SettingGetResponse:
         """Get settings for an organization"""
         return self._get(
@@ -148,25 +148,25 @@ class AsyncSettingsResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
-        filter_prompt: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        google_drive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        include_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | NotGiven = NOT_GIVEN,
-        notion_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        notion_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        notion_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        onedrive_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        onedrive_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        onedrive_custom_key_enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        should_llm_filter: Optional[bool] | NotGiven = NOT_GIVEN,
+        exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
+        filter_prompt: Optional[str] | Omit = omit,
+        google_drive_client_id: Optional[str] | Omit = omit,
+        google_drive_client_secret: Optional[str] | Omit = omit,
+        google_drive_custom_key_enabled: Optional[bool] | Omit = omit,
+        include_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
+        notion_client_id: Optional[str] | Omit = omit,
+        notion_client_secret: Optional[str] | Omit = omit,
+        notion_custom_key_enabled: Optional[bool] | Omit = omit,
+        onedrive_client_id: Optional[str] | Omit = omit,
+        onedrive_client_secret: Optional[str] | Omit = omit,
+        onedrive_custom_key_enabled: Optional[bool] | Omit = omit,
+        should_llm_filter: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SettingUpdateResponse:
         """
         Update settings for an organization
@@ -214,7 +214,7 @@ class AsyncSettingsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SettingGetResponse:
         """Get settings for an organization"""
         return await self._get(

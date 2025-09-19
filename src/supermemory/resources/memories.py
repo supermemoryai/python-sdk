@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import memory_add_params, memory_list_params, memory_update_params, memory_upload_file_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -52,19 +52,19 @@ class MemoriesResource(SyncAPIResource):
         self,
         id: str,
         *,
-        container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        content: str | NotGiven = NOT_GIVEN,
-        custom_id: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        content: str | Omit = omit,
+        custom_id: str | Omit = omit,
+        file_type: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryUpdateResponse:
         """
         Update a document with any content type (text, url, file, etc.) and metadata
@@ -137,19 +137,19 @@ class MemoriesResource(SyncAPIResource):
     def list(
         self,
         *,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        filters: str | NotGiven = NOT_GIVEN,
-        include_content: bool | NotGiven = NOT_GIVEN,
-        limit: Union[str, float] | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        page: Union[str, float] | NotGiven = NOT_GIVEN,
-        sort: Literal["createdAt", "updatedAt"] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        filters: str | Omit = omit,
+        include_content: bool | Omit = omit,
+        limit: Union[str, float] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        page: Union[str, float] | Omit = omit,
+        sort: Literal["createdAt", "updatedAt"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryListResponse:
         """
         Retrieves a paginated list of documents with their metadata and workflow status
@@ -209,7 +209,7 @@ class MemoriesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a document by ID or customId
@@ -238,18 +238,18 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         content: str,
-        container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        custom_id: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        custom_id: str | Omit = omit,
+        file_type: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryAddResponse:
         """
         Add a document with any content type (text, url, file, etc.) and metadata
@@ -326,7 +326,7 @@ class MemoriesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryGetResponse:
         """
         Get a document by ID
@@ -354,15 +354,15 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         file: FileTypes,
-        container_tags: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tags: str | Omit = omit,
+        file_type: str | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryUploadFileResponse:
         """
         Upload a file to be processed
@@ -437,19 +437,19 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        content: str | NotGiven = NOT_GIVEN,
-        custom_id: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        content: str | Omit = omit,
+        custom_id: str | Omit = omit,
+        file_type: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryUpdateResponse:
         """
         Update a document with any content type (text, url, file, etc.) and metadata
@@ -522,19 +522,19 @@ class AsyncMemoriesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        filters: str | NotGiven = NOT_GIVEN,
-        include_content: bool | NotGiven = NOT_GIVEN,
-        limit: Union[str, float] | NotGiven = NOT_GIVEN,
-        order: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
-        page: Union[str, float] | NotGiven = NOT_GIVEN,
-        sort: Literal["createdAt", "updatedAt"] | NotGiven = NOT_GIVEN,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        filters: str | Omit = omit,
+        include_content: bool | Omit = omit,
+        limit: Union[str, float] | Omit = omit,
+        order: Literal["asc", "desc"] | Omit = omit,
+        page: Union[str, float] | Omit = omit,
+        sort: Literal["createdAt", "updatedAt"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryListResponse:
         """
         Retrieves a paginated list of documents with their metadata and workflow status
@@ -594,7 +594,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a document by ID or customId
@@ -623,18 +623,18 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         content: str,
-        container_tag: str | NotGiven = NOT_GIVEN,
-        container_tags: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        custom_id: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        custom_id: str | Omit = omit,
+        file_type: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryAddResponse:
         """
         Add a document with any content type (text, url, file, etc.) and metadata
@@ -711,7 +711,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryGetResponse:
         """
         Get a document by ID
@@ -739,15 +739,15 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         file: FileTypes,
-        container_tags: str | NotGiven = NOT_GIVEN,
-        file_type: str | NotGiven = NOT_GIVEN,
-        mime_type: str | NotGiven = NOT_GIVEN,
+        container_tags: str | Omit = omit,
+        file_type: str | Omit = omit,
+        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryUploadFileResponse:
         """
         Upload a file to be processed
