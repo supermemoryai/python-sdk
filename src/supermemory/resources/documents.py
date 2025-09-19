@@ -138,7 +138,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: str | Omit = omit,
+        filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -159,7 +159,7 @@ class DocumentsResource(SyncAPIResource):
               your user, a project ID, or any other identifier you wish to use to group
               documents.
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_content: Whether to include the content field in the response. Warning: This can make
               responses significantly larger.
@@ -523,7 +523,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: str | Omit = omit,
+        filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -544,7 +544,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
               your user, a project ID, or any other identifier you wish to use to group
               documents.
 
-          filters: Optional filters to apply to the search
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_content: Whether to include the content field in the response. Warning: This can make
               responses significantly larger.

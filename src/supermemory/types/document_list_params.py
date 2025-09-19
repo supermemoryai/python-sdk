@@ -2,13 +2,26 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, Annotated, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
-__all__ = ["DocumentListParams"]
+__all__ = [
+    "DocumentListParams",
+    "Filters",
+    "FiltersOr",
+    "FiltersOrOr",
+    "FiltersOrOrUnionMember0",
+    "FiltersOrOrOr",
+    "FiltersOrOrAnd",
+    "FiltersAnd",
+    "FiltersAndAnd",
+    "FiltersAndAndUnionMember0",
+    "FiltersAndAndOr",
+    "FiltersAndAndAnd",
+]
 
 
 class DocumentListParams(TypedDict, total=False):
@@ -19,8 +32,8 @@ class DocumentListParams(TypedDict, total=False):
     to use to group documents.
     """
 
-    filters: str
-    """Optional filters to apply to the search"""
+    filters: Filters
+    """Optional filters to apply to the search. Can be a JSON string or Query object."""
 
     include_content: Annotated[bool, PropertyInfo(alias="includeContent")]
     """Whether to include the content field in the response.
@@ -39,3 +52,60 @@ class DocumentListParams(TypedDict, total=False):
 
     sort: Literal["createdAt", "updatedAt"]
     """Field to sort by"""
+
+
+class FiltersOrOrUnionMember0(TypedDict, total=False):
+    key: Required[str]
+
+    value: Required[str]
+
+    filter_type: Annotated[Literal["metadata", "numeric", "array_contains"], PropertyInfo(alias="filterType")]
+
+    negate: Union[bool, Literal["true", "false"]]
+
+    numeric_operator: Annotated[Literal[">", "<", ">=", "<=", "="], PropertyInfo(alias="numericOperator")]
+
+
+class FiltersOrOrOr(TypedDict, total=False):
+    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
+
+
+class FiltersOrOrAnd(TypedDict, total=False):
+    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
+
+
+FiltersOrOr: TypeAlias = Union[FiltersOrOrUnionMember0, FiltersOrOrOr, FiltersOrOrAnd]
+
+
+class FiltersOr(TypedDict, total=False):
+    or_: Required[Annotated[Iterable[FiltersOrOr], PropertyInfo(alias="OR")]]
+
+
+class FiltersAndAndUnionMember0(TypedDict, total=False):
+    key: Required[str]
+
+    value: Required[str]
+
+    filter_type: Annotated[Literal["metadata", "numeric", "array_contains"], PropertyInfo(alias="filterType")]
+
+    negate: Union[bool, Literal["true", "false"]]
+
+    numeric_operator: Annotated[Literal[">", "<", ">=", "<=", "="], PropertyInfo(alias="numericOperator")]
+
+
+class FiltersAndAndOr(TypedDict, total=False):
+    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
+
+
+class FiltersAndAndAnd(TypedDict, total=False):
+    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
+
+
+FiltersAndAnd: TypeAlias = Union[FiltersAndAndUnionMember0, FiltersAndAndOr, FiltersAndAndAnd]
+
+
+class FiltersAnd(TypedDict, total=False):
+    and_: Required[Annotated[Iterable[FiltersAndAnd], PropertyInfo(alias="AND")]]
+
+
+Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
