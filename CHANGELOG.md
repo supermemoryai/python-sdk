@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.1.0 (2025-09-20)
+
+Full Changelog: [v3.0.0-alpha.30...v3.1.0](https://github.com/supermemoryai/python-sdk/compare/v3.0.0-alpha.30...v3.1.0)
+
+### Features
+
+* **api:** api update ([19c5dd3](https://github.com/supermemoryai/python-sdk/commit/19c5dd364b496d9a7858e1764000aba6d71613c6))
+* **api:** api update ([3082481](https://github.com/supermemoryai/python-sdk/commit/30824814233753584a89c56a2efb69d72995be02))
+* **api:** manual updates ([e92cb27](https://github.com/supermemoryai/python-sdk/commit/e92cb27550c2190a6804a2865ae359ff79fa1866))
+* **api:** manual updates ([251fdf1](https://github.com/supermemoryai/python-sdk/commit/251fdf116f5f1b0c1ecfb74bef94ba08f7921dca))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([fb748cf](https://github.com/supermemoryai/python-sdk/commit/fb748cf2375b1ce1eddd2584503e81d3b8386443))
+* **internal:** update pydantic dependency ([8c480f7](https://github.com/supermemoryai/python-sdk/commit/8c480f70cf3d0e55c4c5bc3b77d83bd6b21c4fdf))
+* **types:** change optional parameter type from NotGiven to Omit ([3031781](https://github.com/supermemoryai/python-sdk/commit/30317810d7089dbdf59f5e143bd66b1a0495b2b6))
+
 ## 3.0.0-alpha.30 (2025-09-15)
 
 Full Changelog: [v3.0.0-alpha.29...v3.0.0-alpha.30](https://github.com/supermemoryai/python-sdk/compare/v3.0.0-alpha.29...v3.0.0-alpha.30)
