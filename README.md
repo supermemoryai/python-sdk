@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.supermemory.ai](https://docs.su
 
 ```sh
 # install from PyPI
-pip install --pre supermemory
+pip install supermemory
 ```
 
 ## Usage
@@ -77,7 +77,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre supermemory[aiohttp]
+pip install supermemory[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
