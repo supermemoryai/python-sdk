@@ -11,6 +11,8 @@ __all__ = ["SettingUpdateParams"]
 
 
 class SettingUpdateParams(TypedDict, total=False):
+    chunk_size: Annotated[Optional[int], PropertyInfo(alias="chunkSize")]
+
     exclude_items: Annotated[
         Union[str, float, bool, Dict[str, object], Iterable[object], None], PropertyInfo(alias="excludeItems")
     ]

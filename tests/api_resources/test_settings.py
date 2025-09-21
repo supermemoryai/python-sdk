@@ -27,6 +27,7 @@ class TestSettings:
     @parametrize
     def test_method_update_with_all_params(self, client: Supermemory) -> None:
         setting = client.settings.update(
+            chunk_size=-2147483648,
             exclude_items="string",
             filter_prompt="filterPrompt",
             google_drive_client_id="googleDriveClientId",
@@ -109,6 +110,7 @@ class TestAsyncSettings:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncSupermemory) -> None:
         setting = await async_client.settings.update(
+            chunk_size=-2147483648,
             exclude_items="string",
             filter_prompt="filterPrompt",
             google_drive_client_id="googleDriveClientId",
