@@ -300,6 +300,7 @@ class TestDocuments:
             file=b"raw file contents",
             container_tags='["user_123", "project_123"]',
             file_type="image",
+            metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="image/png",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
@@ -613,6 +614,7 @@ class TestAsyncDocuments:
             file=b"raw file contents",
             container_tags='["user_123", "project_123"]',
             file_type="image",
+            metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="image/png",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])

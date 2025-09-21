@@ -356,6 +356,7 @@ class DocumentsResource(SyncAPIResource):
         file: FileTypes,
         container_tags: str | Omit = omit,
         file_type: str | Omit = omit,
+        metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -378,6 +379,10 @@ class DocumentsResource(SyncAPIResource):
               text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
               notion_doc, webpage, onedrive
 
+          metadata: Optional metadata for the document as a JSON string. This is used to store
+              additional information about the document. Keys must be strings and values can
+              be strings, numbers, or booleans.
+
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
@@ -394,6 +399,7 @@ class DocumentsResource(SyncAPIResource):
                 "file": file,
                 "container_tags": container_tags,
                 "file_type": file_type,
+                "metadata": metadata,
                 "mime_type": mime_type,
             }
         )
@@ -741,6 +747,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         file: FileTypes,
         container_tags: str | Omit = omit,
         file_type: str | Omit = omit,
+        metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -763,6 +770,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
               text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
               notion_doc, webpage, onedrive
 
+          metadata: Optional metadata for the document as a JSON string. This is used to store
+              additional information about the document. Keys must be strings and values can
+              be strings, numbers, or booleans.
+
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
@@ -779,6 +790,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "file": file,
                 "container_tags": container_tags,
                 "file_type": file_type,
+                "metadata": metadata,
                 "mime_type": mime_type,
             }
         )

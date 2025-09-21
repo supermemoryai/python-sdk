@@ -28,6 +28,13 @@ class MemoryUploadFileParams(TypedDict, total=False):
     video, notion_doc, webpage, onedrive
     """
 
+    metadata: str
+    """Optional metadata for the document as a JSON string.
+
+    This is used to store additional information about the document. Keys must be
+    strings and values can be strings, numbers, or booleans.
+    """
+
     mime_type: Annotated[str, PropertyInfo(alias="mimeType")]
     """Required when fileType is 'image' or 'video'.
 
