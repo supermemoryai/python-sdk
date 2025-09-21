@@ -10,6 +10,8 @@ __all__ = ["SettingGetResponse"]
 
 
 class SettingGetResponse(BaseModel):
+    chunk_size: Optional[int] = FieldInfo(alias="chunkSize", default=None)
+
     exclude_items: Union[str, float, bool, Dict[str, object], List[object], None] = FieldInfo(
         alias="excludeItems", default=None
     )

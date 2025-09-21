@@ -47,6 +47,7 @@ class SettingsResource(SyncAPIResource):
     def update(
         self,
         *,
+        chunk_size: Optional[int] | Omit = omit,
         exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
         filter_prompt: Optional[str] | Omit = omit,
         google_drive_client_id: Optional[str] | Omit = omit,
@@ -83,6 +84,7 @@ class SettingsResource(SyncAPIResource):
             "/v3/settings",
             body=maybe_transform(
                 {
+                    "chunk_size": chunk_size,
                     "exclude_items": exclude_items,
                     "filter_prompt": filter_prompt,
                     "google_drive_client_id": google_drive_client_id,
@@ -148,6 +150,7 @@ class AsyncSettingsResource(AsyncAPIResource):
     async def update(
         self,
         *,
+        chunk_size: Optional[int] | Omit = omit,
         exclude_items: Union[str, float, bool, Dict[str, object], Iterable[object], None] | Omit = omit,
         filter_prompt: Optional[str] | Omit = omit,
         google_drive_client_id: Optional[str] | Omit = omit,
@@ -184,6 +187,7 @@ class AsyncSettingsResource(AsyncAPIResource):
             "/v3/settings",
             body=await async_maybe_transform(
                 {
+                    "chunk_size": chunk_size,
                     "exclude_items": exclude_items,
                     "filter_prompt": filter_prompt,
                     "google_drive_client_id": google_drive_client_id,
