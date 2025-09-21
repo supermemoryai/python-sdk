@@ -371,8 +371,9 @@ class DocumentsResource(SyncAPIResource):
         Args:
           file: File to upload and process
 
-          container_tags: Optional JSON string of container tags array. This can be an ID for your user, a
-              project ID, or any other identifier you wish to use to group documents.
+          container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
+              '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
+              strings will be automatically converted to an array.
 
           file_type:
               Optional file type override to force specific processing behavior. Valid values:
@@ -762,8 +763,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
         Args:
           file: File to upload and process
 
-          container_tags: Optional JSON string of container tags array. This can be an ID for your user, a
-              project ID, or any other identifier you wish to use to group documents.
+          container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
+              '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
+              strings will be automatically converted to an array.
 
           file_type:
               Optional file type override to force specific processing behavior. Valid values:

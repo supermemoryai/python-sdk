@@ -15,10 +15,11 @@ class MemoryUploadFileParams(TypedDict, total=False):
     """File to upload and process"""
 
     container_tags: Annotated[str, PropertyInfo(alias="containerTags")]
-    """Optional JSON string of container tags array.
+    """Optional container tags.
 
-    This can be an ID for your user, a project ID, or any other identifier you wish
-    to use to group documents.
+    Can be either a JSON string of an array (e.g., '["user_123", "project_123"]') or
+    a single string (e.g., 'user_123'). Single strings will be automatically
+    converted to an array.
     """
 
     file_type: Annotated[str, PropertyInfo(alias="fileType")]
