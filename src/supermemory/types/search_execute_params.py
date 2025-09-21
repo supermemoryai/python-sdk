@@ -2,26 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import List, Union
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .shared_params.or_ import Or
+from .shared_params.and_ import And
 
-__all__ = [
-    "SearchExecuteParams",
-    "Filters",
-    "FiltersOr",
-    "FiltersOrOr",
-    "FiltersOrOrUnionMember0",
-    "FiltersOrOrOr",
-    "FiltersOrOrAnd",
-    "FiltersAnd",
-    "FiltersAndAnd",
-    "FiltersAndAndUnionMember0",
-    "FiltersAndAndOr",
-    "FiltersAndAndAnd",
-]
+__all__ = ["SearchExecuteParams", "Filters"]
 
 
 class SearchExecuteParams(TypedDict, total=False):
@@ -98,58 +87,4 @@ class SearchExecuteParams(TypedDict, total=False):
     """
 
 
-class FiltersOrOrUnionMember0(TypedDict, total=False):
-    key: Required[str]
-
-    value: Required[str]
-
-    filter_type: Annotated[Literal["metadata", "numeric", "array_contains"], PropertyInfo(alias="filterType")]
-
-    negate: Union[bool, Literal["true", "false"]]
-
-    numeric_operator: Annotated[Literal[">", "<", ">=", "<=", "="], PropertyInfo(alias="numericOperator")]
-
-
-class FiltersOrOrOr(TypedDict, total=False):
-    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
-
-
-class FiltersOrOrAnd(TypedDict, total=False):
-    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
-
-
-FiltersOrOr: TypeAlias = Union[FiltersOrOrUnionMember0, FiltersOrOrOr, FiltersOrOrAnd]
-
-
-class FiltersOr(TypedDict, total=False):
-    or_: Required[Annotated[Iterable[FiltersOrOr], PropertyInfo(alias="OR")]]
-
-
-class FiltersAndAndUnionMember0(TypedDict, total=False):
-    key: Required[str]
-
-    value: Required[str]
-
-    filter_type: Annotated[Literal["metadata", "numeric", "array_contains"], PropertyInfo(alias="filterType")]
-
-    negate: Union[bool, Literal["true", "false"]]
-
-    numeric_operator: Annotated[Literal[">", "<", ">=", "<=", "="], PropertyInfo(alias="numericOperator")]
-
-
-class FiltersAndAndOr(TypedDict, total=False):
-    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
-
-
-class FiltersAndAndAnd(TypedDict, total=False):
-    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
-
-
-FiltersAndAnd: TypeAlias = Union[FiltersAndAndUnionMember0, FiltersAndAndOr, FiltersAndAndAnd]
-
-
-class FiltersAnd(TypedDict, total=False):
-    and_: Required[Annotated[Iterable[FiltersAndAnd], PropertyInfo(alias="AND")]]
-
-
-Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
+Filters: TypeAlias = Union[Or, And]
