@@ -40,7 +40,6 @@ class TestDocuments:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
-            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -49,7 +48,6 @@ class TestDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
-            mime_type="image/png",
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
@@ -101,18 +99,17 @@ class TestDocuments:
             filters={
                 "and_": [
                     {
+                        "filterType": "metadata",
                         "key": "group",
-                        "value": "jira_users",
-                        "filter_type": "metadata",
                         "negate": False,
-                        "numeric_operator": ">",
+                        "value": "jira_users",
                     },
                     {
+                        "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
-                        "filter_type": "numeric",
                         "negate": False,
-                        "numeric_operator": ">",
+                        "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ]
             },
@@ -204,7 +201,6 @@ class TestDocuments:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
-            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -213,7 +209,6 @@ class TestDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
-            mime_type="image/png",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -301,7 +296,7 @@ class TestDocuments:
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
-            mime_type="image/png",
+            mime_type="mimeType",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
@@ -354,7 +349,6 @@ class TestAsyncDocuments:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
-            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -363,7 +357,6 @@ class TestAsyncDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
-            mime_type="image/png",
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
@@ -415,18 +408,17 @@ class TestAsyncDocuments:
             filters={
                 "and_": [
                     {
+                        "filterType": "metadata",
                         "key": "group",
-                        "value": "jira_users",
-                        "filter_type": "metadata",
                         "negate": False,
-                        "numeric_operator": ">",
+                        "value": "jira_users",
                     },
                     {
+                        "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
-                        "filter_type": "numeric",
                         "negate": False,
-                        "numeric_operator": ">",
+                        "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ]
             },
@@ -518,7 +510,6 @@ class TestAsyncDocuments:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
-            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -527,7 +518,6 @@ class TestAsyncDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
-            mime_type="image/png",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -615,7 +605,7 @@ class TestAsyncDocuments:
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
-            mime_type="image/png",
+            mime_type="mimeType",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 

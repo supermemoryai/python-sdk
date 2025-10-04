@@ -10,4 +10,4 @@ __all__ = ["And"]
 
 
 class And(BaseModel):
-    and_: List[And] = FieldInfo(alias="AND")
+    and_: List[object] = FieldInfo(alias="AND")
