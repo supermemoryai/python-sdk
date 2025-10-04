@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -25,7 +24,7 @@ class ResultContextChild(BaseModel):
     relation: Literal["updates", "extends", "derives"]
     """Relation type between this memory and its parent/child"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Contextual memory last update date"""
 
     metadata: Optional[Dict[str, object]] = None
@@ -45,7 +44,7 @@ class ResultContextParent(BaseModel):
     relation: Literal["updates", "extends", "derives"]
     """Relation type between this memory and its parent/child"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Contextual memory last update date"""
 
     metadata: Optional[Dict[str, object]] = None
@@ -68,10 +67,10 @@ class ResultDocument(BaseModel):
     id: str
     """Document ID"""
 
-    created_at: datetime = FieldInfo(alias="createdAt")
+    created_at: str = FieldInfo(alias="createdAt")
     """Document creation date"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Document last update date"""
 
     metadata: Optional[Dict[str, object]] = None
@@ -100,7 +99,7 @@ class Result(BaseModel):
     similarity: float
     """Similarity score between the query and memory entry"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Memory last update date"""
 
     context: Optional[ResultContext] = None

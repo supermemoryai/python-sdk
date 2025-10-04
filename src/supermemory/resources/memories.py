@@ -56,9 +56,7 @@ class MemoriesResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
-        file_type: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
-        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -90,19 +88,11 @@ class MemoriesResource(SyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
-          file_type:
-              Optional file type override to force specific processing behavior. Valid values:
-              text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
-              notion_doc, webpage, onedrive
-
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
-
-          mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
-              use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
           extra_headers: Send extra headers
 
@@ -122,9 +112,7 @@ class MemoriesResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
-                    "file_type": file_type,
                     "metadata": metadata,
-                    "mime_type": mime_type,
                 },
                 memory_update_params.MemoryUpdateParams,
             ),
@@ -241,9 +229,7 @@ class MemoriesResource(SyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
-        file_type: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
-        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,19 +261,11 @@ class MemoriesResource(SyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
-          file_type:
-              Optional file type override to force specific processing behavior. Valid values:
-              text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
-              notion_doc, webpage, onedrive
-
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
-
-          mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
-              use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
           extra_headers: Send extra headers
 
@@ -305,9 +283,7 @@ class MemoriesResource(SyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "custom_id": custom_id,
-                    "file_type": file_type,
                     "metadata": metadata,
-                    "mime_type": mime_type,
                 },
                 memory_add_params.MemoryAddParams,
             ),
@@ -448,9 +424,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
-        file_type: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
-        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -482,19 +456,11 @@ class AsyncMemoriesResource(AsyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
-          file_type:
-              Optional file type override to force specific processing behavior. Valid values:
-              text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
-              notion_doc, webpage, onedrive
-
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
-
-          mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
-              use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
           extra_headers: Send extra headers
 
@@ -514,9 +480,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
-                    "file_type": file_type,
                     "metadata": metadata,
-                    "mime_type": mime_type,
                 },
                 memory_update_params.MemoryUpdateParams,
             ),
@@ -633,9 +597,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
-        file_type: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
-        mime_type: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -667,19 +629,11 @@ class AsyncMemoriesResource(AsyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
-          file_type:
-              Optional file type override to force specific processing behavior. Valid values:
-              text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
-              notion_doc, webpage, onedrive
-
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
-
-          mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
-              use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
           extra_headers: Send extra headers
 
@@ -697,9 +651,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "custom_id": custom_id,
-                    "file_type": file_type,
                     "metadata": metadata,
-                    "mime_type": mime_type,
                 },
                 memory_add_params.MemoryAddParams,
             ),
