@@ -42,17 +42,18 @@ class TestSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -112,17 +113,18 @@ class TestSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -178,17 +180,18 @@ class TestSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -258,17 +261,18 @@ class TestAsyncSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -328,17 +332,18 @@ class TestAsyncSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -394,17 +399,18 @@ class TestAsyncSearch:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },

@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Union, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -20,7 +21,7 @@ class Memory(BaseModel):
     This is useful for identifying the source of the document.
     """
 
-    created_at: str = FieldInfo(alias="createdAt")
+    created_at: datetime = FieldInfo(alias="createdAt")
     """Creation timestamp"""
 
     custom_id: Optional[str] = FieldInfo(alias="customId", default=None)
@@ -63,7 +64,7 @@ class Memory(BaseModel):
     ]
     """Type of the document"""
 
-    updated_at: str = FieldInfo(alias="updatedAt")
+    updated_at: datetime = FieldInfo(alias="updatedAt")
     """Last update timestamp"""
 
     container_tags: Optional[List[str]] = FieldInfo(alias="containerTags", default=None)
@@ -80,11 +81,11 @@ class Memory(BaseModel):
 class Pagination(BaseModel):
     current_page: float = FieldInfo(alias="currentPage")
 
+    limit: float
+
     total_items: float = FieldInfo(alias="totalItems")
 
     total_pages: float = FieldInfo(alias="totalPages")
-
-    limit: Optional[float] = None
 
 
 class DocumentListResponse(BaseModel):
