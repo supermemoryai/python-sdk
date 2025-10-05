@@ -11,4 +11,4 @@ __all__ = ["Or"]
 
 
 class Or(TypedDict, total=False):
-    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
+    or_: Required[Annotated[Iterable[Or], PropertyInfo(alias="OR")]]

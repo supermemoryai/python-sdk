@@ -40,6 +40,7 @@ class TestMemories:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -48,6 +49,7 @@ class TestMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
@@ -99,17 +101,18 @@ class TestMemories:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -201,6 +204,7 @@ class TestMemories:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -209,6 +213,7 @@ class TestMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
@@ -296,7 +301,7 @@ class TestMemories:
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
-            mime_type="mimeType",
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUploadFileResponse, memory, path=["response"])
 
@@ -349,6 +354,7 @@ class TestAsyncMemories:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -357,6 +363,7 @@ class TestAsyncMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUpdateResponse, memory, path=["response"])
 
@@ -408,17 +415,18 @@ class TestAsyncMemories:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -510,6 +518,7 @@ class TestAsyncMemories:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             custom_id="mem_abc123",
+            file_type="pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -518,6 +527,7 @@ class TestAsyncMemories:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            mime_type="image/png",
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
 
@@ -605,7 +615,7 @@ class TestAsyncMemories:
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
-            mime_type="mimeType",
+            mime_type="image/png",
         )
         assert_matches_type(MemoryUploadFileResponse, memory, path=["response"])
 

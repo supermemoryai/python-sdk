@@ -11,4 +11,4 @@ __all__ = ["And"]
 
 
 class And(TypedDict, total=False):
-    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
+    and_: Required[Annotated[Iterable[And], PropertyInfo(alias="AND")]]
