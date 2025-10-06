@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Optional
-from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
@@ -25,7 +24,7 @@ class Result(BaseModel):
     chunks: List[ResultChunk]
     """Matching content chunks from the document"""
 
-    created_at: datetime = FieldInfo(alias="createdAt")
+    created_at: str = FieldInfo(alias="createdAt")
     """Document creation date"""
 
     document_id: str = FieldInfo(alias="documentId")
@@ -43,7 +42,7 @@ class Result(BaseModel):
     type: Optional[str] = None
     """Document type"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Document last update date"""
 
     content: Optional[str] = None

@@ -10,4 +10,4 @@ __all__ = ["Or"]
 
 
 class Or(BaseModel):
-    or_: List[Or] = FieldInfo(alias="OR")
+    or_: List[object] = FieldInfo(alias="OR")
