@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Union, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -33,7 +32,7 @@ class DocumentGetResponse(BaseModel):
     We automatically detect the content type from the url's response format.
     """
 
-    created_at: datetime = FieldInfo(alias="createdAt")
+    created_at: str = FieldInfo(alias="createdAt")
     """Creation timestamp"""
 
     custom_id: Optional[str] = FieldInfo(alias="customId", default=None)
@@ -53,6 +52,9 @@ class DocumentGetResponse(BaseModel):
     """
 
     og_image: Optional[str] = FieldInfo(alias="ogImage", default=None)
+
+    raw: object
+    """Raw content of the document"""
 
     source: Optional[str] = None
     """Source of the document"""
@@ -87,7 +89,7 @@ class DocumentGetResponse(BaseModel):
     ]
     """Type of the document"""
 
-    updated_at: datetime = FieldInfo(alias="updatedAt")
+    updated_at: str = FieldInfo(alias="updatedAt")
     """Last update timestamp"""
 
     container_tags: Optional[List[str]] = FieldInfo(alias="containerTags", default=None)
@@ -96,9 +98,6 @@ class DocumentGetResponse(BaseModel):
     This can be an ID for your user, a project ID, or any other identifier you wish
     to use to group documents.
     """
-
-    raw: None = None
-    """Raw content of the document"""
 
     url: Optional[str] = None
     """URL of the document"""
