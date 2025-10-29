@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Literal
-
 import httpx
 
 from ..types import search_execute_params, search_memories_params, search_documents_params
@@ -50,7 +47,7 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         q: str,
-        categories_filter: List[Literal["technology", "science", "business", "health"]] | Omit = omit,
+        categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
@@ -75,7 +72,7 @@ class SearchResource(SyncAPIResource):
         Args:
           q: Search query string
 
-          categories_filter: Optional category filters
+          categories_filter: DEPRECATED: Optional category filters
 
           chunk_threshold: Threshold / sensitivity for chunk selection. 0 is least sensitive (returns most
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
@@ -87,9 +84,8 @@ class SearchResource(SyncAPIResource):
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
 
-          document_threshold: Threshold / sensitivity for document selection. 0 is least sensitive (returns
-              most documents, more results), 1 is most sensitive (returns lesser documents,
-              accurate results)
+          document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
+              chunkThreshold only. This parameter will be ignored.
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -149,7 +145,7 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         q: str,
-        categories_filter: List[Literal["technology", "science", "business", "health"]] | Omit = omit,
+        categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
@@ -174,7 +170,7 @@ class SearchResource(SyncAPIResource):
         Args:
           q: Search query string
 
-          categories_filter: Optional category filters
+          categories_filter: DEPRECATED: Optional category filters
 
           chunk_threshold: Threshold / sensitivity for chunk selection. 0 is least sensitive (returns most
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
@@ -186,9 +182,8 @@ class SearchResource(SyncAPIResource):
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
 
-          document_threshold: Threshold / sensitivity for document selection. 0 is least sensitive (returns
-              most documents, more results), 1 is most sensitive (returns lesser documents,
-              accurate results)
+          document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
+              chunkThreshold only. This parameter will be ignored.
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -339,7 +334,7 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         q: str,
-        categories_filter: List[Literal["technology", "science", "business", "health"]] | Omit = omit,
+        categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
@@ -364,7 +359,7 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           q: Search query string
 
-          categories_filter: Optional category filters
+          categories_filter: DEPRECATED: Optional category filters
 
           chunk_threshold: Threshold / sensitivity for chunk selection. 0 is least sensitive (returns most
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
@@ -376,9 +371,8 @@ class AsyncSearchResource(AsyncAPIResource):
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
 
-          document_threshold: Threshold / sensitivity for document selection. 0 is least sensitive (returns
-              most documents, more results), 1 is most sensitive (returns lesser documents,
-              accurate results)
+          document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
+              chunkThreshold only. This parameter will be ignored.
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -438,7 +432,7 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         q: str,
-        categories_filter: List[Literal["technology", "science", "business", "health"]] | Omit = omit,
+        categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
@@ -463,7 +457,7 @@ class AsyncSearchResource(AsyncAPIResource):
         Args:
           q: Search query string
 
-          categories_filter: Optional category filters
+          categories_filter: DEPRECATED: Optional category filters
 
           chunk_threshold: Threshold / sensitivity for chunk selection. 0 is least sensitive (returns most
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
@@ -475,9 +469,8 @@ class AsyncSearchResource(AsyncAPIResource):
           doc_id: Optional document ID to search within. You can use this to find chunks in a very
               large document.
 
-          document_threshold: Threshold / sensitivity for document selection. 0 is least sensitive (returns
-              most documents, more results), 1 is most sensitive (returns lesser documents,
-              accurate results)
+          document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
+              chunkThreshold only. This parameter will be ignored.
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 

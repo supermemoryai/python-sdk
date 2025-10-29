@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Union
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing import Union
+from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
@@ -17,10 +17,8 @@ class SearchExecuteParams(TypedDict, total=False):
     q: Required[str]
     """Search query string"""
 
-    categories_filter: Annotated[
-        List[Literal["technology", "science", "business", "health"]], PropertyInfo(alias="categoriesFilter")
-    ]
-    """Optional category filters"""
+    categories_filter: Annotated[SequenceNotStr[str], PropertyInfo(alias="categoriesFilter")]
+    """DEPRECATED: Optional category filters"""
 
     chunk_threshold: Annotated[float, PropertyInfo(alias="chunkThreshold")]
     """Threshold / sensitivity for chunk selection.
@@ -43,10 +41,9 @@ class SearchExecuteParams(TypedDict, total=False):
     """
 
     document_threshold: Annotated[float, PropertyInfo(alias="documentThreshold")]
-    """Threshold / sensitivity for document selection.
+    """DEPRECATED: This field is no longer used in v3 search.
 
-    0 is least sensitive (returns most documents, more results), 1 is most sensitive
-    (returns lesser documents, accurate results)
+    The search now uses chunkThreshold only. This parameter will be ignored.
     """
 
     filters: Filters

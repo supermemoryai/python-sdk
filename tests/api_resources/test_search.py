@@ -34,32 +34,16 @@ class TestSearch:
     def test_method_documents_with_all_params(self, client: Supermemory) -> None:
         search = client.search.documents(
             q="machine learning concepts",
-            categories_filter=["technology", "science"],
+            categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tags=["user_123", "project_123"],
-            doc_id="doc_xyz789",
-            document_threshold=0.5,
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            container_tags=["user_123"],
+            doc_id="docId",
+            document_threshold=0,
+            filters={"or_": [{}]},
             include_full_docs=False,
-            include_summary=False,
+            include_summary=True,
             limit=10,
-            only_matching_chunks=False,
+            only_matching_chunks=True,
             rerank=False,
             rewrite_query=False,
         )
@@ -104,32 +88,16 @@ class TestSearch:
     def test_method_execute_with_all_params(self, client: Supermemory) -> None:
         search = client.search.execute(
             q="machine learning concepts",
-            categories_filter=["technology", "science"],
+            categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tags=["user_123", "project_123"],
-            doc_id="doc_xyz789",
-            document_threshold=0.5,
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            container_tags=["user_123"],
+            doc_id="docId",
+            document_threshold=0,
+            filters={"or_": [{}]},
             include_full_docs=False,
-            include_summary=False,
+            include_summary=True,
             limit=10,
-            only_matching_chunks=False,
+            only_matching_chunks=True,
             rerank=False,
             rewrite_query=False,
         )
@@ -175,23 +143,7 @@ class TestSearch:
         search = client.search.memories(
             q="machine learning concepts",
             container_tag="user_123",
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            filters={"or_": [{}]},
             include={
                 "documents": True,
                 "forgotten_memories": False,
@@ -250,32 +202,16 @@ class TestAsyncSearch:
     async def test_method_documents_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.documents(
             q="machine learning concepts",
-            categories_filter=["technology", "science"],
+            categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tags=["user_123", "project_123"],
-            doc_id="doc_xyz789",
-            document_threshold=0.5,
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            container_tags=["user_123"],
+            doc_id="docId",
+            document_threshold=0,
+            filters={"or_": [{}]},
             include_full_docs=False,
-            include_summary=False,
+            include_summary=True,
             limit=10,
-            only_matching_chunks=False,
+            only_matching_chunks=True,
             rerank=False,
             rewrite_query=False,
         )
@@ -320,32 +256,16 @@ class TestAsyncSearch:
     async def test_method_execute_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.execute(
             q="machine learning concepts",
-            categories_filter=["technology", "science"],
+            categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tags=["user_123", "project_123"],
-            doc_id="doc_xyz789",
-            document_threshold=0.5,
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            container_tags=["user_123"],
+            doc_id="docId",
+            document_threshold=0,
+            filters={"or_": [{}]},
             include_full_docs=False,
-            include_summary=False,
+            include_summary=True,
             limit=10,
-            only_matching_chunks=False,
+            only_matching_chunks=True,
             rerank=False,
             rewrite_query=False,
         )
@@ -391,23 +311,7 @@ class TestAsyncSearch:
         search = await async_client.search.memories(
             q="machine learning concepts",
             container_tag="user_123",
-            filters={
-                "and_": [
-                    {
-                        "filterType": "metadata",
-                        "key": "group",
-                        "negate": False,
-                        "value": "jira_users",
-                    },
-                    {
-                        "filterType": "numeric",
-                        "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
-                        "value": "1742745777",
-                    },
-                ]
-            },
+            filters={"or_": [{}]},
             include={
                 "documents": True,
                 "forgotten_memories": False,
