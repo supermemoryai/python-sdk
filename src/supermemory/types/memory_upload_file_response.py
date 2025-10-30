@@ -7,5 +7,7 @@ __all__ = ["MemoryUploadFileResponse"]
 
 class MemoryUploadFileResponse(BaseModel):
     id: str
+    """Unique identifier of the document"""
 
     status: str
+    """Status of the document"""
