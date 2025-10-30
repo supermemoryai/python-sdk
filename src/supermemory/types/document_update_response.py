@@ -7,5 +7,7 @@ __all__ = ["DocumentUpdateResponse"]
 
 class DocumentUpdateResponse(BaseModel):
     id: str
+    """Unique identifier of the document"""
 
     status: str
+    """Status of the document"""

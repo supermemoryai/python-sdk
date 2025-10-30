@@ -189,7 +189,7 @@ class TestDocuments:
     @parametrize
     def test_method_add(self, client: Supermemory) -> None:
         document = client.documents.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -197,18 +197,11 @@ class TestDocuments:
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.add(
-            content="This is a detailed article about machine learning concepts...",
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
-            custom_id="mem_abc123",
-            metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
-            },
+            content="content",
+            container_tag="containerTag",
+            container_tags=["string"],
+            custom_id="customId",
+            metadata={"foo": "string"},
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -216,7 +209,7 @@ class TestDocuments:
     @parametrize
     def test_raw_response_add(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         )
 
         assert response.is_closed is True
@@ -228,7 +221,7 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_add(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -498,7 +491,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_add(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -506,18 +499,11 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.add(
-            content="This is a detailed article about machine learning concepts...",
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
-            custom_id="mem_abc123",
-            metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
-            },
+            content="content",
+            container_tag="containerTag",
+            container_tags=["string"],
+            custom_id="customId",
+            metadata={"foo": "string"},
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -525,7 +511,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         )
 
         assert response.is_closed is True
@@ -537,7 +523,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.add(
-            content="This is a detailed article about machine learning concepts...",
+            content="content",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

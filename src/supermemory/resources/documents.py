@@ -244,28 +244,13 @@ class DocumentsResource(SyncAPIResource):
           content: The content to extract and process into a document. This can be a URL to a
               website, a PDF, an image, or a video.
 
-              Plaintext: Any plaintext format
+          container_tag: Optional tag this document should be containerized by. Max 100 characters,
+              alphanumeric with hyphens and underscores only.
 
-              URL: A URL to a website, PDF, image, or video
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens and underscores only.
 
-              We automatically detect the content type from the url's response format.
-
-          container_tag: Optional tag this document should be containerized by. This can be an ID for
-              your user, a project ID, or any other identifier you wish to use to group
-              documents.
-
-          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
-              containerized by. This can be an ID for your user, a project ID, or any other
-              identifier you wish to use to group documents.
-
-          custom_id: Optional custom ID of the document. This could be an ID from your database that
-              will uniquely identify this document.
-
-          metadata: Optional metadata for the document. This is used to store additional information
-              about the document. You can use this to store any additional information you
-              need about the document. Metadata can be filtered through. Keys must be strings
-              and are case sensitive. Values can be strings, numbers, or booleans. You cannot
-              nest objects.
+          metadata: Optional metadata for the document.
 
           extra_headers: Send extra headers
 
@@ -612,28 +597,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
           content: The content to extract and process into a document. This can be a URL to a
               website, a PDF, an image, or a video.
 
-              Plaintext: Any plaintext format
+          container_tag: Optional tag this document should be containerized by. Max 100 characters,
+              alphanumeric with hyphens and underscores only.
 
-              URL: A URL to a website, PDF, image, or video
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens and underscores only.
 
-              We automatically detect the content type from the url's response format.
-
-          container_tag: Optional tag this document should be containerized by. This can be an ID for
-              your user, a project ID, or any other identifier you wish to use to group
-              documents.
-
-          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
-              containerized by. This can be an ID for your user, a project ID, or any other
-              identifier you wish to use to group documents.
-
-          custom_id: Optional custom ID of the document. This could be an ID from your database that
-              will uniquely identify this document.
-
-          metadata: Optional metadata for the document. This is used to store additional information
-              about the document. You can use this to store any additional information you
-              need about the document. Metadata can be filtered through. Keys must be strings
-              and are case sensitive. Values can be strings, numbers, or booleans. You cannot
-              nest objects.
+          metadata: Optional metadata for the document.
 
           extra_headers: Send extra headers
 
