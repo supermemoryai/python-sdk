@@ -9,13 +9,59 @@ import pytest
 
 from supermemory import Supermemory, AsyncSupermemory
 from tests.utils import assert_matches_type
-from supermemory.types import ProfileResponse
+from supermemory.types import AddResponse, ProfileResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
 class TestClient:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_add(self, client: Supermemory) -> None:
+        client_ = client.add(
+            content="content",
+        )
+        assert_matches_type(AddResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_add_with_all_params(self, client: Supermemory) -> None:
+        client_ = client.add(
+            content="content",
+            container_tag="containerTag",
+            container_tags=["string"],
+            custom_id="customId",
+            metadata={"foo": "string"},
+        )
+        assert_matches_type(AddResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_add(self, client: Supermemory) -> None:
+        response = client.with_raw_response.add(
+            content="content",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client_ = response.parse()
+        assert_matches_type(AddResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_add(self, client: Supermemory) -> None:
+        with client.with_streaming_response.add(
+            content="content",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client_ = response.parse()
+            assert_matches_type(AddResponse, client_, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -65,6 +111,52 @@ class TestAsyncClient:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_add(self, async_client: AsyncSupermemory) -> None:
+        client = await async_client.add(
+            content="content",
+        )
+        assert_matches_type(AddResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
+        client = await async_client.add(
+            content="content",
+            container_tag="containerTag",
+            container_tags=["string"],
+            custom_id="customId",
+            metadata={"foo": "string"},
+        )
+        assert_matches_type(AddResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.with_raw_response.add(
+            content="content",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client = await response.parse()
+        assert_matches_type(AddResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.with_streaming_response.add(
+            content="content",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client = await response.parse()
+            assert_matches_type(AddResponse, client, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize

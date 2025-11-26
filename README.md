@@ -160,7 +160,7 @@ from supermemory import Supermemory
 client = Supermemory()
 
 try:
-    client.memories.add(
+    client.add(
         content="content",
     )
 except supermemory.APIConnectionError as e:
@@ -205,7 +205,7 @@ client = Supermemory(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).memories.add(
+client.with_options(max_retries=5).add(
     content="content",
 )
 ```
@@ -230,7 +230,7 @@ client = Supermemory(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).memories.add(
+client.with_options(timeout=5.0).add(
     content="content",
 )
 ```
@@ -273,13 +273,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from supermemory import Supermemory
 
 client = Supermemory()
-response = client.memories.with_raw_response.add(
+response = client.with_raw_response.add(
     content="content",
 )
 print(response.headers.get('X-My-Header'))
 
-memory = response.parse()  # get the object that `memories.add()` would have returned
-print(memory.id)
+client = response.parse()  # get the object that `add()` would have returned
+print(client.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/supermemoryai/python-sdk/tree/main/src/supermemory/_response.py) object.
@@ -293,7 +293,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.memories.with_streaming_response.add(
+with client.with_streaming_response.add(
     content="content",
 ) as response:
     print(response.headers.get("X-My-Header"))
