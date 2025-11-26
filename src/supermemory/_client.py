@@ -10,17 +10,33 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
+from .types import client_profile_params
 from ._types import (
+    Body,
     Omit,
+    Query,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    omit,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    maybe_transform,
+    get_async_library,
+    async_maybe_transform,
+)
 from ._version import __version__
+from ._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from .resources import search, memories, settings, documents, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SupermemoryError
@@ -28,7 +44,9 @@ from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
+    make_request_options,
 )
+from .types.profile_response import ProfileResponse
 
 __all__ = [
     "Timeout",
@@ -183,6 +201,50 @@ class Supermemory(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def profile(
+        self,
+        *,
+        container_tag: str,
+        q: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProfileResponse:
+        """
+        Get user profile with optional search results
+
+        Args:
+          container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
+              any other identifier you wish to use to filter memories.
+
+          q: Optional search query to include search results in the response
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v4/profile",
+            body=maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "q": q,
+                },
+                client_profile_params.ClientProfileParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProfileResponse,
+        )
 
     @override
     def _make_status_error(
@@ -360,6 +422,50 @@ class AsyncSupermemory(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    async def profile(
+        self,
+        *,
+        container_tag: str,
+        q: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProfileResponse:
+        """
+        Get user profile with optional search results
+
+        Args:
+          container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
+              any other identifier you wish to use to filter memories.
+
+          q: Optional search query to include search results in the response
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v4/profile",
+            body=await async_maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "q": q,
+                },
+                client_profile_params.ClientProfileParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProfileResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -402,6 +508,10 @@ class SupermemoryWithRawResponse:
         self.settings = settings.SettingsResourceWithRawResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
 
+        self.profile = to_raw_response_wrapper(
+            client.profile,
+        )
+
 
 class AsyncSupermemoryWithRawResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
@@ -410,6 +520,10 @@ class AsyncSupermemoryWithRawResponse:
         self.search = search.AsyncSearchResourceWithRawResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithRawResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
+
+        self.profile = async_to_raw_response_wrapper(
+            client.profile,
+        )
 
 
 class SupermemoryWithStreamedResponse:
@@ -420,6 +534,10 @@ class SupermemoryWithStreamedResponse:
         self.settings = settings.SettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
 
+        self.profile = to_streamed_response_wrapper(
+            client.profile,
+        )
+
 
 class AsyncSupermemoryWithStreamedResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
@@ -428,6 +546,10 @@ class AsyncSupermemoryWithStreamedResponse:
         self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)
+
+        self.profile = async_to_streamed_response_wrapper(
+            client.profile,
+        )
 
 
 Client = Supermemory

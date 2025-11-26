@@ -1,3 +1,15 @@
+# Supermemory
+
+Types:
+
+```python
+from supermemory.types import ProfileResponse
+```
+
+Methods:
+
+- <code title="post /v4/profile">client.<a href="./src/supermemory/_client.py">profile</a>(\*\*<a href="src/supermemory/types/client_profile_params.py">params</a>) -> <a href="./src/supermemory/types/profile_response.py">ProfileResponse</a></code>
+
 # Memories
 
 Types:
