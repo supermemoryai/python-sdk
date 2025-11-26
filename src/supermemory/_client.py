@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import Any, Dict, Union, Mapping
 from typing_extensions import Self, override
 
 import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_profile_params
+from .types import client_add_params, client_profile_params
 from ._types import (
     Body,
     Omit,
@@ -21,6 +21,7 @@ from ._types import (
     Transport,
     ProxiesTypes,
     RequestOptions,
+    SequenceNotStr,
     omit,
     not_given,
 )
@@ -46,6 +47,7 @@ from ._base_client import (
     AsyncAPIClient,
     make_request_options,
 )
+from .types.add_response import AddResponse
 from .types.profile_response import ProfileResponse
 
 __all__ = [
@@ -201,6 +203,62 @@ class Supermemory(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def add(
+        self,
+        *,
+        content: str,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        custom_id: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AddResponse:
+        """
+        Add a document with any content type (text, url, file, etc.) and metadata
+
+        Args:
+          content: The content to extract and process into a document. This can be a URL to a
+              website, a PDF, an image, or a video.
+
+          container_tag: Optional tag this document should be containerized by. Max 100 characters,
+              alphanumeric with hyphens and underscores only.
+
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens and underscores only.
+
+          metadata: Optional metadata for the document.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v3/documents",
+            body=maybe_transform(
+                {
+                    "content": content,
+                    "container_tag": container_tag,
+                    "container_tags": container_tags,
+                    "custom_id": custom_id,
+                    "metadata": metadata,
+                },
+                client_add_params.ClientAddParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AddResponse,
+        )
 
     def profile(
         self,
@@ -422,6 +480,62 @@ class AsyncSupermemory(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    async def add(
+        self,
+        *,
+        content: str,
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        custom_id: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AddResponse:
+        """
+        Add a document with any content type (text, url, file, etc.) and metadata
+
+        Args:
+          content: The content to extract and process into a document. This can be a URL to a
+              website, a PDF, an image, or a video.
+
+          container_tag: Optional tag this document should be containerized by. Max 100 characters,
+              alphanumeric with hyphens and underscores only.
+
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens and underscores only.
+
+          metadata: Optional metadata for the document.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v3/documents",
+            body=await async_maybe_transform(
+                {
+                    "content": content,
+                    "container_tag": container_tag,
+                    "container_tags": container_tags,
+                    "custom_id": custom_id,
+                    "metadata": metadata,
+                },
+                client_add_params.ClientAddParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AddResponse,
+        )
+
     async def profile(
         self,
         *,
@@ -508,6 +622,9 @@ class SupermemoryWithRawResponse:
         self.settings = settings.SettingsResourceWithRawResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
 
+        self.add = to_raw_response_wrapper(
+            client.add,
+        )
         self.profile = to_raw_response_wrapper(
             client.profile,
         )
@@ -521,6 +638,9 @@ class AsyncSupermemoryWithRawResponse:
         self.settings = settings.AsyncSettingsResourceWithRawResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
 
+        self.add = async_to_raw_response_wrapper(
+            client.add,
+        )
         self.profile = async_to_raw_response_wrapper(
             client.profile,
         )
@@ -534,6 +654,9 @@ class SupermemoryWithStreamedResponse:
         self.settings = settings.SettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
 
+        self.add = to_streamed_response_wrapper(
+            client.add,
+        )
         self.profile = to_streamed_response_wrapper(
             client.profile,
         )
@@ -547,6 +670,9 @@ class AsyncSupermemoryWithStreamedResponse:
         self.settings = settings.AsyncSettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)
 
+        self.add = async_to_streamed_response_wrapper(
+            client.add,
+        )
         self.profile = async_to_streamed_response_wrapper(
             client.profile,
         )

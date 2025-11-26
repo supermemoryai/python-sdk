@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+from .add_response import AddResponse as AddResponse
 from .profile_response import ProfileResponse as ProfileResponse
+from .client_add_params import ClientAddParams as ClientAddParams
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .document_add_params import DocumentAddParams as DocumentAddParams
