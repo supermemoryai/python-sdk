@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .shared import Or as Or, And as And
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .document_add_params import DocumentAddParams as DocumentAddParams
