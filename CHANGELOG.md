@@ -1,5 +1,35 @@
 # Changelog
 
+## 3.5.0 (2025-11-26)
+
+Full Changelog: [v3.4.0...v3.5.0](https://github.com/supermemoryai/python-sdk/compare/v3.4.0...v3.5.0)
+
+### Features
+
+* **api:** api update ([a7749c9](https://github.com/supermemoryai/python-sdk/commit/a7749c97703d995ed97ba1a5c09fef9e5804bea7))
+* **api:** api update ([0972c10](https://github.com/supermemoryai/python-sdk/commit/0972c10cebf6bab936371dfa4c5ad87dad1f5496))
+* **api:** api update ([e29337c](https://github.com/supermemoryai/python-sdk/commit/e29337c11f26831d69e6f830542e5db708760b62))
+* **api:** api update ([a776c2c](https://github.com/supermemoryai/python-sdk/commit/a776c2cfcf82ee239c707b9065bd3313755388fa))
+* **api:** api update ([4e6c8e6](https://github.com/supermemoryai/python-sdk/commit/4e6c8e61653c99c733f862cbb5e08478159d082b))
+* **api:** manual updates ([c780b0f](https://github.com/supermemoryai/python-sdk/commit/c780b0fc9afb857dd55613d5b67cd7849b68973c))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([1155c43](https://github.com/supermemoryai/python-sdk/commit/1155c4396baa8681dcb72f6b53f90c42052fac6f))
+* compat with Python 3.14 ([d42dd9c](https://github.com/supermemoryai/python-sdk/commit/d42dd9c177546142c2d87484e1bb435401cfaac8))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([447f54f](https://github.com/supermemoryai/python-sdk/commit/447f54f0f7846283b4033275fe2042f6dff66a2c))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([8802bdd](https://github.com/supermemoryai/python-sdk/commit/8802bdd0529ef3759bf1b8547ce2405c8164d0e9))
+* bump `httpx-aiohttp` version to 0.1.9 ([6ad4b61](https://github.com/supermemoryai/python-sdk/commit/6ad4b613df1d4177fabeaf0b67d984e195af8594))
+* **internal/tests:** avoid race condition with implicit client cleanup ([7bad0fc](https://github.com/supermemoryai/python-sdk/commit/7bad0fc387de50f25bec0e3a7ecca2b732294460))
+* **internal:** detect missing future annotations with ruff ([6085dd3](https://github.com/supermemoryai/python-sdk/commit/6085dd39d67398eec25d5b9bcc5371f4810622c8))
+* **internal:** grammar fix (it's -&gt; its) ([329768e](https://github.com/supermemoryai/python-sdk/commit/329768ed8cec31b2ef510409b9f67a3f800a286b))
+* **package:** drop Python 3.8 support ([9feb588](https://github.com/supermemoryai/python-sdk/commit/9feb588a112036bd5de9041f775232f7c1384e3f))
+
 ## 3.4.0 (2025-10-07)
 
 Full Changelog: [v3.3.0...v3.4.0](https://github.com/supermemoryai/python-sdk/compare/v3.3.0...v3.4.0)
