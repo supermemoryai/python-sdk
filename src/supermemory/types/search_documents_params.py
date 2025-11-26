@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Iterable
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .shared_params.or_ import Or
-from .shared_params.and_ import And
 
-__all__ = ["SearchDocumentsParams", "Filters"]
+__all__ = ["SearchDocumentsParams", "Filters", "FiltersOr", "FiltersAnd"]
 
 
 class SearchDocumentsParams(TypedDict, total=False):
@@ -84,4 +82,12 @@ class SearchDocumentsParams(TypedDict, total=False):
     """
 
 
-Filters: TypeAlias = Union[Or, And]
+class FiltersOr(TypedDict, total=False):
+    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
+
+
+class FiltersAnd(TypedDict, total=False):
+    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
+
+
+Filters: TypeAlias = Union[FiltersOr, FiltersAnd]

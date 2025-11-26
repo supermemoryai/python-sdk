@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, Annotated, TypeAlias, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .shared_params.or_ import Or
-from .shared_params.and_ import And
 
-__all__ = ["DocumentListParams", "Filters"]
+__all__ = ["DocumentListParams", "Filters", "FiltersOr", "FiltersAnd"]
 
 
 class DocumentListParams(TypedDict, total=False):
@@ -43,4 +41,12 @@ class DocumentListParams(TypedDict, total=False):
     """Field to sort by"""
 
 
-Filters: TypeAlias = Union[Or, And]
+class FiltersOr(TypedDict, total=False):
+    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
+
+
+class FiltersAnd(TypedDict, total=False):
+    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
+
+
+Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
