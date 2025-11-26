@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from supermemory.types import And, Or, ProfileResponse
+from supermemory.types import And, Or
 ```
 
 # Memories
