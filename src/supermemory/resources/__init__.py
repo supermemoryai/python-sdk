@@ -8,14 +8,6 @@ from .search import (
     SearchResourceWithStreamingResponse,
     AsyncSearchResourceWithStreamingResponse,
 )
-from .profile import (
-    ProfileResource,
-    AsyncProfileResource,
-    ProfileResourceWithRawResponse,
-    AsyncProfileResourceWithRawResponse,
-    ProfileResourceWithStreamingResponse,
-    AsyncProfileResourceWithStreamingResponse,
-)
 from .memories import (
     MemoriesResource,
     AsyncMemoriesResource,
@@ -62,12 +54,6 @@ __all__ = [
     "AsyncDocumentsResourceWithRawResponse",
     "DocumentsResourceWithStreamingResponse",
     "AsyncDocumentsResourceWithStreamingResponse",
-    "ProfileResource",
-    "AsyncProfileResource",
-    "ProfileResourceWithRawResponse",
-    "AsyncProfileResourceWithRawResponse",
-    "ProfileResourceWithStreamingResponse",
-    "AsyncProfileResourceWithStreamingResponse",
     "SearchResource",
     "AsyncSearchResource",
     "SearchResourceWithRawResponse",
