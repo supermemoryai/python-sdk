@@ -50,18 +50,6 @@ Methods:
 - <code title="get /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">get</a>(id) -> <a href="./src/supermemory/types/document_get_response.py">DocumentGetResponse</a></code>
 - <code title="post /v3/documents/file">client.documents.<a href="./src/supermemory/resources/documents.py">upload_file</a>(\*\*<a href="src/supermemory/types/document_upload_file_params.py">params</a>) -> <a href="./src/supermemory/types/document_upload_file_response.py">DocumentUploadFileResponse</a></code>
 
-# Profile
-
-Types:
-
-```python
-from supermemory.types import ProfilePropertyResponse
-```
-
-Methods:
-
-- <code title="post /v4/profile">client.profile.<a href="./src/supermemory/resources/profile.py">property</a>(\*\*<a href="src/supermemory/types/profile_property_params.py">params</a>) -> <a href="./src/supermemory/types/profile_property_response.py">ProfilePropertyResponse</a></code>
-
 # Search
 
 Types:
