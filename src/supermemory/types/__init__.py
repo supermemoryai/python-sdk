@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .profile_response import ProfileResponse as ProfileResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .document_add_params import DocumentAddParams as DocumentAddParams
@@ -11,6 +12,7 @@ from .document_list_params import DocumentListParams as DocumentListParams
 from .memory_list_response import MemoryListResponse as MemoryListResponse
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .setting_get_response import SettingGetResponse as SettingGetResponse
+from .client_profile_params import ClientProfileParams as ClientProfileParams
 from .document_add_response import DocumentAddResponse as DocumentAddResponse
 from .document_get_response import DocumentGetResponse as DocumentGetResponse
 from .search_execute_params import SearchExecuteParams as SearchExecuteParams
