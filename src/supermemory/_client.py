@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import search, memories, settings, documents, connections
+from .resources import search, profile, memories, settings, documents, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SupermemoryError
 from ._base_client import (
@@ -45,6 +45,7 @@ __all__ = [
 class Supermemory(SyncAPIClient):
     memories: memories.MemoriesResource
     documents: documents.DocumentsResource
+    profile: profile.ProfileResource
     search: search.SearchResource
     settings: settings.SettingsResource
     connections: connections.ConnectionsResource
@@ -107,6 +108,7 @@ class Supermemory(SyncAPIClient):
 
         self.memories = memories.MemoriesResource(self)
         self.documents = documents.DocumentsResource(self)
+        self.profile = profile.ProfileResource(self)
         self.search = search.SearchResource(self)
         self.settings = settings.SettingsResource(self)
         self.connections = connections.ConnectionsResource(self)
@@ -221,6 +223,7 @@ class Supermemory(SyncAPIClient):
 class AsyncSupermemory(AsyncAPIClient):
     memories: memories.AsyncMemoriesResource
     documents: documents.AsyncDocumentsResource
+    profile: profile.AsyncProfileResource
     search: search.AsyncSearchResource
     settings: settings.AsyncSettingsResource
     connections: connections.AsyncConnectionsResource
@@ -283,6 +286,7 @@ class AsyncSupermemory(AsyncAPIClient):
 
         self.memories = memories.AsyncMemoriesResource(self)
         self.documents = documents.AsyncDocumentsResource(self)
+        self.profile = profile.AsyncProfileResource(self)
         self.search = search.AsyncSearchResource(self)
         self.settings = settings.AsyncSettingsResource(self)
         self.connections = connections.AsyncConnectionsResource(self)
@@ -398,6 +402,7 @@ class SupermemoryWithRawResponse:
     def __init__(self, client: Supermemory) -> None:
         self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
         self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
+        self.profile = profile.ProfileResourceWithRawResponse(client.profile)
         self.search = search.SearchResourceWithRawResponse(client.search)
         self.settings = settings.SettingsResourceWithRawResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
@@ -407,6 +412,7 @@ class AsyncSupermemoryWithRawResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
         self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
         self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
+        self.profile = profile.AsyncProfileResourceWithRawResponse(client.profile)
         self.search = search.AsyncSearchResourceWithRawResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithRawResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
@@ -416,6 +422,7 @@ class SupermemoryWithStreamedResponse:
     def __init__(self, client: Supermemory) -> None:
         self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
         self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
+        self.profile = profile.ProfileResourceWithStreamingResponse(client.profile)
         self.search = search.SearchResourceWithStreamingResponse(client.search)
         self.settings = settings.SettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
@@ -425,6 +432,7 @@ class AsyncSupermemoryWithStreamedResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
         self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
         self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
+        self.profile = profile.AsyncProfileResourceWithStreamingResponse(client.profile)
         self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
         self.settings = settings.AsyncSettingsResourceWithStreamingResponse(client.settings)
         self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)

@@ -21,6 +21,7 @@ from .document_list_response import DocumentListResponse as DocumentListResponse
 from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
 from .memory_update_response import MemoryUpdateResponse as MemoryUpdateResponse
 from .search_memories_params import SearchMemoriesParams as SearchMemoriesParams
+from .profile_property_params import ProfilePropertyParams as ProfilePropertyParams
 from .search_documents_params import SearchDocumentsParams as SearchDocumentsParams
 from .search_execute_response import SearchExecuteResponse as SearchExecuteResponse
 from .setting_update_response import SettingUpdateResponse as SettingUpdateResponse
@@ -30,6 +31,7 @@ from .connection_list_response import ConnectionListResponse as ConnectionListRe
 from .document_update_response import DocumentUpdateResponse as DocumentUpdateResponse
 from .search_memories_response import SearchMemoriesResponse as SearchMemoriesResponse
 from .memory_upload_file_params import MemoryUploadFileParams as MemoryUploadFileParams
+from .profile_property_response import ProfilePropertyResponse as ProfilePropertyResponse
 from .search_documents_response import SearchDocumentsResponse as SearchDocumentsResponse
 from .connection_create_response import ConnectionCreateResponse as ConnectionCreateResponse
 from .connection_import_response import ConnectionImportResponse as ConnectionImportResponse
