@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import search, memories, settings, documents, connections
+from .resources import search, shared, memories, settings, documents, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SupermemoryError
 from ._base_client import (
@@ -396,6 +396,7 @@ class AsyncSupermemory(AsyncAPIClient):
 
 class SupermemoryWithRawResponse:
     def __init__(self, client: Supermemory) -> None:
+        self.shared = shared.SharedResourceWithRawResponse(client.shared)
         self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
         self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
         self.search = search.SearchResourceWithRawResponse(client.search)
@@ -405,6 +406,7 @@ class SupermemoryWithRawResponse:
 
 class AsyncSupermemoryWithRawResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
+        self.shared = shared.AsyncSharedResourceWithRawResponse(client.shared)
         self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
         self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
         self.search = search.AsyncSearchResourceWithRawResponse(client.search)
@@ -414,6 +416,7 @@ class AsyncSupermemoryWithRawResponse:
 
 class SupermemoryWithStreamedResponse:
     def __init__(self, client: Supermemory) -> None:
+        self.shared = shared.SharedResourceWithStreamingResponse(client.shared)
         self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
         self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
         self.search = search.SearchResourceWithStreamingResponse(client.search)
@@ -423,6 +426,7 @@ class SupermemoryWithStreamedResponse:
 
 class AsyncSupermemoryWithStreamedResponse:
     def __init__(self, client: AsyncSupermemory) -> None:
+        self.shared = shared.AsyncSharedResourceWithStreamingResponse(client.shared)
         self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
         self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
         self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
