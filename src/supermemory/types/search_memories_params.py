@@ -61,6 +61,12 @@ Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
 
 
 class Include(TypedDict, total=False):
+    chunks: bool
+    """
+    If true, fetch and return chunks from documents associated with the found
+    memories. Performs vector search on chunks within those documents.
+    """
+
     documents: bool
 
     forgotten_memories: Annotated[bool, PropertyInfo(alias="forgottenMemories")]
