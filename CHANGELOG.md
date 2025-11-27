@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.0 (2025-11-27)
+
+Full Changelog: [v3.7.0...v3.8.0](https://github.com/supermemoryai/python-sdk/compare/v3.7.0...v3.8.0)
+
+### Features
+
+* **api:** api update ([a6a18ce](https://github.com/supermemoryai/python-sdk/commit/a6a18ce48bb1f1f80f4cfe6a9c3b0c9ff4f9fbcb))
+
 ## 3.7.0 (2025-11-26)
 
 Full Changelog: [v3.6.0...v3.7.0](https://github.com/supermemoryai/python-sdk/compare/v3.6.0...v3.7.0)
