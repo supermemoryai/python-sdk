@@ -145,6 +145,7 @@ class TestSearch:
             container_tag="user_123",
             filters={"or_": [{}]},
             include={
+                "chunks": False,
                 "documents": True,
                 "forgotten_memories": False,
                 "related_memories": True,
@@ -313,6 +314,7 @@ class TestAsyncSearch:
             container_tag="user_123",
             filters={"or_": [{}]},
             include={
+                "chunks": False,
                 "documents": True,
                 "forgotten_memories": False,
                 "related_memories": True,

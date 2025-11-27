@@ -10,11 +10,26 @@ from .._models import BaseModel
 __all__ = [
     "SearchMemoriesResponse",
     "Result",
+    "ResultChunk",
     "ResultContext",
     "ResultContextChild",
     "ResultContextParent",
     "ResultDocument",
 ]
+
+
+class ResultChunk(BaseModel):
+    content: str
+    """Content of the chunk"""
+
+    document_id: str = FieldInfo(alias="documentId")
+    """ID of the document this chunk belongs to"""
+
+    position: float
+    """Position of chunk in the document (0-indexed)"""
+
+    score: float
+    """Similarity score between the query and chunk"""
 
 
 class ResultContextChild(BaseModel):
@@ -101,6 +116,9 @@ class Result(BaseModel):
 
     updated_at: str = FieldInfo(alias="updatedAt")
     """Memory last update date"""
+
+    chunks: Optional[List[ResultChunk]] = None
+    """Relevant chunks from associated documents (only included when chunks=true)"""
 
     context: Optional[ResultContext] = None
     """Object containing arrays of parent and child contextual memories"""
