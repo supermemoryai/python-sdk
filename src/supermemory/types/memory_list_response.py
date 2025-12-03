@@ -60,6 +60,7 @@ class Memory(BaseModel):
         "notion_doc",
         "webpage",
         "onedrive",
+        "github_markdown",
     ]
     """Type of the document"""
 
