@@ -83,6 +83,7 @@ pip install supermemory[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from supermemory import DefaultAioHttpClient
 from supermemory import AsyncSupermemory
@@ -90,7 +91,7 @@ from supermemory import AsyncSupermemory
 
 async def main() -> None:
     async with AsyncSupermemory(
-        api_key="My API Key",
+        api_key=os.environ.get("SUPERMEMORY_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.search.documents(
