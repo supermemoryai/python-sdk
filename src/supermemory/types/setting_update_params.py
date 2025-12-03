@@ -19,6 +19,12 @@ class SettingUpdateParams(TypedDict, total=False):
 
     filter_prompt: Annotated[Optional[str], PropertyInfo(alias="filterPrompt")]
 
+    github_client_id: Annotated[Optional[str], PropertyInfo(alias="githubClientId")]
+
+    github_client_secret: Annotated[Optional[str], PropertyInfo(alias="githubClientSecret")]
+
+    github_custom_key_enabled: Annotated[Optional[bool], PropertyInfo(alias="githubCustomKeyEnabled")]
+
     google_drive_client_id: Annotated[Optional[str], PropertyInfo(alias="googleDriveClientId")]
 
     google_drive_client_secret: Annotated[Optional[str], PropertyInfo(alias="googleDriveClientSecret")]

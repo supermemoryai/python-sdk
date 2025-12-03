@@ -18,6 +18,12 @@ class Updated(BaseModel):
 
     filter_prompt: Optional[str] = FieldInfo(alias="filterPrompt", default=None)
 
+    github_client_id: Optional[str] = FieldInfo(alias="githubClientId", default=None)
+
+    github_client_secret: Optional[str] = FieldInfo(alias="githubClientSecret", default=None)
+
+    github_custom_key_enabled: Optional[bool] = FieldInfo(alias="githubCustomKeyEnabled", default=None)
+
     google_drive_client_id: Optional[str] = FieldInfo(alias="googleDriveClientId", default=None)
 
     google_drive_client_secret: Optional[str] = FieldInfo(alias="googleDriveClientSecret", default=None)
