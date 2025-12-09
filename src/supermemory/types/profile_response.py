@@ -18,6 +18,8 @@ class Profile(BaseModel):
 
 
 class SearchResults(BaseModel):
+    """Search results if a search query was provided"""
+
     results: List[object]
     """Search results for the provided query"""
 
