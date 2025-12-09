@@ -121,7 +121,7 @@ from supermemory import Supermemory
 
 client = Supermemory()
 
-response = client.search.memories(
+response = client.search(
     q="machine learning concepts",
     include={},
 )

@@ -14,6 +14,7 @@ from supermemory.types import (
     DocumentGetResponse,
     DocumentListResponse,
     DocumentUpdateResponse,
+    DocumentDeleteBulkResponse,
     DocumentUploadFileResponse,
 )
 
@@ -228,6 +229,43 @@ class TestDocuments:
 
             document = response.parse()
             assert_matches_type(DocumentAddResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_delete_bulk(self, client: Supermemory) -> None:
+        document = client.documents.delete_bulk()
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_delete_bulk_with_all_params(self, client: Supermemory) -> None:
+        document = client.documents.delete_bulk(
+            container_tags=["user_123", "project_123"],
+            ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
+        )
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_delete_bulk(self, client: Supermemory) -> None:
+        response = client.documents.with_raw_response.delete_bulk()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = response.parse()
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_delete_bulk(self, client: Supermemory) -> None:
+        with client.documents.with_streaming_response.delete_bulk() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = response.parse()
+            assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -530,6 +568,43 @@ class TestAsyncDocuments:
 
             document = await response.parse()
             assert_matches_type(DocumentAddResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_delete_bulk(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.delete_bulk()
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_delete_bulk_with_all_params(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.delete_bulk(
+            container_tags=["user_123", "project_123"],
+            ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
+        )
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_delete_bulk(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.documents.with_raw_response.delete_bulk()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = await response.parse()
+        assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_delete_bulk(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.documents.with_streaming_response.delete_bulk() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = await response.parse()
+            assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

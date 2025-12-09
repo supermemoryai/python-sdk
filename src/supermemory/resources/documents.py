@@ -7,7 +7,13 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import document_add_params, document_list_params, document_update_params, document_upload_file_params
+from ..types import (
+    document_add_params,
+    document_list_params,
+    document_update_params,
+    document_delete_bulk_params,
+    document_upload_file_params,
+)
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
@@ -23,6 +29,7 @@ from ..types.document_add_response import DocumentAddResponse
 from ..types.document_get_response import DocumentGetResponse
 from ..types.document_list_response import DocumentListResponse
 from ..types.document_update_response import DocumentUpdateResponse
+from ..types.document_delete_bulk_response import DocumentDeleteBulkResponse
 from ..types.document_upload_file_response import DocumentUploadFileResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
@@ -276,6 +283,49 @@ class DocumentsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DocumentAddResponse,
+        )
+
+    def delete_bulk(
+        self,
+        *,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        ids: SequenceNotStr[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentDeleteBulkResponse:
+        """
+        Bulk delete documents by IDs or container tags
+
+        Args:
+          container_tags: Array of container tags - all documents in these containers will be deleted
+
+          ids: Array of document IDs to delete (max 100 at once)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._delete(
+            "/v3/documents/bulk",
+            body=maybe_transform(
+                {
+                    "container_tags": container_tags,
+                    "ids": ids,
+                },
+                document_delete_bulk_params.DocumentDeleteBulkParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentDeleteBulkResponse,
         )
 
     def get(
@@ -631,6 +681,49 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=DocumentAddResponse,
         )
 
+    async def delete_bulk(
+        self,
+        *,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        ids: SequenceNotStr[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentDeleteBulkResponse:
+        """
+        Bulk delete documents by IDs or container tags
+
+        Args:
+          container_tags: Array of container tags - all documents in these containers will be deleted
+
+          ids: Array of document IDs to delete (max 100 at once)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._delete(
+            "/v3/documents/bulk",
+            body=await async_maybe_transform(
+                {
+                    "container_tags": container_tags,
+                    "ids": ids,
+                },
+                document_delete_bulk_params.DocumentDeleteBulkParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentDeleteBulkResponse,
+        )
+
     async def get(
         self,
         id: str,
@@ -750,6 +843,9 @@ class DocumentsResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             documents.add,
         )
+        self.delete_bulk = to_raw_response_wrapper(
+            documents.delete_bulk,
+        )
         self.get = to_raw_response_wrapper(
             documents.get,
         )
@@ -773,6 +869,9 @@ class AsyncDocumentsResourceWithRawResponse:
         )
         self.add = async_to_raw_response_wrapper(
             documents.add,
+        )
+        self.delete_bulk = async_to_raw_response_wrapper(
+            documents.delete_bulk,
         )
         self.get = async_to_raw_response_wrapper(
             documents.get,
@@ -798,6 +897,9 @@ class DocumentsResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             documents.add,
         )
+        self.delete_bulk = to_streamed_response_wrapper(
+            documents.delete_bulk,
+        )
         self.get = to_streamed_response_wrapper(
             documents.get,
         )
@@ -821,6 +923,9 @@ class AsyncDocumentsResourceWithStreamingResponse:
         )
         self.add = async_to_streamed_response_wrapper(
             documents.add,
+        )
+        self.delete_bulk = async_to_streamed_response_wrapper(
+            documents.delete_bulk,
         )
         self.get = async_to_streamed_response_wrapper(
             documents.get,

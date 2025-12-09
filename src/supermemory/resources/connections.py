@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -11,7 +11,9 @@ from ..types import (
     connection_list_params,
     connection_create_params,
     connection_import_params,
-    connection_get_by_tags_params,
+    connection_configure_params,
+    connection_resources_params,
+    connection_get_by_tag_params,
     connection_list_documents_params,
     connection_delete_by_provider_params,
 )
@@ -28,8 +30,10 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.connection_list_response import ConnectionListResponse
 from ..types.connection_create_response import ConnectionCreateResponse
+from ..types.connection_configure_response import ConnectionConfigureResponse
 from ..types.connection_get_by_id_response import ConnectionGetByIDResponse
-from ..types.connection_get_by_tags_response import ConnectionGetByTagsResponse
+from ..types.connection_resources_response import ConnectionResourcesResponse
+from ..types.connection_get_by_tag_response import ConnectionGetByTagResponse
 from ..types.connection_delete_by_id_response import ConnectionDeleteByIDResponse
 from ..types.connection_list_documents_response import ConnectionListDocumentsResponse
 from ..types.connection_delete_by_provider_response import ConnectionDeleteByProviderResponse
@@ -135,6 +139,41 @@ class ConnectionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ConnectionListResponse,
+        )
+
+    def configure(
+        self,
+        connection_id: str,
+        *,
+        resources: Iterable[Dict[str, object]],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ConnectionConfigureResponse:
+        """
+        Configure resources for a connection (supported providers: GitHub for now)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return self._post(
+            f"/v3/connections/{connection_id}/configure",
+            body=maybe_transform({"resources": resources}, connection_configure_params.ConnectionConfigureParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConnectionConfigureResponse,
         )
 
     def delete_by_id(
@@ -243,7 +282,7 @@ class ConnectionsResource(SyncAPIResource):
             cast_to=ConnectionGetByIDResponse,
         )
 
-    def get_by_tags(
+    def get_by_tag(
         self,
         provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
         *,
@@ -254,7 +293,7 @@ class ConnectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ConnectionGetByTagsResponse:
+    ) -> ConnectionGetByTagResponse:
         """
         Get connection details with provider and container tags
 
@@ -274,12 +313,12 @@ class ConnectionsResource(SyncAPIResource):
         return self._post(
             f"/v3/connections/{provider}/connection",
             body=maybe_transform(
-                {"container_tags": container_tags}, connection_get_by_tags_params.ConnectionGetByTagsParams
+                {"container_tags": container_tags}, connection_get_by_tag_params.ConnectionGetByTagParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ConnectionGetByTagsResponse,
+            cast_to=ConnectionGetByTagResponse,
         )
 
     def import_(
@@ -357,6 +396,51 @@ class ConnectionsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ConnectionListDocumentsResponse,
+        )
+
+    def resources(
+        self,
+        connection_id: str,
+        *,
+        page: float | Omit = omit,
+        per_page: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ConnectionResourcesResponse:
+        """
+        Fetch resources for a connection (supported providers: GitHub for now)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return self._get(
+            f"/v3/connections/{connection_id}/resources",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page": page,
+                        "per_page": per_page,
+                    },
+                    connection_resources_params.ConnectionResourcesParams,
+                ),
+            ),
+            cast_to=ConnectionResourcesResponse,
         )
 
 
@@ -460,6 +544,43 @@ class AsyncConnectionsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ConnectionListResponse,
+        )
+
+    async def configure(
+        self,
+        connection_id: str,
+        *,
+        resources: Iterable[Dict[str, object]],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ConnectionConfigureResponse:
+        """
+        Configure resources for a connection (supported providers: GitHub for now)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return await self._post(
+            f"/v3/connections/{connection_id}/configure",
+            body=await async_maybe_transform(
+                {"resources": resources}, connection_configure_params.ConnectionConfigureParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConnectionConfigureResponse,
         )
 
     async def delete_by_id(
@@ -568,7 +689,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
             cast_to=ConnectionGetByIDResponse,
         )
 
-    async def get_by_tags(
+    async def get_by_tag(
         self,
         provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
         *,
@@ -579,7 +700,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ConnectionGetByTagsResponse:
+    ) -> ConnectionGetByTagResponse:
         """
         Get connection details with provider and container tags
 
@@ -599,12 +720,12 @@ class AsyncConnectionsResource(AsyncAPIResource):
         return await self._post(
             f"/v3/connections/{provider}/connection",
             body=await async_maybe_transform(
-                {"container_tags": container_tags}, connection_get_by_tags_params.ConnectionGetByTagsParams
+                {"container_tags": container_tags}, connection_get_by_tag_params.ConnectionGetByTagParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ConnectionGetByTagsResponse,
+            cast_to=ConnectionGetByTagResponse,
         )
 
     async def import_(
@@ -686,6 +807,51 @@ class AsyncConnectionsResource(AsyncAPIResource):
             cast_to=ConnectionListDocumentsResponse,
         )
 
+    async def resources(
+        self,
+        connection_id: str,
+        *,
+        page: float | Omit = omit,
+        per_page: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ConnectionResourcesResponse:
+        """
+        Fetch resources for a connection (supported providers: GitHub for now)
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not connection_id:
+            raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
+        return await self._get(
+            f"/v3/connections/{connection_id}/resources",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page": page,
+                        "per_page": per_page,
+                    },
+                    connection_resources_params.ConnectionResourcesParams,
+                ),
+            ),
+            cast_to=ConnectionResourcesResponse,
+        )
+
 
 class ConnectionsResourceWithRawResponse:
     def __init__(self, connections: ConnectionsResource) -> None:
@@ -697,6 +863,9 @@ class ConnectionsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             connections.list,
         )
+        self.configure = to_raw_response_wrapper(
+            connections.configure,
+        )
         self.delete_by_id = to_raw_response_wrapper(
             connections.delete_by_id,
         )
@@ -706,14 +875,17 @@ class ConnectionsResourceWithRawResponse:
         self.get_by_id = to_raw_response_wrapper(
             connections.get_by_id,
         )
-        self.get_by_tags = to_raw_response_wrapper(
-            connections.get_by_tags,
+        self.get_by_tag = to_raw_response_wrapper(
+            connections.get_by_tag,
         )
         self.import_ = to_raw_response_wrapper(
             connections.import_,
         )
         self.list_documents = to_raw_response_wrapper(
             connections.list_documents,
+        )
+        self.resources = to_raw_response_wrapper(
+            connections.resources,
         )
 
 
@@ -727,6 +899,9 @@ class AsyncConnectionsResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             connections.list,
         )
+        self.configure = async_to_raw_response_wrapper(
+            connections.configure,
+        )
         self.delete_by_id = async_to_raw_response_wrapper(
             connections.delete_by_id,
         )
@@ -736,14 +911,17 @@ class AsyncConnectionsResourceWithRawResponse:
         self.get_by_id = async_to_raw_response_wrapper(
             connections.get_by_id,
         )
-        self.get_by_tags = async_to_raw_response_wrapper(
-            connections.get_by_tags,
+        self.get_by_tag = async_to_raw_response_wrapper(
+            connections.get_by_tag,
         )
         self.import_ = async_to_raw_response_wrapper(
             connections.import_,
         )
         self.list_documents = async_to_raw_response_wrapper(
             connections.list_documents,
+        )
+        self.resources = async_to_raw_response_wrapper(
+            connections.resources,
         )
 
 
@@ -757,6 +935,9 @@ class ConnectionsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             connections.list,
         )
+        self.configure = to_streamed_response_wrapper(
+            connections.configure,
+        )
         self.delete_by_id = to_streamed_response_wrapper(
             connections.delete_by_id,
         )
@@ -766,14 +947,17 @@ class ConnectionsResourceWithStreamingResponse:
         self.get_by_id = to_streamed_response_wrapper(
             connections.get_by_id,
         )
-        self.get_by_tags = to_streamed_response_wrapper(
-            connections.get_by_tags,
+        self.get_by_tag = to_streamed_response_wrapper(
+            connections.get_by_tag,
         )
         self.import_ = to_streamed_response_wrapper(
             connections.import_,
         )
         self.list_documents = to_streamed_response_wrapper(
             connections.list_documents,
+        )
+        self.resources = to_streamed_response_wrapper(
+            connections.resources,
         )
 
 
@@ -787,6 +971,9 @@ class AsyncConnectionsResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             connections.list,
         )
+        self.configure = async_to_streamed_response_wrapper(
+            connections.configure,
+        )
         self.delete_by_id = async_to_streamed_response_wrapper(
             connections.delete_by_id,
         )
@@ -796,12 +983,15 @@ class AsyncConnectionsResourceWithStreamingResponse:
         self.get_by_id = async_to_streamed_response_wrapper(
             connections.get_by_id,
         )
-        self.get_by_tags = async_to_streamed_response_wrapper(
-            connections.get_by_tags,
+        self.get_by_tag = async_to_streamed_response_wrapper(
+            connections.get_by_tag,
         )
         self.import_ = async_to_streamed_response_wrapper(
             connections.import_,
         )
         self.list_documents = async_to_streamed_response_wrapper(
             connections.list_documents,
+        )
+        self.resources = async_to_streamed_response_wrapper(
+            connections.resources,
         )

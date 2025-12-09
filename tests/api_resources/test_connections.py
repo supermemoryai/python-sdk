@@ -13,7 +13,9 @@ from supermemory.types import (
     ConnectionListResponse,
     ConnectionCreateResponse,
     ConnectionGetByIDResponse,
-    ConnectionGetByTagsResponse,
+    ConnectionGetByTagResponse,
+    ConnectionConfigureResponse,
+    ConnectionResourcesResponse,
     ConnectionDeleteByIDResponse,
     ConnectionListDocumentsResponse,
     ConnectionDeleteByProviderResponse,
@@ -106,6 +108,52 @@ class TestConnections:
             assert_matches_type(ConnectionListResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_configure(self, client: Supermemory) -> None:
+        connection = client.connections.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        )
+        assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_configure(self, client: Supermemory) -> None:
+        response = client.connections.with_raw_response.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = response.parse()
+        assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_configure(self, client: Supermemory) -> None:
+        with client.connections.with_streaming_response.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = response.parse()
+            assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_configure(self, client: Supermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            client.connections.with_raw_response.configure(
+                connection_id="",
+                resources=[{"foo": "bar"}],
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -230,17 +278,17 @@ class TestConnections:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_get_by_tags(self, client: Supermemory) -> None:
-        connection = client.connections.get_by_tags(
+    def test_method_get_by_tag(self, client: Supermemory) -> None:
+        connection = client.connections.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
-        assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+        assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_get_by_tags(self, client: Supermemory) -> None:
-        response = client.connections.with_raw_response.get_by_tags(
+    def test_raw_response_get_by_tag(self, client: Supermemory) -> None:
+        response = client.connections.with_raw_response.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
@@ -248,12 +296,12 @@ class TestConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = response.parse()
-        assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+        assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_get_by_tags(self, client: Supermemory) -> None:
-        with client.connections.with_streaming_response.get_by_tags(
+    def test_streaming_response_get_by_tag(self, client: Supermemory) -> None:
+        with client.connections.with_streaming_response.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         ) as response:
@@ -261,7 +309,7 @@ class TestConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = response.parse()
-            assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+            assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -351,6 +399,58 @@ class TestConnections:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_resources(self, client: Supermemory) -> None:
+        connection = client.connections.resources(
+            connection_id="connectionId",
+        )
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_resources_with_all_params(self, client: Supermemory) -> None:
+        connection = client.connections.resources(
+            connection_id="connectionId",
+            page=0,
+            per_page=0,
+        )
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_resources(self, client: Supermemory) -> None:
+        response = client.connections.with_raw_response.resources(
+            connection_id="connectionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = response.parse()
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_resources(self, client: Supermemory) -> None:
+        with client.connections.with_streaming_response.resources(
+            connection_id="connectionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = response.parse()
+            assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_resources(self, client: Supermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            client.connections.with_raw_response.resources(
+                connection_id="",
+            )
+
 
 class TestAsyncConnections:
     parametrize = pytest.mark.parametrize(
@@ -438,6 +538,52 @@ class TestAsyncConnections:
             assert_matches_type(ConnectionListResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_configure(self, async_client: AsyncSupermemory) -> None:
+        connection = await async_client.connections.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        )
+        assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_configure(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.connections.with_raw_response.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = await response.parse()
+        assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_configure(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.connections.with_streaming_response.configure(
+            connection_id="connectionId",
+            resources=[{"foo": "bar"}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = await response.parse()
+            assert_matches_type(ConnectionConfigureResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_configure(self, async_client: AsyncSupermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            await async_client.connections.with_raw_response.configure(
+                connection_id="",
+                resources=[{"foo": "bar"}],
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -562,17 +708,17 @@ class TestAsyncConnections:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_get_by_tags(self, async_client: AsyncSupermemory) -> None:
-        connection = await async_client.connections.get_by_tags(
+    async def test_method_get_by_tag(self, async_client: AsyncSupermemory) -> None:
+        connection = await async_client.connections.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
-        assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+        assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_get_by_tags(self, async_client: AsyncSupermemory) -> None:
-        response = await async_client.connections.with_raw_response.get_by_tags(
+    async def test_raw_response_get_by_tag(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.connections.with_raw_response.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         )
@@ -580,12 +726,12 @@ class TestAsyncConnections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         connection = await response.parse()
-        assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+        assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_get_by_tags(self, async_client: AsyncSupermemory) -> None:
-        async with async_client.connections.with_streaming_response.get_by_tags(
+    async def test_streaming_response_get_by_tag(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.connections.with_streaming_response.get_by_tag(
             provider="notion",
             container_tags=["user_123", "project_123"],
         ) as response:
@@ -593,7 +739,7 @@ class TestAsyncConnections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             connection = await response.parse()
-            assert_matches_type(ConnectionGetByTagsResponse, connection, path=["response"])
+            assert_matches_type(ConnectionGetByTagResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -682,3 +828,55 @@ class TestAsyncConnections:
             assert_matches_type(ConnectionListDocumentsResponse, connection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_resources(self, async_client: AsyncSupermemory) -> None:
+        connection = await async_client.connections.resources(
+            connection_id="connectionId",
+        )
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_resources_with_all_params(self, async_client: AsyncSupermemory) -> None:
+        connection = await async_client.connections.resources(
+            connection_id="connectionId",
+            page=0,
+            per_page=0,
+        )
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_resources(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.connections.with_raw_response.resources(
+            connection_id="connectionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        connection = await response.parse()
+        assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_resources(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.connections.with_streaming_response.resources(
+            connection_id="connectionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            connection = await response.parse()
+            assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_resources(self, async_client: AsyncSupermemory) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `connection_id` but received ''"):
+            await async_client.connections.with_raw_response.resources(
+                connection_id="",
+            )
