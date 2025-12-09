@@ -11,6 +11,8 @@ __all__ = ["DocumentGetResponse"]
 
 
 class DocumentGetResponse(BaseModel):
+    """Document object"""
+
     id: str
     """Unique identifier of the document."""
 

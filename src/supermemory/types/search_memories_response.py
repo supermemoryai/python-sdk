@@ -73,6 +73,8 @@ class ResultContextParent(BaseModel):
 
 
 class ResultContext(BaseModel):
+    """Object containing arrays of parent and child contextual memories"""
+
     children: Optional[List[ResultContextChild]] = None
 
     parents: Optional[List[ResultContextParent]] = None

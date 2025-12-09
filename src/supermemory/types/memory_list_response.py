@@ -79,6 +79,8 @@ class Memory(BaseModel):
 
 
 class Pagination(BaseModel):
+    """Pagination metadata"""
+
     current_page: float = FieldInfo(alias="currentPage")
 
     total_items: float = FieldInfo(alias="totalItems")
@@ -89,6 +91,8 @@ class Pagination(BaseModel):
 
 
 class MemoryListResponse(BaseModel):
+    """List of documents"""
+
     memories: List[Memory]
 
     pagination: Pagination

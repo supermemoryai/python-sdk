@@ -50,10 +50,14 @@ class SearchMemoriesParams(TypedDict, total=False):
 
 
 class FiltersOr(TypedDict, total=False):
+    """OR"""
+
     or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
 
 
 class FiltersAnd(TypedDict, total=False):
+    """AND"""
+
     and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
 
 

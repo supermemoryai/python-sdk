@@ -10,6 +10,8 @@ __all__ = ["SearchExecuteResponse", "Result", "ResultChunk"]
 
 
 class ResultChunk(BaseModel):
+    """Matching content chunk"""
+
     content: str
     """Content of the matching chunk"""
 

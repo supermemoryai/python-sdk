@@ -11,6 +11,8 @@ __all__ = ["MemoryGetResponse"]
 
 
 class MemoryGetResponse(BaseModel):
+    """Document object"""
+
     id: str
     """Unique identifier of the document."""
 
