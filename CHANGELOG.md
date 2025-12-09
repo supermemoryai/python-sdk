@@ -1,5 +1,28 @@
 # Changelog
 
+## 3.9.0 (2025-12-09)
+
+Full Changelog: [v3.8.0...v3.9.0](https://github.com/supermemoryai/python-sdk/compare/v3.8.0...v3.9.0)
+
+### Features
+
+* **api:** api update ([3042cbf](https://github.com/supermemoryai/python-sdk/commit/3042cbfd221d52291480c6df1c1fca40eb97a61f))
+* **api:** manual updates ([96b34d0](https://github.com/supermemoryai/python-sdk/commit/96b34d0a371e0d9c9866e1dbbfd70329d9400850))
+
+
+### Bug Fixes
+
+* ensure streams are always closed ([a1403da](https://github.com/supermemoryai/python-sdk/commit/a1403da98836ac4215ee81f168ff044dcd83fc83))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([4c1365d](https://github.com/supermemoryai/python-sdk/commit/4c1365d2bc02b2d81eb99ef93ac56f1f1b6aba3c))
+
+
+### Chores
+
+* add missing docstrings ([bdb32bc](https://github.com/supermemoryai/python-sdk/commit/bdb32bc4a13ae9a73409f827082a1c5637dc9860))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([2fc3d2a](https://github.com/supermemoryai/python-sdk/commit/2fc3d2a92410192a31bb1c4a7b85094c2ea55f4a))
+* **docs:** use environment variables for authentication in code snippets ([442b9fd](https://github.com/supermemoryai/python-sdk/commit/442b9fdc7e8b7b07dc82cc087ffbc6fbe60bd12f))
+* update lockfile ([37b9f74](https://github.com/supermemoryai/python-sdk/commit/37b9f74097fdc2e3395714ccb72c0f470d162ac4))
+
 ## 3.8.0 (2025-11-27)
 
 Full Changelog: [v3.7.0...v3.8.0](https://github.com/supermemoryai/python-sdk/compare/v3.7.0...v3.8.0)
