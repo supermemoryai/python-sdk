@@ -10,7 +10,7 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_add_params, client_profile_params
+from .types import client_add_params, client_search_params, client_profile_params
 from ._types import (
     Body,
     Omit,
@@ -48,6 +48,7 @@ from ._base_client import (
     make_request_options,
 )
 from .types.add_response import AddResponse
+from .types.search_response import SearchResponse
 from .types.profile_response import ProfileResponse
 
 __all__ = [
@@ -302,6 +303,76 @@ class Supermemory(SyncAPIClient):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ProfileResponse,
+        )
+
+    def search(
+        self,
+        *,
+        q: str,
+        container_tag: str | Omit = omit,
+        filters: client_search_params.Filters | Omit = omit,
+        include: client_search_params.Include | Omit = omit,
+        limit: int | Omit = omit,
+        rerank: bool | Omit = omit,
+        rewrite_query: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchResponse:
+        """
+        Search memory entries - Low latency for conversational
+
+        Args:
+          q: Search query string
+
+          container_tag: Optional tag this search should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
+
+          limit: Maximum number of results to return
+
+          rerank: If true, rerank the results based on the query. This is helpful if you want to
+              ensure the most relevant results are returned.
+
+          rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
+              the latency by about 400ms
+
+          threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
+              most memories, more results), 1 is most sensitive (returns lesser memories,
+              accurate results)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v4/search",
+            body=maybe_transform(
+                {
+                    "q": q,
+                    "container_tag": container_tag,
+                    "filters": filters,
+                    "include": include,
+                    "limit": limit,
+                    "rerank": rerank,
+                    "rewrite_query": rewrite_query,
+                    "threshold": threshold,
+                },
+                client_search_params.ClientSearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchResponse,
         )
 
     @override
@@ -580,6 +651,76 @@ class AsyncSupermemory(AsyncAPIClient):
             cast_to=ProfileResponse,
         )
 
+    async def search(
+        self,
+        *,
+        q: str,
+        container_tag: str | Omit = omit,
+        filters: client_search_params.Filters | Omit = omit,
+        include: client_search_params.Include | Omit = omit,
+        limit: int | Omit = omit,
+        rerank: bool | Omit = omit,
+        rewrite_query: bool | Omit = omit,
+        threshold: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchResponse:
+        """
+        Search memory entries - Low latency for conversational
+
+        Args:
+          q: Search query string
+
+          container_tag: Optional tag this search should be containerized by. This can be an ID for your
+              user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filters: Optional filters to apply to the search. Can be a JSON string or Query object.
+
+          limit: Maximum number of results to return
+
+          rerank: If true, rerank the results based on the query. This is helpful if you want to
+              ensure the most relevant results are returned.
+
+          rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
+              the latency by about 400ms
+
+          threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
+              most memories, more results), 1 is most sensitive (returns lesser memories,
+              accurate results)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v4/search",
+            body=await async_maybe_transform(
+                {
+                    "q": q,
+                    "container_tag": container_tag,
+                    "filters": filters,
+                    "include": include,
+                    "limit": limit,
+                    "rerank": rerank,
+                    "rewrite_query": rewrite_query,
+                    "threshold": threshold,
+                },
+                client_search_params.ClientSearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -628,6 +769,9 @@ class SupermemoryWithRawResponse:
         self.profile = to_raw_response_wrapper(
             client.profile,
         )
+        self.search = to_raw_response_wrapper(
+            client.search,
+        )
 
 
 class AsyncSupermemoryWithRawResponse:
@@ -643,6 +787,9 @@ class AsyncSupermemoryWithRawResponse:
         )
         self.profile = async_to_raw_response_wrapper(
             client.profile,
+        )
+        self.search = async_to_raw_response_wrapper(
+            client.search,
         )
 
 
@@ -660,6 +807,9 @@ class SupermemoryWithStreamedResponse:
         self.profile = to_streamed_response_wrapper(
             client.profile,
         )
+        self.search = to_streamed_response_wrapper(
+            client.search,
+        )
 
 
 class AsyncSupermemoryWithStreamedResponse:
@@ -675,6 +825,9 @@ class AsyncSupermemoryWithStreamedResponse:
         )
         self.profile = async_to_streamed_response_wrapper(
             client.profile,
+        )
+        self.search = async_to_streamed_response_wrapper(
+            client.search,
         )
 
 

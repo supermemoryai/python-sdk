@@ -7,7 +7,14 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import memory_add_params, memory_list_params, memory_update_params, memory_upload_file_params
+from ..types import (
+    memory_add_params,
+    memory_list_params,
+    memory_forget_params,
+    memory_update_params,
+    memory_upload_file_params,
+    memory_update_memory_params,
+)
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
@@ -22,8 +29,10 @@ from .._base_client import make_request_options
 from ..types.memory_add_response import MemoryAddResponse
 from ..types.memory_get_response import MemoryGetResponse
 from ..types.memory_list_response import MemoryListResponse
+from ..types.memory_forget_response import MemoryForgetResponse
 from ..types.memory_update_response import MemoryUpdateResponse
 from ..types.memory_upload_file_response import MemoryUploadFileResponse
+from ..types.memory_update_memory_response import MemoryUpdateMemoryResponse
 
 __all__ = ["MemoriesResource", "AsyncMemoriesResource"]
 
@@ -278,6 +287,60 @@ class MemoriesResource(SyncAPIResource):
             cast_to=MemoryAddResponse,
         )
 
+    def forget(
+        self,
+        *,
+        container_tag: str,
+        id: str | Omit = omit,
+        content: str | Omit = omit,
+        reason: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryForgetResponse:
+        """Forget (soft delete) a memory entry.
+
+        The memory is marked as forgotten but not
+        permanently deleted.
+
+        Args:
+          container_tag: Container tag / space identifier. Required to scope the operation.
+
+          id: ID of the memory entry to operate on
+
+          content: Exact content match of the memory entry to operate on. Use this when you don't
+              have the ID.
+
+          reason: Optional reason for forgetting this memory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._delete(
+            "/v4/memories",
+            body=maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "id": id,
+                    "content": content,
+                    "reason": reason,
+                },
+                memory_forget_params.MemoryForgetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryForgetResponse,
+        )
+
     def get(
         self,
         id: str,
@@ -309,6 +372,64 @@ class MemoriesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MemoryGetResponse,
+        )
+
+    def update_memory(
+        self,
+        *,
+        container_tag: str,
+        new_content: str,
+        id: str | Omit = omit,
+        content: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryUpdateMemoryResponse:
+        """Update a memory by creating a new version.
+
+        The original memory is preserved with
+        isLatest=false.
+
+        Args:
+          container_tag: Container tag / space identifier. Required to scope the operation.
+
+          new_content: The new content that will replace the existing memory
+
+          id: ID of the memory entry to operate on
+
+          content: Exact content match of the memory entry to operate on. Use this when you don't
+              have the ID.
+
+          metadata: Optional metadata. If not provided, inherits from the previous version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._patch(
+            "/v4/memories",
+            body=maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "new_content": new_content,
+                    "id": id,
+                    "content": content,
+                    "metadata": metadata,
+                },
+                memory_update_memory_params.MemoryUpdateMemoryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryUpdateMemoryResponse,
         )
 
     def upload_file(
@@ -631,6 +752,60 @@ class AsyncMemoriesResource(AsyncAPIResource):
             cast_to=MemoryAddResponse,
         )
 
+    async def forget(
+        self,
+        *,
+        container_tag: str,
+        id: str | Omit = omit,
+        content: str | Omit = omit,
+        reason: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryForgetResponse:
+        """Forget (soft delete) a memory entry.
+
+        The memory is marked as forgotten but not
+        permanently deleted.
+
+        Args:
+          container_tag: Container tag / space identifier. Required to scope the operation.
+
+          id: ID of the memory entry to operate on
+
+          content: Exact content match of the memory entry to operate on. Use this when you don't
+              have the ID.
+
+          reason: Optional reason for forgetting this memory
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._delete(
+            "/v4/memories",
+            body=await async_maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "id": id,
+                    "content": content,
+                    "reason": reason,
+                },
+                memory_forget_params.MemoryForgetParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryForgetResponse,
+        )
+
     async def get(
         self,
         id: str,
@@ -662,6 +837,64 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MemoryGetResponse,
+        )
+
+    async def update_memory(
+        self,
+        *,
+        container_tag: str,
+        new_content: str,
+        id: str | Omit = omit,
+        content: str | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryUpdateMemoryResponse:
+        """Update a memory by creating a new version.
+
+        The original memory is preserved with
+        isLatest=false.
+
+        Args:
+          container_tag: Container tag / space identifier. Required to scope the operation.
+
+          new_content: The new content that will replace the existing memory
+
+          id: ID of the memory entry to operate on
+
+          content: Exact content match of the memory entry to operate on. Use this when you don't
+              have the ID.
+
+          metadata: Optional metadata. If not provided, inherits from the previous version.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._patch(
+            "/v4/memories",
+            body=await async_maybe_transform(
+                {
+                    "container_tag": container_tag,
+                    "new_content": new_content,
+                    "id": id,
+                    "content": content,
+                    "metadata": metadata,
+                },
+                memory_update_memory_params.MemoryUpdateMemoryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryUpdateMemoryResponse,
         )
 
     async def upload_file(
@@ -750,8 +983,14 @@ class MemoriesResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             memories.add,
         )
+        self.forget = to_raw_response_wrapper(
+            memories.forget,
+        )
         self.get = to_raw_response_wrapper(
             memories.get,
+        )
+        self.update_memory = to_raw_response_wrapper(
+            memories.update_memory,
         )
         self.upload_file = to_raw_response_wrapper(
             memories.upload_file,
@@ -774,8 +1013,14 @@ class AsyncMemoriesResourceWithRawResponse:
         self.add = async_to_raw_response_wrapper(
             memories.add,
         )
+        self.forget = async_to_raw_response_wrapper(
+            memories.forget,
+        )
         self.get = async_to_raw_response_wrapper(
             memories.get,
+        )
+        self.update_memory = async_to_raw_response_wrapper(
+            memories.update_memory,
         )
         self.upload_file = async_to_raw_response_wrapper(
             memories.upload_file,
@@ -798,8 +1043,14 @@ class MemoriesResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             memories.add,
         )
+        self.forget = to_streamed_response_wrapper(
+            memories.forget,
+        )
         self.get = to_streamed_response_wrapper(
             memories.get,
+        )
+        self.update_memory = to_streamed_response_wrapper(
+            memories.update_memory,
         )
         self.upload_file = to_streamed_response_wrapper(
             memories.upload_file,
@@ -822,8 +1073,14 @@ class AsyncMemoriesResourceWithStreamingResponse:
         self.add = async_to_streamed_response_wrapper(
             memories.add,
         )
+        self.forget = async_to_streamed_response_wrapper(
+            memories.forget,
+        )
         self.get = async_to_streamed_response_wrapper(
             memories.get,
+        )
+        self.update_memory = async_to_streamed_response_wrapper(
+            memories.update_memory,
         )
         self.upload_file = async_to_streamed_response_wrapper(
             memories.upload_file,
