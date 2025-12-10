@@ -39,7 +39,18 @@ class TestSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include_full_docs=False,
             include_summary=True,
             limit=10,
@@ -93,7 +104,18 @@ class TestSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include_full_docs=False,
             include_summary=True,
             limit=10,
@@ -143,7 +165,18 @@ class TestSearch:
         search = client.search.memories(
             q="machine learning concepts",
             container_tag="user_123",
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include={
                 "chunks": False,
                 "documents": True,
@@ -208,7 +241,18 @@ class TestAsyncSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include_full_docs=False,
             include_summary=True,
             limit=10,
@@ -262,7 +306,18 @@ class TestAsyncSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include_full_docs=False,
             include_summary=True,
             limit=10,
@@ -312,7 +367,18 @@ class TestAsyncSearch:
         search = await async_client.search.memories(
             q="machine learning concepts",
             container_tag="user_123",
-            filters={"or_": [{}]},
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             include={
                 "chunks": False,
                 "documents": True,
