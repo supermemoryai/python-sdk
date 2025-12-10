@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .shared import Or as Or, And as And
 from .add_response import AddResponse as AddResponse
 from .search_response import SearchResponse as SearchResponse
 from .profile_response import ProfileResponse as ProfileResponse

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union
 from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
+from .shared_params.or_ import Or
+from .shared_params.and_ import And
 
-__all__ = ["SearchMemoriesParams", "Filters", "FiltersOr", "FiltersAnd", "Include"]
+__all__ = ["SearchMemoriesParams", "Filters", "Include"]
 
 
 class SearchMemoriesParams(TypedDict, total=False):
@@ -49,19 +51,7 @@ class SearchMemoriesParams(TypedDict, total=False):
     """
 
 
-class FiltersOr(TypedDict, total=False):
-    """OR"""
-
-    or_: Required[Annotated[Iterable[object], PropertyInfo(alias="OR")]]
-
-
-class FiltersAnd(TypedDict, total=False):
-    """AND"""
-
-    and_: Required[Annotated[Iterable[object], PropertyInfo(alias="AND")]]
-
-
-Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
+Filters: TypeAlias = Union[Or, And]
 
 
 class Include(TypedDict, total=False):
