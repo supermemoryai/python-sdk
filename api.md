@@ -9,14 +9,13 @@ from supermemory.types import And, Or
 Types:
 
 ```python
-from supermemory.types import AddResponse, ProfileResponse, SearchResponse
+from supermemory.types import AddResponse, ProfileResponse
 ```
 
 Methods:
 
 - <code title="post /v3/documents">client.<a href="./src/supermemory/_client.py">add</a>(\*\*<a href="src/supermemory/types/client_add_params.py">params</a>) -> <a href="./src/supermemory/types/add_response.py">AddResponse</a></code>
 - <code title="post /v4/profile">client.<a href="./src/supermemory/_client.py">profile</a>(\*\*<a href="src/supermemory/types/client_profile_params.py">params</a>) -> <a href="./src/supermemory/types/profile_response.py">ProfileResponse</a></code>
-- <code title="post /v4/search">client.<a href="./src/supermemory/_client.py">search</a>(\*\*<a href="src/supermemory/types/client_search_params.py">params</a>) -> <a href="./src/supermemory/types/search_response.py">SearchResponse</a></code>
 
 # Memories
 
