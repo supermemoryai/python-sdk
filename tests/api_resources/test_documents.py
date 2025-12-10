@@ -16,6 +16,8 @@ from supermemory.types import (
     DocumentUpdateResponse,
     DocumentDeleteBulkResponse,
     DocumentUploadFileResponse,
+    DocumentBatchCreateResponse,
+    DocumentListProcessingResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -234,6 +236,74 @@ class TestDocuments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_batch_create(self, client: Supermemory) -> None:
+        document = client.documents.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        )
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_batch_create_with_all_params(self, client: Supermemory) -> None:
+        document = client.documents.batch_create(
+            documents=[
+                {
+                    "content": "This is a detailed article about machine learning concepts...",
+                    "container_tag": "user_123",
+                    "container_tags": ["user_123", "project_123"],
+                    "custom_id": "mem_abc123",
+                    "metadata": {
+                        "category": "technology",
+                        "isPublic": True,
+                        "readingTime": 5,
+                        "source": "web",
+                        "tag_1": "ai",
+                        "tag_2": "machine-learning",
+                    },
+                }
+            ],
+            container_tag="user_123",
+            container_tags=["user_123", "project_123"],
+            content=None,
+            metadata={
+                "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
+                "tag_1": "ai",
+                "tag_2": "machine-learning",
+            },
+        )
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_batch_create(self, client: Supermemory) -> None:
+        response = client.documents.with_raw_response.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = response.parse()
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_batch_create(self, client: Supermemory) -> None:
+        with client.documents.with_streaming_response.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = response.parse()
+            assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_delete_bulk(self, client: Supermemory) -> None:
         document = client.documents.delete_bulk()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -310,6 +380,34 @@ class TestDocuments:
             client.documents.with_raw_response.get(
                 "",
             )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_processing(self, client: Supermemory) -> None:
+        document = client.documents.list_processing()
+        assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_list_processing(self, client: Supermemory) -> None:
+        response = client.documents.with_raw_response.list_processing()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = response.parse()
+        assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_list_processing(self, client: Supermemory) -> None:
+        with client.documents.with_streaming_response.list_processing() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = response.parse()
+            assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -573,6 +671,74 @@ class TestAsyncDocuments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_batch_create(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        )
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_batch_create_with_all_params(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.batch_create(
+            documents=[
+                {
+                    "content": "This is a detailed article about machine learning concepts...",
+                    "container_tag": "user_123",
+                    "container_tags": ["user_123", "project_123"],
+                    "custom_id": "mem_abc123",
+                    "metadata": {
+                        "category": "technology",
+                        "isPublic": True,
+                        "readingTime": 5,
+                        "source": "web",
+                        "tag_1": "ai",
+                        "tag_2": "machine-learning",
+                    },
+                }
+            ],
+            container_tag="user_123",
+            container_tags=["user_123", "project_123"],
+            content=None,
+            metadata={
+                "category": "technology",
+                "isPublic": True,
+                "readingTime": 5,
+                "source": "web",
+                "tag_1": "ai",
+                "tag_2": "machine-learning",
+            },
+        )
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_batch_create(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.documents.with_raw_response.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = await response.parse()
+        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_batch_create(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.documents.with_streaming_response.batch_create(
+            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = await response.parse()
+            assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_method_delete_bulk(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete_bulk()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -649,6 +815,34 @@ class TestAsyncDocuments:
             await async_client.documents.with_raw_response.get(
                 "",
             )
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_processing(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.list_processing()
+        assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_list_processing(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.documents.with_raw_response.list_processing()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        document = await response.parse()
+        assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_processing(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.documents.with_streaming_response.list_processing() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            document = await response.parse()
+            assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize

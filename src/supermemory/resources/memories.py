@@ -8,6 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
+    Query,
     memory_add_params,
     memory_list_params,
     memory_forget_params,
@@ -26,6 +27,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_param import QueryParam
 from ..types.memory_add_response import MemoryAddResponse
 from ..types.memory_get_response import MemoryGetResponse
 from ..types.memory_list_response import MemoryListResponse
@@ -135,7 +137,7 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: memory_list_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -600,7 +602,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: memory_list_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,

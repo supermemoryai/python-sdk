@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .shared_params.or_ import Or
-from .shared_params.and_ import And
+from .query_param import QueryParam
 
-__all__ = ["SearchExecuteParams", "Filters"]
+__all__ = ["SearchExecuteParams"]
 
 
 class SearchExecuteParams(TypedDict, total=False):
@@ -46,7 +44,7 @@ class SearchExecuteParams(TypedDict, total=False):
     The search now uses chunkThreshold only. This parameter will be ignored.
     """
 
-    filters: Filters
+    filters: QueryParam
     """Optional filters to apply to the search. Can be a JSON string or Query object."""
 
     include_full_docs: Annotated[bool, PropertyInfo(alias="includeFullDocs")]
@@ -82,6 +80,3 @@ class SearchExecuteParams(TypedDict, total=False):
 
     This increases the latency by about 400ms
     """
-
-
-Filters: TypeAlias = Union[Or, And]
