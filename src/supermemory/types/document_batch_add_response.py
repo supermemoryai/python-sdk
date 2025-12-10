@@ -5,10 +5,10 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["DocumentBatchCreateResponse", "DocumentBatchCreateResponseItem"]
+__all__ = ["DocumentBatchAddResponse", "DocumentBatchAddResponseItem"]
 
 
-class DocumentBatchCreateResponseItem(BaseModel):
+class DocumentBatchAddResponseItem(BaseModel):
     id: str
     """Unique identifier of the document"""
 
@@ -16,4 +16,4 @@ class DocumentBatchCreateResponseItem(BaseModel):
     """Status of the document"""
 
 
-DocumentBatchCreateResponse: TypeAlias = List[DocumentBatchCreateResponseItem]
+DocumentBatchAddResponse: TypeAlias = List[DocumentBatchAddResponseItem]

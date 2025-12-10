@@ -14,9 +14,9 @@ from supermemory.types import (
     DocumentGetResponse,
     DocumentListResponse,
     DocumentUpdateResponse,
+    DocumentBatchAddResponse,
     DocumentDeleteBulkResponse,
     DocumentUploadFileResponse,
-    DocumentBatchCreateResponse,
     DocumentListProcessingResponse,
 )
 
@@ -236,16 +236,16 @@ class TestDocuments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_batch_create(self, client: Supermemory) -> None:
-        document = client.documents.batch_create(
+    def test_method_batch_add(self, client: Supermemory) -> None:
+        document = client.documents.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         )
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_batch_create_with_all_params(self, client: Supermemory) -> None:
-        document = client.documents.batch_create(
+    def test_method_batch_add_with_all_params(self, client: Supermemory) -> None:
+        document = client.documents.batch_add(
             documents=[
                 {
                     "content": "This is a detailed article about machine learning concepts...",
@@ -274,31 +274,31 @@ class TestDocuments:
                 "tag_2": "machine-learning",
             },
         )
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_batch_create(self, client: Supermemory) -> None:
-        response = client.documents.with_raw_response.batch_create(
+    def test_raw_response_batch_add(self, client: Supermemory) -> None:
+        response = client.documents.with_raw_response.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         document = response.parse()
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_batch_create(self, client: Supermemory) -> None:
-        with client.documents.with_streaming_response.batch_create(
+    def test_streaming_response_batch_add(self, client: Supermemory) -> None:
+        with client.documents.with_streaming_response.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             document = response.parse()
-            assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+            assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -671,16 +671,16 @@ class TestAsyncDocuments:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_batch_create(self, async_client: AsyncSupermemory) -> None:
-        document = await async_client.documents.batch_create(
+    async def test_method_batch_add(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         )
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_batch_create_with_all_params(self, async_client: AsyncSupermemory) -> None:
-        document = await async_client.documents.batch_create(
+    async def test_method_batch_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
+        document = await async_client.documents.batch_add(
             documents=[
                 {
                     "content": "This is a detailed article about machine learning concepts...",
@@ -709,31 +709,31 @@ class TestAsyncDocuments:
                 "tag_2": "machine-learning",
             },
         )
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_batch_create(self, async_client: AsyncSupermemory) -> None:
-        response = await async_client.documents.with_raw_response.batch_create(
+    async def test_raw_response_batch_add(self, async_client: AsyncSupermemory) -> None:
+        response = await async_client.documents.with_raw_response.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         document = await response.parse()
-        assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+        assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_batch_create(self, async_client: AsyncSupermemory) -> None:
-        async with async_client.documents.with_streaming_response.batch_create(
+    async def test_streaming_response_batch_add(self, async_client: AsyncSupermemory) -> None:
+        async with async_client.documents.with_streaming_response.batch_add(
             documents=[{"content": "This is a detailed article about machine learning concepts..."}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             document = await response.parse()
-            assert_matches_type(DocumentBatchCreateResponse, document, path=["response"])
+            assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
