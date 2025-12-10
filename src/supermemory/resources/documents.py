@@ -8,7 +8,6 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
-    Query,
     document_add_params,
     document_list_params,
     document_update_params,
@@ -27,7 +26,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.query_param import QueryParam
 from ..types.document_add_response import DocumentAddResponse
 from ..types.document_get_response import DocumentGetResponse
 from ..types.document_list_response import DocumentListResponse
@@ -138,7 +136,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: QueryParam | Omit = omit,
+        filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -614,7 +612,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: QueryParam | Omit = omit,
+        filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
