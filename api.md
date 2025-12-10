@@ -54,7 +54,7 @@ from supermemory.types import (
     DocumentUpdateResponse,
     DocumentListResponse,
     DocumentAddResponse,
-    DocumentBatchCreateResponse,
+    DocumentBatchAddResponse,
     DocumentDeleteBulkResponse,
     DocumentGetResponse,
     DocumentListProcessingResponse,
@@ -68,7 +68,7 @@ Methods:
 - <code title="post /v3/documents/list">client.documents.<a href="./src/supermemory/resources/documents.py">list</a>(\*\*<a href="src/supermemory/types/document_list_params.py">params</a>) -> <a href="./src/supermemory/types/document_list_response.py">DocumentListResponse</a></code>
 - <code title="delete /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">delete</a>(id) -> None</code>
 - <code title="post /v3/documents">client.documents.<a href="./src/supermemory/resources/documents.py">add</a>(\*\*<a href="src/supermemory/types/document_add_params.py">params</a>) -> <a href="./src/supermemory/types/document_add_response.py">DocumentAddResponse</a></code>
-- <code title="post /v3/documents/batch">client.documents.<a href="./src/supermemory/resources/documents.py">batch_create</a>(\*\*<a href="src/supermemory/types/document_batch_create_params.py">params</a>) -> <a href="./src/supermemory/types/document_batch_create_response.py">DocumentBatchCreateResponse</a></code>
+- <code title="post /v3/documents/batch">client.documents.<a href="./src/supermemory/resources/documents.py">batch_add</a>(\*\*<a href="src/supermemory/types/document_batch_add_params.py">params</a>) -> <a href="./src/supermemory/types/document_batch_add_response.py">DocumentBatchAddResponse</a></code>
 - <code title="delete /v3/documents/bulk">client.documents.<a href="./src/supermemory/resources/documents.py">delete_bulk</a>(\*\*<a href="src/supermemory/types/document_delete_bulk_params.py">params</a>) -> <a href="./src/supermemory/types/document_delete_bulk_response.py">DocumentDeleteBulkResponse</a></code>
 - <code title="get /v3/documents/{id}">client.documents.<a href="./src/supermemory/resources/documents.py">get</a>(id) -> <a href="./src/supermemory/types/document_get_response.py">DocumentGetResponse</a></code>
 - <code title="get /v3/documents/processing">client.documents.<a href="./src/supermemory/resources/documents.py">list_processing</a>() -> <a href="./src/supermemory/types/document_list_processing_response.py">DocumentListProcessingResponse</a></code>

@@ -12,9 +12,9 @@ from ..types import (
     document_add_params,
     document_list_params,
     document_update_params,
+    document_batch_add_params,
     document_delete_bulk_params,
     document_upload_file_params,
-    document_batch_create_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
@@ -32,9 +32,9 @@ from ..types.document_add_response import DocumentAddResponse
 from ..types.document_get_response import DocumentGetResponse
 from ..types.document_list_response import DocumentListResponse
 from ..types.document_update_response import DocumentUpdateResponse
+from ..types.document_batch_add_response import DocumentBatchAddResponse
 from ..types.document_delete_bulk_response import DocumentDeleteBulkResponse
 from ..types.document_upload_file_response import DocumentUploadFileResponse
-from ..types.document_batch_create_response import DocumentBatchCreateResponse
 from ..types.document_list_processing_response import DocumentListProcessingResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
@@ -290,10 +290,10 @@ class DocumentsResource(SyncAPIResource):
             cast_to=DocumentAddResponse,
         )
 
-    def batch_create(
+    def batch_add(
         self,
         *,
-        documents: Union[Iterable[document_batch_create_params.DocumentsUnionMember0], SequenceNotStr[str]],
+        documents: Union[Iterable[document_batch_add_params.DocumentsUnionMember0], SequenceNotStr[str]],
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
@@ -304,7 +304,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentBatchCreateResponse:
+    ) -> DocumentBatchAddResponse:
         """Add multiple documents in a single request.
 
         Each document can have any content
@@ -343,12 +343,12 @@ class DocumentsResource(SyncAPIResource):
                     "content": content,
                     "metadata": metadata,
                 },
-                document_batch_create_params.DocumentBatchCreateParams,
+                document_batch_add_params.DocumentBatchAddParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentBatchCreateResponse,
+            cast_to=DocumentBatchAddResponse,
         )
 
     def delete_bulk(
@@ -766,10 +766,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=DocumentAddResponse,
         )
 
-    async def batch_create(
+    async def batch_add(
         self,
         *,
-        documents: Union[Iterable[document_batch_create_params.DocumentsUnionMember0], SequenceNotStr[str]],
+        documents: Union[Iterable[document_batch_add_params.DocumentsUnionMember0], SequenceNotStr[str]],
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
@@ -780,7 +780,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentBatchCreateResponse:
+    ) -> DocumentBatchAddResponse:
         """Add multiple documents in a single request.
 
         Each document can have any content
@@ -819,12 +819,12 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "content": content,
                     "metadata": metadata,
                 },
-                document_batch_create_params.DocumentBatchCreateParams,
+                document_batch_add_params.DocumentBatchAddParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentBatchCreateResponse,
+            cast_to=DocumentBatchAddResponse,
         )
 
     async def delete_bulk(
@@ -1008,8 +1008,8 @@ class DocumentsResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             documents.add,
         )
-        self.batch_create = to_raw_response_wrapper(
-            documents.batch_create,
+        self.batch_add = to_raw_response_wrapper(
+            documents.batch_add,
         )
         self.delete_bulk = to_raw_response_wrapper(
             documents.delete_bulk,
@@ -1041,8 +1041,8 @@ class AsyncDocumentsResourceWithRawResponse:
         self.add = async_to_raw_response_wrapper(
             documents.add,
         )
-        self.batch_create = async_to_raw_response_wrapper(
-            documents.batch_create,
+        self.batch_add = async_to_raw_response_wrapper(
+            documents.batch_add,
         )
         self.delete_bulk = async_to_raw_response_wrapper(
             documents.delete_bulk,
@@ -1074,8 +1074,8 @@ class DocumentsResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             documents.add,
         )
-        self.batch_create = to_streamed_response_wrapper(
-            documents.batch_create,
+        self.batch_add = to_streamed_response_wrapper(
+            documents.batch_add,
         )
         self.delete_bulk = to_streamed_response_wrapper(
             documents.delete_bulk,
@@ -1107,8 +1107,8 @@ class AsyncDocumentsResourceWithStreamingResponse:
         self.add = async_to_streamed_response_wrapper(
             documents.add,
         )
-        self.batch_create = async_to_streamed_response_wrapper(
-            documents.batch_create,
+        self.batch_add = async_to_streamed_response_wrapper(
+            documents.batch_add,
         )
         self.delete_bulk = async_to_streamed_response_wrapper(
             documents.delete_bulk,
