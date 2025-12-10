@@ -102,17 +102,20 @@ class TestDocuments:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "ignore_case": True,
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },
@@ -537,17 +540,20 @@ class TestAsyncDocuments:
             filters={
                 "and_": [
                     {
-                        "filterType": "metadata",
                         "key": "group",
-                        "negate": False,
                         "value": "jira_users",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                     {
-                        "filterType": "numeric",
                         "key": "timestamp",
-                        "negate": False,
-                        "numericOperator": ">",
                         "value": "1742745777",
+                        "filter_type": "numeric",
+                        "ignore_case": True,
+                        "negate": False,
+                        "numeric_operator": ">",
                     },
                 ]
             },

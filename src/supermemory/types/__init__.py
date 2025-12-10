@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from .shared import Or as Or, And as And
 from .add_response import AddResponse as AddResponse
 from .profile_response import ProfileResponse as ProfileResponse
 from .client_add_params import ClientAddParams as ClientAddParams
