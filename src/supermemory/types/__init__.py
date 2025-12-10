@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from .shared import Or as Or, And as And
 from .add_response import AddResponse as AddResponse
-from .search_response import SearchResponse as SearchResponse
 from .profile_response import ProfileResponse as ProfileResponse
 from .client_add_params import ClientAddParams as ClientAddParams
 from .memory_add_params import MemoryAddParams as MemoryAddParams
@@ -12,7 +11,6 @@ from .memory_list_params import MemoryListParams as MemoryListParams
 from .document_add_params import DocumentAddParams as DocumentAddParams
 from .memory_add_response import MemoryAddResponse as MemoryAddResponse
 from .memory_get_response import MemoryGetResponse as MemoryGetResponse
-from .client_search_params import ClientSearchParams as ClientSearchParams
 from .document_list_params import DocumentListParams as DocumentListParams
 from .memory_forget_params import MemoryForgetParams as MemoryForgetParams
 from .memory_list_response import MemoryListResponse as MemoryListResponse
