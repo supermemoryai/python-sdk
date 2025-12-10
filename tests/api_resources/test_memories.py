@@ -101,20 +101,17 @@ class TestMemories:
             filters={
                 "and_": [
                     {
+                        "filterType": "metadata",
                         "key": "group",
-                        "value": "jira_users",
-                        "filter_type": "metadata",
-                        "ignore_case": True,
                         "negate": False,
-                        "numeric_operator": ">",
+                        "value": "jira_users",
                     },
                     {
+                        "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
-                        "filter_type": "numeric",
-                        "ignore_case": True,
                         "negate": False,
-                        "numeric_operator": ">",
+                        "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ]
             },
@@ -500,20 +497,17 @@ class TestAsyncMemories:
             filters={
                 "and_": [
                     {
+                        "filterType": "metadata",
                         "key": "group",
-                        "value": "jira_users",
-                        "filter_type": "metadata",
-                        "ignore_case": True,
                         "negate": False,
-                        "numeric_operator": ">",
+                        "value": "jira_users",
                     },
                     {
+                        "filterType": "numeric",
                         "key": "timestamp",
-                        "value": "1742745777",
-                        "filter_type": "numeric",
-                        "ignore_case": True,
                         "negate": False,
-                        "numeric_operator": ">",
+                        "numericOperator": ">",
+                        "value": "1742745777",
                     },
                 ]
             },
