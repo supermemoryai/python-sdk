@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
-from .shared_params.or_ import Or
-from .shared_params.and_ import And
+from .query_param import QueryParam
 
-__all__ = ["SearchMemoriesParams", "Filters", "Include"]
+__all__ = ["SearchMemoriesParams", "Include"]
 
 
 class SearchMemoriesParams(TypedDict, total=False):
@@ -23,7 +21,7 @@ class SearchMemoriesParams(TypedDict, total=False):
     to use to filter memories.
     """
 
-    filters: Filters
+    filters: QueryParam
     """Optional filters to apply to the search. Can be a JSON string or Query object."""
 
     include: Include
@@ -49,9 +47,6 @@ class SearchMemoriesParams(TypedDict, total=False):
     0 is least sensitive (returns most memories, more results), 1 is most sensitive
     (returns lesser memories, accurate results)
     """
-
-
-Filters: TypeAlias = Union[Or, And]
 
 
 class Include(TypedDict, total=False):

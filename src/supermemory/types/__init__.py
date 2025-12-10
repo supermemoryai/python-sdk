@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .shared import Or as Or, And as And
+from .query_param import QueryParam as QueryParam
 from .add_response import AddResponse as AddResponse
 from .profile_response import ProfileResponse as ProfileResponse
 from .client_add_params import ClientAddParams as ClientAddParams
@@ -46,6 +47,7 @@ from .document_upload_file_params import DocumentUploadFileParams as DocumentUpl
 from .memory_update_memory_params import MemoryUpdateMemoryParams as MemoryUpdateMemoryParams
 from .memory_upload_file_response import MemoryUploadFileResponse as MemoryUploadFileResponse
 from .connection_get_by_tag_params import ConnectionGetByTagParams as ConnectionGetByTagParams
+from .document_batch_create_params import DocumentBatchCreateParams as DocumentBatchCreateParams
 from .connection_configure_response import ConnectionConfigureResponse as ConnectionConfigureResponse
 from .connection_get_by_id_response import ConnectionGetByIDResponse as ConnectionGetByIDResponse
 from .connection_resources_response import ConnectionResourcesResponse as ConnectionResourcesResponse
@@ -53,8 +55,10 @@ from .document_delete_bulk_response import DocumentDeleteBulkResponse as Documen
 from .document_upload_file_response import DocumentUploadFileResponse as DocumentUploadFileResponse
 from .memory_update_memory_response import MemoryUpdateMemoryResponse as MemoryUpdateMemoryResponse
 from .connection_get_by_tag_response import ConnectionGetByTagResponse as ConnectionGetByTagResponse
+from .document_batch_create_response import DocumentBatchCreateResponse as DocumentBatchCreateResponse
 from .connection_delete_by_id_response import ConnectionDeleteByIDResponse as ConnectionDeleteByIDResponse
 from .connection_list_documents_params import ConnectionListDocumentsParams as ConnectionListDocumentsParams
+from .document_list_processing_response import DocumentListProcessingResponse as DocumentListProcessingResponse
 from .connection_list_documents_response import ConnectionListDocumentsResponse as ConnectionListDocumentsResponse
 from .connection_delete_by_provider_params import ConnectionDeleteByProviderParams as ConnectionDeleteByProviderParams
 from .connection_delete_by_provider_response import (

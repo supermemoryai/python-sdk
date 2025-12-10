@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import search_execute_params, search_memories_params, search_documents_params
+from ..types import Query, search_execute_params, search_memories_params, search_documents_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -16,6 +16,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_param import QueryParam
 from ..types.search_execute_response import SearchExecuteResponse
 from ..types.search_memories_response import SearchMemoriesResponse
 from ..types.search_documents_response import SearchDocumentsResponse
@@ -52,7 +53,7 @@ class SearchResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
-        filters: search_documents_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -150,7 +151,7 @@ class SearchResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
-        filters: search_execute_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -244,7 +245,7 @@ class SearchResource(SyncAPIResource):
         *,
         q: str,
         container_tag: str | Omit = omit,
-        filters: search_memories_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,
@@ -339,7 +340,7 @@ class AsyncSearchResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
-        filters: search_documents_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -437,7 +438,7 @@ class AsyncSearchResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
-        filters: search_execute_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -531,7 +532,7 @@ class AsyncSearchResource(AsyncAPIResource):
         *,
         q: str,
         container_tag: str | Omit = omit,
-        filters: search_memories_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,

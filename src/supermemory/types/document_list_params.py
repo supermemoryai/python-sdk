@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .shared_params.or_ import Or
-from .shared_params.and_ import And
+from .query_param import QueryParam
 
-__all__ = ["DocumentListParams", "Filters"]
+__all__ = ["DocumentListParams"]
 
 
 class DocumentListParams(TypedDict, total=False):
@@ -21,7 +20,7 @@ class DocumentListParams(TypedDict, total=False):
     to use to group documents.
     """
 
-    filters: Filters
+    filters: QueryParam
     """Optional filters to apply to the search. Can be a JSON string or Query object."""
 
     include_content: Annotated[bool, PropertyInfo(alias="includeContent")]
@@ -41,6 +40,3 @@ class DocumentListParams(TypedDict, total=False):
 
     sort: Literal["createdAt", "updatedAt"]
     """Field to sort by"""
-
-
-Filters: TypeAlias = Union[Or, And]

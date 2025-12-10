@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Mapping, cast
+from typing import Dict, Union, Mapping, Iterable, cast
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import (
+    Query,
     document_add_params,
     document_list_params,
     document_update_params,
     document_delete_bulk_params,
     document_upload_file_params,
+    document_batch_create_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
@@ -25,12 +27,15 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_param import QueryParam
 from ..types.document_add_response import DocumentAddResponse
 from ..types.document_get_response import DocumentGetResponse
 from ..types.document_list_response import DocumentListResponse
 from ..types.document_update_response import DocumentUpdateResponse
 from ..types.document_delete_bulk_response import DocumentDeleteBulkResponse
 from ..types.document_upload_file_response import DocumentUploadFileResponse
+from ..types.document_batch_create_response import DocumentBatchCreateResponse
+from ..types.document_list_processing_response import DocumentListProcessingResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -133,7 +138,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: document_list_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -285,6 +290,67 @@ class DocumentsResource(SyncAPIResource):
             cast_to=DocumentAddResponse,
         )
 
+    def batch_create(
+        self,
+        *,
+        documents: Union[Iterable[document_batch_create_params.DocumentsUnionMember0], SequenceNotStr[str]],
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        content: None | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentBatchCreateResponse:
+        """Add multiple documents in a single request.
+
+        Each document can have any content
+        type (text, url, file, etc.) and metadata
+
+        Args:
+          container_tag: Optional tag this document should be containerized by. This can be an ID for
+              your user, a project ID, or any other identifier you wish to use to group
+              documents.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group documents.
+
+          metadata: Optional metadata for the document. This is used to store additional information
+              about the document. You can use this to store any additional information you
+              need about the document. Metadata can be filtered through. Keys must be strings
+              and are case sensitive. Values can be strings, numbers, or booleans. You cannot
+              nest objects.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v3/documents/batch",
+            body=maybe_transform(
+                {
+                    "documents": documents,
+                    "container_tag": container_tag,
+                    "container_tags": container_tags,
+                    "content": content,
+                    "metadata": metadata,
+                },
+                document_batch_create_params.DocumentBatchCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentBatchCreateResponse,
+        )
+
     def delete_bulk(
         self,
         *,
@@ -359,6 +425,25 @@ class DocumentsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DocumentGetResponse,
+        )
+
+    def list_processing(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentListProcessingResponse:
+        """Get documents that are currently being processed"""
+        return self._get(
+            "/v3/documents/processing",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentListProcessingResponse,
         )
 
     def upload_file(
@@ -529,7 +614,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
-        filters: document_list_params.Filters | Omit = omit,
+        filters: QueryParam | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
@@ -681,6 +766,67 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=DocumentAddResponse,
         )
 
+    async def batch_create(
+        self,
+        *,
+        documents: Union[Iterable[document_batch_create_params.DocumentsUnionMember0], SequenceNotStr[str]],
+        container_tag: str | Omit = omit,
+        container_tags: SequenceNotStr[str] | Omit = omit,
+        content: None | Omit = omit,
+        metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentBatchCreateResponse:
+        """Add multiple documents in a single request.
+
+        Each document can have any content
+        type (text, url, file, etc.) and metadata
+
+        Args:
+          container_tag: Optional tag this document should be containerized by. This can be an ID for
+              your user, a project ID, or any other identifier you wish to use to group
+              documents.
+
+          container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
+              containerized by. This can be an ID for your user, a project ID, or any other
+              identifier you wish to use to group documents.
+
+          metadata: Optional metadata for the document. This is used to store additional information
+              about the document. You can use this to store any additional information you
+              need about the document. Metadata can be filtered through. Keys must be strings
+              and are case sensitive. Values can be strings, numbers, or booleans. You cannot
+              nest objects.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v3/documents/batch",
+            body=await async_maybe_transform(
+                {
+                    "documents": documents,
+                    "container_tag": container_tag,
+                    "container_tags": container_tags,
+                    "content": content,
+                    "metadata": metadata,
+                },
+                document_batch_create_params.DocumentBatchCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentBatchCreateResponse,
+        )
+
     async def delete_bulk(
         self,
         *,
@@ -755,6 +901,25 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DocumentGetResponse,
+        )
+
+    async def list_processing(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentListProcessingResponse:
+        """Get documents that are currently being processed"""
+        return await self._get(
+            "/v3/documents/processing",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentListProcessingResponse,
         )
 
     async def upload_file(
@@ -843,11 +1008,17 @@ class DocumentsResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             documents.add,
         )
+        self.batch_create = to_raw_response_wrapper(
+            documents.batch_create,
+        )
         self.delete_bulk = to_raw_response_wrapper(
             documents.delete_bulk,
         )
         self.get = to_raw_response_wrapper(
             documents.get,
+        )
+        self.list_processing = to_raw_response_wrapper(
+            documents.list_processing,
         )
         self.upload_file = to_raw_response_wrapper(
             documents.upload_file,
@@ -870,11 +1041,17 @@ class AsyncDocumentsResourceWithRawResponse:
         self.add = async_to_raw_response_wrapper(
             documents.add,
         )
+        self.batch_create = async_to_raw_response_wrapper(
+            documents.batch_create,
+        )
         self.delete_bulk = async_to_raw_response_wrapper(
             documents.delete_bulk,
         )
         self.get = async_to_raw_response_wrapper(
             documents.get,
+        )
+        self.list_processing = async_to_raw_response_wrapper(
+            documents.list_processing,
         )
         self.upload_file = async_to_raw_response_wrapper(
             documents.upload_file,
@@ -897,11 +1074,17 @@ class DocumentsResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             documents.add,
         )
+        self.batch_create = to_streamed_response_wrapper(
+            documents.batch_create,
+        )
         self.delete_bulk = to_streamed_response_wrapper(
             documents.delete_bulk,
         )
         self.get = to_streamed_response_wrapper(
             documents.get,
+        )
+        self.list_processing = to_streamed_response_wrapper(
+            documents.list_processing,
         )
         self.upload_file = to_streamed_response_wrapper(
             documents.upload_file,
@@ -924,11 +1107,17 @@ class AsyncDocumentsResourceWithStreamingResponse:
         self.add = async_to_streamed_response_wrapper(
             documents.add,
         )
+        self.batch_create = async_to_streamed_response_wrapper(
+            documents.batch_create,
+        )
         self.delete_bulk = async_to_streamed_response_wrapper(
             documents.delete_bulk,
         )
         self.get = async_to_streamed_response_wrapper(
             documents.get,
+        )
+        self.list_processing = async_to_streamed_response_wrapper(
+            documents.list_processing,
         )
         self.upload_file = async_to_streamed_response_wrapper(
             documents.upload_file,
