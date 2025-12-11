@@ -42,3 +42,9 @@ class MemoryUploadFileParams(TypedDict, total=False):
     Specifies the exact MIME type to use (e.g., 'image/png', 'image/jpeg',
     'video/mp4', 'video/webm')
     """
+
+    use_advanced_processing: Annotated[str, PropertyInfo(alias="useAdvancedProcessing")]
+    """Use advanced processing with Reducto for better PDF extraction and chunking.
+
+    This costs 3x tokens but provides superior quality for complex documents.
+    """
