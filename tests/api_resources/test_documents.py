@@ -429,6 +429,7 @@ class TestDocuments:
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
+            use_advanced_processing="true",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
@@ -867,6 +868,7 @@ class TestAsyncDocuments:
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
+            use_advanced_processing="true",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 

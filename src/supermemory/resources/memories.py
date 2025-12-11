@@ -440,6 +440,7 @@ class MemoriesResource(SyncAPIResource):
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
+        use_advanced_processing: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -469,6 +470,9 @@ class MemoriesResource(SyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
+          use_advanced_processing: Use advanced processing with Reducto for better PDF extraction and chunking.
+              This costs 3x tokens but provides superior quality for complex documents.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -484,6 +488,7 @@ class MemoriesResource(SyncAPIResource):
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,
+                "use_advanced_processing": use_advanced_processing,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -905,6 +910,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
+        use_advanced_processing: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -934,6 +940,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
+          use_advanced_processing: Use advanced processing with Reducto for better PDF extraction and chunking.
+              This costs 3x tokens but provides superior quality for complex documents.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -949,6 +958,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,
+                "use_advanced_processing": use_advanced_processing,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
