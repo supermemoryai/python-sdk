@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping
+from typing import TYPE_CHECKING, Any, Dict, Union, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -31,6 +31,7 @@ from ._utils import (
     get_async_library,
     async_maybe_transform,
 )
+from ._compat import cached_property
 from ._version import __version__
 from ._response import (
     to_raw_response_wrapper,
@@ -38,7 +39,6 @@ from ._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .resources import search, memories, settings, documents, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, SupermemoryError
 from ._base_client import (
@@ -49,6 +49,14 @@ from ._base_client import (
 )
 from .types.add_response import AddResponse
 from .types.profile_response import ProfileResponse
+
+if TYPE_CHECKING:
+    from .resources import search, memories, settings, documents, connections
+    from .resources.search import SearchResource, AsyncSearchResource
+    from .resources.memories import MemoriesResource, AsyncMemoriesResource
+    from .resources.settings import SettingsResource, AsyncSettingsResource
+    from .resources.documents import DocumentsResource, AsyncDocumentsResource
+    from .resources.connections import ConnectionsResource, AsyncConnectionsResource
 
 __all__ = [
     "Timeout",
@@ -63,14 +71,6 @@ __all__ = [
 
 
 class Supermemory(SyncAPIClient):
-    memories: memories.MemoriesResource
-    documents: documents.DocumentsResource
-    search: search.SearchResource
-    settings: settings.SettingsResource
-    connections: connections.ConnectionsResource
-    with_raw_response: SupermemoryWithRawResponse
-    with_streaming_response: SupermemoryWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -125,13 +125,43 @@ class Supermemory(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.memories = memories.MemoriesResource(self)
-        self.documents = documents.DocumentsResource(self)
-        self.search = search.SearchResource(self)
-        self.settings = settings.SettingsResource(self)
-        self.connections = connections.ConnectionsResource(self)
-        self.with_raw_response = SupermemoryWithRawResponse(self)
-        self.with_streaming_response = SupermemoryWithStreamedResponse(self)
+    @cached_property
+    def memories(self) -> MemoriesResource:
+        from .resources.memories import MemoriesResource
+
+        return MemoriesResource(self)
+
+    @cached_property
+    def documents(self) -> DocumentsResource:
+        from .resources.documents import DocumentsResource
+
+        return DocumentsResource(self)
+
+    @cached_property
+    def search(self) -> SearchResource:
+        from .resources.search import SearchResource
+
+        return SearchResource(self)
+
+    @cached_property
+    def settings(self) -> SettingsResource:
+        from .resources.settings import SettingsResource
+
+        return SettingsResource(self)
+
+    @cached_property
+    def connections(self) -> ConnectionsResource:
+        from .resources.connections import ConnectionsResource
+
+        return ConnectionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> SupermemoryWithRawResponse:
+        return SupermemoryWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> SupermemoryWithStreamedResponse:
+        return SupermemoryWithStreamedResponse(self)
 
     @property
     @override
@@ -339,14 +369,6 @@ class Supermemory(SyncAPIClient):
 
 
 class AsyncSupermemory(AsyncAPIClient):
-    memories: memories.AsyncMemoriesResource
-    documents: documents.AsyncDocumentsResource
-    search: search.AsyncSearchResource
-    settings: settings.AsyncSettingsResource
-    connections: connections.AsyncConnectionsResource
-    with_raw_response: AsyncSupermemoryWithRawResponse
-    with_streaming_response: AsyncSupermemoryWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -401,13 +423,43 @@ class AsyncSupermemory(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.memories = memories.AsyncMemoriesResource(self)
-        self.documents = documents.AsyncDocumentsResource(self)
-        self.search = search.AsyncSearchResource(self)
-        self.settings = settings.AsyncSettingsResource(self)
-        self.connections = connections.AsyncConnectionsResource(self)
-        self.with_raw_response = AsyncSupermemoryWithRawResponse(self)
-        self.with_streaming_response = AsyncSupermemoryWithStreamedResponse(self)
+    @cached_property
+    def memories(self) -> AsyncMemoriesResource:
+        from .resources.memories import AsyncMemoriesResource
+
+        return AsyncMemoriesResource(self)
+
+    @cached_property
+    def documents(self) -> AsyncDocumentsResource:
+        from .resources.documents import AsyncDocumentsResource
+
+        return AsyncDocumentsResource(self)
+
+    @cached_property
+    def search(self) -> AsyncSearchResource:
+        from .resources.search import AsyncSearchResource
+
+        return AsyncSearchResource(self)
+
+    @cached_property
+    def settings(self) -> AsyncSettingsResource:
+        from .resources.settings import AsyncSettingsResource
+
+        return AsyncSettingsResource(self)
+
+    @cached_property
+    def connections(self) -> AsyncConnectionsResource:
+        from .resources.connections import AsyncConnectionsResource
+
+        return AsyncConnectionsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncSupermemoryWithRawResponse:
+        return AsyncSupermemoryWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncSupermemoryWithStreamedResponse:
+        return AsyncSupermemoryWithStreamedResponse(self)
 
     @property
     @override
@@ -615,12 +667,10 @@ class AsyncSupermemory(AsyncAPIClient):
 
 
 class SupermemoryWithRawResponse:
+    _client: Supermemory
+
     def __init__(self, client: Supermemory) -> None:
-        self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
-        self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
-        self.search = search.SearchResourceWithRawResponse(client.search)
-        self.settings = settings.SettingsResourceWithRawResponse(client.settings)
-        self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
+        self._client = client
 
         self.add = to_raw_response_wrapper(
             client.add,
@@ -629,14 +679,42 @@ class SupermemoryWithRawResponse:
             client.profile,
         )
 
+    @cached_property
+    def memories(self) -> memories.MemoriesResourceWithRawResponse:
+        from .resources.memories import MemoriesResourceWithRawResponse
+
+        return MemoriesResourceWithRawResponse(self._client.memories)
+
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithRawResponse:
+        from .resources.documents import DocumentsResourceWithRawResponse
+
+        return DocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def search(self) -> search.SearchResourceWithRawResponse:
+        from .resources.search import SearchResourceWithRawResponse
+
+        return SearchResourceWithRawResponse(self._client.search)
+
+    @cached_property
+    def settings(self) -> settings.SettingsResourceWithRawResponse:
+        from .resources.settings import SettingsResourceWithRawResponse
+
+        return SettingsResourceWithRawResponse(self._client.settings)
+
+    @cached_property
+    def connections(self) -> connections.ConnectionsResourceWithRawResponse:
+        from .resources.connections import ConnectionsResourceWithRawResponse
+
+        return ConnectionsResourceWithRawResponse(self._client.connections)
+
 
 class AsyncSupermemoryWithRawResponse:
+    _client: AsyncSupermemory
+
     def __init__(self, client: AsyncSupermemory) -> None:
-        self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
-        self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
-        self.search = search.AsyncSearchResourceWithRawResponse(client.search)
-        self.settings = settings.AsyncSettingsResourceWithRawResponse(client.settings)
-        self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
+        self._client = client
 
         self.add = async_to_raw_response_wrapper(
             client.add,
@@ -645,14 +723,42 @@ class AsyncSupermemoryWithRawResponse:
             client.profile,
         )
 
+    @cached_property
+    def memories(self) -> memories.AsyncMemoriesResourceWithRawResponse:
+        from .resources.memories import AsyncMemoriesResourceWithRawResponse
+
+        return AsyncMemoriesResourceWithRawResponse(self._client.memories)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithRawResponse:
+        from .resources.documents import AsyncDocumentsResourceWithRawResponse
+
+        return AsyncDocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def search(self) -> search.AsyncSearchResourceWithRawResponse:
+        from .resources.search import AsyncSearchResourceWithRawResponse
+
+        return AsyncSearchResourceWithRawResponse(self._client.search)
+
+    @cached_property
+    def settings(self) -> settings.AsyncSettingsResourceWithRawResponse:
+        from .resources.settings import AsyncSettingsResourceWithRawResponse
+
+        return AsyncSettingsResourceWithRawResponse(self._client.settings)
+
+    @cached_property
+    def connections(self) -> connections.AsyncConnectionsResourceWithRawResponse:
+        from .resources.connections import AsyncConnectionsResourceWithRawResponse
+
+        return AsyncConnectionsResourceWithRawResponse(self._client.connections)
+
 
 class SupermemoryWithStreamedResponse:
+    _client: Supermemory
+
     def __init__(self, client: Supermemory) -> None:
-        self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
-        self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
-        self.search = search.SearchResourceWithStreamingResponse(client.search)
-        self.settings = settings.SettingsResourceWithStreamingResponse(client.settings)
-        self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
+        self._client = client
 
         self.add = to_streamed_response_wrapper(
             client.add,
@@ -661,14 +767,42 @@ class SupermemoryWithStreamedResponse:
             client.profile,
         )
 
+    @cached_property
+    def memories(self) -> memories.MemoriesResourceWithStreamingResponse:
+        from .resources.memories import MemoriesResourceWithStreamingResponse
+
+        return MemoriesResourceWithStreamingResponse(self._client.memories)
+
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithStreamingResponse:
+        from .resources.documents import DocumentsResourceWithStreamingResponse
+
+        return DocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def search(self) -> search.SearchResourceWithStreamingResponse:
+        from .resources.search import SearchResourceWithStreamingResponse
+
+        return SearchResourceWithStreamingResponse(self._client.search)
+
+    @cached_property
+    def settings(self) -> settings.SettingsResourceWithStreamingResponse:
+        from .resources.settings import SettingsResourceWithStreamingResponse
+
+        return SettingsResourceWithStreamingResponse(self._client.settings)
+
+    @cached_property
+    def connections(self) -> connections.ConnectionsResourceWithStreamingResponse:
+        from .resources.connections import ConnectionsResourceWithStreamingResponse
+
+        return ConnectionsResourceWithStreamingResponse(self._client.connections)
+
 
 class AsyncSupermemoryWithStreamedResponse:
+    _client: AsyncSupermemory
+
     def __init__(self, client: AsyncSupermemory) -> None:
-        self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
-        self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
-        self.search = search.AsyncSearchResourceWithStreamingResponse(client.search)
-        self.settings = settings.AsyncSettingsResourceWithStreamingResponse(client.settings)
-        self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)
+        self._client = client
 
         self.add = async_to_streamed_response_wrapper(
             client.add,
@@ -676,6 +810,36 @@ class AsyncSupermemoryWithStreamedResponse:
         self.profile = async_to_streamed_response_wrapper(
             client.profile,
         )
+
+    @cached_property
+    def memories(self) -> memories.AsyncMemoriesResourceWithStreamingResponse:
+        from .resources.memories import AsyncMemoriesResourceWithStreamingResponse
+
+        return AsyncMemoriesResourceWithStreamingResponse(self._client.memories)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithStreamingResponse:
+        from .resources.documents import AsyncDocumentsResourceWithStreamingResponse
+
+        return AsyncDocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def search(self) -> search.AsyncSearchResourceWithStreamingResponse:
+        from .resources.search import AsyncSearchResourceWithStreamingResponse
+
+        return AsyncSearchResourceWithStreamingResponse(self._client.search)
+
+    @cached_property
+    def settings(self) -> settings.AsyncSettingsResourceWithStreamingResponse:
+        from .resources.settings import AsyncSettingsResourceWithStreamingResponse
+
+        return AsyncSettingsResourceWithStreamingResponse(self._client.settings)
+
+    @cached_property
+    def connections(self) -> connections.AsyncConnectionsResourceWithStreamingResponse:
+        from .resources.connections import AsyncConnectionsResourceWithStreamingResponse
+
+        return AsyncConnectionsResourceWithStreamingResponse(self._client.connections)
 
 
 Client = Supermemory
