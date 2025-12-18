@@ -359,6 +359,13 @@ class SearchMemoriesParams(TypedDict, total=False):
     This increases the latency by about 400ms
     """
 
+    search_mode: Annotated[Literal["memories", "hybrid"], PropertyInfo(alias="searchMode")]
+    """Search mode.
+
+    'memories' searches only memory entries (default). 'hybrid' searches memories
+    first, then falls back to document chunks if no memories are found.
+    """
+
     threshold: float
     """Threshold / sensitivity for memories selection.
 

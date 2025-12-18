@@ -105,10 +105,7 @@ class ResultDocument(BaseModel):
 
 class Result(BaseModel):
     id: str
-    """Memory entry ID"""
-
-    memory: str
-    """The memory content"""
+    """Memory entry ID or chunk ID"""
 
     metadata: Optional[Dict[str, object]] = None
     """Memory metadata"""
@@ -119,6 +116,9 @@ class Result(BaseModel):
     updated_at: str = FieldInfo(alias="updatedAt")
     """Memory last update date"""
 
+    chunk: Optional[str] = None
+    """The chunk content (only present for chunk results from hybrid search)"""
+
     chunks: Optional[List[ResultChunk]] = None
     """Relevant chunks from associated documents (only included when chunks=true)"""
 
@@ -128,13 +128,21 @@ class Result(BaseModel):
     documents: Optional[List[ResultDocument]] = None
     """Associated documents for this memory entry"""
 
+    memory: Optional[str] = None
+    """The memory content (only present for memory results)"""
+
     version: Optional[float] = None
     """Version number of this memory entry"""
 
 
 class SearchMemoriesResponse(BaseModel):
     results: List[Result]
-    """Array of matching memory entries with similarity scores"""
+    """Array of matching memory entries and chunks with similarity scores.
+
+    Contains memory results when searchMode='memories', or both memory and chunk
+    results when searchMode='hybrid'. Memory results have 'memory' field, chunk
+    results have 'chunk' field.
+    """
 
     timing: float
     """Search execution time in milliseconds"""

@@ -187,6 +187,7 @@ class TestSearch:
             limit=10,
             rerank=False,
             rewrite_query=False,
+            search_mode="memories",
             threshold=0.5,
         )
         assert_matches_type(SearchMemoriesResponse, search, path=["response"])
@@ -389,6 +390,7 @@ class TestAsyncSearch:
             limit=10,
             rerank=False,
             rewrite_query=False,
+            search_mode="memories",
             threshold=0.5,
         )
         assert_matches_type(SearchMemoriesResponse, search, path=["response"])

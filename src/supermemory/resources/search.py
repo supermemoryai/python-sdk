@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import search_execute_params, search_memories_params, search_documents_params
@@ -249,6 +251,7 @@ class SearchResource(SyncAPIResource):
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,
         rewrite_query: bool | Omit = omit,
+        search_mode: Literal["memories", "hybrid"] | Omit = omit,
         threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,6 +279,10 @@ class SearchResource(SyncAPIResource):
           rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
               the latency by about 400ms
 
+          search_mode: Search mode. 'memories' searches only memory entries (default). 'hybrid'
+              searches memories first, then falls back to document chunks if no memories are
+              found.
+
           threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
               most memories, more results), 1 is most sensitive (returns lesser memories,
               accurate results)
@@ -299,6 +306,7 @@ class SearchResource(SyncAPIResource):
                     "limit": limit,
                     "rerank": rerank,
                     "rewrite_query": rewrite_query,
+                    "search_mode": search_mode,
                     "threshold": threshold,
                 },
                 search_memories_params.SearchMemoriesParams,
@@ -536,6 +544,7 @@ class AsyncSearchResource(AsyncAPIResource):
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,
         rewrite_query: bool | Omit = omit,
+        search_mode: Literal["memories", "hybrid"] | Omit = omit,
         threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -563,6 +572,10 @@ class AsyncSearchResource(AsyncAPIResource):
           rewrite_query: If true, rewrites the query to make it easier to find documents. This increases
               the latency by about 400ms
 
+          search_mode: Search mode. 'memories' searches only memory entries (default). 'hybrid'
+              searches memories first, then falls back to document chunks if no memories are
+              found.
+
           threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
               most memories, more results), 1 is most sensitive (returns lesser memories,
               accurate results)
@@ -586,6 +599,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "limit": limit,
                     "rerank": rerank,
                     "rewrite_query": rewrite_query,
+                    "search_mode": search_mode,
                     "threshold": threshold,
                 },
                 search_memories_params.SearchMemoriesParams,
