@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.11.1 (2025-12-18)
+
+Full Changelog: [v3.11.0...v3.11.1](https://github.com/supermemoryai/python-sdk/compare/v3.11.0...v3.11.1)
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([aa13c3d](https://github.com/supermemoryai/python-sdk/commit/aa13c3d8760b95b308fe785a9a022375c8021379))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([8c1dda0](https://github.com/supermemoryai/python-sdk/commit/8c1dda0fc98ab035e884fe78d3025ec69f04cc82))
+* speedup initial import ([088bf48](https://github.com/supermemoryai/python-sdk/commit/088bf4882131b61f629bb6bc2a78c872263d5712))
+
 ## 3.11.0 (2025-12-11)
 
 Full Changelog: [v3.10.0...v3.11.0](https://github.com/supermemoryai/python-sdk/compare/v3.10.0...v3.11.0)
