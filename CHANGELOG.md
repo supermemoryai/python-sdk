@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.12.1 (2025-12-19)
+
+Full Changelog: [v3.12.0...v3.12.1](https://github.com/supermemoryai/python-sdk/compare/v3.12.0...v3.12.1)
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([43c4206](https://github.com/supermemoryai/python-sdk/commit/43c42067ce474eacac435fd686ff8f6bb1d159d1))
+
 ## 3.12.0 (2025-12-18)
 
 Full Changelog: [v3.11.1...v3.12.0](https://github.com/supermemoryai/python-sdk/compare/v3.11.1...v3.12.0)
