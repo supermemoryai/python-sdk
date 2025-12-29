@@ -63,7 +63,7 @@ class ConnectionsResource(SyncAPIResource):
 
     def create(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         document_limit: int | Omit = omit,
@@ -211,7 +211,7 @@ class ConnectionsResource(SyncAPIResource):
 
     def delete_by_provider(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -284,7 +284,7 @@ class ConnectionsResource(SyncAPIResource):
 
     def get_by_tag(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -323,7 +323,7 @@ class ConnectionsResource(SyncAPIResource):
 
     def import_(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -361,7 +361,7 @@ class ConnectionsResource(SyncAPIResource):
 
     def list_documents(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -466,7 +466,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def create(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         document_limit: int | Omit = omit,
@@ -618,7 +618,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def delete_by_provider(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -691,7 +691,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def get_by_tag(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -730,7 +730,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def import_(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -770,7 +770,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
 
     async def list_documents(
         self,
-        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler"],
+        provider: Literal["notion", "google-drive", "onedrive", "github", "web-crawler", "s3"],
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
