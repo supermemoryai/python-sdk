@@ -294,8 +294,8 @@ class Supermemory(SyncAPIClient):
         self,
         *,
         container_tag: str,
-        threshold: float,
         q: str | Omit = omit,
+        threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -310,10 +310,10 @@ class Supermemory(SyncAPIClient):
           container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
               any other identifier you wish to use to filter memories.
 
+          q: Optional search query to include search results in the response
+
           threshold: Threshold for search results. Only results with a score above this threshold
               will be included.
-
-          q: Optional search query to include search results in the response
 
           extra_headers: Send extra headers
 
@@ -328,8 +328,8 @@ class Supermemory(SyncAPIClient):
             body=maybe_transform(
                 {
                     "container_tag": container_tag,
-                    "threshold": threshold,
                     "q": q,
+                    "threshold": threshold,
                 },
                 client_profile_params.ClientProfileParams,
             ),
@@ -597,8 +597,8 @@ class AsyncSupermemory(AsyncAPIClient):
         self,
         *,
         container_tag: str,
-        threshold: float,
         q: str | Omit = omit,
+        threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -613,10 +613,10 @@ class AsyncSupermemory(AsyncAPIClient):
           container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
               any other identifier you wish to use to filter memories.
 
+          q: Optional search query to include search results in the response
+
           threshold: Threshold for search results. Only results with a score above this threshold
               will be included.
-
-          q: Optional search query to include search results in the response
 
           extra_headers: Send extra headers
 
@@ -631,8 +631,8 @@ class AsyncSupermemory(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "container_tag": container_tag,
-                    "threshold": threshold,
                     "q": q,
+                    "threshold": threshold,
                 },
                 client_profile_params.ClientProfileParams,
             ),
