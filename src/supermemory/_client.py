@@ -294,6 +294,7 @@ class Supermemory(SyncAPIClient):
         self,
         *,
         container_tag: str,
+        threshold: float,
         q: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -308,6 +309,9 @@ class Supermemory(SyncAPIClient):
         Args:
           container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
               any other identifier you wish to use to filter memories.
+
+          threshold: Threshold for search results. Only results with a score above this threshold
+              will be included.
 
           q: Optional search query to include search results in the response
 
@@ -324,6 +328,7 @@ class Supermemory(SyncAPIClient):
             body=maybe_transform(
                 {
                     "container_tag": container_tag,
+                    "threshold": threshold,
                     "q": q,
                 },
                 client_profile_params.ClientProfileParams,
@@ -592,6 +597,7 @@ class AsyncSupermemory(AsyncAPIClient):
         self,
         *,
         container_tag: str,
+        threshold: float,
         q: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -606,6 +612,9 @@ class AsyncSupermemory(AsyncAPIClient):
         Args:
           container_tag: Tag to filter the profile by. This can be an ID for your user, a project ID, or
               any other identifier you wish to use to filter memories.
+
+          threshold: Threshold for search results. Only results with a score above this threshold
+              will be included.
 
           q: Optional search query to include search results in the response
 
@@ -622,6 +631,7 @@ class AsyncSupermemory(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "container_tag": container_tag,
+                    "threshold": threshold,
                     "q": q,
                 },
                 client_profile_params.ClientProfileParams,
