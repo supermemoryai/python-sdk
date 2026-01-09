@@ -68,7 +68,6 @@ class TestClient:
     def test_method_profile(self, client: Supermemory) -> None:
         client_ = client.profile(
             container_tag="containerTag",
-            threshold=0,
         )
         assert_matches_type(ProfileResponse, client_, path=["response"])
 
@@ -77,8 +76,8 @@ class TestClient:
     def test_method_profile_with_all_params(self, client: Supermemory) -> None:
         client_ = client.profile(
             container_tag="containerTag",
-            threshold=0,
             q="q",
+            threshold=0,
         )
         assert_matches_type(ProfileResponse, client_, path=["response"])
 
@@ -87,7 +86,6 @@ class TestClient:
     def test_raw_response_profile(self, client: Supermemory) -> None:
         response = client.with_raw_response.profile(
             container_tag="containerTag",
-            threshold=0,
         )
 
         assert response.is_closed is True
@@ -100,7 +98,6 @@ class TestClient:
     def test_streaming_response_profile(self, client: Supermemory) -> None:
         with client.with_streaming_response.profile(
             container_tag="containerTag",
-            threshold=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -167,7 +164,6 @@ class TestAsyncClient:
     async def test_method_profile(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.profile(
             container_tag="containerTag",
-            threshold=0,
         )
         assert_matches_type(ProfileResponse, client, path=["response"])
 
@@ -176,8 +172,8 @@ class TestAsyncClient:
     async def test_method_profile_with_all_params(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.profile(
             container_tag="containerTag",
-            threshold=0,
             q="q",
+            threshold=0,
         )
         assert_matches_type(ProfileResponse, client, path=["response"])
 
@@ -186,7 +182,6 @@ class TestAsyncClient:
     async def test_raw_response_profile(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.with_raw_response.profile(
             container_tag="containerTag",
-            threshold=0,
         )
 
         assert response.is_closed is True
@@ -199,7 +194,6 @@ class TestAsyncClient:
     async def test_streaming_response_profile(self, async_client: AsyncSupermemory) -> None:
         async with async_client.with_streaming_response.profile(
             container_tag="containerTag",
-            threshold=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

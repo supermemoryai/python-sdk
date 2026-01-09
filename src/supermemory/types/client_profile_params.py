@@ -17,11 +17,11 @@ class ClientProfileParams(TypedDict, total=False):
     to use to filter memories.
     """
 
-    threshold: Required[float]
+    q: str
+    """Optional search query to include search results in the response"""
+
+    threshold: float
     """Threshold for search results.
 
     Only results with a score above this threshold will be included.
     """
-
-    q: str
-    """Optional search query to include search results in the response"""
