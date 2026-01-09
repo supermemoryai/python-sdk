@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.15.0 (2026-01-09)
+
+Full Changelog: [v3.14.0...v3.15.0](https://github.com/supermemoryai/python-sdk/compare/v3.14.0...v3.15.0)
+
+### Features
+
+* **api:** api update ([8df190c](https://github.com/supermemoryai/python-sdk/commit/8df190ce72d0340f459ec64e3a8463025e33c3af))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([a1b1bbe](https://github.com/supermemoryai/python-sdk/commit/a1b1bbe66bff136314597e68504a404e2dea68ba))
+
 ## 3.14.0 (2026-01-05)
 
 Full Changelog: [v3.13.0...v3.14.0](https://github.com/supermemoryai/python-sdk/compare/v3.13.0...v3.14.0)
