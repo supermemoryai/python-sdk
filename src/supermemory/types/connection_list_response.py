@@ -17,6 +17,8 @@ class ConnectionListResponseItem(BaseModel):
 
     provider: str
 
+    container_tags: Optional[List[str]] = FieldInfo(alias="containerTags", default=None)
+
     document_limit: Optional[float] = FieldInfo(alias="documentLimit", default=None)
 
     email: Optional[str] = None
