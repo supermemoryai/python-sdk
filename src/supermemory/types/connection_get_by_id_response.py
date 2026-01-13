@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -15,6 +15,8 @@ class ConnectionGetByIDResponse(BaseModel):
     created_at: str = FieldInfo(alias="createdAt")
 
     provider: str
+
+    container_tags: Optional[List[str]] = FieldInfo(alias="containerTags", default=None)
 
     document_limit: Optional[float] = FieldInfo(alias="documentLimit", default=None)
 
