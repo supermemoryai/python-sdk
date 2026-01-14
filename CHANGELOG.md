@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.18.0 (2026-01-14)
+
+Full Changelog: [v3.17.0...v3.18.0](https://github.com/supermemoryai/python-sdk/compare/v3.17.0...v3.18.0)
+
+### Features
+
+* **api:** api update ([e29bfb0](https://github.com/supermemoryai/python-sdk/commit/e29bfb02e15babd725dbc1ac41230ed87860f7f3))
+* **client:** add support for binary request streaming ([e7ea563](https://github.com/supermemoryai/python-sdk/commit/e7ea563f6399ed0dc1fe23dcc335d11fdbd2489f))
+
 ## 3.17.0 (2026-01-13)
 
 Full Changelog: [v3.16.0...v3.17.0](https://github.com/supermemoryai/python-sdk/compare/v3.16.0...v3.17.0)
