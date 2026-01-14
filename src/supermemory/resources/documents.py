@@ -482,8 +482,9 @@ class DocumentsResource(SyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
-          use_advanced_processing: Use advanced processing with Reducto for better PDF extraction and chunking.
-              This costs 3x tokens but provides superior quality for complex documents.
+          use_advanced_processing: DEPRECATED: This field is no longer used. Advanced PDF processing is now
+              automatic with our hybrid Mistral OCR + Gemini pipeline. This parameter will be
+              accepted but ignored for backwards compatibility.
 
           extra_headers: Send extra headers
 
@@ -963,8 +964,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
-          use_advanced_processing: Use advanced processing with Reducto for better PDF extraction and chunking.
-              This costs 3x tokens but provides superior quality for complex documents.
+          use_advanced_processing: DEPRECATED: This field is no longer used. Advanced PDF processing is now
+              automatic with our hybrid Mistral OCR + Gemini pipeline. This parameter will be
+              accepted but ignored for backwards compatibility.
 
           extra_headers: Send extra headers
 

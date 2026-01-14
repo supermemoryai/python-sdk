@@ -44,7 +44,9 @@ class DocumentUploadFileParams(TypedDict, total=False):
     """
 
     use_advanced_processing: Annotated[str, PropertyInfo(alias="useAdvancedProcessing")]
-    """Use advanced processing with Reducto for better PDF extraction and chunking.
+    """DEPRECATED: This field is no longer used.
 
-    This costs 3x tokens but provides superior quality for complex documents.
+    Advanced PDF processing is now automatic with our hybrid Mistral OCR + Gemini
+    pipeline. This parameter will be accepted but ignored for backwards
+    compatibility.
     """
