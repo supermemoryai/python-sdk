@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.19.0 (2026-01-19)
+
+Full Changelog: [v3.18.0...v3.19.0](https://github.com/supermemoryai/python-sdk/compare/v3.18.0...v3.19.0)
+
+### Features
+
+* **api:** api update ([7f096e5](https://github.com/supermemoryai/python-sdk/commit/7f096e5dbb3fd423ca0e9311ba0568cc15c00902))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([0639b9e](https://github.com/supermemoryai/python-sdk/commit/0639b9ece23ae00871fc4ff7a8817ff8e81469cd))
+
 ## 3.18.0 (2026-01-14)
 
 Full Changelog: [v3.17.0...v3.18.0](https://github.com/supermemoryai/python-sdk/compare/v3.17.0...v3.18.0)
