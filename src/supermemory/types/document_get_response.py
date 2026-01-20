@@ -67,16 +67,6 @@ class DocumentGetResponse(BaseModel):
     summary: Optional[str] = None
     """Summary of the document content"""
 
-    summary_embedding_hv: Optional[List[float]] = FieldInfo(alias="summaryEmbeddingHv", default=None)
-
-    summary_embedding_model: Optional[str] = FieldInfo(alias="summaryEmbeddingModel", default=None)
-
-    summary_embedding_model_hv: Optional[str] = FieldInfo(alias="summaryEmbeddingModelHv", default=None)
-
-    summary_embedding_model_new: Optional[str] = FieldInfo(alias="summaryEmbeddingModelNew", default=None)
-
-    summary_embedding_new: Optional[List[float]] = FieldInfo(alias="summaryEmbeddingNew", default=None)
-
     title: Optional[str] = None
     """Title of the document"""
 
