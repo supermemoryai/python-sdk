@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.20.1 (2026-01-29)
+
+Full Changelog: [v3.20.0...v3.20.1](https://github.com/supermemoryai/python-sdk/compare/v3.20.0...v3.20.1)
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([e695a58](https://github.com/supermemoryai/python-sdk/commit/e695a5834959e52a0d66b753ea12e33ebc828fab))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([e3c1865](https://github.com/supermemoryai/python-sdk/commit/e3c1865c4f1a767683d2fdde59ec9aa50fe5724e))
+
 ## 3.20.0 (2026-01-20)
 
 Full Changelog: [v3.19.0...v3.20.0](https://github.com/supermemoryai/python-sdk/compare/v3.19.0...v3.20.0)
