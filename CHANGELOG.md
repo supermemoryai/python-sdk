@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.21.0 (2026-01-30)
+
+Full Changelog: [v3.20.1...v3.21.0](https://github.com/supermemoryai/python-sdk/compare/v3.20.1...v3.21.0)
+
+### Features
+
+* **client:** add custom JSON encoder for extended type support ([a5e73e7](https://github.com/supermemoryai/python-sdk/commit/a5e73e708a2348598bd0c13cc074d827ece2cfeb))
+
 ## 3.20.1 (2026-01-29)
 
 Full Changelog: [v3.20.0...v3.20.1](https://github.com/supermemoryai/python-sdk/compare/v3.20.0...v3.20.1)
