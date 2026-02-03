@@ -32,5 +32,11 @@ class MemoryAddParams(TypedDict, total=False):
     Max 100 characters, alphanumeric with hyphens and underscores only.
     """
 
+    entity_context: Annotated[str, PropertyInfo(alias="entityContext")]
+    """Optional entity context for this container tag.
+
+    Max 1500 characters. Used during document processing to guide memory extraction.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document."""

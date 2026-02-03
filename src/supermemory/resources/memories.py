@@ -238,6 +238,7 @@ class MemoriesResource(SyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
+        entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -259,6 +260,9 @@ class MemoriesResource(SyncAPIResource):
           custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
               hyphens and underscores only.
 
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
+
           metadata: Optional metadata for the document.
 
           extra_headers: Send extra headers
@@ -277,6 +281,7 @@ class MemoriesResource(SyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "custom_id": custom_id,
+                    "entity_context": entity_context,
                     "metadata": metadata,
                 },
                 memory_add_params.MemoryAddParams,
@@ -709,6 +714,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
+        entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -730,6 +736,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
           custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
               hyphens and underscores only.
 
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
+
           metadata: Optional metadata for the document.
 
           extra_headers: Send extra headers
@@ -748,6 +757,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "custom_id": custom_id,
+                    "entity_context": entity_context,
                     "metadata": metadata,
                 },
                 memory_add_params.MemoryAddParams,
