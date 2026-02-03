@@ -206,6 +206,7 @@ class TestMemories:
             container_tag="containerTag",
             container_tags=["string"],
             custom_id="customId",
+            entity_context="entityContext",
             metadata={"foo": "string"},
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])
@@ -606,6 +607,7 @@ class TestAsyncMemories:
             container_tag="containerTag",
             container_tags=["string"],
             custom_id="customId",
+            entity_context="entityContext",
             metadata={"foo": "string"},
         )
         assert_matches_type(MemoryAddResponse, memory, path=["response"])

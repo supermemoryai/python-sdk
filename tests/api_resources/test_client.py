@@ -33,6 +33,7 @@ class TestClient:
             container_tag="containerTag",
             container_tags=["string"],
             custom_id="customId",
+            entity_context="entityContext",
             metadata={"foo": "string"},
         )
         assert_matches_type(AddResponse, client_, path=["response"])
@@ -129,6 +130,7 @@ class TestAsyncClient:
             container_tag="containerTag",
             container_tags=["string"],
             custom_id="customId",
+            entity_context="entityContext",
             metadata={"foo": "string"},
         )
         assert_matches_type(AddResponse, client, path=["response"])
