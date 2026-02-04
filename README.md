@@ -147,7 +147,7 @@ from supermemory import Supermemory
 
 client = Supermemory()
 
-client.memories.upload_file(
+client.documents.upload_file(
     file=Path("/path/to/file"),
 )
 ```
