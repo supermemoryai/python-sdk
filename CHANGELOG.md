@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.25.0 (2026-02-18)
+
+Full Changelog: [v3.24.0...v3.25.0](https://github.com/supermemoryai/python-sdk/compare/v3.24.0...v3.25.0)
+
+### Features
+
+* **api:** api update ([93a76e1](https://github.com/supermemoryai/python-sdk/commit/93a76e11b33bb52c265541c583e47bbea26462d1))
+
+
+### Chores
+
+* format all `api.md` files ([d879ea5](https://github.com/supermemoryai/python-sdk/commit/d879ea5d7e4ebe83220572692ddad28a4fc94b30))
+* **internal:** bump dependencies ([f992701](https://github.com/supermemoryai/python-sdk/commit/f992701f8e78502f43616240eb04c10f6c679862))
+* **internal:** fix lint error on Python 3.14 ([035b6d6](https://github.com/supermemoryai/python-sdk/commit/035b6d665e03ea518f2d40bd967bc63472087705))
+
 ## 3.24.0 (2026-02-09)
 
 Full Changelog: [v3.23.0...v3.24.0](https://github.com/supermemoryai/python-sdk/compare/v3.23.0...v3.24.0)
