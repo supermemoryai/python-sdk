@@ -251,7 +251,7 @@ class SearchResource(SyncAPIResource):
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,
         rewrite_query: bool | Omit = omit,
-        search_mode: Literal["memories", "hybrid"] | Omit = omit,
+        search_mode: Literal["memories", "hybrid", "documents"] | Omit = omit,
         threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -280,8 +280,8 @@ class SearchResource(SyncAPIResource):
               the latency by about 400ms
 
           search_mode: Search mode. 'memories' searches only memory entries (default). 'hybrid'
-              searches memories first, then falls back to document chunks if no memories are
-              found.
+              searches both memories and document chunks. 'documents' searches only document
+              chunks.
 
           threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
               most memories, more results), 1 is most sensitive (returns lesser memories,
@@ -544,7 +544,7 @@ class AsyncSearchResource(AsyncAPIResource):
         limit: int | Omit = omit,
         rerank: bool | Omit = omit,
         rewrite_query: bool | Omit = omit,
-        search_mode: Literal["memories", "hybrid"] | Omit = omit,
+        search_mode: Literal["memories", "hybrid", "documents"] | Omit = omit,
         threshold: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -573,8 +573,8 @@ class AsyncSearchResource(AsyncAPIResource):
               the latency by about 400ms
 
           search_mode: Search mode. 'memories' searches only memory entries (default). 'hybrid'
-              searches memories first, then falls back to document chunks if no memories are
-              found.
+              searches both memories and document chunks. 'documents' searches only document
+              chunks.
 
           threshold: Threshold / sensitivity for memories selection. 0 is least sensitive (returns
               most memories, more results), 1 is most sensitive (returns lesser memories,
