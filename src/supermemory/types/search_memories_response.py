@@ -139,9 +139,10 @@ class SearchMemoriesResponse(BaseModel):
     results: List[Result]
     """Array of matching memory entries and chunks with similarity scores.
 
-    Contains memory results when searchMode='memories', or both memory and chunk
-    results when searchMode='hybrid'. Memory results have 'memory' field, chunk
-    results have 'chunk' field.
+    Contains memory results when searchMode='memories', both memory and chunk
+    results when searchMode='hybrid', or only chunk results when
+    searchMode='documents'. Memory results have 'memory' field, chunk results have
+    'chunk' field.
     """
 
     timing: float
