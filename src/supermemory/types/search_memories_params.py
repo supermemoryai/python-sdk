@@ -3857,9 +3857,10 @@ Filters: TypeAlias = Union[FiltersOr, FiltersAnd]
 
 class Include(TypedDict, total=False):
     chunks: bool
-    """
-    If true, fetch and return chunks from documents associated with the found
-    memories. Performs vector search on chunks within those documents.
+    """DEPRECATED: Use searchMode='hybrid' instead.
+
+    If true, automatically switches to hybrid mode. This field is kept for backward
+    compatibility only.
     """
 
     documents: bool
