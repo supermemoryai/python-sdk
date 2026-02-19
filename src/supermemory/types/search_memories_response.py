@@ -142,7 +142,9 @@ class SearchMemoriesResponse(BaseModel):
     Contains memory results when searchMode='memories', both memory and chunk
     results when searchMode='hybrid', or only chunk results when
     searchMode='documents'. Memory results have 'memory' field, chunk results have
-    'chunk' field.
+    'chunk' field. BACKWARD COMPATIBILITY: When using deprecated
+    include.chunks=true, only memory results are returned with chunks embedded in
+    them (old format).
     """
 
     timing: float
