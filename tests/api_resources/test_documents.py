@@ -26,7 +26,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDocuments:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Supermemory) -> None:
         document = client.documents.update(
@@ -34,7 +34,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.update(
@@ -54,7 +54,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.update(
@@ -66,7 +66,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.update(
@@ -80,7 +80,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -88,13 +88,13 @@ class TestDocuments:
                 id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Supermemory) -> None:
         document = client.documents.list()
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.list(
@@ -127,7 +127,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.list()
@@ -137,7 +137,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.list() as response:
@@ -149,7 +149,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Supermemory) -> None:
         document = client.documents.delete(
@@ -157,7 +157,7 @@ class TestDocuments:
         )
         assert document is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.delete(
@@ -169,7 +169,7 @@ class TestDocuments:
         document = response.parse()
         assert document is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.delete(
@@ -183,7 +183,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -191,7 +191,7 @@ class TestDocuments:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add(self, client: Supermemory) -> None:
         document = client.documents.add(
@@ -199,7 +199,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.add(
@@ -212,7 +212,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_add(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.add(
@@ -224,7 +224,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_add(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.add(
@@ -238,7 +238,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_batch_add(self, client: Supermemory) -> None:
         document = client.documents.batch_add(
@@ -246,7 +246,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_batch_add_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.batch_add(
@@ -280,7 +280,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_batch_add(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.batch_add(
@@ -292,7 +292,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_batch_add(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.batch_add(
@@ -306,13 +306,13 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_bulk(self, client: Supermemory) -> None:
         document = client.documents.delete_bulk()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_bulk_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.delete_bulk(
@@ -321,7 +321,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_bulk(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.delete_bulk()
@@ -331,7 +331,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_bulk(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.delete_bulk() as response:
@@ -343,7 +343,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: Supermemory) -> None:
         document = client.documents.get(
@@ -351,7 +351,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentGetResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.get(
@@ -363,7 +363,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentGetResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.get(
@@ -377,7 +377,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get(self, client: Supermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -385,13 +385,13 @@ class TestDocuments:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_processing(self, client: Supermemory) -> None:
         document = client.documents.list_processing()
         assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_processing(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.list_processing()
@@ -401,7 +401,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_processing(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.list_processing() as response:
@@ -413,7 +413,7 @@ class TestDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_file(self, client: Supermemory) -> None:
         document = client.documents.upload_file(
@@ -421,7 +421,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload_file_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.upload_file(
@@ -434,7 +434,7 @@ class TestDocuments:
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload_file(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.upload_file(
@@ -446,7 +446,7 @@ class TestDocuments:
         document = response.parse()
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload_file(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.upload_file(
@@ -466,7 +466,7 @@ class TestAsyncDocuments:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.update(
@@ -474,7 +474,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.update(
@@ -494,7 +494,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.update(
@@ -506,7 +506,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.update(
@@ -520,7 +520,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -528,13 +528,13 @@ class TestAsyncDocuments:
                 id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list()
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list(
@@ -567,7 +567,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.list()
@@ -577,7 +577,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.list() as response:
@@ -589,7 +589,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete(
@@ -597,7 +597,7 @@ class TestAsyncDocuments:
         )
         assert document is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.delete(
@@ -609,7 +609,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert document is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.delete(
@@ -623,7 +623,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -631,7 +631,7 @@ class TestAsyncDocuments:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.add(
@@ -639,7 +639,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.add(
@@ -652,7 +652,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.add(
@@ -664,7 +664,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.add(
@@ -678,7 +678,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_batch_add(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.batch_add(
@@ -686,7 +686,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_batch_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.batch_add(
@@ -720,7 +720,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_batch_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.batch_add(
@@ -732,7 +732,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_batch_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.batch_add(
@@ -746,13 +746,13 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_bulk(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete_bulk()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_bulk_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete_bulk(
@@ -761,7 +761,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_bulk(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.delete_bulk()
@@ -771,7 +771,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_bulk(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.delete_bulk() as response:
@@ -783,7 +783,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.get(
@@ -791,7 +791,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentGetResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.get(
@@ -803,7 +803,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentGetResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.get(
@@ -817,7 +817,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncSupermemory) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -825,13 +825,13 @@ class TestAsyncDocuments:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_processing(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list_processing()
         assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_processing(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.list_processing()
@@ -841,7 +841,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentListProcessingResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_processing(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.list_processing() as response:
@@ -853,7 +853,7 @@ class TestAsyncDocuments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_file(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.upload_file(
@@ -861,7 +861,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload_file_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.upload_file(
@@ -874,7 +874,7 @@ class TestAsyncDocuments:
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload_file(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.upload_file(
@@ -886,7 +886,7 @@ class TestAsyncDocuments:
         document = await response.parse()
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload_file(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.upload_file(

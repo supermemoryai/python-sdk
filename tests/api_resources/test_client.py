@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestClient:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add(self, client: Supermemory) -> None:
         client_ = client.add(
@@ -25,7 +25,7 @@ class TestClient:
         )
         assert_matches_type(AddResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add_with_all_params(self, client: Supermemory) -> None:
         client_ = client.add(
@@ -38,7 +38,7 @@ class TestClient:
         )
         assert_matches_type(AddResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_add(self, client: Supermemory) -> None:
         response = client.with_raw_response.add(
@@ -50,7 +50,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(AddResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_add(self, client: Supermemory) -> None:
         with client.with_streaming_response.add(
@@ -64,7 +64,7 @@ class TestClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_profile(self, client: Supermemory) -> None:
         client_ = client.profile(
@@ -72,7 +72,7 @@ class TestClient:
         )
         assert_matches_type(ProfileResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_profile_with_all_params(self, client: Supermemory) -> None:
         client_ = client.profile(
@@ -82,7 +82,7 @@ class TestClient:
         )
         assert_matches_type(ProfileResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_profile(self, client: Supermemory) -> None:
         response = client.with_raw_response.profile(
@@ -94,7 +94,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(ProfileResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_profile(self, client: Supermemory) -> None:
         with client.with_streaming_response.profile(
@@ -114,7 +114,7 @@ class TestAsyncClient:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.add(
@@ -122,7 +122,7 @@ class TestAsyncClient:
         )
         assert_matches_type(AddResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.add(
@@ -135,7 +135,7 @@ class TestAsyncClient:
         )
         assert_matches_type(AddResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.with_raw_response.add(
@@ -147,7 +147,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(AddResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.with_streaming_response.add(
@@ -161,7 +161,7 @@ class TestAsyncClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_profile(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.profile(
@@ -169,7 +169,7 @@ class TestAsyncClient:
         )
         assert_matches_type(ProfileResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_profile_with_all_params(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.profile(
@@ -179,7 +179,7 @@ class TestAsyncClient:
         )
         assert_matches_type(ProfileResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_profile(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.with_raw_response.profile(
@@ -191,7 +191,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(ProfileResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_profile(self, async_client: AsyncSupermemory) -> None:
         async with async_client.with_streaming_response.profile(
