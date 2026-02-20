@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.26.0 (2026-02-20)
+
+Full Changelog: [v3.25.0...v3.26.0](https://github.com/supermemoryai/python-sdk/compare/v3.25.0...v3.26.0)
+
+### Features
+
+* **api:** api update ([0bfae9d](https://github.com/supermemoryai/python-sdk/commit/0bfae9dce59817f6aa92f79a35f033d5888501af))
+
+
+### Chores
+
+* **internal:** remove mock server code ([1135336](https://github.com/supermemoryai/python-sdk/commit/113533627803db42f5b519cc2ba978da81f4c99d))
+* update mock server docs ([b382215](https://github.com/supermemoryai/python-sdk/commit/b382215ce4f4062f43fa4b0ef686e90bf461c651))
+
 ## 3.25.0 (2026-02-18)
 
 Full Changelog: [v3.24.0...v3.25.0](https://github.com/supermemoryai/python-sdk/compare/v3.24.0...v3.25.0)
