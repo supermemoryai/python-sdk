@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMemories:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_forget(self, client: Supermemory) -> None:
         memory = client.memories.forget(
@@ -28,7 +28,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_forget_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.forget(
@@ -39,7 +39,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_forget(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.forget(
@@ -51,7 +51,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_forget(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.forget(
@@ -65,7 +65,7 @@ class TestMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_memory(self, client: Supermemory) -> None:
         memory = client.memories.update_memory(
@@ -74,7 +74,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_memory_with_all_params(self, client: Supermemory) -> None:
         memory = client.memories.update_memory(
@@ -86,7 +86,7 @@ class TestMemories:
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update_memory(self, client: Supermemory) -> None:
         response = client.memories.with_raw_response.update_memory(
@@ -99,7 +99,7 @@ class TestMemories:
         memory = response.parse()
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update_memory(self, client: Supermemory) -> None:
         with client.memories.with_streaming_response.update_memory(
@@ -120,7 +120,7 @@ class TestAsyncMemories:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_forget(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.forget(
@@ -128,7 +128,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_forget_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.forget(
@@ -139,7 +139,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_forget(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.forget(
@@ -151,7 +151,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryForgetResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_forget(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.forget(
@@ -165,7 +165,7 @@ class TestAsyncMemories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_memory(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.update_memory(
@@ -174,7 +174,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_memory_with_all_params(self, async_client: AsyncSupermemory) -> None:
         memory = await async_client.memories.update_memory(
@@ -186,7 +186,7 @@ class TestAsyncMemories:
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update_memory(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.memories.with_raw_response.update_memory(
@@ -199,7 +199,7 @@ class TestAsyncMemories:
         memory = await response.parse()
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update_memory(self, async_client: AsyncSupermemory) -> None:
         async with async_client.memories.with_streaming_response.update_memory(
