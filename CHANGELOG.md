@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.27.0 (2026-02-24)
+
+Full Changelog: [v3.26.0...v3.27.0](https://github.com/supermemoryai/python-sdk/compare/v3.26.0...v3.27.0)
+
+### Features
+
+* **api:** api update ([04a5168](https://github.com/supermemoryai/python-sdk/commit/04a51688c214687dc622500c934d053e046b38c1))
+
+
+### Chores
+
+* **internal:** add request options to SSE classes ([2d6cdd8](https://github.com/supermemoryai/python-sdk/commit/2d6cdd83fb5f6097f940cdea43eafe2f73a510ca))
+* **internal:** make `test_proxy_environment_variables` more resilient ([1539616](https://github.com/supermemoryai/python-sdk/commit/1539616c58f9f72e63c560d6c08e6bf8b04a0740))
+
 ## 3.26.0 (2026-02-20)
 
 Full Changelog: [v3.25.0...v3.26.0](https://github.com/supermemoryai/python-sdk/compare/v3.25.0...v3.26.0)
