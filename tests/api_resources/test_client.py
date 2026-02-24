@@ -77,6 +77,18 @@ class TestClient:
     def test_method_profile_with_all_params(self, client: Supermemory) -> None:
         client_ = client.profile(
             container_tag="containerTag",
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             q="q",
             threshold=0,
         )
@@ -174,6 +186,18 @@ class TestAsyncClient:
     async def test_method_profile_with_all_params(self, async_client: AsyncSupermemory) -> None:
         client = await async_client.profile(
             container_tag="containerTag",
+            filters={
+                "or_": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                        "filter_type": "metadata",
+                        "ignore_case": True,
+                        "negate": True,
+                        "numeric_operator": ">",
+                    }
+                ]
+            },
             q="q",
             threshold=0,
         )
