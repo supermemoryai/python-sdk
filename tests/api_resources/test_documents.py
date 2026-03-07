@@ -417,7 +417,7 @@ class TestDocuments:
     @parametrize
     def test_method_upload_file(self, client: Supermemory) -> None:
         document = client.documents.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
@@ -425,7 +425,7 @@ class TestDocuments:
     @parametrize
     def test_method_upload_file_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
@@ -438,7 +438,7 @@ class TestDocuments:
     @parametrize
     def test_raw_response_upload_file(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -450,7 +450,7 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_upload_file(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -857,7 +857,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_upload_file(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
 
@@ -865,7 +865,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_upload_file_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
@@ -878,7 +878,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_raw_response_upload_file(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -890,7 +890,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_upload_file(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.upload_file(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
