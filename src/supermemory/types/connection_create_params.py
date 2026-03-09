@@ -12,6 +12,8 @@ __all__ = ["ConnectionCreateParams"]
 
 
 class ConnectionCreateParams(TypedDict, total=False):
+    container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
+
     container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
 
     document_limit: Annotated[int, PropertyInfo(alias="documentLimit")]

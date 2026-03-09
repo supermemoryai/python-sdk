@@ -40,7 +40,8 @@ class TestConnections:
     def test_method_create_with_all_params(self, client: Supermemory) -> None:
         connection = client.connections.create(
             provider="notion",
-            container_tags=["string"],
+            container_tag="containerTag",
+            container_tags=["_1K--W2kIFj1"],
             document_limit=1,
             metadata={"foo": "string"},
             redirect_url="redirectUrl",
@@ -470,7 +471,8 @@ class TestAsyncConnections:
     async def test_method_create_with_all_params(self, async_client: AsyncSupermemory) -> None:
         connection = await async_client.connections.create(
             provider="notion",
-            container_tags=["string"],
+            container_tag="containerTag",
+            container_tags=["_1K--W2kIFj1"],
             document_limit=1,
             metadata={"foo": "string"},
             redirect_url="redirectUrl",
