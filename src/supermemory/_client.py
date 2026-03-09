@@ -258,10 +258,10 @@ class Supermemory(SyncAPIClient):
               website, a PDF, an image, or a video.
 
           container_tag: Optional tag this document should be containerized by. Max 100 characters,
-              alphanumeric with hyphens and underscores only.
+              alphanumeric with hyphens, underscores, and dots only.
 
           custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
-              hyphens and underscores only.
+              hyphens, underscores, and dots only.
 
           entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
               document processing to guide memory extraction.
@@ -571,10 +571,10 @@ class AsyncSupermemory(AsyncAPIClient):
               website, a PDF, an image, or a video.
 
           container_tag: Optional tag this document should be containerized by. Max 100 characters,
-              alphanumeric with hyphens and underscores only.
+              alphanumeric with hyphens, underscores, and dots only.
 
           custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
-              hyphens and underscores only.
+              hyphens, underscores, and dots only.
 
           entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
               document processing to guide memory extraction.

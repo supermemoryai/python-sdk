@@ -21,7 +21,7 @@ class ClientAddParams(TypedDict, total=False):
     container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
     """Optional tag this document should be containerized by.
 
-    Max 100 characters, alphanumeric with hyphens and underscores only.
+    Max 100 characters, alphanumeric with hyphens, underscores, and dots only.
     """
 
     container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
@@ -29,7 +29,7 @@ class ClientAddParams(TypedDict, total=False):
     custom_id: Annotated[str, PropertyInfo(alias="customId")]
     """Optional custom ID of the document.
 
-    Max 100 characters, alphanumeric with hyphens and underscores only.
+    Max 100 characters, alphanumeric with hyphens, underscores, and dots only.
     """
 
     entity_context: Annotated[str, PropertyInfo(alias="entityContext")]

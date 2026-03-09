@@ -65,6 +65,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive", "gmail", "github", "web-crawler", "s3"],
         *,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         document_limit: int | Omit = omit,
         metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
@@ -94,6 +95,7 @@ class ConnectionsResource(SyncAPIResource):
             f"/v3/connections/{provider}",
             body=maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "document_limit": document_limit,
                     "metadata": metadata,
@@ -468,6 +470,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         provider: Literal["notion", "google-drive", "onedrive", "gmail", "github", "web-crawler", "s3"],
         *,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         document_limit: int | Omit = omit,
         metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
@@ -497,6 +500,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
             f"/v3/connections/{provider}",
             body=await async_maybe_transform(
                 {
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "document_limit": document_limit,
                     "metadata": metadata,
