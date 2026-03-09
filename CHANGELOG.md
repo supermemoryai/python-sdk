@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.28.0 (2026-03-09)
+
+Full Changelog: [v3.27.0...v3.28.0](https://github.com/supermemoryai/python-sdk/compare/v3.27.0...v3.28.0)
+
+### Features
+
+* **api:** api update ([0631be2](https://github.com/supermemoryai/python-sdk/commit/0631be2c3b7274f34b362ddc902c7f377c5ee11b))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([9b8ce06](https://github.com/supermemoryai/python-sdk/commit/9b8ce065606550ceec128b6d8e0fd15f51c3c32d))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([0f56565](https://github.com/supermemoryai/python-sdk/commit/0f5656508ff42b297ec9a47b40d06a5ffc0a1a7e))
+* update placeholder string ([f37dc85](https://github.com/supermemoryai/python-sdk/commit/f37dc85ff4113d4a8c7f1155eecd8ae90db5bb14))
+
 ## 3.27.0 (2026-02-24)
 
 Full Changelog: [v3.26.0...v3.27.0](https://github.com/supermemoryai/python-sdk/compare/v3.26.0...v3.27.0)
