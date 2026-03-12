@@ -41,7 +41,7 @@ class TestConnections:
         connection = client.connections.create(
             provider="notion",
             container_tag="containerTag",
-            container_tags=["_1K--W2kIFj1"],
+            container_tags=["_:_k--W2K_1V"],
             document_limit=1,
             metadata={"foo": "string"},
             redirect_url="redirectUrl",
@@ -481,7 +481,7 @@ class TestAsyncConnections:
         connection = await async_client.connections.create(
             provider="notion",
             container_tag="containerTag",
-            container_tags=["_1K--W2kIFj1"],
+            container_tags=["_:_k--W2K_1V"],
             document_limit=1,
             metadata={"foo": "string"},
             redirect_url="redirectUrl",
