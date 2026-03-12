@@ -14,6 +14,7 @@ from ..types import (
     connection_configure_params,
     connection_resources_params,
     connection_get_by_tag_params,
+    connection_delete_by_id_params,
     connection_list_documents_params,
     connection_delete_by_provider_params,
 )
@@ -182,6 +183,7 @@ class ConnectionsResource(SyncAPIResource):
         self,
         connection_id: str,
         *,
+        delete_documents: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,6 +195,8 @@ class ConnectionsResource(SyncAPIResource):
         Delete a specific connection by ID
 
         Args:
+          delete_documents: Whether to also delete documents imported by this connection. Defaults to true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -206,7 +210,13 @@ class ConnectionsResource(SyncAPIResource):
         return self._delete(
             f"/v3/connections/{connection_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"delete_documents": delete_documents}, connection_delete_by_id_params.ConnectionDeleteByIDParams
+                ),
             ),
             cast_to=ConnectionDeleteByIDResponse,
         )
@@ -591,6 +601,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         self,
         connection_id: str,
         *,
+        delete_documents: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -602,6 +613,8 @@ class AsyncConnectionsResource(AsyncAPIResource):
         Delete a specific connection by ID
 
         Args:
+          delete_documents: Whether to also delete documents imported by this connection. Defaults to true.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -615,7 +628,13 @@ class AsyncConnectionsResource(AsyncAPIResource):
         return await self._delete(
             f"/v3/connections/{connection_id}",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"delete_documents": delete_documents}, connection_delete_by_id_params.ConnectionDeleteByIDParams
+                ),
             ),
             cast_to=ConnectionDeleteByIDResponse,
         )
