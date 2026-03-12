@@ -57,6 +57,7 @@ class Memory(BaseModel):
         "google_sheet",
         "image",
         "video",
+        "audio",
         "notion_doc",
         "webpage",
         "onedrive",
