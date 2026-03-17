@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.29.1 (2026-03-17)
+
+Full Changelog: [v3.29.0...v3.29.1](https://github.com/supermemoryai/python-sdk/compare/v3.29.0...v3.29.1)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([40943ed](https://github.com/supermemoryai/python-sdk/commit/40943ed24ddb182222f57e6e9689c45538113245))
+* **pydantic:** do not pass `by_alias` unless set ([a6e01e5](https://github.com/supermemoryai/python-sdk/commit/a6e01e58b3a369f1921012a8264ece407dfeb4e3))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([2326f6c](https://github.com/supermemoryai/python-sdk/commit/2326f6cc5280f9af986176831833978b46cea310))
+
 ## 3.29.0 (2026-03-12)
 
 Full Changelog: [v3.28.0...v3.29.0](https://github.com/supermemoryai/python-sdk/compare/v3.28.0...v3.29.0)
