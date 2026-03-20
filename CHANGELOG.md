@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.30.1 (2026-03-20)
+
+Full Changelog: [v3.30.0...v3.30.1](https://github.com/supermemoryai/python-sdk/compare/v3.30.0...v3.30.1)
+
+### Bug Fixes
+
+* sanitize endpoint path params ([4e459b3](https://github.com/supermemoryai/python-sdk/commit/4e459b34f220bc55bc73ec8bb653fb01457c027e))
+
 ## 3.30.0 (2026-03-18)
 
 Full Changelog: [v3.29.1...v3.30.0](https://github.com/supermemoryai/python-sdk/compare/v3.29.1...v3.30.0)
