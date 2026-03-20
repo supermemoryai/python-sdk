@@ -19,7 +19,7 @@ from ..types import (
     connection_delete_by_provider_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -93,7 +93,7 @@ class ConnectionsResource(SyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return self._post(
-            f"/v3/connections/{provider}",
+            path_template("/v3/connections/{provider}", provider=provider),
             body=maybe_transform(
                 {
                     "container_tag": container_tag,
@@ -171,7 +171,7 @@ class ConnectionsResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._post(
-            f"/v3/connections/{connection_id}/configure",
+            path_template("/v3/connections/{connection_id}/configure", connection_id=connection_id),
             body=maybe_transform({"resources": resources}, connection_configure_params.ConnectionConfigureParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -208,7 +208,7 @@ class ConnectionsResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._delete(
-            f"/v3/connections/{connection_id}",
+            path_template("/v3/connections/{connection_id}", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -250,7 +250,7 @@ class ConnectionsResource(SyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return self._delete(
-            f"/v3/connections/{provider}",
+            path_template("/v3/connections/{provider}", provider=provider),
             body=maybe_transform(
                 {"container_tags": container_tags},
                 connection_delete_by_provider_params.ConnectionDeleteByProviderParams,
@@ -287,7 +287,7 @@ class ConnectionsResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._get(
-            f"/v3/connections/{connection_id}",
+            path_template("/v3/connections/{connection_id}", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -323,7 +323,7 @@ class ConnectionsResource(SyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return self._post(
-            f"/v3/connections/{provider}/connection",
+            path_template("/v3/connections/{provider}/connection", provider=provider),
             body=maybe_transform(
                 {"container_tags": container_tags}, connection_get_by_tag_params.ConnectionGetByTagParams
             ),
@@ -363,7 +363,7 @@ class ConnectionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return self._post(
-            f"/v3/connections/{provider}/import",
+            path_template("/v3/connections/{provider}/import", provider=provider),
             body=maybe_transform({"container_tags": container_tags}, connection_import_params.ConnectionImportParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -400,7 +400,7 @@ class ConnectionsResource(SyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return self._post(
-            f"/v3/connections/{provider}/documents",
+            path_template("/v3/connections/{provider}/documents", provider=provider),
             body=maybe_transform(
                 {"container_tags": container_tags}, connection_list_documents_params.ConnectionListDocumentsParams
             ),
@@ -438,7 +438,7 @@ class ConnectionsResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._get(
-            f"/v3/connections/{connection_id}/resources",
+            path_template("/v3/connections/{connection_id}/resources", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -507,7 +507,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return await self._post(
-            f"/v3/connections/{provider}",
+            path_template("/v3/connections/{provider}", provider=provider),
             body=await async_maybe_transform(
                 {
                     "container_tag": container_tag,
@@ -587,7 +587,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._post(
-            f"/v3/connections/{connection_id}/configure",
+            path_template("/v3/connections/{connection_id}/configure", connection_id=connection_id),
             body=await async_maybe_transform(
                 {"resources": resources}, connection_configure_params.ConnectionConfigureParams
             ),
@@ -626,7 +626,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._delete(
-            f"/v3/connections/{connection_id}",
+            path_template("/v3/connections/{connection_id}", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -668,7 +668,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return await self._delete(
-            f"/v3/connections/{provider}",
+            path_template("/v3/connections/{provider}", provider=provider),
             body=await async_maybe_transform(
                 {"container_tags": container_tags},
                 connection_delete_by_provider_params.ConnectionDeleteByProviderParams,
@@ -705,7 +705,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._get(
-            f"/v3/connections/{connection_id}",
+            path_template("/v3/connections/{connection_id}", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -741,7 +741,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return await self._post(
-            f"/v3/connections/{provider}/connection",
+            path_template("/v3/connections/{provider}/connection", provider=provider),
             body=await async_maybe_transform(
                 {"container_tags": container_tags}, connection_get_by_tag_params.ConnectionGetByTagParams
             ),
@@ -781,7 +781,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         extra_headers = {"Accept": "text/plain", **(extra_headers or {})}
         return await self._post(
-            f"/v3/connections/{provider}/import",
+            path_template("/v3/connections/{provider}/import", provider=provider),
             body=await async_maybe_transform(
                 {"container_tags": container_tags}, connection_import_params.ConnectionImportParams
             ),
@@ -820,7 +820,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not provider:
             raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
         return await self._post(
-            f"/v3/connections/{provider}/documents",
+            path_template("/v3/connections/{provider}/documents", provider=provider),
             body=await async_maybe_transform(
                 {"container_tags": container_tags}, connection_list_documents_params.ConnectionListDocumentsParams
             ),
@@ -858,7 +858,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._get(
-            f"/v3/connections/{connection_id}/resources",
+            path_template("/v3/connections/{connection_id}/resources", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
