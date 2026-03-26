@@ -18,6 +18,12 @@ class MemoryUpdateMemoryResponse(BaseModel):
     created_at: str = FieldInfo(alias="createdAt")
     """When this memory version was created"""
 
+    forget_after: Optional[str] = FieldInfo(alias="forgetAfter", default=None)
+    """When this memory will be auto-forgotten, or null if no expiry"""
+
+    forget_reason: Optional[str] = FieldInfo(alias="forgetReason", default=None)
+    """Reason for the scheduled forgetting, or null"""
+
     memory: str
     """The content of the new memory version"""
 

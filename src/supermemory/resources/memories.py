@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Optional
 
 import httpx
 
@@ -105,7 +105,10 @@ class MemoriesResource(SyncAPIResource):
         new_content: str,
         id: str | Omit = omit,
         content: str | Omit = omit,
+        forget_after: Optional[str] | Omit = omit,
+        forget_reason: Optional[str] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        temporal_context: memory_update_memory_params.TemporalContext | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -128,7 +131,17 @@ class MemoriesResource(SyncAPIResource):
           content: Exact content match of the memory entry to operate on. Use this when you don't
               have the ID.
 
+          forget_after: ISO 8601 datetime string. The memory will be auto-forgotten after this time.
+              Pass null to clear an existing expiry. Omit to inherit from the previous
+              version.
+
+          forget_reason: Optional reason for the scheduled forgetting. Cleared automatically when
+              forgetAfter is set to null.
+
           metadata: Optional metadata. If not provided, inherits from the previous version.
+
+          temporal_context: Structured temporal metadata. Merged into the metadata JSON column. If omitted,
+              existing temporalContext is preserved.
 
           extra_headers: Send extra headers
 
@@ -146,7 +159,10 @@ class MemoriesResource(SyncAPIResource):
                     "new_content": new_content,
                     "id": id,
                     "content": content,
+                    "forget_after": forget_after,
+                    "forget_reason": forget_reason,
                     "metadata": metadata,
+                    "temporal_context": temporal_context,
                 },
                 memory_update_memory_params.MemoryUpdateMemoryParams,
             ),
@@ -238,7 +254,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
         new_content: str,
         id: str | Omit = omit,
         content: str | Omit = omit,
+        forget_after: Optional[str] | Omit = omit,
+        forget_reason: Optional[str] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        temporal_context: memory_update_memory_params.TemporalContext | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -261,7 +280,17 @@ class AsyncMemoriesResource(AsyncAPIResource):
           content: Exact content match of the memory entry to operate on. Use this when you don't
               have the ID.
 
+          forget_after: ISO 8601 datetime string. The memory will be auto-forgotten after this time.
+              Pass null to clear an existing expiry. Omit to inherit from the previous
+              version.
+
+          forget_reason: Optional reason for the scheduled forgetting. Cleared automatically when
+              forgetAfter is set to null.
+
           metadata: Optional metadata. If not provided, inherits from the previous version.
+
+          temporal_context: Structured temporal metadata. Merged into the metadata JSON column. If omitted,
+              existing temporalContext is preserved.
 
           extra_headers: Send extra headers
 
@@ -279,7 +308,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "new_content": new_content,
                     "id": id,
                     "content": content,
+                    "forget_after": forget_after,
+                    "forget_reason": forget_reason,
                     "metadata": metadata,
+                    "temporal_context": temporal_context,
                 },
                 memory_update_memory_params.MemoryUpdateMemoryParams,
             ),
