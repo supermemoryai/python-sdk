@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.31.0 (2026-03-26)
+
+Full Changelog: [v3.30.1...v3.31.0](https://github.com/supermemoryai/python-sdk/compare/v3.30.1...v3.31.0)
+
+### Features
+
+* **api:** api update ([ef54b87](https://github.com/supermemoryai/python-sdk/commit/ef54b87aaf4a455600be3bf0cc9611d4492182a2))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([846bd47](https://github.com/supermemoryai/python-sdk/commit/846bd47ac5d76604016adca3a47bc57579b3c36c))
+* **internal:** update gitignore ([ea672c5](https://github.com/supermemoryai/python-sdk/commit/ea672c5342bda843a94cec1298f386f58a34899e))
+
 ## 3.30.1 (2026-03-20)
 
 Full Changelog: [v3.30.0...v3.30.1](https://github.com/supermemoryai/python-sdk/compare/v3.30.0...v3.30.1)
