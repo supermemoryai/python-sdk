@@ -82,7 +82,13 @@ class TestMemories:
             new_content="John now prefers light mode",
             id="mem_abc123",
             content="John prefers dark mode",
+            forget_after="2026-06-01T00:00:00Z",
+            forget_reason="temporary project deadline",
             metadata={"foo": "string"},
+            temporal_context={
+                "document_date": "documentDate",
+                "event_date": ["string"],
+            },
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 
@@ -182,7 +188,13 @@ class TestAsyncMemories:
             new_content="John now prefers light mode",
             id="mem_abc123",
             content="John prefers dark mode",
+            forget_after="2026-06-01T00:00:00Z",
+            forget_reason="temporary project deadline",
             metadata={"foo": "string"},
+            temporal_context={
+                "document_date": "documentDate",
+                "event_date": ["string"],
+            },
         )
         assert_matches_type(MemoryUpdateMemoryResponse, memory, path=["response"])
 

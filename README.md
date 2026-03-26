@@ -130,11 +130,12 @@ from supermemory import Supermemory
 
 client = Supermemory()
 
-response = client.search.memories(
-    q="machine learning concepts",
-    include={},
+response = client.memories.update_memory(
+    container_tag="user_123",
+    new_content="John now prefers light mode",
+    temporal_context={},
 )
-print(response.include)
+print(response.temporal_context)
 ```
 
 ## File uploads
