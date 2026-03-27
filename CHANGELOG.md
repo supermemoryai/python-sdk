@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.32.0 (2026-03-27)
+
+Full Changelog: [v3.31.0...v3.32.0](https://github.com/supermemoryai/python-sdk/compare/v3.31.0...v3.32.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([8439a09](https://github.com/supermemoryai/python-sdk/commit/8439a0921f38de154249b783837810f8b2e06d80))
+
 ## 3.31.0 (2026-03-26)
 
 Full Changelog: [v3.30.1...v3.31.0](https://github.com/supermemoryai/python-sdk/compare/v3.30.1...v3.31.0)
