@@ -245,6 +245,7 @@ class SearchResource(SyncAPIResource):
         self,
         *,
         q: str,
+        aggregate: bool | Omit = omit,
         container_tag: str | Omit = omit,
         filters: search_memories_params.Filters | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
@@ -265,6 +266,10 @@ class SearchResource(SyncAPIResource):
 
         Args:
           q: Search query string
+
+          aggregate: If true, aggregates information from multiple memories to create new synthesized
+              memories. The result will be a mix of aggregated and non-aggregated memories,
+              reranked by relevance to the query. Works in conjunction with reranking.
 
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
@@ -300,6 +305,7 @@ class SearchResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "q": q,
+                    "aggregate": aggregate,
                     "container_tag": container_tag,
                     "filters": filters,
                     "include": include,
@@ -538,6 +544,7 @@ class AsyncSearchResource(AsyncAPIResource):
         self,
         *,
         q: str,
+        aggregate: bool | Omit = omit,
         container_tag: str | Omit = omit,
         filters: search_memories_params.Filters | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
@@ -558,6 +565,10 @@ class AsyncSearchResource(AsyncAPIResource):
 
         Args:
           q: Search query string
+
+          aggregate: If true, aggregates information from multiple memories to create new synthesized
+              memories. The result will be a mix of aggregated and non-aggregated memories,
+              reranked by relevance to the query. Works in conjunction with reranking.
 
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
@@ -593,6 +604,7 @@ class AsyncSearchResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "q": q,
+                    "aggregate": aggregate,
                     "container_tag": container_tag,
                     "filters": filters,
                     "include": include,
