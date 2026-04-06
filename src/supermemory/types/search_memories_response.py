@@ -128,6 +128,9 @@ class Result(BaseModel):
     documents: Optional[List[ResultDocument]] = None
     """Associated documents for this memory entry"""
 
+    is_aggregated: Optional[bool] = FieldInfo(alias="isAggregated", default=None)
+    """Indicates if this memory was created by aggregating multiple source memories"""
+
     memory: Optional[str] = None
     """The memory content (only present for memory results)"""
 

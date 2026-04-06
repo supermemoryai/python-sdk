@@ -164,6 +164,7 @@ class TestSearch:
     def test_method_memories_with_all_params(self, client: Supermemory) -> None:
         search = client.search.memories(
             q="machine learning concepts",
+            aggregate=False,
             container_tag="user_123",
             filters={
                 "or_": [
@@ -367,6 +368,7 @@ class TestAsyncSearch:
     async def test_method_memories_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.memories(
             q="machine learning concepts",
+            aggregate=False,
             container_tag="user_123",
             filters={
                 "or_": [

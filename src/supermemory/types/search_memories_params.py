@@ -332,6 +332,13 @@ class SearchMemoriesParams(TypedDict, total=False):
     q: Required[str]
     """Search query string"""
 
+    aggregate: bool
+    """
+    If true, aggregates information from multiple memories to create new synthesized
+    memories. The result will be a mix of aggregated and non-aggregated memories,
+    reranked by relevance to the query. Works in conjunction with reranking.
+    """
+
     container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
     """Optional tag this search should be containerized by.
 
