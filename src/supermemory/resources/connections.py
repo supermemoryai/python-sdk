@@ -43,6 +43,8 @@ __all__ = ["ConnectionsResource", "AsyncConnectionsResource"]
 
 
 class ConnectionsResource(SyncAPIResource):
+    """External service integrations"""
+
     @cached_property
     def with_raw_response(self) -> ConnectionsResourceWithRawResponse:
         """
@@ -457,6 +459,8 @@ class ConnectionsResource(SyncAPIResource):
 
 
 class AsyncConnectionsResource(AsyncAPIResource):
+    """External service integrations"""
+
     @cached_property
     def with_raw_response(self) -> AsyncConnectionsResourceWithRawResponse:
         """

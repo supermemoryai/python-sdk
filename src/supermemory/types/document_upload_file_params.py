@@ -14,6 +14,9 @@ class DocumentUploadFileParams(TypedDict, total=False):
     file: Required[FileTypes]
     """File to upload and process"""
 
+    container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
+    """Optional container tag (e.g., 'user_123'). Use this for a single tag."""
+
     container_tags: Annotated[str, PropertyInfo(alias="containerTags")]
     """Optional container tags.
 
