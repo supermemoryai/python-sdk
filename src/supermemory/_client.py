@@ -145,12 +145,14 @@ class Supermemory(SyncAPIClient):
 
     @cached_property
     def settings(self) -> SettingsResource:
+        """Organization settings"""
         from .resources.settings import SettingsResource
 
         return SettingsResource(self)
 
     @cached_property
     def connections(self) -> ConnectionsResource:
+        """External service integrations"""
         from .resources.connections import ConnectionsResource
 
         return ConnectionsResource(self)
@@ -458,12 +460,14 @@ class AsyncSupermemory(AsyncAPIClient):
 
     @cached_property
     def settings(self) -> AsyncSettingsResource:
+        """Organization settings"""
         from .resources.settings import AsyncSettingsResource
 
         return AsyncSettingsResource(self)
 
     @cached_property
     def connections(self) -> AsyncConnectionsResource:
+        """External service integrations"""
         from .resources.connections import AsyncConnectionsResource
 
         return AsyncConnectionsResource(self)
@@ -729,12 +733,14 @@ class SupermemoryWithRawResponse:
 
     @cached_property
     def settings(self) -> settings.SettingsResourceWithRawResponse:
+        """Organization settings"""
         from .resources.settings import SettingsResourceWithRawResponse
 
         return SettingsResourceWithRawResponse(self._client.settings)
 
     @cached_property
     def connections(self) -> connections.ConnectionsResourceWithRawResponse:
+        """External service integrations"""
         from .resources.connections import ConnectionsResourceWithRawResponse
 
         return ConnectionsResourceWithRawResponse(self._client.connections)
@@ -773,12 +779,14 @@ class AsyncSupermemoryWithRawResponse:
 
     @cached_property
     def settings(self) -> settings.AsyncSettingsResourceWithRawResponse:
+        """Organization settings"""
         from .resources.settings import AsyncSettingsResourceWithRawResponse
 
         return AsyncSettingsResourceWithRawResponse(self._client.settings)
 
     @cached_property
     def connections(self) -> connections.AsyncConnectionsResourceWithRawResponse:
+        """External service integrations"""
         from .resources.connections import AsyncConnectionsResourceWithRawResponse
 
         return AsyncConnectionsResourceWithRawResponse(self._client.connections)
@@ -817,12 +825,14 @@ class SupermemoryWithStreamedResponse:
 
     @cached_property
     def settings(self) -> settings.SettingsResourceWithStreamingResponse:
+        """Organization settings"""
         from .resources.settings import SettingsResourceWithStreamingResponse
 
         return SettingsResourceWithStreamingResponse(self._client.settings)
 
     @cached_property
     def connections(self) -> connections.ConnectionsResourceWithStreamingResponse:
+        """External service integrations"""
         from .resources.connections import ConnectionsResourceWithStreamingResponse
 
         return ConnectionsResourceWithStreamingResponse(self._client.connections)
@@ -861,12 +871,14 @@ class AsyncSupermemoryWithStreamedResponse:
 
     @cached_property
     def settings(self) -> settings.AsyncSettingsResourceWithStreamingResponse:
+        """Organization settings"""
         from .resources.settings import AsyncSettingsResourceWithStreamingResponse
 
         return AsyncSettingsResourceWithStreamingResponse(self._client.settings)
 
     @cached_property
     def connections(self) -> connections.AsyncConnectionsResourceWithStreamingResponse:
+        """External service integrations"""
         from .resources.connections import AsyncConnectionsResourceWithStreamingResponse
 
         return AsyncConnectionsResourceWithStreamingResponse(self._client.connections)
