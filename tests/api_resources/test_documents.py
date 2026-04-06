@@ -426,6 +426,7 @@ class TestDocuments:
     def test_method_upload_file_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.upload_file(
             file=b"Example data",
+            container_tag="user",
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
@@ -866,6 +867,7 @@ class TestAsyncDocuments:
     async def test_method_upload_file_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.upload_file(
             file=b"Example data",
+            container_tag="user",
             container_tags='["user_123", "project_123"]',
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',

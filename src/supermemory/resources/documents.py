@@ -453,6 +453,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         file: FileTypes,
+        container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
@@ -470,6 +471,8 @@ class DocumentsResource(SyncAPIResource):
 
         Args:
           file: File to upload and process
+
+          container_tag: Optional container tag (e.g., 'user_123'). Use this for a single tag.
 
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
@@ -502,6 +505,7 @@ class DocumentsResource(SyncAPIResource):
         body = deepcopy_minimal(
             {
                 "file": file,
+                "container_tag": container_tag,
                 "container_tags": container_tags,
                 "file_type": file_type,
                 "metadata": metadata,
@@ -940,6 +944,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         file: FileTypes,
+        container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
@@ -957,6 +962,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Args:
           file: File to upload and process
+
+          container_tag: Optional container tag (e.g., 'user_123'). Use this for a single tag.
 
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
@@ -989,6 +996,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         body = deepcopy_minimal(
             {
                 "file": file,
+                "container_tag": container_tag,
                 "container_tags": container_tags,
                 "file_type": file_type,
                 "metadata": metadata,
