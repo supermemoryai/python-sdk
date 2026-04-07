@@ -127,6 +127,7 @@ class Supermemory(SyncAPIClient):
 
     @cached_property
     def memories(self) -> MemoriesResource:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import MemoriesResource
 
         return MemoriesResource(self)
@@ -442,6 +443,7 @@ class AsyncSupermemory(AsyncAPIClient):
 
     @cached_property
     def memories(self) -> AsyncMemoriesResource:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import AsyncMemoriesResource
 
         return AsyncMemoriesResource(self)
@@ -715,6 +717,7 @@ class SupermemoryWithRawResponse:
 
     @cached_property
     def memories(self) -> memories.MemoriesResourceWithRawResponse:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import MemoriesResourceWithRawResponse
 
         return MemoriesResourceWithRawResponse(self._client.memories)
@@ -761,6 +764,7 @@ class AsyncSupermemoryWithRawResponse:
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithRawResponse:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import AsyncMemoriesResourceWithRawResponse
 
         return AsyncMemoriesResourceWithRawResponse(self._client.memories)
@@ -807,6 +811,7 @@ class SupermemoryWithStreamedResponse:
 
     @cached_property
     def memories(self) -> memories.MemoriesResourceWithStreamingResponse:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import MemoriesResourceWithStreamingResponse
 
         return MemoriesResourceWithStreamingResponse(self._client.memories)
@@ -853,6 +858,7 @@ class AsyncSupermemoryWithStreamedResponse:
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithStreamingResponse:
+        """List, get, update, and delete content and memories"""
         from .resources.memories import AsyncMemoriesResourceWithStreamingResponse
 
         return AsyncMemoriesResourceWithStreamingResponse(self._client.memories)

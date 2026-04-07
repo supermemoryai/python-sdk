@@ -25,6 +25,8 @@ __all__ = ["MemoriesResource", "AsyncMemoriesResource"]
 
 
 class MemoriesResource(SyncAPIResource):
+    """List, get, update, and delete content and memories"""
+
     @cached_property
     def with_raw_response(self) -> MemoriesResourceWithRawResponse:
         """
@@ -174,6 +176,8 @@ class MemoriesResource(SyncAPIResource):
 
 
 class AsyncMemoriesResource(AsyncAPIResource):
+    """List, get, update, and delete content and memories"""
+
     @cached_property
     def with_raw_response(self) -> AsyncMemoriesResourceWithRawResponse:
         """
