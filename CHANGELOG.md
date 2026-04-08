@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.33.0 (2026-04-08)
+
+Full Changelog: [v3.32.0...v3.33.0](https://github.com/supermemoryai/python-sdk/compare/v3.32.0...v3.33.0)
+
+### Features
+
+* **api:** api update ([40f3e83](https://github.com/supermemoryai/python-sdk/commit/40f3e834d84a2e780a23642fd34d2e7d0f52f41b))
+* **api:** api update ([147ad12](https://github.com/supermemoryai/python-sdk/commit/147ad124ce89899e469450865e299e75666af0a8))
+* **api:** api update ([0eaf416](https://github.com/supermemoryai/python-sdk/commit/0eaf416665d0dfb92e0119c54c11f170e0a1fe32))
+* **api:** api update ([5e2fc3b](https://github.com/supermemoryai/python-sdk/commit/5e2fc3b3b0aabe7f506284ae5922ab0c86b2eafb))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([0e7665d](https://github.com/supermemoryai/python-sdk/commit/0e7665d7f19a5828a45566e4e39ad6664c4c2d26))
+
 ## 3.32.0 (2026-03-27)
 
 Full Changelog: [v3.31.0...v3.32.0](https://github.com/supermemoryai/python-sdk/compare/v3.31.0...v3.32.0)
