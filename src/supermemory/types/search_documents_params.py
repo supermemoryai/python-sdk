@@ -342,6 +342,9 @@ class SearchDocumentsParams(TypedDict, total=False):
     (returns lesser chunks, accurate results)
     """
 
+    container_tag: Annotated[str, PropertyInfo(alias="containerTag")]
+    """Optional single container tag. Use this or containerTags."""
+
     container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
     """Optional tags this search should be containerized by.
 

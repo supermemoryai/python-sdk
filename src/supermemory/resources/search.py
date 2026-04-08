@@ -51,6 +51,7 @@ class SearchResource(SyncAPIResource):
         q: str,
         categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
@@ -80,6 +81,8 @@ class SearchResource(SyncAPIResource):
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
               results)
 
+          container_tag: Optional single container tag. Use this or containerTags.
+
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter documents.
 
@@ -124,6 +127,7 @@ class SearchResource(SyncAPIResource):
                     "q": q,
                     "categories_filter": categories_filter,
                     "chunk_threshold": chunk_threshold,
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
@@ -149,6 +153,7 @@ class SearchResource(SyncAPIResource):
         q: str,
         categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
@@ -178,6 +183,8 @@ class SearchResource(SyncAPIResource):
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
               results)
 
+          container_tag: Optional single container tag. Use this or containerTags.
+
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter documents.
 
@@ -222,6 +229,7 @@ class SearchResource(SyncAPIResource):
                     "q": q,
                     "categories_filter": categories_filter,
                     "chunk_threshold": chunk_threshold,
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
@@ -350,6 +358,7 @@ class AsyncSearchResource(AsyncAPIResource):
         q: str,
         categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
@@ -379,6 +388,8 @@ class AsyncSearchResource(AsyncAPIResource):
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
               results)
 
+          container_tag: Optional single container tag. Use this or containerTags.
+
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter documents.
 
@@ -423,6 +434,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "q": q,
                     "categories_filter": categories_filter,
                     "chunk_threshold": chunk_threshold,
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
@@ -448,6 +460,7 @@ class AsyncSearchResource(AsyncAPIResource):
         q: str,
         categories_filter: SequenceNotStr[str] | Omit = omit,
         chunk_threshold: float | Omit = omit,
+        container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
@@ -477,6 +490,8 @@ class AsyncSearchResource(AsyncAPIResource):
               chunks, more results), 1 is most sensitive (returns lesser chunks, accurate
               results)
 
+          container_tag: Optional single container tag. Use this or containerTags.
+
           container_tags: Optional tags this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter documents.
 
@@ -521,6 +536,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "q": q,
                     "categories_filter": categories_filter,
                     "chunk_threshold": chunk_threshold,
+                    "container_tag": container_tag,
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
