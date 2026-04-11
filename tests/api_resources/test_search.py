@@ -46,8 +46,8 @@ class TestSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -112,8 +112,8 @@ class TestSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -174,8 +174,8 @@ class TestSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -252,8 +252,8 @@ class TestAsyncSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -318,8 +318,8 @@ class TestAsyncSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -380,8 +380,8 @@ class TestAsyncSearch:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]

@@ -83,8 +83,8 @@ class TestClient:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
@@ -192,8 +192,8 @@ class TestAsyncClient:
                         "key": "key",
                         "value": "value",
                         "filter_type": "metadata",
-                        "ignore_case": True,
-                        "negate": True,
+                        "ignore_case": "true",
+                        "negate": "true",
                         "numeric_operator": ">",
                     }
                 ]
