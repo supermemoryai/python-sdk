@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.33.1 (2026-04-11)
+
+Full Changelog: [v3.33.0...v3.33.1](https://github.com/supermemoryai/python-sdk/compare/v3.33.0...v3.33.1)
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([e1f2afd](https://github.com/supermemoryai/python-sdk/commit/e1f2afdd2cc08f93999cebf584a821360186feb3))
+
+
+### Documentation
+
+* improve examples ([82e512e](https://github.com/supermemoryai/python-sdk/commit/82e512e4c2698025269ab4a4c604eb344ee1f83f))
+
 ## 3.33.0 (2026-04-08)
 
 Full Changelog: [v3.32.0...v3.33.0](https://github.com/supermemoryai/python-sdk/compare/v3.32.0...v3.33.0)
