@@ -35,6 +35,7 @@ class TestClient:
             custom_id="customId",
             entity_context="entityContext",
             metadata={"foo": "string"},
+            task_type="memory",
         )
         assert_matches_type(AddResponse, client_, path=["response"])
 
@@ -144,6 +145,7 @@ class TestAsyncClient:
             custom_id="customId",
             entity_context="entityContext",
             metadata={"foo": "string"},
+            task_type="memory",
         )
         assert_matches_type(AddResponse, client, path=["response"])
 

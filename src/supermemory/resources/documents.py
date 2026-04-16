@@ -67,6 +67,7 @@ class DocumentsResource(SyncAPIResource):
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,6 +105,9 @@ class DocumentsResource(SyncAPIResource):
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -123,6 +127,7 @@ class DocumentsResource(SyncAPIResource):
                     "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_update_params.DocumentUpdateParams,
             ),
@@ -241,6 +246,7 @@ class DocumentsResource(SyncAPIResource):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -266,6 +272,9 @@ class DocumentsResource(SyncAPIResource):
 
           metadata: Optional metadata for the document.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -284,6 +293,7 @@ class DocumentsResource(SyncAPIResource):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_add_params.DocumentAddParams,
             ),
@@ -301,6 +311,7 @@ class DocumentsResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,6 +339,9 @@ class DocumentsResource(SyncAPIResource):
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -345,6 +359,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_batch_add_params.DocumentBatchAddParams,
             ),
@@ -458,6 +473,7 @@ class DocumentsResource(SyncAPIResource):
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         use_advanced_processing: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -490,6 +506,9 @@ class DocumentsResource(SyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           use_advanced_processing: DEPRECATED: This field is no longer used. Advanced PDF processing is now
               automatic with our hybrid Mistral OCR + Gemini pipeline. This parameter will be
               accepted but ignored for backwards compatibility.
@@ -510,6 +529,7 @@ class DocumentsResource(SyncAPIResource):
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,
+                "task_type": task_type,
                 "use_advanced_processing": use_advanced_processing,
             }
         )
@@ -558,6 +578,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -595,6 +616,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -614,6 +638,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "content": content,
                     "custom_id": custom_id,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_update_params.DocumentUpdateParams,
             ),
@@ -732,6 +757,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -757,6 +783,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
           metadata: Optional metadata for the document.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -775,6 +804,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_add_params.DocumentAddParams,
             ),
@@ -792,6 +822,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -819,6 +850,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
               and are case sensitive. Values can be strings, numbers, or booleans. You cannot
               nest objects.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -836,6 +870,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 document_batch_add_params.DocumentBatchAddParams,
             ),
@@ -949,6 +984,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         use_advanced_processing: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -981,6 +1017,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           mime_type: Required when fileType is 'image' or 'video'. Specifies the exact MIME type to
               use (e.g., 'image/png', 'image/jpeg', 'video/mp4', 'video/webm')
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           use_advanced_processing: DEPRECATED: This field is no longer used. Advanced PDF processing is now
               automatic with our hybrid Mistral OCR + Gemini pipeline. This parameter will be
               accepted but ignored for backwards compatibility.
@@ -1001,6 +1040,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,
+                "task_type": task_type,
                 "use_advanced_processing": use_advanced_processing,
             }
         )

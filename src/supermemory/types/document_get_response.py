@@ -69,6 +69,12 @@ class DocumentGetResponse(BaseModel):
     summary: Optional[str] = None
     """Summary of the document content"""
 
+    task_type: Literal["memory", "superrag"] = FieldInfo(alias="taskType")
+    """
+    Task type: "memory" (default) for full context layer with SuperRAG built in,
+    "superrag" for managed RAG as a service.
+    """
+
     title: Optional[str] = None
     """Title of the document"""
 
