@@ -10,4 +10,6 @@ __all__ = ["ConnectionResourcesParams"]
 class ConnectionResourcesParams(TypedDict, total=False):
     page: float
 
+    parent_id: str
+
     per_page: float
