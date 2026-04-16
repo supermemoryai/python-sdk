@@ -423,6 +423,7 @@ class TestConnections:
         connection = client.connections.resources(
             connection_id="connectionId",
             page=0,
+            parent_id="parent_id",
             per_page=0,
         )
         assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])
@@ -863,6 +864,7 @@ class TestAsyncConnections:
         connection = await async_client.connections.resources(
             connection_id="connectionId",
             page=0,
+            parent_id="parent_id",
             per_page=0,
         )
         assert_matches_type(ConnectionResourcesResponse, connection, path=["response"])

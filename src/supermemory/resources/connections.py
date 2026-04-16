@@ -417,6 +417,7 @@ class ConnectionsResource(SyncAPIResource):
         connection_id: str,
         *,
         page: float | Omit = omit,
+        parent_id: str | Omit = omit,
         per_page: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -449,6 +450,7 @@ class ConnectionsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "page": page,
+                        "parent_id": parent_id,
                         "per_page": per_page,
                     },
                     connection_resources_params.ConnectionResourcesParams,
@@ -839,6 +841,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
         connection_id: str,
         *,
         page: float | Omit = omit,
+        parent_id: str | Omit = omit,
         per_page: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -871,6 +874,7 @@ class AsyncConnectionsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "page": page,
+                        "parent_id": parent_id,
                         "per_page": per_page,
                     },
                     connection_resources_params.ConnectionResourcesParams,
