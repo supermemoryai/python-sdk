@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
@@ -52,4 +52,10 @@ class DocumentUpdateParams(TypedDict, total=False):
     this to store any additional information you need about the document. Metadata
     can be filtered through. Keys must be strings and are case sensitive. Values can
     be strings, numbers, or booleans. You cannot nest objects.
+    """
+
+    task_type: Annotated[Literal["memory", "superrag"], PropertyInfo(alias="taskType")]
+    """
+    Task type: "memory" (default) for full context layer with SuperRAG built in,
+    "superrag" for managed RAG as a service.
     """

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import FileTypes
 from .._utils import PropertyInfo
@@ -44,6 +44,12 @@ class DocumentUploadFileParams(TypedDict, total=False):
 
     Specifies the exact MIME type to use (e.g., 'image/png', 'image/jpeg',
     'video/mp4', 'video/webm')
+    """
+
+    task_type: Annotated[Literal["memory", "superrag"], PropertyInfo(alias="taskType")]
+    """
+    Task type: "memory" (default) for full context layer with SuperRAG built in,
+    "superrag" for managed RAG as a service.
     """
 
     use_advanced_processing: Annotated[str, PropertyInfo(alias="useAdvancedProcessing")]
