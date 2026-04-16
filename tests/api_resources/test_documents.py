@@ -51,6 +51,7 @@ class TestDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            task_type="memory",
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
@@ -209,6 +210,7 @@ class TestDocuments:
             custom_id="customId",
             entity_context="entityContext",
             metadata={"foo": "string"},
+            task_type="memory",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -264,6 +266,7 @@ class TestDocuments:
                         "tag_1": "ai",
                         "tag_2": "machine-learning",
                     },
+                    "task_type": "memory",
                 }
             ],
             container_tag="user_123",
@@ -277,6 +280,7 @@ class TestDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            task_type="memory",
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
@@ -431,6 +435,7 @@ class TestDocuments:
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
+            task_type="memory",
             use_advanced_processing="true",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])
@@ -492,6 +497,7 @@ class TestAsyncDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            task_type="memory",
         )
         assert_matches_type(DocumentUpdateResponse, document, path=["response"])
 
@@ -650,6 +656,7 @@ class TestAsyncDocuments:
             custom_id="customId",
             entity_context="entityContext",
             metadata={"foo": "string"},
+            task_type="memory",
         )
         assert_matches_type(DocumentAddResponse, document, path=["response"])
 
@@ -705,6 +712,7 @@ class TestAsyncDocuments:
                         "tag_1": "ai",
                         "tag_2": "machine-learning",
                     },
+                    "task_type": "memory",
                 }
             ],
             container_tag="user_123",
@@ -718,6 +726,7 @@ class TestAsyncDocuments:
                 "tag_1": "ai",
                 "tag_2": "machine-learning",
             },
+            task_type="memory",
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
@@ -872,6 +881,7 @@ class TestAsyncDocuments:
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
+            task_type="memory",
             use_advanced_processing="true",
         )
         assert_matches_type(DocumentUploadFileResponse, document, path=["response"])

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 from typing import TYPE_CHECKING, Any, Dict, Union, Mapping
-from typing_extensions import Self, override
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -246,6 +246,7 @@ class Supermemory(SyncAPIClient):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,6 +272,9 @@ class Supermemory(SyncAPIClient):
 
           metadata: Optional metadata for the document.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -289,6 +293,7 @@ class Supermemory(SyncAPIClient):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 client_add_params.ClientAddParams,
             ),
@@ -562,6 +567,7 @@ class AsyncSupermemory(AsyncAPIClient):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
+        task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -587,6 +593,9 @@ class AsyncSupermemory(AsyncAPIClient):
 
           metadata: Optional metadata for the document.
 
+          task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
+              "superrag" for managed RAG as a service.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -605,6 +614,7 @@ class AsyncSupermemory(AsyncAPIClient):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "metadata": metadata,
+                    "task_type": task_type,
                 },
                 client_add_params.ClientAddParams,
             ),

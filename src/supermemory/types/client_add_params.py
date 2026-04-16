@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
@@ -40,3 +40,9 @@ class ClientAddParams(TypedDict, total=False):
 
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document."""
+
+    task_type: Annotated[Literal["memory", "superrag"], PropertyInfo(alias="taskType")]
+    """
+    Task type: "memory" (default) for full context layer with SuperRAG built in,
+    "superrag" for managed RAG as a service.
+    """
