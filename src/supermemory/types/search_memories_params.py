@@ -346,6 +346,12 @@ class SearchMemoriesParams(TypedDict, total=False):
     to use to filter memories.
     """
 
+    filepath: str
+    """Filter search results by filepath.
+
+    Exact match for full paths, prefix match if ending with /
+    """
+
     filters: Filters
     """Optional filters to apply to the search. Can be a JSON string or Query object."""
 

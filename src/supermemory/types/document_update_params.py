@@ -45,6 +45,12 @@ class DocumentUpdateParams(TypedDict, total=False):
     document.
     """
 
+    filepath: str
+    """Optional file path for the document (e.g., '/documents/reports/file.pdf').
+
+    Used by supermemoryfs to map documents to filesystem paths.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document.
 

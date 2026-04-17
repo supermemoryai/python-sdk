@@ -30,6 +30,12 @@ class DocumentBatchAddParams(TypedDict, total=False):
 
     content: None
 
+    filepath: str
+    """Optional file path for the document (e.g., '/documents/reports/file.pdf').
+
+    Used by supermemoryfs to map documents to filesystem paths.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document.
 
@@ -78,6 +84,12 @@ class DocumentsUnionMember0(TypedDict, total=False):
 
     This could be an ID from your database that will uniquely identify this
     document.
+    """
+
+    filepath: str
+    """Optional file path for the document (e.g., '/documents/reports/file.pdf').
+
+    Used by supermemoryfs to map documents to filesystem paths.
     """
 
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
