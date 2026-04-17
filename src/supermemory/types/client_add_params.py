@@ -38,6 +38,12 @@ class ClientAddParams(TypedDict, total=False):
     Max 1500 characters. Used during document processing to guide memory extraction.
     """
 
+    filepath: str
+    """Optional file path for the document.
+
+    Used by supermemoryfs to store the full path of the file.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document."""
 

@@ -336,6 +336,12 @@ class DocumentListParams(TypedDict, total=False):
     to use to group documents.
     """
 
+    filepath: str
+    """Filter documents by filepath.
+
+    Exact match for full paths, prefix match if ending with /
+    """
+
     filters: Filters
     """Optional filters to apply to the search. Can be a JSON string or Query object."""
 

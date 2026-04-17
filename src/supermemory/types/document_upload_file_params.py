@@ -25,6 +25,12 @@ class DocumentUploadFileParams(TypedDict, total=False):
     converted to an array.
     """
 
+    filepath: str
+    """Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
+
+    Used by supermemoryfs to map documents to filesystem paths.
+    """
+
     file_type: Annotated[str, PropertyInfo(alias="fileType")]
     """Optional file type override to force specific processing behavior.
 

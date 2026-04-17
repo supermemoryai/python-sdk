@@ -34,6 +34,7 @@ class TestClient:
             container_tags=["string"],
             custom_id="customId",
             entity_context="entityContext",
+            filepath="filepath",
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -144,6 +145,7 @@ class TestAsyncClient:
             container_tags=["string"],
             custom_id="customId",
             entity_context="entityContext",
+            filepath="filepath",
             metadata={"foo": "string"},
             task_type="memory",
         )

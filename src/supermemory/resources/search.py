@@ -55,6 +55,7 @@ class SearchResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_documents_params.Filters | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
@@ -92,6 +93,9 @@ class SearchResource(SyncAPIResource):
           document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
               chunkThreshold only. This parameter will be ignored.
 
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
+
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
@@ -131,6 +135,7 @@ class SearchResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_full_docs": include_full_docs,
                     "include_summary": include_summary,
@@ -157,6 +162,7 @@ class SearchResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_execute_params.Filters | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
@@ -194,6 +200,9 @@ class SearchResource(SyncAPIResource):
           document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
               chunkThreshold only. This parameter will be ignored.
 
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
+
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
@@ -233,6 +242,7 @@ class SearchResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_full_docs": include_full_docs,
                     "include_summary": include_summary,
@@ -255,6 +265,7 @@ class SearchResource(SyncAPIResource):
         q: str,
         aggregate: bool | Omit = omit,
         container_tag: str | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_memories_params.Filters | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
         limit: int | Omit = omit,
@@ -281,6 +292,9 @@ class SearchResource(SyncAPIResource):
 
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -315,6 +329,7 @@ class SearchResource(SyncAPIResource):
                     "q": q,
                     "aggregate": aggregate,
                     "container_tag": container_tag,
+                    "filepath": filepath,
                     "filters": filters,
                     "include": include,
                     "limit": limit,
@@ -362,6 +377,7 @@ class AsyncSearchResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_documents_params.Filters | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
@@ -399,6 +415,9 @@ class AsyncSearchResource(AsyncAPIResource):
           document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
               chunkThreshold only. This parameter will be ignored.
 
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
+
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
@@ -438,6 +457,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_full_docs": include_full_docs,
                     "include_summary": include_summary,
@@ -464,6 +484,7 @@ class AsyncSearchResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         doc_id: str | Omit = omit,
         document_threshold: float | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_execute_params.Filters | Omit = omit,
         include_full_docs: bool | Omit = omit,
         include_summary: bool | Omit = omit,
@@ -501,6 +522,9 @@ class AsyncSearchResource(AsyncAPIResource):
           document_threshold: DEPRECATED: This field is no longer used in v3 search. The search now uses
               chunkThreshold only. This parameter will be ignored.
 
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
+
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
           include_full_docs: If true, include full document in the response. This is helpful if you want a
@@ -540,6 +564,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "doc_id": doc_id,
                     "document_threshold": document_threshold,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_full_docs": include_full_docs,
                     "include_summary": include_summary,
@@ -562,6 +587,7 @@ class AsyncSearchResource(AsyncAPIResource):
         q: str,
         aggregate: bool | Omit = omit,
         container_tag: str | Omit = omit,
+        filepath: str | Omit = omit,
         filters: search_memories_params.Filters | Omit = omit,
         include: search_memories_params.Include | Omit = omit,
         limit: int | Omit = omit,
@@ -588,6 +614,9 @@ class AsyncSearchResource(AsyncAPIResource):
 
           container_tag: Optional tag this search should be containerized by. This can be an ID for your
               user, a project ID, or any other identifier you wish to use to filter memories.
+
+          filepath: Filter search results by filepath. Exact match for full paths, prefix match if
+              ending with /
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -622,6 +651,7 @@ class AsyncSearchResource(AsyncAPIResource):
                     "q": q,
                     "aggregate": aggregate,
                     "container_tag": container_tag,
+                    "filepath": filepath,
                     "filters": filters,
                     "include": include,
                     "limit": limit,

@@ -128,6 +128,9 @@ class Result(BaseModel):
     documents: Optional[List[ResultDocument]] = None
     """Associated documents for this memory entry"""
 
+    filepath: Optional[str] = None
+    """Filepath of the source document this memory or chunk came from"""
+
     is_aggregated: Optional[bool] = FieldInfo(alias="isAggregated", default=None)
     """Indicates if this memory was created by aggregating multiple source memories"""
 

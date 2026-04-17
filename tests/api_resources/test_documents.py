@@ -43,6 +43,7 @@ class TestDocuments:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            filepath="/documents/reports/file.pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -100,6 +101,7 @@ class TestDocuments:
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.list(
             container_tags=["user_123", "project_123"],
+            filepath="/docs/",
             filters={
                 "and_": [
                     {
@@ -209,6 +211,7 @@ class TestDocuments:
             container_tags=["string"],
             custom_id="customId",
             entity_context="entityContext",
+            filepath="filepath",
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -258,6 +261,7 @@ class TestDocuments:
                     "container_tag": "user_123",
                     "container_tags": ["user_123", "project_123"],
                     "custom_id": "mem_abc123",
+                    "filepath": "/documents/reports/file.pdf",
                     "metadata": {
                         "category": "technology",
                         "isPublic": True,
@@ -272,6 +276,7 @@ class TestDocuments:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content=None,
+            filepath="/documents/reports/file.pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -321,6 +326,7 @@ class TestDocuments:
     def test_method_delete_bulk_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.delete_bulk(
             container_tags=["user_123", "project_123"],
+            filepath="/docs/old/",
             ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -432,6 +438,7 @@ class TestDocuments:
             file=b"Example data",
             container_tag="user",
             container_tags='["user_123", "project_123"]',
+            filepath="/documents/reports/file.pdf",
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
@@ -489,6 +496,7 @@ class TestAsyncDocuments:
             container_tags=["user_123", "project_123"],
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
+            filepath="/documents/reports/file.pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -546,6 +554,7 @@ class TestAsyncDocuments:
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list(
             container_tags=["user_123", "project_123"],
+            filepath="/docs/",
             filters={
                 "and_": [
                     {
@@ -655,6 +664,7 @@ class TestAsyncDocuments:
             container_tags=["string"],
             custom_id="customId",
             entity_context="entityContext",
+            filepath="filepath",
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -704,6 +714,7 @@ class TestAsyncDocuments:
                     "container_tag": "user_123",
                     "container_tags": ["user_123", "project_123"],
                     "custom_id": "mem_abc123",
+                    "filepath": "/documents/reports/file.pdf",
                     "metadata": {
                         "category": "technology",
                         "isPublic": True,
@@ -718,6 +729,7 @@ class TestAsyncDocuments:
             container_tag="user_123",
             container_tags=["user_123", "project_123"],
             content=None,
+            filepath="/documents/reports/file.pdf",
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -767,6 +779,7 @@ class TestAsyncDocuments:
     async def test_method_delete_bulk_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete_bulk(
             container_tags=["user_123", "project_123"],
+            filepath="/docs/old/",
             ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -878,6 +891,7 @@ class TestAsyncDocuments:
             file=b"Example data",
             container_tag="user",
             container_tags='["user_123", "project_123"]',
+            filepath="/documents/reports/file.pdf",
             file_type="image",
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",

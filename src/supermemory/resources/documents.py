@@ -66,6 +66,7 @@ class DocumentsResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -99,6 +100,9 @@ class DocumentsResource(SyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
+          filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
+              by supermemoryfs to map documents to filesystem paths.
+
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
@@ -126,6 +130,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -141,6 +146,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
+        filepath: str | Omit = omit,
         filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
@@ -161,6 +167,9 @@ class DocumentsResource(SyncAPIResource):
           container_tags: Optional tags this document should be containerized by. This can be an ID for
               your user, a project ID, or any other identifier you wish to use to group
               documents.
+
+          filepath: Filter documents by filepath. Exact match for full paths, prefix match if ending
+              with /
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -188,6 +197,7 @@ class DocumentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "container_tags": container_tags,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_content": include_content,
                     "limit": limit,
@@ -245,6 +255,7 @@ class DocumentsResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -270,6 +281,9 @@ class DocumentsResource(SyncAPIResource):
           entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
               document processing to guide memory extraction.
 
+          filepath: Optional file path for the document. Used by supermemoryfs to store the full
+              path of the file.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -292,6 +306,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "custom_id": custom_id,
                     "entity_context": entity_context,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -310,6 +325,7 @@ class DocumentsResource(SyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -332,6 +348,9 @@ class DocumentsResource(SyncAPIResource):
           container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
               containerized by. This can be an ID for your user, a project ID, or any other
               identifier you wish to use to group documents.
+
+          filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
+              by supermemoryfs to map documents to filesystem paths.
 
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
@@ -358,6 +377,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -373,6 +393,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
+        filepath: str | Omit = omit,
         ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -386,6 +407,9 @@ class DocumentsResource(SyncAPIResource):
 
         Args:
           container_tags: Array of container tags - all documents in these containers will be deleted
+
+          filepath: Delete documents matching this filepath. Exact match for full paths, prefix
+              match if ending with /
 
           ids: Array of document IDs to delete (max 100 at once)
 
@@ -402,6 +426,7 @@ class DocumentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "container_tags": container_tags,
+                    "filepath": filepath,
                     "ids": ids,
                 },
                 document_delete_bulk_params.DocumentDeleteBulkParams,
@@ -470,6 +495,7 @@ class DocumentsResource(SyncAPIResource):
         file: FileTypes,
         container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
+        filepath: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
@@ -493,6 +519,9 @@ class DocumentsResource(SyncAPIResource):
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
               strings will be automatically converted to an array.
+
+          filepath: Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
+              Used by supermemoryfs to map documents to filesystem paths.
 
           file_type:
               Optional file type override to force specific processing behavior. Valid values:
@@ -526,6 +555,7 @@ class DocumentsResource(SyncAPIResource):
                 "file": file,
                 "container_tag": container_tag,
                 "container_tags": container_tags,
+                "filepath": filepath,
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,
@@ -577,6 +607,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -610,6 +641,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           custom_id: Optional custom ID of the document. This could be an ID from your database that
               will uniquely identify this document.
 
+          filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
+              by supermemoryfs to map documents to filesystem paths.
+
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
@@ -637,6 +671,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "custom_id": custom_id,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -652,6 +687,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
+        filepath: str | Omit = omit,
         filters: document_list_params.Filters | Omit = omit,
         include_content: bool | Omit = omit,
         limit: Union[str, float] | Omit = omit,
@@ -672,6 +708,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           container_tags: Optional tags this document should be containerized by. This can be an ID for
               your user, a project ID, or any other identifier you wish to use to group
               documents.
+
+          filepath: Filter documents by filepath. Exact match for full paths, prefix match if ending
+              with /
 
           filters: Optional filters to apply to the search. Can be a JSON string or Query object.
 
@@ -699,6 +738,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "container_tags": container_tags,
+                    "filepath": filepath,
                     "filters": filters,
                     "include_content": include_content,
                     "limit": limit,
@@ -756,6 +796,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -781,6 +822,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
               document processing to guide memory extraction.
 
+          filepath: Optional file path for the document. Used by supermemoryfs to store the full
+              path of the file.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -803,6 +847,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "custom_id": custom_id,
                     "entity_context": entity_context,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -821,6 +866,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
+        filepath: str | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -843,6 +889,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
               containerized by. This can be an ID for your user, a project ID, or any other
               identifier you wish to use to group documents.
+
+          filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
+              by supermemoryfs to map documents to filesystem paths.
 
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
@@ -869,6 +918,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
+                    "filepath": filepath,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -884,6 +934,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         container_tags: SequenceNotStr[str] | Omit = omit,
+        filepath: str | Omit = omit,
         ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -897,6 +948,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Args:
           container_tags: Array of container tags - all documents in these containers will be deleted
+
+          filepath: Delete documents matching this filepath. Exact match for full paths, prefix
+              match if ending with /
 
           ids: Array of document IDs to delete (max 100 at once)
 
@@ -913,6 +967,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "container_tags": container_tags,
+                    "filepath": filepath,
                     "ids": ids,
                 },
                 document_delete_bulk_params.DocumentDeleteBulkParams,
@@ -981,6 +1036,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         file: FileTypes,
         container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
+        filepath: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
@@ -1004,6 +1060,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
               strings will be automatically converted to an array.
+
+          filepath: Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
+              Used by supermemoryfs to map documents to filesystem paths.
 
           file_type:
               Optional file type override to force specific processing behavior. Valid values:
@@ -1037,6 +1096,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "file": file,
                 "container_tag": container_tag,
                 "container_tags": container_tags,
+                "filepath": filepath,
                 "file_type": file_type,
                 "metadata": metadata,
                 "mime_type": mime_type,

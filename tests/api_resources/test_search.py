@@ -40,6 +40,7 @@ class TestSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
+            filepath="/docs/",
             filters={
                 "or_": [
                     {
@@ -106,6 +107,7 @@ class TestSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
+            filepath="/docs/",
             filters={
                 "or_": [
                     {
@@ -168,6 +170,7 @@ class TestSearch:
             q="machine learning concepts",
             aggregate=False,
             container_tag="user_123",
+            filepath="/docs/",
             filters={
                 "or_": [
                     {
@@ -246,6 +249,7 @@ class TestAsyncSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
+            filepath="/docs/",
             filters={
                 "or_": [
                     {
@@ -312,6 +316,7 @@ class TestAsyncSearch:
             container_tags=["user_123"],
             doc_id="docId",
             document_threshold=0,
+            filepath="/docs/",
             filters={
                 "or_": [
                     {
@@ -374,6 +379,7 @@ class TestAsyncSearch:
             q="machine learning concepts",
             aggregate=False,
             container_tag="user_123",
+            filepath="/docs/",
             filters={
                 "or_": [
                     {

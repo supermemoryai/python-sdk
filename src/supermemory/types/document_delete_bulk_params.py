@@ -14,5 +14,11 @@ class DocumentDeleteBulkParams(TypedDict, total=False):
     container_tags: Annotated[SequenceNotStr[str], PropertyInfo(alias="containerTags")]
     """Array of container tags - all documents in these containers will be deleted"""
 
+    filepath: str
+    """Delete documents matching this filepath.
+
+    Exact match for full paths, prefix match if ending with /
+    """
+
     ids: SequenceNotStr[str]
     """Array of document IDs to delete (max 100 at once)"""

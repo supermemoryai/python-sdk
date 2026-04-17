@@ -44,6 +44,8 @@ class DocumentGetResponse(BaseModel):
     document.
     """
 
+    filepath: Optional[str] = None
+
     metadata: Union[str, float, bool, Dict[str, object], List[object], None] = None
     """Optional metadata for the document.
 
