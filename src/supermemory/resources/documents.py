@@ -15,8 +15,9 @@ from ..types import (
     document_delete_bulk_params,
     document_upload_file_params,
 )
+from .._files import deepcopy_with_paths
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, FileTypes, SequenceNotStr, omit, not_given
-from .._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
+from .._utils import extract_files, path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -550,7 +551,7 @@ class DocumentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "file": file,
                 "container_tag": container_tag,
@@ -561,7 +562,8 @@ class DocumentsResource(SyncAPIResource):
                 "mime_type": mime_type,
                 "task_type": task_type,
                 "use_advanced_processing": use_advanced_processing,
-            }
+            },
+            [["file"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
@@ -1091,7 +1093,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "file": file,
                 "container_tag": container_tag,
@@ -1102,7 +1104,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "mime_type": mime_type,
                 "task_type": task_type,
                 "use_advanced_processing": use_advanced_processing,
-            }
+            },
+            [["file"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
