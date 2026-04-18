@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.34.0 (2026-04-18)
+
+Full Changelog: [v3.33.1...v3.34.0](https://github.com/supermemoryai/python-sdk/compare/v3.33.1...v3.34.0)
+
+### Features
+
+* **api:** api update ([5b92603](https://github.com/supermemoryai/python-sdk/commit/5b9260335ff2514491b0c41f6544872ee58485fb))
+* **api:** api update ([ab60a76](https://github.com/supermemoryai/python-sdk/commit/ab60a7657699fc974c8648adcb74a0dba9a4fe5b))
+* **api:** api update ([0950bae](https://github.com/supermemoryai/python-sdk/commit/0950bae08a126b09a2844839db673e99cfc13f75))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([421e80e](https://github.com/supermemoryai/python-sdk/commit/421e80e55548a1ea7b348683e841060c350b56e7))
+
 ## 3.33.1 (2026-04-11)
 
 Full Changelog: [v3.33.0...v3.33.1](https://github.com/supermemoryai/python-sdk/compare/v3.33.0...v3.33.1)
