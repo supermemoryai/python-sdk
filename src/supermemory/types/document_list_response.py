@@ -80,6 +80,9 @@ class Memory(BaseModel):
     content: Optional[str] = None
     """Content of the document (only included when includeContent=true)"""
 
+    url: Optional[str] = None
+    """URL of the document"""
+
 
 class Pagination(BaseModel):
     """Pagination metadata"""
