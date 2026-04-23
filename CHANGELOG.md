@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.35.0 (2026-04-23)
+
+Full Changelog: [v3.34.0...v3.35.0](https://github.com/supermemoryai/python-sdk/compare/v3.34.0...v3.35.0)
+
+### Features
+
+* **api:** api update ([3ca510b](https://github.com/supermemoryai/python-sdk/commit/3ca510b50c4577717133eed699934fde69aa29cc))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([c2e1ceb](https://github.com/supermemoryai/python-sdk/commit/c2e1ceb34f7ce104f4bf95ac356584085d520c80))
+
 ## 3.34.0 (2026-04-18)
 
 Full Changelog: [v3.33.1...v3.34.0](https://github.com/supermemoryai/python-sdk/compare/v3.33.1...v3.34.0)
