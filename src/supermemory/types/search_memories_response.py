@@ -14,6 +14,7 @@ __all__ = [
     "ResultContext",
     "ResultContextChild",
     "ResultContextParent",
+    "ResultContextRelated",
     "ResultDocument",
 ]
 
@@ -72,12 +73,30 @@ class ResultContextParent(BaseModel):
     """
 
 
+class ResultContextRelated(BaseModel):
+    memory: str
+    """The related memory content"""
+
+    relation: Literal["extends", "derives"]
+    """Relation type"""
+
+    updated_at: str = FieldInfo(alias="updatedAt")
+    """Related memory last update date"""
+
+    metadata: Optional[Dict[str, object]] = None
+    """Related memory metadata"""
+
+
 class ResultContext(BaseModel):
-    """Object containing arrays of parent and child contextual memories"""
+    """
+    Object containing version history (parents/children via updates) and related memories (extends/derives)
+    """
 
     children: Optional[List[ResultContextChild]] = None
 
     parents: Optional[List[ResultContextParent]] = None
+
+    related: Optional[List[ResultContextRelated]] = None
 
 
 class ResultDocument(BaseModel):
@@ -123,7 +142,10 @@ class Result(BaseModel):
     """Relevant chunks from associated documents (only included when chunks=true)"""
 
     context: Optional[ResultContext] = None
-    """Object containing arrays of parent and child contextual memories"""
+    """
+    Object containing version history (parents/children via updates) and related
+    memories (extends/derives)
+    """
 
     documents: Optional[List[ResultDocument]] = None
     """Associated documents for this memory entry"""
