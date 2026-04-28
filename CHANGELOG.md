@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.37.0 (2026-04-28)
+
+Full Changelog: [v3.36.0...v3.37.0](https://github.com/supermemoryai/python-sdk/compare/v3.36.0...v3.37.0)
+
+### Features
+
+* support setting headers via env ([9d86a3c](https://github.com/supermemoryai/python-sdk/commit/9d86a3c975b1656c9d32816580557207b771ae30))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([a94f7a1](https://github.com/supermemoryai/python-sdk/commit/a94f7a1c6bcae8d9d0c0b5d33b895efbcdf1a123))
+
 ## 3.36.0 (2026-04-25)
 
 Full Changelog: [v3.35.0...v3.36.0](https://github.com/supermemoryai/python-sdk/compare/v3.35.0...v3.36.0)
