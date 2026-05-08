@@ -25,6 +25,18 @@ class DocumentUploadFileParams(TypedDict, total=False):
     converted to an array.
     """
 
+    custom_id: Annotated[str, PropertyInfo(alias="customId")]
+    """Optional custom ID of the document.
+
+    Max 100 characters, alphanumeric with hyphens, underscores, and colons only.
+    """
+
+    entity_context: Annotated[str, PropertyInfo(alias="entityContext")]
+    """Optional entity context for this container tag.
+
+    Max 1500 characters. Used during document processing to guide memory extraction.
+    """
+
     filepath: str
     """Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
 
