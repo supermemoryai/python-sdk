@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.38.0 (2026-05-08)
+
+Full Changelog: [v3.37.0...v3.38.0](https://github.com/supermemoryai/python-sdk/compare/v3.37.0...v3.38.0)
+
+### Features
+
+* **api:** api update ([25be280](https://github.com/supermemoryai/python-sdk/commit/25be280240889b7ecadc3727aabdf85d614f38ec))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([1d58848](https://github.com/supermemoryai/python-sdk/commit/1d58848385ad806699a3c4ef6d40dd606e27f8b1))
+
 ## 3.37.0 (2026-04-28)
 
 Full Changelog: [v3.36.0...v3.37.0](https://github.com/supermemoryai/python-sdk/compare/v3.36.0...v3.37.0)
