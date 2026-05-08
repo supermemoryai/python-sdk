@@ -496,6 +496,8 @@ class DocumentsResource(SyncAPIResource):
         file: FileTypes,
         container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
+        custom_id: str | Omit = omit,
+        entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
@@ -520,6 +522,12 @@ class DocumentsResource(SyncAPIResource):
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
               strings will be automatically converted to an array.
+
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens, underscores, and colons only.
+
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
 
           filepath: Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
               Used by supermemoryfs to map documents to filesystem paths.
@@ -556,6 +564,8 @@ class DocumentsResource(SyncAPIResource):
                 "file": file,
                 "container_tag": container_tag,
                 "container_tags": container_tags,
+                "custom_id": custom_id,
+                "entity_context": entity_context,
                 "filepath": filepath,
                 "file_type": file_type,
                 "metadata": metadata,
@@ -1038,6 +1048,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         file: FileTypes,
         container_tag: str | Omit = omit,
         container_tags: str | Omit = omit,
+        custom_id: str | Omit = omit,
+        entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         file_type: str | Omit = omit,
         metadata: str | Omit = omit,
@@ -1062,6 +1074,12 @@ class AsyncDocumentsResource(AsyncAPIResource):
           container_tags: Optional container tags. Can be either a JSON string of an array (e.g.,
               '["user_123", "project_123"]') or a single string (e.g., 'user_123'). Single
               strings will be automatically converted to an array.
+
+          custom_id: Optional custom ID of the document. Max 100 characters, alphanumeric with
+              hyphens, underscores, and colons only.
+
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
 
           filepath: Optional file path for the uploaded file (e.g., '/documents/reports/file.pdf').
               Used by supermemoryfs to map documents to filesystem paths.
@@ -1098,6 +1116,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "file": file,
                 "container_tag": container_tag,
                 "container_tags": container_tags,
+                "custom_id": custom_id,
+                "entity_context": entity_context,
                 "filepath": filepath,
                 "file_type": file_type,
                 "metadata": metadata,
