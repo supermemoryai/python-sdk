@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.38.1 (2026-05-09)
+
+Full Changelog: [v3.38.0...v3.38.1](https://github.com/supermemoryai/python-sdk/compare/v3.38.0...v3.38.1)
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([cf16be5](https://github.com/supermemoryai/python-sdk/commit/cf16be5581f916f4de1477f0d4d8bc8782fe009d))
+
 ## 3.38.0 (2026-05-08)
 
 Full Changelog: [v3.37.0...v3.38.0](https://github.com/supermemoryai/python-sdk/compare/v3.37.0...v3.38.0)
