@@ -63,8 +63,6 @@ class DocumentGetResponse(BaseModel):
     source: Optional[str] = None
     """Source of the document"""
 
-    spatial_point: object = FieldInfo(alias="spatialPoint")
-
     status: Literal["unknown", "queued", "extracting", "chunking", "embedding", "indexing", "done", "failed"]
     """Status of the document"""
 
