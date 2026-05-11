@@ -44,6 +44,14 @@ class DocumentAddParams(TypedDict, total=False):
     Used by supermemoryfs to store the full path of the file.
     """
 
+    filter_by_metadata: Annotated[
+        Dict[str, Union[str, float, bool, SequenceNotStr[str]]], PropertyInfo(alias="filterByMetadata")
+    ]
+    """
+    Optional metadata filter to apply when pulling related memories and profile
+    during ingestion. Only memories matching these filters will be used as context.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document."""
 

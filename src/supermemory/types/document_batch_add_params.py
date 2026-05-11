@@ -36,6 +36,16 @@ class DocumentBatchAddParams(TypedDict, total=False):
     Used by supermemoryfs to map documents to filesystem paths.
     """
 
+    filter_by_metadata: Annotated[
+        Dict[str, Union[str, float, bool, SequenceNotStr[str]]], PropertyInfo(alias="filterByMetadata")
+    ]
+    """
+    Optional metadata filter scoping which existing memories are pulled as context
+    during ingestion. Scalar values match exactly (AND across keys); array values
+    match ANY (OR within key). Only memories whose source documents match this
+    filter are used as context.
+    """
+
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]
     """Optional metadata for the document.
 
@@ -90,6 +100,16 @@ class DocumentsUnionMember0(TypedDict, total=False):
     """Optional file path for the document (e.g., '/documents/reports/file.pdf').
 
     Used by supermemoryfs to map documents to filesystem paths.
+    """
+
+    filter_by_metadata: Annotated[
+        Dict[str, Union[str, float, bool, SequenceNotStr[str]]], PropertyInfo(alias="filterByMetadata")
+    ]
+    """
+    Optional metadata filter scoping which existing memories are pulled as context
+    during ingestion. Scalar values match exactly (AND across keys); array values
+    match ANY (OR within key). Only memories whose source documents match this
+    filter are used as context.
     """
 
     metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]]

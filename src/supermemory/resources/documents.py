@@ -68,6 +68,7 @@ class DocumentsResource(SyncAPIResource):
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -104,6 +105,11 @@ class DocumentsResource(SyncAPIResource):
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
 
+          filter_by_metadata: Optional metadata filter scoping which existing memories are pulled as context
+              during ingestion. Scalar values match exactly (AND across keys); array values
+              match ANY (OR within key). Only memories whose source documents match this
+              filter are used as context.
+
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
@@ -132,6 +138,7 @@ class DocumentsResource(SyncAPIResource):
                     "content": content,
                     "custom_id": custom_id,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -257,6 +264,7 @@ class DocumentsResource(SyncAPIResource):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -285,6 +293,9 @@ class DocumentsResource(SyncAPIResource):
           filepath: Optional file path for the document. Used by supermemoryfs to store the full
               path of the file.
 
+          filter_by_metadata: Optional metadata filter to apply when pulling related memories and profile
+              during ingestion. Only memories matching these filters will be used as context.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -308,6 +319,7 @@ class DocumentsResource(SyncAPIResource):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -327,6 +339,7 @@ class DocumentsResource(SyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -352,6 +365,11 @@ class DocumentsResource(SyncAPIResource):
 
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
+
+          filter_by_metadata: Optional metadata filter scoping which existing memories are pulled as context
+              during ingestion. Scalar values match exactly (AND across keys); array values
+              match ANY (OR within key). Only memories whose source documents match this
+              filter are used as context.
 
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
@@ -379,6 +397,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -500,6 +519,7 @@ class DocumentsResource(SyncAPIResource):
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         file_type: str | Omit = omit,
+        filter_by_metadata: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
@@ -537,6 +557,10 @@ class DocumentsResource(SyncAPIResource):
               text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
               notion_doc, webpage, onedrive
 
+          filter_by_metadata: Optional metadata filter as a JSON string. Scopes which existing memories are
+              pulled as context during ingestion. Scalar values match exactly (AND across
+              keys); array values match ANY (OR within key).
+
           metadata: Optional metadata for the document as a JSON string. This is used to store
               additional information about the document. Keys must be strings and values can
               be strings, numbers, or booleans.
@@ -568,6 +592,7 @@ class DocumentsResource(SyncAPIResource):
                 "entity_context": entity_context,
                 "filepath": filepath,
                 "file_type": file_type,
+                "filter_by_metadata": filter_by_metadata,
                 "metadata": metadata,
                 "mime_type": mime_type,
                 "task_type": task_type,
@@ -620,6 +645,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         content: str | Omit = omit,
         custom_id: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -656,6 +682,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
 
+          filter_by_metadata: Optional metadata filter scoping which existing memories are pulled as context
+              during ingestion. Scalar values match exactly (AND across keys); array values
+              match ANY (OR within key). Only memories whose source documents match this
+              filter are used as context.
+
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
               need about the document. Metadata can be filtered through. Keys must be strings
@@ -684,6 +715,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "content": content,
                     "custom_id": custom_id,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -809,6 +841,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -837,6 +870,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           filepath: Optional file path for the document. Used by supermemoryfs to store the full
               path of the file.
 
+          filter_by_metadata: Optional metadata filter to apply when pulling related memories and profile
+              during ingestion. Only memories matching these filters will be used as context.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -860,6 +896,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -879,6 +916,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -904,6 +942,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
+
+          filter_by_metadata: Optional metadata filter scoping which existing memories are pulled as context
+              during ingestion. Scalar values match exactly (AND across keys); array values
+              match ANY (OR within key). Only memories whose source documents match this
+              filter are used as context.
 
           metadata: Optional metadata for the document. This is used to store additional information
               about the document. You can use this to store any additional information you
@@ -931,6 +974,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tags": container_tags,
                     "content": content,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -1052,6 +1096,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         file_type: str | Omit = omit,
+        filter_by_metadata: str | Omit = omit,
         metadata: str | Omit = omit,
         mime_type: str | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
@@ -1089,6 +1134,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
               text, pdf, tweet, google_doc, google_slide, google_sheet, image, video,
               notion_doc, webpage, onedrive
 
+          filter_by_metadata: Optional metadata filter as a JSON string. Scopes which existing memories are
+              pulled as context during ingestion. Scalar values match exactly (AND across
+              keys); array values match ANY (OR within key).
+
           metadata: Optional metadata for the document as a JSON string. This is used to store
               additional information about the document. Keys must be strings and values can
               be strings, numbers, or booleans.
@@ -1120,6 +1169,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 "entity_context": entity_context,
                 "filepath": filepath,
                 "file_type": file_type,
+                "filter_by_metadata": filter_by_metadata,
                 "metadata": metadata,
                 "mime_type": mime_type,
                 "task_type": task_type,

@@ -50,6 +50,13 @@ class DocumentUploadFileParams(TypedDict, total=False):
     video, notion_doc, webpage, onedrive
     """
 
+    filter_by_metadata: Annotated[str, PropertyInfo(alias="filterByMetadata")]
+    """Optional metadata filter as a JSON string.
+
+    Scopes which existing memories are pulled as context during ingestion. Scalar
+    values match exactly (AND across keys); array values match ANY (OR within key).
+    """
+
     metadata: str
     """Optional metadata for the document as a JSON string.
 
