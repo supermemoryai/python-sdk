@@ -44,6 +44,10 @@ class TestDocuments:
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
             filepath="/documents/reports/file.pdf",
+            filter_by_metadata={
+                "department": "engineering",
+                "region": "us",
+            },
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -212,6 +216,7 @@ class TestDocuments:
             custom_id="customId",
             entity_context="entityContext",
             filepath="filepath",
+            filter_by_metadata={"foo": "string"},
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -262,6 +267,10 @@ class TestDocuments:
                     "container_tags": ["user_123", "project_123"],
                     "custom_id": "mem_abc123",
                     "filepath": "/documents/reports/file.pdf",
+                    "filter_by_metadata": {
+                        "department": "engineering",
+                        "region": "us",
+                    },
                     "metadata": {
                         "category": "technology",
                         "isPublic": True,
@@ -277,6 +286,10 @@ class TestDocuments:
             container_tags=["user_123", "project_123"],
             content=None,
             filepath="/documents/reports/file.pdf",
+            filter_by_metadata={
+                "department": "engineering",
+                "region": "us",
+            },
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -442,6 +455,7 @@ class TestDocuments:
             entity_context="This user is a software engineer who prefers concise technical documentation.",
             filepath="/documents/reports/file.pdf",
             file_type="image",
+            filter_by_metadata='{"department": "engineering"}',
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
             task_type="memory",
@@ -499,6 +513,10 @@ class TestAsyncDocuments:
             content="This is a detailed article about machine learning concepts...",
             custom_id="mem_abc123",
             filepath="/documents/reports/file.pdf",
+            filter_by_metadata={
+                "department": "engineering",
+                "region": "us",
+            },
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -667,6 +685,7 @@ class TestAsyncDocuments:
             custom_id="customId",
             entity_context="entityContext",
             filepath="filepath",
+            filter_by_metadata={"foo": "string"},
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -717,6 +736,10 @@ class TestAsyncDocuments:
                     "container_tags": ["user_123", "project_123"],
                     "custom_id": "mem_abc123",
                     "filepath": "/documents/reports/file.pdf",
+                    "filter_by_metadata": {
+                        "department": "engineering",
+                        "region": "us",
+                    },
                     "metadata": {
                         "category": "technology",
                         "isPublic": True,
@@ -732,6 +755,10 @@ class TestAsyncDocuments:
             container_tags=["user_123", "project_123"],
             content=None,
             filepath="/documents/reports/file.pdf",
+            filter_by_metadata={
+                "department": "engineering",
+                "region": "us",
+            },
             metadata={
                 "category": "technology",
                 "isPublic": True,
@@ -897,6 +924,7 @@ class TestAsyncDocuments:
             entity_context="This user is a software engineer who prefers concise technical documentation.",
             filepath="/documents/reports/file.pdf",
             file_type="image",
+            filter_by_metadata='{"department": "engineering"}',
             metadata='{"category": "technology", "isPublic": true, "readingTime": 5}',
             mime_type="mimeType",
             task_type="memory",
