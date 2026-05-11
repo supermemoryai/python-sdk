@@ -256,6 +256,7 @@ class Supermemory(SyncAPIClient):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -284,6 +285,9 @@ class Supermemory(SyncAPIClient):
           filepath: Optional file path for the document. Used by supermemoryfs to store the full
               path of the file.
 
+          filter_by_metadata: Optional metadata filter to apply when pulling related memories and profile
+              during ingestion. Only memories matching these filters will be used as context.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -307,6 +311,7 @@ class Supermemory(SyncAPIClient):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },
@@ -591,6 +596,7 @@ class AsyncSupermemory(AsyncAPIClient):
         custom_id: str | Omit = omit,
         entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
+        filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         task_type: Literal["memory", "superrag"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -619,6 +625,9 @@ class AsyncSupermemory(AsyncAPIClient):
           filepath: Optional file path for the document. Used by supermemoryfs to store the full
               path of the file.
 
+          filter_by_metadata: Optional metadata filter to apply when pulling related memories and profile
+              during ingestion. Only memories matching these filters will be used as context.
+
           metadata: Optional metadata for the document.
 
           task_type: Task type: "memory" (default) for full context layer with SuperRAG built in,
@@ -642,6 +651,7 @@ class AsyncSupermemory(AsyncAPIClient):
                     "custom_id": custom_id,
                     "entity_context": entity_context,
                     "filepath": filepath,
+                    "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
                     "task_type": task_type,
                 },

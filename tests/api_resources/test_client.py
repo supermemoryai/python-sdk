@@ -35,6 +35,7 @@ class TestClient:
             custom_id="customId",
             entity_context="entityContext",
             filepath="filepath",
+            filter_by_metadata={"foo": "string"},
             metadata={"foo": "string"},
             task_type="memory",
         )
@@ -146,6 +147,7 @@ class TestAsyncClient:
             custom_id="customId",
             entity_context="entityContext",
             filepath="filepath",
+            filter_by_metadata={"foo": "string"},
             metadata={"foo": "string"},
             task_type="memory",
         )
