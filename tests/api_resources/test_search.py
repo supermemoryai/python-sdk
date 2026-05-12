@@ -25,7 +25,7 @@ class TestSearch:
     @parametrize
     def test_method_documents(self, client: Supermemory) -> None:
         search = client.search.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchDocumentsResponse, search, path=["response"])
 
@@ -33,14 +33,14 @@ class TestSearch:
     @parametrize
     def test_method_documents_with_all_params(self, client: Supermemory) -> None:
         search = client.search.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tag="user_123",
-            container_tags=["user_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             doc_id="docId",
             document_threshold=0,
-            filepath="/docs/",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -66,7 +66,7 @@ class TestSearch:
     @parametrize
     def test_raw_response_documents(self, client: Supermemory) -> None:
         response = client.search.with_raw_response.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -78,7 +78,7 @@ class TestSearch:
     @parametrize
     def test_streaming_response_documents(self, client: Supermemory) -> None:
         with client.search.with_streaming_response.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -92,7 +92,7 @@ class TestSearch:
     @parametrize
     def test_method_execute(self, client: Supermemory) -> None:
         search = client.search.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
@@ -100,14 +100,14 @@ class TestSearch:
     @parametrize
     def test_method_execute_with_all_params(self, client: Supermemory) -> None:
         search = client.search.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tag="user_123",
-            container_tags=["user_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             doc_id="docId",
             document_threshold=0,
-            filepath="/docs/",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -133,7 +133,7 @@ class TestSearch:
     @parametrize
     def test_raw_response_execute(self, client: Supermemory) -> None:
         response = client.search.with_raw_response.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -145,7 +145,7 @@ class TestSearch:
     @parametrize
     def test_streaming_response_execute(self, client: Supermemory) -> None:
         with client.search.with_streaming_response.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -159,7 +159,7 @@ class TestSearch:
     @parametrize
     def test_method_memories(self, client: Supermemory) -> None:
         search = client.search.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchMemoriesResponse, search, path=["response"])
 
@@ -167,10 +167,10 @@ class TestSearch:
     @parametrize
     def test_method_memories_with_all_params(self, client: Supermemory) -> None:
         search = client.search.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             aggregate=False,
-            container_tag="user_123",
-            filepath="/docs/",
+            container_tag="user_alex",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -202,7 +202,7 @@ class TestSearch:
     @parametrize
     def test_raw_response_memories(self, client: Supermemory) -> None:
         response = client.search.with_raw_response.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -214,7 +214,7 @@ class TestSearch:
     @parametrize
     def test_streaming_response_memories(self, client: Supermemory) -> None:
         with client.search.with_streaming_response.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -234,7 +234,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_documents(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchDocumentsResponse, search, path=["response"])
 
@@ -242,14 +242,14 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_documents_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tag="user_123",
-            container_tags=["user_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             doc_id="docId",
             document_threshold=0,
-            filepath="/docs/",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -275,7 +275,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_raw_response_documents(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.search.with_raw_response.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -287,7 +287,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_streaming_response_documents(self, async_client: AsyncSupermemory) -> None:
         async with async_client.search.with_streaming_response.documents(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -301,7 +301,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_execute(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchExecuteResponse, search, path=["response"])
 
@@ -309,14 +309,14 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_execute_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             categories_filter=["string"],
             chunk_threshold=0.5,
-            container_tag="user_123",
-            container_tags=["user_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             doc_id="docId",
             document_threshold=0,
-            filepath="/docs/",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -342,7 +342,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_raw_response_execute(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.search.with_raw_response.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -354,7 +354,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_streaming_response_execute(self, async_client: AsyncSupermemory) -> None:
         async with async_client.search.with_streaming_response.execute(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -368,7 +368,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_memories(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
         assert_matches_type(SearchMemoriesResponse, search, path=["response"])
 
@@ -376,10 +376,10 @@ class TestAsyncSearch:
     @parametrize
     async def test_method_memories_with_all_params(self, async_client: AsyncSupermemory) -> None:
         search = await async_client.search.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
             aggregate=False,
-            container_tag="user_123",
-            filepath="/docs/",
+            container_tag="user_alex",
+            filepath="filepath",
             filters={
                 "or_": [
                     {
@@ -411,7 +411,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_raw_response_memories(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.search.with_raw_response.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         )
 
         assert response.is_closed is True
@@ -423,7 +423,7 @@ class TestAsyncSearch:
     @parametrize
     async def test_streaming_response_memories(self, async_client: AsyncSupermemory) -> None:
         async with async_client.search.with_streaming_response.memories(
-            q="machine learning concepts",
+            q="what are the API rate limits",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

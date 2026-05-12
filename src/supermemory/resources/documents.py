@@ -338,6 +338,7 @@ class DocumentsResource(SyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
+        entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
@@ -362,6 +363,9 @@ class DocumentsResource(SyncAPIResource):
           container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
               containerized by. This can be an ID for your user, a project ID, or any other
               identifier you wish to use to group documents.
+
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
 
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
@@ -396,6 +400,7 @@ class DocumentsResource(SyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
+                    "entity_context": entity_context,
                     "filepath": filepath,
                     "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
@@ -915,6 +920,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         container_tag: str | Omit = omit,
         container_tags: SequenceNotStr[str] | Omit = omit,
         content: None | Omit = omit,
+        entity_context: str | Omit = omit,
         filepath: str | Omit = omit,
         filter_by_metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
         metadata: Dict[str, Union[str, float, bool, SequenceNotStr[str]]] | Omit = omit,
@@ -939,6 +945,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
           container_tags: (DEPRECATED: Use containerTag instead) Optional tags this document should be
               containerized by. This can be an ID for your user, a project ID, or any other
               identifier you wish to use to group documents.
+
+          entity_context: Optional entity context for this container tag. Max 1500 characters. Used during
+              document processing to guide memory extraction.
 
           filepath: Optional file path for the document (e.g., '/documents/reports/file.pdf'). Used
               by supermemoryfs to map documents to filesystem paths.
@@ -973,6 +982,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "container_tag": container_tag,
                     "container_tags": container_tags,
                     "content": content,
+                    "entity_context": entity_context,
                     "filepath": filepath,
                     "filter_by_metadata": filter_by_metadata,
                     "metadata": metadata,
