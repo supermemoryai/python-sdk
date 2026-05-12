@@ -30,6 +30,12 @@ class DocumentBatchAddParams(TypedDict, total=False):
 
     content: None
 
+    entity_context: Annotated[str, PropertyInfo(alias="entityContext")]
+    """Optional entity context for this container tag.
+
+    Max 1500 characters. Used during document processing to guide memory extraction.
+    """
+
     filepath: str
     """Optional file path for the document (e.g., '/documents/reports/file.pdf').
 
@@ -94,6 +100,12 @@ class DocumentsUnionMember0(TypedDict, total=False):
 
     This could be an ID from your database that will uniquely identify this
     document.
+    """
+
+    entity_context: Annotated[str, PropertyInfo(alias="entityContext")]
+    """Optional entity context for this container tag.
+
+    Max 1500 characters. Used during document processing to guide memory extraction.
     """
 
     filepath: str
