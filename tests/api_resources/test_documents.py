@@ -39,22 +39,18 @@ class TestDocuments:
     def test_method_update_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.update(
             id="id",
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
-            content="This is a detailed article about machine learning concepts...",
-            custom_id="mem_abc123",
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
+            content="Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s.",
+            custom_id="doc-api-rate-limits",
             filepath="/documents/reports/file.pdf",
             filter_by_metadata={
                 "department": "engineering",
                 "region": "us",
             },
             metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
+                "source": "upload",
+                "language": "en",
             },
             task_type="memory",
         )
@@ -104,8 +100,8 @@ class TestDocuments:
     @parametrize
     def test_method_list_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.list(
-            container_tags=["user_123", "project_123"],
-            filepath="/docs/",
+            container_tags=["_:_k--W2K_1V"],
+            filepath="filepath",
             filters={
                 "and_": [
                     {
@@ -252,7 +248,11 @@ class TestDocuments:
     @parametrize
     def test_method_batch_add(self, client: Supermemory) -> None:
         document = client.documents.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
@@ -262,41 +262,35 @@ class TestDocuments:
         document = client.documents.batch_add(
             documents=[
                 {
-                    "content": "This is a detailed article about machine learning concepts...",
-                    "container_tag": "user_123",
-                    "container_tags": ["user_123", "project_123"],
-                    "custom_id": "mem_abc123",
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s.",
+                    "container_tag": "user_alex",
+                    "container_tags": ["_:_k--W2K_1V"],
+                    "custom_id": "doc-api-rate-limits",
+                    "entity_context": "User's name is {XYZ}",
                     "filepath": "/documents/reports/file.pdf",
                     "filter_by_metadata": {
                         "department": "engineering",
                         "region": "us",
                     },
                     "metadata": {
-                        "category": "technology",
-                        "isPublic": True,
-                        "readingTime": 5,
-                        "source": "web",
-                        "tag_1": "ai",
-                        "tag_2": "machine-learning",
+                        "source": "upload",
+                        "language": "en",
                     },
                     "task_type": "memory",
                 }
             ],
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             content=None,
+            entity_context="User's name is {XYZ}",
             filepath="/documents/reports/file.pdf",
             filter_by_metadata={
                 "department": "engineering",
                 "region": "us",
             },
             metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
+                "source": "upload",
+                "language": "en",
             },
             task_type="memory",
         )
@@ -306,7 +300,11 @@ class TestDocuments:
     @parametrize
     def test_raw_response_batch_add(self, client: Supermemory) -> None:
         response = client.documents.with_raw_response.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -318,7 +316,11 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_batch_add(self, client: Supermemory) -> None:
         with client.documents.with_streaming_response.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -338,8 +340,8 @@ class TestDocuments:
     @parametrize
     def test_method_delete_bulk_with_all_params(self, client: Supermemory) -> None:
         document = client.documents.delete_bulk(
-            container_tags=["user_123", "project_123"],
-            filepath="/docs/old/",
+            container_tags=["_:_k--W2K_1V"],
+            filepath="filepath",
             ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -450,9 +452,9 @@ class TestDocuments:
         document = client.documents.upload_file(
             file=b"Example data",
             container_tag="user",
-            container_tags='["user_123", "project_123"]',
+            container_tags="containerTags",
             custom_id="mem_abc123",
-            entity_context="This user is a software engineer who prefers concise technical documentation.",
+            entity_context="User's name is {XYZ}",
             filepath="/documents/reports/file.pdf",
             file_type="image",
             filter_by_metadata='{"department": "engineering"}',
@@ -508,22 +510,18 @@ class TestAsyncDocuments:
     async def test_method_update_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.update(
             id="id",
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
-            content="This is a detailed article about machine learning concepts...",
-            custom_id="mem_abc123",
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
+            content="Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s.",
+            custom_id="doc-api-rate-limits",
             filepath="/documents/reports/file.pdf",
             filter_by_metadata={
                 "department": "engineering",
                 "region": "us",
             },
             metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
+                "source": "upload",
+                "language": "en",
             },
             task_type="memory",
         )
@@ -573,8 +571,8 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.list(
-            container_tags=["user_123", "project_123"],
-            filepath="/docs/",
+            container_tags=["_:_k--W2K_1V"],
+            filepath="filepath",
             filters={
                 "and_": [
                     {
@@ -721,7 +719,11 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_batch_add(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         )
         assert_matches_type(DocumentBatchAddResponse, document, path=["response"])
 
@@ -731,41 +733,35 @@ class TestAsyncDocuments:
         document = await async_client.documents.batch_add(
             documents=[
                 {
-                    "content": "This is a detailed article about machine learning concepts...",
-                    "container_tag": "user_123",
-                    "container_tags": ["user_123", "project_123"],
-                    "custom_id": "mem_abc123",
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s.",
+                    "container_tag": "user_alex",
+                    "container_tags": ["_:_k--W2K_1V"],
+                    "custom_id": "doc-api-rate-limits",
+                    "entity_context": "User's name is {XYZ}",
                     "filepath": "/documents/reports/file.pdf",
                     "filter_by_metadata": {
                         "department": "engineering",
                         "region": "us",
                     },
                     "metadata": {
-                        "category": "technology",
-                        "isPublic": True,
-                        "readingTime": 5,
-                        "source": "web",
-                        "tag_1": "ai",
-                        "tag_2": "machine-learning",
+                        "source": "upload",
+                        "language": "en",
                     },
                     "task_type": "memory",
                 }
             ],
-            container_tag="user_123",
-            container_tags=["user_123", "project_123"],
+            container_tag="user_alex",
+            container_tags=["_:_k--W2K_1V"],
             content=None,
+            entity_context="User's name is {XYZ}",
             filepath="/documents/reports/file.pdf",
             filter_by_metadata={
                 "department": "engineering",
                 "region": "us",
             },
             metadata={
-                "category": "technology",
-                "isPublic": True,
-                "readingTime": 5,
-                "source": "web",
-                "tag_1": "ai",
-                "tag_2": "machine-learning",
+                "source": "upload",
+                "language": "en",
             },
             task_type="memory",
         )
@@ -775,7 +771,11 @@ class TestAsyncDocuments:
     @parametrize
     async def test_raw_response_batch_add(self, async_client: AsyncSupermemory) -> None:
         response = await async_client.documents.with_raw_response.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         )
 
         assert response.is_closed is True
@@ -787,7 +787,11 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_batch_add(self, async_client: AsyncSupermemory) -> None:
         async with async_client.documents.with_streaming_response.batch_add(
-            documents=[{"content": "This is a detailed article about machine learning concepts..."}],
+            documents=[
+                {
+                    "content": "Our API rate limits are 100 req/min on free and 1000 on pro. Clients should use exponential backoff on 429s."
+                }
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -807,8 +811,8 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_delete_bulk_with_all_params(self, async_client: AsyncSupermemory) -> None:
         document = await async_client.documents.delete_bulk(
-            container_tags=["user_123", "project_123"],
-            filepath="/docs/old/",
+            container_tags=["_:_k--W2K_1V"],
+            filepath="filepath",
             ids=["acxV5LHMEsG2hMSNb4umbn", "bxcV5LHMEsG2hMSNb4umbn"],
         )
         assert_matches_type(DocumentDeleteBulkResponse, document, path=["response"])
@@ -919,9 +923,9 @@ class TestAsyncDocuments:
         document = await async_client.documents.upload_file(
             file=b"Example data",
             container_tag="user",
-            container_tags='["user_123", "project_123"]',
+            container_tags="containerTags",
             custom_id="mem_abc123",
-            entity_context="This user is a software engineer who prefers concise technical documentation.",
+            entity_context="User's name is {XYZ}",
             filepath="/documents/reports/file.pdf",
             file_type="image",
             filter_by_metadata='{"department": "engineering"}',
