@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.42.0 (2026-05-12)
+
+Full Changelog: [v3.41.0...v3.42.0](https://github.com/supermemoryai/python-sdk/compare/v3.41.0...v3.42.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([5bb354d](https://github.com/supermemoryai/python-sdk/commit/5bb354dc5e11ef9f189fd06400b27bff1c727d39))
+
 ## 3.41.0 (2026-05-12)
 
 Full Changelog: [v3.40.0...v3.41.0](https://github.com/supermemoryai/python-sdk/compare/v3.40.0...v3.41.0)
