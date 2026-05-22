@@ -44,6 +44,8 @@ class DocumentGetResponse(BaseModel):
     document.
     """
 
+    dreaming_status: Literal["dreaming", "done"] = FieldInfo(alias="dreamingStatus")
+
     filepath: Optional[str] = None
 
     metadata: Union[str, float, bool, Dict[str, object], List[object], None] = None
