@@ -79,3 +79,35 @@ Methods:
 
 - <code title="patch /v3/settings">client.settings.<a href="./src/supermemory/resources/settings.py">update</a>(\*\*<a href="src/supermemory/types/setting_update_params.py">params</a>) -> <a href="./src/supermemory/types/setting_update_response.py">SettingUpdateResponse</a></code>
 - <code title="get /v3/settings">client.settings.<a href="./src/supermemory/resources/settings.py">get</a>() -> <a href="./src/supermemory/types/setting_get_response.py">SettingGetResponse</a></code>
+
+# Connections
+
+Types:
+
+```python
+from supermemory.types import (
+    ConnectionCreateResponse,
+    ConnectionListResponse,
+    ConnectionConfigureResponse,
+    ConnectionDeleteByIDResponse,
+    ConnectionDeleteByProviderResponse,
+    ConnectionGetByIDResponse,
+    ConnectionGetByTagResponse,
+    ConnectionImportResponse,
+    ConnectionListDocumentsResponse,
+    ConnectionResourcesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v3/connections/{provider}">client.connections.<a href="./src/supermemory/resources/connections.py">create</a>(provider, \*\*<a href="src/supermemory/types/connection_create_params.py">params</a>) -> <a href="./src/supermemory/types/connection_create_response.py">ConnectionCreateResponse</a></code>
+- <code title="post /v3/connections/list">client.connections.<a href="./src/supermemory/resources/connections.py">list</a>(\*\*<a href="src/supermemory/types/connection_list_params.py">params</a>) -> <a href="./src/supermemory/types/connection_list_response.py">ConnectionListResponse</a></code>
+- <code title="post /v3/connections/{connectionId}/configure">client.connections.<a href="./src/supermemory/resources/connections.py">configure</a>(connection_id, \*\*<a href="src/supermemory/types/connection_configure_params.py">params</a>) -> <a href="./src/supermemory/types/connection_configure_response.py">ConnectionConfigureResponse</a></code>
+- <code title="delete /v3/connections/{connectionId}">client.connections.<a href="./src/supermemory/resources/connections.py">delete_by_id</a>(connection_id, \*\*<a href="src/supermemory/types/connection_delete_by_id_params.py">params</a>) -> <a href="./src/supermemory/types/connection_delete_by_id_response.py">ConnectionDeleteByIDResponse</a></code>
+- <code title="delete /v3/connections/{provider}">client.connections.<a href="./src/supermemory/resources/connections.py">delete_by_provider</a>(provider, \*\*<a href="src/supermemory/types/connection_delete_by_provider_params.py">params</a>) -> <a href="./src/supermemory/types/connection_delete_by_provider_response.py">ConnectionDeleteByProviderResponse</a></code>
+- <code title="get /v3/connections/{connectionId}">client.connections.<a href="./src/supermemory/resources/connections.py">get_by_id</a>(connection_id) -> <a href="./src/supermemory/types/connection_get_by_id_response.py">ConnectionGetByIDResponse</a></code>
+- <code title="post /v3/connections/{provider}/connection">client.connections.<a href="./src/supermemory/resources/connections.py">get_by_tag</a>(provider, \*\*<a href="src/supermemory/types/connection_get_by_tag_params.py">params</a>) -> <a href="./src/supermemory/types/connection_get_by_tag_response.py">ConnectionGetByTagResponse</a></code>
+- <code title="post /v3/connections/{provider}/import">client.connections.<a href="./src/supermemory/resources/connections.py">import\_</a>(provider, \*\*<a href="src/supermemory/types/connection_import_params.py">params</a>) -> str</code>
+- <code title="post /v3/connections/{provider}/documents">client.connections.<a href="./src/supermemory/resources/connections.py">list_documents</a>(provider, \*\*<a href="src/supermemory/types/connection_list_documents_params.py">params</a>) -> <a href="./src/supermemory/types/connection_list_documents_response.py">ConnectionListDocumentsResponse</a></code>
+- <code title="get /v3/connections/{connectionId}/resources">client.connections.<a href="./src/supermemory/resources/connections.py">resources</a>(connection_id, \*\*<a href="src/supermemory/types/connection_resources_params.py">params</a>) -> <a href="./src/supermemory/types/connection_resources_response.py">ConnectionResourcesResponse</a></code>
