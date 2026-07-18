@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.51.0 (2026-07-18)
+
+Full Changelog: [v3.50.0...v3.51.0](https://github.com/supermemoryai/python-sdk/compare/v3.50.0...v3.51.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([2d80bfa](https://github.com/supermemoryai/python-sdk/commit/2d80bfaee6931d9a54f77d900c28d96623a4d80d))
+
 ## 3.50.0 (2026-06-24)
 
 Full Changelog: [v3.49.0...v3.50.0](https://github.com/supermemoryai/python-sdk/compare/v3.49.0...v3.50.0)
