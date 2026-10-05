@@ -4,6 +4,8 @@ import typing
 
 import httpx
 
+from supermemory._types import NOT_GIVEN, NotGiven
+
 from .. import core
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
@@ -48,7 +50,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DeleteDocumentsResult:
         """
         Permanently remove documents and their derived knowledge by document ID or caller-defined ID. Each requested ID is handled independently so successful deletions are preserved when another ID fails.
@@ -95,7 +97,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> BatchAddResult:
         """
         Build a knowledge base efficiently by ingesting up to 600 text or URL documents at once. Existing caller-defined IDs append new information using the same semantics as single-document ingestion.
@@ -153,7 +155,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Document:
         """
         Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally attach its source chunks, derived memories, or both in the same response.
@@ -208,7 +210,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DocumentRef:
         """
         Refresh an existing document without changing its stable ID. Supplied content replaces the canonical content and is reprocessed; omitted fields remain unchanged.
@@ -293,7 +295,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Transform an uploaded file into searchable knowledge and learned memory. The response returns as soon as ingestion is safely queued while extraction and memory formation continue asynchronously.
@@ -382,7 +384,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Replace an existing document with a new file while keeping its stable document ID. Content and caller metadata are overwritten, then the document is reprocessed asynchronously.
@@ -476,7 +478,7 @@ class DocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Refresh only the file-backed fields you provide. Supplying a file replaces the canonical content; omitted metadata and processing context remain unchanged.
@@ -577,7 +579,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DeleteDocumentsResult:
         """
         Permanently remove documents and their derived knowledge by document ID or caller-defined ID. Each requested ID is handled independently so successful deletions are preserved when another ID fails.
@@ -632,7 +634,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> BatchAddResult:
         """
         Build a knowledge base efficiently by ingesting up to 600 text or URL documents at once. Existing caller-defined IDs append new information using the same semantics as single-document ingestion.
@@ -698,7 +700,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Document:
         """
         Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally attach its source chunks, derived memories, or both in the same response.
@@ -761,7 +763,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DocumentRef:
         """
         Refresh an existing document without changing its stable ID. Supplied content replaces the canonical content and is reprocessed; omitted fields remain unchanged.
@@ -854,7 +856,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Transform an uploaded file into searchable knowledge and learned memory. The response returns as soon as ingestion is safely queued while extraction and memory formation continue asynchronously.
@@ -951,7 +953,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Replace an existing document with a new file while keeping its stable document ID. Content and caller metadata are overwritten, then the document is reprocessed asynchronously.
@@ -1053,7 +1055,7 @@ class AsyncDocumentsClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> FileUploadResult:
         """
         Refresh only the file-backed fields you provide. Supplying a file replaces the canonical content; omitted metadata and processing context remain unchanged.

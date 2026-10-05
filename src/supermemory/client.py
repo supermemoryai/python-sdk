@@ -6,6 +6,8 @@ import os
 import typing
 
 import httpx
+
+from supermemory._types import NOT_GIVEN, NotGiven
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.logging import LogConfig, Logger
@@ -163,7 +165,7 @@ class Supermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DocumentRef:
         """
         Turn text or a supported URL into searchable, evolving memory. Supply a new ID to create a document, or reuse an existing ID to append new information while preserving its history.
@@ -247,7 +249,7 @@ class Supermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SearchResponse:
         """
         Recall the most relevant learned context and source passages from a namespace. Hybrid search combines memories with document chunks by default, with optional query rewriting, reranking, and supporting context attachments.
@@ -326,7 +328,7 @@ class Supermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ProfileResponse:
         """
         Read a continuously maintained understanding of the subject represented by this namespace. Stable facts, evolving context, and selected custom buckets are returned together without requiring a search query.
@@ -378,7 +380,7 @@ class Supermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ListResponse:
         """
         Browse documents, source chunks, or learned memories through one predictable paginated contract. Choose the collection in the path; the other collection arrays remain empty for a stable response shape.
@@ -631,7 +633,7 @@ class AsyncSupermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> DocumentRef:
         """
         Turn text or a supported URL into searchable, evolving memory. Supply a new ID to create a document, or reuse an existing ID to append new information while preserving its history.
@@ -723,7 +725,7 @@ class AsyncSupermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> SearchResponse:
         """
         Recall the most relevant learned context and source passages from a namespace. Hybrid search combines memories with document chunks by default, with optional query rewriting, reranking, and supporting context attachments.
@@ -810,7 +812,7 @@ class AsyncSupermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ProfileResponse:
         """
         Read a continuously maintained understanding of the subject represented by this namespace. Stable facts, evolving context, and selected custom buckets are returned together without requiring a search query.
@@ -872,7 +874,7 @@ class AsyncSupermemory:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ListResponse:
         """
         Browse documents, source chunks, or learned memories through one predictable paginated contract. Choose the collection in the path; the other collection arrays remain empty for a stable response shape.

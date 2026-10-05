@@ -3,6 +3,8 @@
 import typing
 
 import httpx
+
+from supermemory._types import NOT_GIVEN, NotGiven
 from json.decoder import JSONDecodeError
 
 from ..core.api_error import ApiError
@@ -38,7 +40,7 @@ class RawMemoriesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[ForgetResult]:
         """
         Remove exact memories from normal recall while preserving their audit history. Each ID is handled independently and any missing or ineligible memory is reported without rolling back successful changes.
@@ -144,7 +146,7 @@ class RawMemoriesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[ForgetResult]:
         """
         Describe what should be forgotten in natural language, then preview or apply the matching set. Use dry-run results with the exact-ID endpoint when you need a reviewable, drift-free workflow.
@@ -258,7 +260,7 @@ class AsyncRawMemoriesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[ForgetResult]:
         """
         Remove exact memories from normal recall while preserving their audit history. Each ID is handled independently and any missing or ineligible memory is reported without rolling back successful changes.
@@ -364,7 +366,7 @@ class AsyncRawMemoriesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[ForgetResult]:
         """
         Describe what should be forgotten in natural language, then preview or apply the matching set. Use dry-run results with the exact-ID endpoint when you need a reviewable, drift-free workflow.

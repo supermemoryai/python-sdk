@@ -3,6 +3,8 @@
 import typing
 
 import httpx
+
+from supermemory._types import NOT_GIVEN, NotGiven
 from json.decoder import JSONDecodeError
 
 from ..core.api_error import ApiError
@@ -40,7 +42,7 @@ class RawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[typing.List[Namespace]]:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
@@ -120,7 +122,7 @@ class RawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[NamespaceDetails]:
         """
         Read the supporting context that helps Supermemory understand content and form better memories inside this namespace.
@@ -226,7 +228,7 @@ class RawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[NamespaceDeleted]:
         """
         Retire a namespace by permanently deleting its content, or preserve that knowledge by moving everything into another namespace first. Moves are queued and complete asynchronously.
@@ -353,7 +355,7 @@ class RawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[NamespaceDetails]:
         """
         Shape how Supermemory understands an existing namespace by updating the background context used during ingestion and memory formation.
@@ -472,7 +474,7 @@ class AsyncRawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[typing.List[Namespace]]:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
@@ -552,7 +554,7 @@ class AsyncRawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[NamespaceDetails]:
         """
         Read the supporting context that helps Supermemory understand content and form better memories inside this namespace.
@@ -658,7 +660,7 @@ class AsyncRawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[NamespaceDeleted]:
         """
         Retire a namespace by permanently deleting its content, or preserve that knowledge by moving everything into another namespace first. Moves are queued and complete asynchronously.
@@ -785,7 +787,7 @@ class AsyncRawNamespacesClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[NamespaceDetails]:
         """
         Shape how Supermemory understands an existing namespace by updating the background context used during ingestion and memory formation.

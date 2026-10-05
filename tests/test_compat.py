@@ -144,6 +144,27 @@ def test_timeout_object_is_forwarded_whole() -> None:
     assert captured[1].extensions["timeout"]["read"] == 20.0
 
 
+def test_timeout_none_disables_timeouts() -> None:
+    from supermemory import NOT_GIVEN
+
+    captured: list[httpx.Request] = []
+    off = {"connect": None, "read": None, "write": None, "pool": None}
+
+    _client(_ok(captured, [])).namespaces.list()
+    assert captured[0].extensions["timeout"] == {"connect": 5.0, "read": 60.0, "write": 60.0, "pool": 60.0}
+
+    _client(_ok(captured, []), timeout=None).namespaces.list()
+    assert captured[1].extensions["timeout"] == off
+
+    client = _client(_ok(captured, []), timeout=10.0)
+    client.namespaces.list(timeout=None)
+    assert captured[2].extensions["timeout"] == off
+    client.namespaces.list(timeout=NOT_GIVEN)
+    assert captured[3].extensions["timeout"]["read"] == 10.0
+    client.with_options(timeout=None).namespaces.list()
+    assert captured[4].extensions["timeout"] == off
+
+
 def test_read_timeout_is_retried(monkeypatch: pytest.MonkeyPatch) -> None:
     import supermemory.core.http_client as http_client
 

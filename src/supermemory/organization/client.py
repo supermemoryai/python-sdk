@@ -4,6 +4,8 @@ import typing
 
 import httpx
 
+from supermemory._types import NOT_GIVEN, NotGiven
+
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.organization import Organization
@@ -35,7 +37,7 @@ class OrganizationClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Organization:
         """
         Read the shared background that guides memory formation across the organization, together with the number of active namespaces.
@@ -70,7 +72,7 @@ class OrganizationClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Organization:
         """
         Give Supermemory organization-wide background that improves how content is interpreted across every namespace. Send null to remove the existing context.
@@ -125,7 +127,7 @@ class AsyncOrganizationClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Organization:
         """
         Read the shared background that guides memory formation across the organization, together with the number of active namespaces.
@@ -168,7 +170,7 @@ class AsyncOrganizationClient:
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
-        timeout: typing.Union[float, httpx.Timeout, None] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Organization:
         """
         Give Supermemory organization-wide background that improves how content is interpreted across every namespace. Send null to remove the existing context.

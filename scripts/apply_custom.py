@@ -34,7 +34,7 @@ PER_CALL_OPTIONS = (
     ", extra_headers: typing.Optional[typing.Mapping[str, str]] = None"
     ", extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None"
     ", extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None"
-    ", timeout: typing.Union[float, httpx.Timeout, None] = None"
+    ", timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN"
 )
 PER_CALL_NAMES = {"extra_headers", "extra_query", "extra_body", "timeout"}
 
@@ -65,6 +65,13 @@ def add_per_call_options(path: Path) -> None:
     source = "".join(lines)
     if not re.search(r"^import httpx$", source, re.M):
         source = re.sub(r"^import typing$", "import typing\n\nimport httpx", source, count=1, flags=re.M)
+    source = re.sub(
+        r"^import httpx$",
+        "import httpx\n\nfrom supermemory._types import NOT_GIVEN, NotGiven",
+        source,
+        count=1,
+        flags=re.M,
+    )
     path.write_text(source)
 
 

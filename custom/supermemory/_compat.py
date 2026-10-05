@@ -30,6 +30,7 @@ import httpx
 import pydantic
 from typing_extensions import Self
 
+from ._types import NOT_GIVEN, NotGiven
 from .client import AsyncSupermemory as _GeneratedAsyncSupermemory
 from .client import Supermemory as _GeneratedSupermemory
 from .core.api_error import ApiError
@@ -38,6 +39,8 @@ from .core.pydantic_utilities import IS_PYDANTIC_V2
 __all__ = [
     "DEFAULT_MAX_RETRIES",
     "DEFAULT_TIMEOUT",
+    "NOT_GIVEN",
+    "NotGiven",
     "APIConnectionError",
     "APIError",
     "APIResponseValidationError",
@@ -238,9 +241,9 @@ def _apply_per_call_options(kwargs: dict[str, Any], defaults: _Defaults) -> None
     extra_headers = kwargs.pop("extra_headers", None)
     extra_query = kwargs.pop("extra_query", None)
     extra_body = kwargs.pop("extra_body", None)
-    timeout = kwargs.pop("timeout", None)
+    timeout = kwargs.pop("timeout", NOT_GIVEN)
     query = {**defaults.default_query, **(extra_query or {})}
-    if not (extra_headers or query or extra_body or timeout is not None):
+    if not (extra_headers or query or extra_body or not isinstance(timeout, NotGiven)):
         return
     request_options: dict[str, Any] = dict(kwargs.get("request_options") or {})
     if extra_headers:
@@ -255,8 +258,9 @@ def _apply_per_call_options(kwargs: dict[str, Any], defaults: _Defaults) -> None
             **extra_body,
             **request_options.get("additional_body_parameters", {}),
         }
-    if timeout is not None:
-        request_options["timeout"] = timeout  # httpx.Timeout keeps connect/write/pool; Fern just forwards it
+    if not isinstance(timeout, NotGiven):
+        # httpx.Timeout keeps connect/write/pool; Fern just forwards it. None disables timeouts, as in 3.x.
+        request_options["timeout"] = httpx.Timeout(None) if timeout is None else timeout
     kwargs["request_options"] = request_options
 
 
@@ -347,14 +351,12 @@ def _resolve(api_key: str | None, base_url: str | httpx.URL | None) -> tuple[str
     return api_key, str(base_url or "https://api.supermemory.ai").rstrip("/")
 
 
-def _resolve_timeout(timeout: float | httpx.Timeout | None) -> httpx.Timeout:
-    return (
-        timeout
-        if isinstance(timeout, httpx.Timeout)
-        else httpx.Timeout(timeout)
-        if timeout is not None
-        else DEFAULT_TIMEOUT
-    )
+def _resolve_timeout(timeout: float | httpx.Timeout | None | NotGiven) -> httpx.Timeout:
+    if isinstance(timeout, NotGiven):
+        return DEFAULT_TIMEOUT
+    if timeout is None:
+        return httpx.Timeout(None)  # 3.x: explicit None disables timeouts
+    return timeout if isinstance(timeout, httpx.Timeout) else httpx.Timeout(timeout)
 
 
 def _add_hook(client: httpx.Client | httpx.AsyncClient, hook: Callable[..., Any]) -> None:
@@ -375,7 +377,7 @@ class Supermemory(_GeneratedSupermemory):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | httpx.Timeout | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -460,7 +462,7 @@ class AsyncSupermemory(_GeneratedAsyncSupermemory):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | httpx.Timeout | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
