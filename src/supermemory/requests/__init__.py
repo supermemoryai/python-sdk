@@ -75,7 +75,9 @@ if typing.TYPE_CHECKING:
     from .memory_system import MemorySystemParams
     from .metadata_value import MetadataValueParams
     from .namespace import NamespaceParams
-    from .namespace_deleted import NamespaceDeletedParams
+    from .namespace_deleted import NamespaceDeletedParams, NamespaceDeleted_DeletedParams, NamespaceDeleted_QueuedParams
+    from .namespace_deleted_deleted import NamespaceDeletedDeletedParams
+    from .namespace_deleted_queued import NamespaceDeletedQueuedParams
     from .namespace_details import NamespaceDetailsParams
     from .namespace_system import NamespaceSystemParams
     from .organization import OrganizationParams
@@ -165,7 +167,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MemoryParams": ".memory",
     "MemorySystemParams": ".memory_system",
     "MetadataValueParams": ".metadata_value",
+    "NamespaceDeletedDeletedParams": ".namespace_deleted_deleted",
     "NamespaceDeletedParams": ".namespace_deleted",
+    "NamespaceDeletedQueuedParams": ".namespace_deleted_queued",
+    "NamespaceDeleted_DeletedParams": ".namespace_deleted",
+    "NamespaceDeleted_QueuedParams": ".namespace_deleted",
     "NamespaceDetailsParams": ".namespace_details",
     "NamespaceParams": ".namespace",
     "NamespaceSystemParams": ".namespace_system",
@@ -280,7 +286,11 @@ __all__ = [
     "MemoryParams",
     "MemorySystemParams",
     "MetadataValueParams",
+    "NamespaceDeletedDeletedParams",
     "NamespaceDeletedParams",
+    "NamespaceDeletedQueuedParams",
+    "NamespaceDeleted_DeletedParams",
+    "NamespaceDeleted_QueuedParams",
     "NamespaceDetailsParams",
     "NamespaceParams",
     "NamespaceSystemParams",

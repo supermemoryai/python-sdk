@@ -2213,7 +2213,7 @@ client.connectors.delete(
 <dl>
 <dd>
 
-**delete_documents:** `typing.Optional[DeleteConnectorsRequestDeleteDocuments]` — Also delete documents this connector imported. Defaults to true.
+**delete_documents:** `typing.Optional[bool]` — Also delete documents this connector imported. Defaults to true.
     
 </dd>
 </dl>
