@@ -33,7 +33,6 @@ from ..types.connector_provider import ConnectorProvider
 from ..types.connector_setup_result import ConnectorSetupResult
 from ..types.connector_sync_started import ConnectorSyncStarted
 from ..types.error_response import ErrorResponse
-from .types.delete_connectors_request_delete_documents import DeleteConnectorsRequestDeleteDocuments
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -514,7 +513,7 @@ class RawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        delete_documents: typing.Optional[DeleteConnectorsRequestDeleteDocuments] = None,
+        delete_documents: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -532,7 +531,7 @@ class RawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        delete_documents : typing.Optional[DeleteConnectorsRequestDeleteDocuments]
+        delete_documents : typing.Optional[bool]
             Also delete documents this connector imported. Defaults to true.
 
         request_options : typing.Optional[RequestOptions]
@@ -1369,7 +1368,7 @@ class AsyncRawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        delete_documents: typing.Optional[DeleteConnectorsRequestDeleteDocuments] = None,
+        delete_documents: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1387,7 +1386,7 @@ class AsyncRawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        delete_documents : typing.Optional[DeleteConnectorsRequestDeleteDocuments]
+        delete_documents : typing.Optional[bool]
             Also delete documents this connector imported. Defaults to true.
 
         request_options : typing.Optional[RequestOptions]
