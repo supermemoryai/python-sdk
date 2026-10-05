@@ -127,7 +127,6 @@ if typing.TYPE_CHECKING:
     )
     from . import connectors, documents, memories, namespaces, organization, profiles
     from ._default_clients import DefaultAioHttpClient, DefaultAsyncHttpxClient
-    from .connectors import DeleteConnectorsRequestDeleteDocuments
     from .environment import SupermemoryEnvironment
     from .requests import (
         BadRequestErrorBodyParams,
@@ -301,7 +300,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorSyncTrigger": ".types",
     "DefaultAioHttpClient": "._default_clients",
     "DefaultAsyncHttpxClient": "._default_clients",
-    "DeleteConnectorsRequestDeleteDocuments": ".connectors",
     "DeleteDocumentError": ".types",
     "DeleteDocumentErrorParams": ".requests",
     "DeleteDocumentsResult": ".types",
@@ -544,7 +542,6 @@ __all__ = [
     "ConnectorSyncTrigger",
     "DefaultAioHttpClient",
     "DefaultAsyncHttpxClient",
-    "DeleteConnectorsRequestDeleteDocuments",
     "DeleteDocumentError",
     "DeleteDocumentErrorParams",
     "DeleteDocumentsResult",
