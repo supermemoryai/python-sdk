@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Regenerate src/supermemory from the live v5 OpenAPI spec.
+#
+#   scripts/generate            # fetch the latest spec, then generate
+#   SKIP_FETCH=1 scripts/generate   # regenerate from the committed fern/openapi.json
+#
+# Requires Docker (Fern runs its Python generator as a container), bun, and uv.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+SPEC_URL="${SUPERMEMORY_OPENAPI_URL:-https://api.supermemory.ai/v5/openapi}"
+FERN_VERSION=$(python3 -c 'import json; print(json.load(open("fern/fern.config.json"))["version"])')
+SDK_VERSION=$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+
+docker info >/dev/null 2>&1 || { echo "error: a running Docker daemon is required" >&2; exit 1; }
+
+if [ -z "${SKIP_FETCH:-}" ]; then
+  echo "==> Fetching $SPEC_URL"
+  curl -fsSL "$SPEC_URL" | python3 -c 'import json,sys; json.dump(json.load(sys.stdin), sys.stdout, indent=2); print()' > fern/openapi.json
+fi
+
+# Name the spec's inline schemas (fern/schemas.yaml) in a copy Fern reads.
+python3 scripts/name_schemas.py fern/openapi.json fern/openapi.sdk.json
+
+echo "==> Generating supermemory $SDK_VERSION with fern-api@$FERN_VERSION"
+FERN_NO_VERSION_REDIRECTION=true bunx "fern-api@$FERN_VERSION" generate \
+  --local --group python-sdk --version "$SDK_VERSION" --force 2>&1 | tee .fern-generate.log
+# fern exits 0 on some generator failures; treat any reported error as fatal.
+if grep -qE "Unexpected error|Failed|CliError" .fern-generate.log || [ ! -f src/supermemory/client.py ]; then
+  rm -f .fern-generate.log
+  echo "error: Fern generation failed" >&2
+  exit 1
+fi
+rm -f .fern-generate.log
+
+# Fern writes repo-level docs, its own tests, and run metadata (which embeds the
+# git commit, so it would never diff clean) inside the package directory.
+mv src/supermemory/reference.md reference.md
+rm -rf src/supermemory/README.md src/supermemory/CONTRIBUTING.md src/supermemory/tests src/supermemory/.fern
+touch src/supermemory/py.typed
+
+# Hand-written code (custom/) on top of the generated package.
+python3 scripts/apply_custom.py
+
+# Re-format after the edits above (pinned, so output is reproducible).
+uvx --quiet "ruff==0.16.10" format --quiet --isolated --line-length 120 src/supermemory
+
+echo "==> Done. Review with: git diff --stat"
