@@ -1777,7 +1777,7 @@ client.memories.forget_matching(
 </details>
 
 ## Connectors
-<details><summary><code>client.connectors.<a href="src/supermemory/connectors/client.py">list_providers</a>(...) -> ConnectorList</code></summary>
+<details><summary><code>client.connectors.<a href="src/supermemory/connectors/client.py">list_all</a>(...) -> ConnectorList</code></summary>
 <dl>
 <dd>
 
@@ -1812,7 +1812,7 @@ client = Supermemory(
     environment=SupermemoryEnvironment.DEFAULT,
 )
 
-client.connectors.list_providers()
+client.connectors.list_all()
 
 ```
 </dd>

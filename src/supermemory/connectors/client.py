@@ -36,7 +36,7 @@ class ConnectorsClient:
         """
         return self._raw_client
 
-    def list_providers(
+    def list_all(
         self,
         *,
         provider: typing.Optional[ConnectorProvider] = None,
@@ -77,9 +77,9 @@ class ConnectorsClient:
         client = Supermemory(
             api_key="YOUR_API_KEY",
         )
-        client.connectors.list_providers()
+        client.connectors.list_all()
         """
-        _response = self._raw_client.list_providers(
+        _response = self._raw_client.list_all(
             provider=provider, page=page, limit=limit, request_options=request_options
         )
         return _response.data
@@ -404,7 +404,7 @@ class AsyncConnectorsClient:
         """
         return self._raw_client
 
-    async def list_providers(
+    async def list_all(
         self,
         *,
         provider: typing.Optional[ConnectorProvider] = None,
@@ -450,12 +450,12 @@ class AsyncConnectorsClient:
 
 
         async def main() -> None:
-            await client.connectors.list_providers()
+            await client.connectors.list_all()
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list_providers(
+        _response = await self._raw_client.list_all(
             provider=provider, page=page, limit=limit, request_options=request_options
         )
         return _response.data

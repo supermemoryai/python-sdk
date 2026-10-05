@@ -60,7 +60,7 @@ Install `supermemory[aiohttp]` to use aiohttp as the async transport.
 | `client.documents.{get, update, delete, batch_add, upload_file, replace_with_file, update_file}` | `/ns/{namespace}/document…` |
 | `client.memories.{forget, forget_matching}` | `/ns/{namespace}/memories…` |
 | `client.profiles.{get_buckets, set_buckets, delete_buckets}` | `/ns/{namespace}/profile/buckets` |
-| `client.connectors.{list_providers, list, create, get, update, delete, sync}` | `/connectors`, `/ns/{namespace}/connectors…` |
+| `client.connectors.{list_all, list, create, get, update, delete, sync}` | `/connectors`, `/ns/{namespace}/connectors…` |
 | `client.namespaces.{list, get, update, delete}` | `/ns`, `/ns/{namespace}` |
 | `client.organization.{get, update}` | `/organization` |
 

@@ -44,7 +44,7 @@ Only the API methods change. Everything around them works as before:
 | `client.memories.forget(...)` | `client.memories.forget(namespace, ids=[...])` |
 | — | `client.memories.forget_matching(...)` |
 | — | `client.profiles.{get_buckets, set_buckets, delete_buckets}` |
-| `client.connections.*` | `client.connectors.{list_providers, list, create, get, update, delete, sync}` |
+| `client.connections.*` | `client.connectors.{list_all, list, create, get, update, delete, sync}` |
 | container tag management | `client.namespaces.{list, get, update, delete}` |
 | `client.settings.{get, update}` | `client.organization.{get, update}` |
 
