@@ -92,7 +92,9 @@ if typing.TYPE_CHECKING:
     from .memory_system import MemorySystem
     from .metadata_value import MetadataValue
     from .namespace import Namespace
-    from .namespace_deleted import NamespaceDeleted
+    from .namespace_deleted import NamespaceDeleted, NamespaceDeleted_Deleted, NamespaceDeleted_Queued
+    from .namespace_deleted_deleted import NamespaceDeletedDeleted
+    from .namespace_deleted_queued import NamespaceDeletedQueued
     from .namespace_details import NamespaceDetails
     from .namespace_system import NamespaceSystem
     from .organization import Organization
@@ -205,6 +207,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MetadataValue": ".metadata_value",
     "Namespace": ".namespace",
     "NamespaceDeleted": ".namespace_deleted",
+    "NamespaceDeletedDeleted": ".namespace_deleted_deleted",
+    "NamespaceDeletedQueued": ".namespace_deleted_queued",
+    "NamespaceDeleted_Deleted": ".namespace_deleted",
+    "NamespaceDeleted_Queued": ".namespace_deleted",
     "NamespaceDetails": ".namespace_details",
     "NamespaceSystem": ".namespace_system",
     "Organization": ".organization",
@@ -341,6 +347,10 @@ __all__ = [
     "MetadataValue",
     "Namespace",
     "NamespaceDeleted",
+    "NamespaceDeletedDeleted",
+    "NamespaceDeletedQueued",
+    "NamespaceDeleted_Deleted",
+    "NamespaceDeleted_Queued",
     "NamespaceDetails",
     "NamespaceSystem",
     "Organization",
