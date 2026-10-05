@@ -392,7 +392,7 @@ class HttpClient:
                 files=request_files,
                 timeout=timeout,
             )
-        except (httpx.ConnectError, httpx.RemoteProtocolError):
+        except (httpx.ConnectError, httpx.RemoteProtocolError, httpx.TimeoutException):
             if retries < max_retries:
                 time.sleep(_retry_timeout_from_retries(retries=retries))
                 return self.request(
@@ -690,7 +690,7 @@ class AsyncHttpClient:
                 files=request_files,
                 timeout=timeout,
             )
-        except (httpx.ConnectError, httpx.RemoteProtocolError):
+        except (httpx.ConnectError, httpx.RemoteProtocolError, httpx.TimeoutException):
             if retries < max_retries:
                 await asyncio.sleep(_retry_timeout_from_retries(retries=retries))
                 return await self.request(

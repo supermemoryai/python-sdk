@@ -133,6 +133,34 @@ def test_timeout_error() -> None:
     assert exc.value.request is not None
 
 
+def test_timeout_object_is_forwarded_whole() -> None:
+    captured: list[httpx.Request] = []
+    client = _client(_ok(captured, []), timeout=httpx.Timeout(10.0, connect=2.5))
+    client.namespaces.list()
+    assert captured[0].extensions["timeout"] == {"connect": 2.5, "read": 10.0, "write": 10.0, "pool": 10.0}
+
+    client.namespaces.list(timeout=httpx.Timeout(20.0, connect=1.0))
+    assert captured[1].extensions["timeout"]["connect"] == 1.0
+    assert captured[1].extensions["timeout"]["read"] == 20.0
+
+
+def test_read_timeout_is_retried(monkeypatch: pytest.MonkeyPatch) -> None:
+    import supermemory.core.http_client as http_client
+
+    monkeypatch.setattr(http_client.time, "sleep", lambda _: None)
+    calls = 0
+
+    def handle(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise httpx.ReadTimeout("slow", request=request)
+        return httpx.Response(200, json=[])
+
+    assert _client(handle, max_retries=2).namespaces.list() == []
+    assert calls == 2
+
+
 def test_connection_error() -> None:
     def handle(request: httpx.Request) -> httpx.Response:
         raise httpx.ConnectError("refused", request=request)

@@ -256,7 +256,7 @@ def _apply_per_call_options(kwargs: dict[str, Any], defaults: _Defaults) -> None
             **request_options.get("additional_body_parameters", {}),
         }
     if timeout is not None:
-        request_options["timeout"] = timeout.read if isinstance(timeout, httpx.Timeout) else timeout
+        request_options["timeout"] = timeout  # httpx.Timeout keeps connect/write/pool; Fern just forwards it
     kwargs["request_options"] = request_options
 
 
@@ -404,7 +404,7 @@ class Supermemory(_GeneratedSupermemory):
         super().__init__(
             api_key=self.api_key,
             base_url=self.base_url,
-            timeout=self.timeout.read,
+            timeout=cast(float, self.timeout),  # whole httpx.Timeout, forwarded as-is
             max_retries=max_retries,
             headers=headers,
             httpx_client=self._http_client,
@@ -489,7 +489,7 @@ class AsyncSupermemory(_GeneratedAsyncSupermemory):
         super().__init__(
             api_key=self.api_key,
             base_url=self.base_url,
-            timeout=self.timeout.read,
+            timeout=cast(float, self.timeout),  # whole httpx.Timeout, forwarded as-is
             max_retries=max_retries,
             headers=headers,
             httpx_client=self._http_client,
