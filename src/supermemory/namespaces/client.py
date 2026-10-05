@@ -134,7 +134,7 @@ class NamespacesClient:
         Returns
         -------
         NamespaceDeleted
-            Namespace permanently deleted
+            Namespace permanently deleted (status "deleted"). A move answers 202 with status "queued".
 
         Examples
         --------
@@ -330,7 +330,7 @@ class AsyncNamespacesClient:
         Returns
         -------
         NamespaceDeleted
-            Namespace permanently deleted
+            Namespace permanently deleted (status "deleted"). A move answers 202 with status "queued".
 
         Examples
         --------

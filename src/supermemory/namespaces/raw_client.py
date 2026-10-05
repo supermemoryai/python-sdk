@@ -247,7 +247,7 @@ class RawNamespacesClient:
         Returns
         -------
         HttpResponse[NamespaceDeleted]
-            Namespace permanently deleted
+            Namespace permanently deleted (status "deleted"). A move answers 202 with status "queued".
         """
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}",
@@ -679,7 +679,7 @@ class AsyncRawNamespacesClient:
         Returns
         -------
         AsyncHttpResponse[NamespaceDeleted]
-            Namespace permanently deleted
+            Namespace permanently deleted (status "deleted"). A move answers 202 with status "queued".
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}",
