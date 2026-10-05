@@ -1,31 +1,50 @@
-# This workflow is triggered when a GitHub release is created.
-# It can also be run manually to re-publish to PyPI in case it failed for some reason.
-# You can run this workflow by navigating to https://www.github.com/supermemoryai/python-sdk/actions/workflows/publish-pypi.yml
-name: Publish PyPI
+name: Publish to PyPI
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
-  release:
-    types: [published]
+permissions:
+  contents: write # tag + GitHub release
 
 jobs:
   publish:
-    name: publish
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
 
-      - name: Install Rye
+      # Merges that don't bump the version (docs, CI tweaks) are no-ops.
+      - name: Check version
+        id: meta
         run: |
-          curl -sSf https://rye.astral.sh/get | bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
-        env:
-          RYE_VERSION: '0.44.0'
-          RYE_INSTALL_OPTION: '--yes'
+          VERSION=$(grep -m1 '^version' pyproject.toml | cut -d'"' -f2)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if curl -fsS "https://pypi.org/pypi/supermemory/$VERSION/json" >/dev/null 2>&1; then
+            echo "supermemory $VERSION is already on PyPI — skipping."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Publish to PyPI
-        run: |
-          bash ./bin/publish-pypi
+      - if: steps.meta.outputs.publish == 'true'
+        run: uv run --group dev pytest -q
+
+      - if: steps.meta.outputs.publish == 'true'
+        run: uv build
+
+      - name: Publish ${{ steps.meta.outputs.version }}
+        if: steps.meta.outputs.publish == 'true'
+        run: uv publish
         env:
-          PYPI_TOKEN: ${{ secrets.SUPERMEMORY_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+          UV_PUBLISH_TOKEN: ${{ secrets.SUPERMEMORY_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+
+      - name: Tag and release
+        if: steps.meta.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          flags=(--target "$GITHUB_SHA" --generate-notes)
+          [[ "$VERSION" =~ (a|b|rc|dev)[0-9]+$ ]] && flags+=(--prerelease)
+          gh release create "v$VERSION" dist/* "${flags[@]}"

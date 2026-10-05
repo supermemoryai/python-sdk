@@ -1,0 +1,93 @@
+diff -ru a/src/supermemory/core/http_response.py b/src/supermemory/core/http_response.py
+--- a/src/supermemory/core/http_response.py	2026-10-04 21:47:52
++++ b/src/supermemory/core/http_response.py	2026-10-04 21:47:52
+@@ -24,7 +24,12 @@
+     def status_code(self) -> int:
+         return self._response.status_code
+ 
++    @property
++    def http_response(self) -> httpx.Response:
++        """The underlying httpx response (3.x-compatible)."""
++        return self._response
+ 
++
+ class HttpResponse(Generic[T], BaseHttpResponse):
+     """HTTP response wrapper that exposes response headers and data."""
+ 
+@@ -38,6 +43,10 @@
+     def data(self) -> T:
+         return self._data
+ 
++    def parse(self) -> T:
++        """The parsed response body (3.x-compatible alias of `.data`)."""
++        return self._data
++
+     def close(self) -> None:
+         self._response.close()
+ 
+@@ -53,6 +62,10 @@
+ 
+     @property
+     def data(self) -> T:
++        return self._data
++
++    async def parse(self) -> T:
++        """The parsed response body (3.x-compatible alias of `.data`)."""
+         return self._data
+ 
+     async def close(self) -> None:
+diff -ru a/src/supermemory/core/unchecked_base_model.py b/src/supermemory/core/unchecked_base_model.py
+--- a/src/supermemory/core/unchecked_base_model.py	2026-10-04 21:47:52
++++ b/src/supermemory/core/unchecked_base_model.py	2026-10-04 21:47:52
+@@ -65,6 +65,51 @@
+         class Config:
+             extra = pydantic.Extra.allow
+ 
++    def to_dict(
++        self,
++        *,
++        mode: typing.Literal["json", "python"] = "python",
++        use_api_names: bool = True,
++        exclude_unset: bool = True,
++        exclude_defaults: bool = False,
++        exclude_none: bool = False,
++    ) -> typing.Dict[str, typing.Any]:
++        """Dictionary of the model, keyed by API field names unless `use_api_names=False` (3.x-compatible)."""
++        options: typing.Dict[str, typing.Any] = {
++            "by_alias": use_api_names,
++            "exclude_unset": exclude_unset,
++            "exclude_defaults": exclude_defaults,
++            "exclude_none": exclude_none,
++        }
++        if IS_PYDANTIC_V2:
++            return pydantic.BaseModel.model_dump(self, mode=mode, **options)  # type: ignore[no-any-return]
++        if mode == "json":
++            import json
++
++            return json.loads(pydantic.BaseModel.json(self, **options))  # type: ignore[no-any-return]
++        return pydantic.BaseModel.dict(self, **options)
++
++    def to_json(
++        self,
++        *,
++        indent: typing.Optional[int] = 2,
++        use_api_names: bool = True,
++        exclude_unset: bool = True,
++        exclude_defaults: bool = False,
++        exclude_none: bool = False,
++    ) -> str:
++        """JSON string of the model, keyed by API field names unless `use_api_names=False` (3.x-compatible)."""
++        import json
++
++        data = self.to_dict(
++            mode="json",
++            use_api_names=use_api_names,
++            exclude_unset=exclude_unset,
++            exclude_defaults=exclude_defaults,
++            exclude_none=exclude_none,
++        )
++        return json.dumps(data, indent=indent)
++
+     @classmethod
+     def model_construct(
+         cls: typing.Type["Model"],

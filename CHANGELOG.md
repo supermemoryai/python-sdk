@@ -1,5 +1,24 @@
 # Changelog
 
+## 5.0.0rc1 (2026-10-04)
+
+Generated from the Supermemory **v5 API** (`/v5/openapi`) with Fern's open-source generator, replacing Stainless. See [MIGRATION.md](MIGRATION.md).
+
+### Breaking
+
+- Namespace-first methods matching the TypeScript SDK: `client.add(namespace, ...)`, `client.search(namespace, query=...)`, `client.profile`, `client.list`, `documents.*`, `memories.*`, `profiles.*`, `namespaces.*`, `organization.*`.
+- Container tags are replaced by namespaces; `q` → `query`, `custom_id` → `id`, `filters` → `filter`, `include` → `attach`.
+- Requires Python 3.10+.
+
+### Kept from 3.x
+
+- Client options, environment variables, per-call `extra_headers` / `extra_query` / `extra_body` / `timeout`, `with_options`, the exception hierarchy, `with_raw_response`, `to_dict()` / `to_json()`, and dict-typed request params.
+
+### New
+
+- `client.connectors.*` for Notion, Google Drive, OneDrive, Gmail, GitHub, S3, web crawler, and Granola.
+- Named types (`Document`, `Memory`, `SearchResult`, `Connector`, …) and typed filter expressions.
+
 ## 3.62.0 (2026-09-14)
 
 Full Changelog: [v3.61.0...v3.62.0](https://github.com/supermemoryai/python-sdk/compare/v3.61.0...v3.62.0)
