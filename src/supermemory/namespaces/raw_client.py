@@ -24,7 +24,7 @@ from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.error_response import ErrorResponse
 from ..types.namespace_deleted import NamespaceDeleted
 from ..types.namespace_details import NamespaceDetails
-from .types.list_namespaces_response import ListNamespacesResponse
+from ..types.namespace_list import NamespaceList
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -45,7 +45,7 @@ class RawNamespacesClient:
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> HttpResponse[ListNamespacesResponse]:
+    ) -> HttpResponse[NamespaceList]:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
@@ -62,7 +62,7 @@ class RawNamespacesClient:
 
         Returns
         -------
-        HttpResponse[ListNamespacesResponse]
+        HttpResponse[NamespaceList]
             Namespaces available to the caller
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -77,9 +77,9 @@ class RawNamespacesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ListNamespacesResponse,
+                    NamespaceList,
                     construct_type(
-                        type_=ListNamespacesResponse,  # type: ignore
+                        type_=NamespaceList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -496,7 +496,7 @@ class AsyncRawNamespacesClient:
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AsyncHttpResponse[ListNamespacesResponse]:
+    ) -> AsyncHttpResponse[NamespaceList]:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
@@ -513,7 +513,7 @@ class AsyncRawNamespacesClient:
 
         Returns
         -------
-        AsyncHttpResponse[ListNamespacesResponse]
+        AsyncHttpResponse[NamespaceList]
             Namespaces available to the caller
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -528,9 +528,9 @@ class AsyncRawNamespacesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ListNamespacesResponse,
+                    NamespaceList,
                     construct_type(
-                        type_=ListNamespacesResponse,  # type: ignore
+                        type_=NamespaceList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

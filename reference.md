@@ -109,7 +109,7 @@ client.add(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[AddRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -117,7 +117,7 @@ client.add(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[AddRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -215,7 +215,7 @@ client.search(
 <dl>
 <dd>
 
-**search_mode:** `typing.Optional[SearchRequestSearchMode]` — Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
+**search_mode:** `typing.Optional[SearchMode]` — Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
     
 </dd>
 </dl>
@@ -231,7 +231,7 @@ client.search(
 <dl>
 <dd>
 
-**include:** `typing.Optional[SearchRequestInclude]` — Optional context to include alongside each matching result
+**include:** `typing.Optional[SearchInclude]` — Optional context to include alongside each matching result
     
 </dd>
 </dl>
@@ -655,7 +655,7 @@ client.documents.batch_add(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[BatchAddDocumentsRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -663,7 +663,7 @@ client.documents.batch_add(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[BatchAddDocumentsRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -753,7 +753,7 @@ client.documents.get(
 <dl>
 <dd>
 
-**include:** `typing.Optional[typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]]` — Comma-separated child resources to include: chunks, memories, or both.
+**include:** `typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]]` — Comma-separated child resources to include: chunks, memories, or both.
     
 </dd>
 </dl>
@@ -883,7 +883,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[UpdateDocumentsRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -891,7 +891,7 @@ client.documents.update(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[UpdateDocumentsRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -1013,7 +1013,7 @@ client.documents.upload_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[UploadFileDocumentsRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -1021,7 +1021,7 @@ client.documents.upload_file(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[UploadFileDocumentsRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -1029,7 +1029,7 @@ client.documents.upload_file(
 <dl>
 <dd>
 
-**file_type:** `typing.Optional[UploadFileDocumentsRequestFileType]` — Explicit source type used when automatic inference is insufficient
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
     
 </dd>
 </dl>
@@ -1168,7 +1168,7 @@ client.documents.replace_with_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[ReplaceWithFileDocumentsRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -1176,7 +1176,7 @@ client.documents.replace_with_file(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[ReplaceWithFileDocumentsRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -1184,7 +1184,7 @@ client.documents.replace_with_file(
 <dl>
 <dd>
 
-**file_type:** `typing.Optional[ReplaceWithFileDocumentsRequestFileType]` — Explicit source type used when automatic inference is insufficient
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
     
 </dd>
 </dl>
@@ -1323,7 +1323,7 @@ client.documents.update_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[UpdateFileDocumentsRequestTaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
     
 </dd>
 </dl>
@@ -1331,7 +1331,7 @@ client.documents.update_file(
 <dl>
 <dd>
 
-**dreaming:** `typing.Optional[UpdateFileDocumentsRequestDreaming]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -1339,7 +1339,7 @@ client.documents.update_file(
 <dl>
 <dd>
 
-**file_type:** `typing.Optional[UpdateFileDocumentsRequestFileType]` — Explicit source type used when automatic inference is insufficient
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
     
 </dd>
 </dl>
@@ -1785,7 +1785,7 @@ client.memories.forget_matching(
 </dl>
 </details>
 
-<details><summary><code>client.memories.<a href="src/supermemory/memories/client.py">get</a>(...) -> GetMemoriesResponse</code></summary>
+<details><summary><code>client.memories.<a href="src/supermemory/memories/client.py">get</a>(...) -> MemoryDetails</code></summary>
 <dl>
 <dd>
 
@@ -1855,7 +1855,7 @@ client.memories.get(
 <dl>
 <dd>
 
-**include:** `typing.Optional[typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]]` — Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+**include:** `typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]` — Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
     
 </dd>
 </dl>
@@ -2080,7 +2080,7 @@ client.connectors.list(
 <dl>
 <dd>
 
-Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 </dd>
 </dl>
 </dd>
@@ -2222,7 +2222,7 @@ client.connectors.get(
 <dl>
 <dd>
 
-**include:** `typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]` — Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
+**include:** `typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]` — Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
     
 </dd>
 </dl>
@@ -2521,7 +2521,7 @@ client.connectors.sync(
 </details>
 
 ## Namespaces
-<details><summary><code>client.namespaces.<a href="src/supermemory/namespaces/client.py">list</a>(...) -> ListNamespacesResponse</code></summary>
+<details><summary><code>client.namespaces.<a href="src/supermemory/namespaces/client.py">list</a>(...) -> NamespaceList</code></summary>
 <dl>
 <dd>
 

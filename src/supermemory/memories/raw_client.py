@@ -22,8 +22,8 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.error_response import ErrorResponse
 from ..types.forget_result import ForgetResult
-from .types.get_memories_request_include_item import GetMemoriesRequestIncludeItem
-from .types.get_memories_response import GetMemoriesResponse
+from ..types.memory_details import MemoryDetails
+from ..types.memory_include import MemoryInclude
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -254,16 +254,14 @@ class RawMemoriesClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]] = None,
         related_limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> HttpResponse[GetMemoriesResponse]:
+    ) -> HttpResponse[MemoryDetails]:
         """
         Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
 
@@ -275,7 +273,7 @@ class RawMemoriesClient:
         id : str
             Memory identifier
 
-        include : typing.Optional[typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]
             Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
 
         related_limit : typing.Optional[int]
@@ -286,7 +284,7 @@ class RawMemoriesClient:
 
         Returns
         -------
-        HttpResponse[GetMemoriesResponse]
+        HttpResponse[MemoryDetails]
             Memory retrieved
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -301,9 +299,9 @@ class RawMemoriesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetMemoriesResponse,
+                    MemoryDetails,
                     construct_type(
-                        type_=GetMemoriesResponse,  # type: ignore
+                        type_=MemoryDetails,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -597,16 +595,14 @@ class AsyncRawMemoriesClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]] = None,
         related_limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AsyncHttpResponse[GetMemoriesResponse]:
+    ) -> AsyncHttpResponse[MemoryDetails]:
         """
         Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
 
@@ -618,7 +614,7 @@ class AsyncRawMemoriesClient:
         id : str
             Memory identifier
 
-        include : typing.Optional[typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]
             Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
 
         related_limit : typing.Optional[int]
@@ -629,7 +625,7 @@ class AsyncRawMemoriesClient:
 
         Returns
         -------
-        AsyncHttpResponse[GetMemoriesResponse]
+        AsyncHttpResponse[MemoryDetails]
             Memory retrieved
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -644,9 +640,9 @@ class AsyncRawMemoriesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetMemoriesResponse,
+                    MemoryDetails,
                     construct_type(
-                        type_=GetMemoriesResponse,  # type: ignore
+                        type_=MemoryDetails,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

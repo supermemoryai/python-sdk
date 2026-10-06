@@ -10,8 +10,8 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.namespace_deleted import NamespaceDeleted
 from ..types.namespace_details import NamespaceDetails
+from ..types.namespace_list import NamespaceList
 from .raw_client import AsyncRawNamespacesClient, RawNamespacesClient
-from .types.list_namespaces_response import ListNamespacesResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -42,7 +42,7 @@ class NamespacesClient:
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> ListNamespacesResponse:
+    ) -> NamespaceList:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
@@ -59,7 +59,7 @@ class NamespacesClient:
 
         Returns
         -------
-        ListNamespacesResponse
+        NamespaceList
             Namespaces available to the caller
 
         Examples
@@ -231,7 +231,7 @@ class AsyncNamespacesClient:
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> ListNamespacesResponse:
+    ) -> NamespaceList:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
@@ -248,7 +248,7 @@ class AsyncNamespacesClient:
 
         Returns
         -------
-        ListNamespacesResponse
+        NamespaceList
             Namespaces available to the caller
 
         Examples

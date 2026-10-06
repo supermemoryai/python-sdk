@@ -12,12 +12,12 @@ from ..requests.connector_selection import ConnectorSelectionParams
 from ..requests.connector_setup import ConnectorSetupParams
 from ..types.connector import Connector
 from ..types.connector_deleted import ConnectorDeleted
+from ..types.connector_include import ConnectorInclude
 from ..types.connector_list import ConnectorList
 from ..types.connector_provider import ConnectorProvider
 from ..types.connector_setup_result import ConnectorSetupResult
 from ..types.connector_sync_started import ConnectorSyncStarted
 from .raw_client import AsyncRawConnectorsClient, RawConnectorsClient
-from .types.get_connectors_request_include_item import GetConnectorsRequestIncludeItem
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -152,7 +152,7 @@ class ConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ConnectorSetupResult:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -189,9 +189,7 @@ class ConnectorsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -210,7 +208,7 @@ class ConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -538,7 +536,7 @@ class AsyncConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ConnectorSetupResult:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -583,9 +581,7 @@ class AsyncConnectorsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -604,7 +600,7 @@ class AsyncConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
