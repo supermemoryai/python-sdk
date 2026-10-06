@@ -24,7 +24,7 @@ class SearchResultParams(typing_extensions.TypedDict):
     Source passage returned by chunk search (only present for chunk results from hybrid search)
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]]
+    metadata: typing.Dict[str, typing.Any]
     """
     Public metadata attached to the result
     """
@@ -37,6 +37,11 @@ class SearchResultParams(typing_extensions.TypedDict):
     is_latest: typing_extensions.Annotated[bool, FieldMetadata(alias="isLatest")]
     """
     Whether the memory is its latest version; false for recalled forgotten memories
+    """
+
+    is_inference: typing_extensions.Annotated[bool, FieldMetadata(alias="isInference")]
+    """
+    Whether the memory was inferred rather than stated directly; false for chunks
     """
 
     system: SearchResultSystemParams

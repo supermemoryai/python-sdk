@@ -22,23 +22,22 @@ from .errors.internal_server_error import InternalServerError
 from .errors.payment_required_error import PaymentRequiredError
 from .errors.unauthorized_error import UnauthorizedError
 from .requests.filter_expression import FilterExpressionParams
-from .requests.list_request_limit import ListRequestLimitParams
-from .requests.list_request_page import ListRequestPageParams
+from .requests.list_request_include import ListRequestIncludeParams
 from .requests.metadata_value import MetadataValueParams
-from .requests.search_request_attach import SearchRequestAttachParams
+from .requests.search_request_include import SearchRequestIncludeParams
+from .types.add_request_dreaming import AddRequestDreaming
+from .types.add_request_task_type import AddRequestTaskType
 from .types.bad_request_error_body import BadRequestErrorBody
 from .types.document_ref import DocumentRef
-from .types.dreaming_mode import DreamingMode
 from .types.error_response import ErrorResponse
 from .types.list_response import ListResponse
 from .types.list_sort import ListSort
 from .types.list_type import ListType
 from .types.profile_response import ProfileResponse
-from .types.search_mode import SearchMode
 from .types.search_request_rerank import SearchRequestRerank
+from .types.search_request_search_mode import SearchRequestSearchMode
 from .types.search_response import SearchResponse
 from .types.sort_order import SortOrder
-from .types.task_type import TaskType
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -54,13 +53,13 @@ class RawSupermemory:
         namespace: str,
         *,
         content: str,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
         id: typing.Optional[str] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[AddRequestTaskType] = OMIT,
+        dreaming: typing.Optional[AddRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -78,12 +77,6 @@ class RawSupermemory:
         content : str
             The content to process. This may be plaintext or a URL to supported rich content.
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
         id : typing.Optional[str]
             An optional caller-defined document ID
 
@@ -99,6 +92,12 @@ class RawSupermemory:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[AddRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[AddRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -110,10 +109,6 @@ class RawSupermemory:
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "content": content,
                 "id": id,
@@ -125,6 +120,8 @@ class RawSupermemory:
                     object_=group, annotation=typing.Dict[str, MetadataValueParams], direction="write"
                 ),
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -222,10 +219,10 @@ class RawSupermemory:
         namespace: str,
         *,
         query: str,
-        limit: typing.Optional[int] = None,
-        search_mode: typing.Optional[SearchMode] = None,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
-        attach: typing.Optional[SearchRequestAttachParams] = OMIT,
+        search_mode: typing.Optional[SearchRequestSearchMode] = OMIT,
+        limit: typing.Optional[int] = OMIT,
+        include: typing.Optional[SearchRequestIncludeParams] = OMIT,
         threshold: typing.Optional[float] = OMIT,
         rerank: typing.Optional[SearchRequestRerank] = OMIT,
         rewrite_query: typing.Optional[bool] = OMIT,
@@ -246,16 +243,16 @@ class RawSupermemory:
         query : str
             Natural-language question, topic, or phrase to retrieve relevant context for. Replaces the v4 `q` field.
 
-        limit : typing.Optional[int]
-            Maximum number of results to return
-
-        search_mode : typing.Optional[SearchMode]
-            Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
-
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
 
-        attach : typing.Optional[SearchRequestAttachParams]
+        search_mode : typing.Optional[SearchRequestSearchMode]
+            Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
+
+        limit : typing.Optional[int]
+            Maximum number of results to return
+
+        include : typing.Optional[SearchRequestIncludeParams]
             Optional context to include alongside each matching result
 
         threshold : typing.Optional[float]
@@ -278,17 +275,15 @@ class RawSupermemory:
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/search",
             method="POST",
-            params={
-                "limit": limit,
-                "searchMode": search_mode,
-            },
             json={
                 "query": query,
                 "filter": convert_and_respect_annotation_metadata(
                     object_=filter, annotation=FilterExpressionParams, direction="write"
                 ),
-                "attach": convert_and_respect_annotation_metadata(
-                    object_=attach, annotation=SearchRequestAttachParams, direction="write"
+                "searchMode": search_mode,
+                "limit": limit,
+                "include": convert_and_respect_annotation_metadata(
+                    object_=include, annotation=SearchRequestIncludeParams, direction="write"
                 ),
                 "threshold": threshold,
                 "rerank": rerank,
@@ -491,11 +486,12 @@ class RawSupermemory:
         namespace: str,
         type: ListType,
         *,
-        page: typing.Optional[ListRequestPageParams] = None,
-        limit: typing.Optional[ListRequestLimitParams] = None,
+        page: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         sort: typing.Optional[ListSort] = None,
         order: typing.Optional[SortOrder] = None,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
+        include: typing.Optional[ListRequestIncludeParams] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -513,10 +509,10 @@ class RawSupermemory:
         type : ListType
             Resource collection to list: source documents, extracted chunks, or learned memories
 
-        page : typing.Optional[ListRequestPageParams]
+        page : typing.Optional[int]
             One-based page number
 
-        limit : typing.Optional[ListRequestLimitParams]
+        limit : typing.Optional[int]
             Maximum resources to return per page
 
         sort : typing.Optional[ListSort]
@@ -527,6 +523,9 @@ class RawSupermemory:
 
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before pagination
+
+        include : typing.Optional[ListRequestIncludeParams]
+            Optional extras, matching search's include
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -540,18 +539,17 @@ class RawSupermemory:
             f"ns/{encode_path_param(namespace)}/list/{encode_path_param(type)}",
             method="POST",
             params={
-                "page": convert_and_respect_annotation_metadata(
-                    object_=page, annotation=ListRequestPageParams, direction="write"
-                ),
-                "limit": convert_and_respect_annotation_metadata(
-                    object_=limit, annotation=ListRequestLimitParams, direction="write"
-                ),
+                "page": page,
+                "limit": limit,
                 "sort": sort,
                 "order": order,
             },
             json={
                 "filter": convert_and_respect_annotation_metadata(
                     object_=filter, annotation=FilterExpressionParams, direction="write"
+                ),
+                "include": convert_and_respect_annotation_metadata(
+                    object_=include, annotation=ListRequestIncludeParams, direction="write"
                 ),
             },
             headers={
@@ -633,13 +631,13 @@ class AsyncRawSupermemory:
         namespace: str,
         *,
         content: str,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
         id: typing.Optional[str] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[AddRequestTaskType] = OMIT,
+        dreaming: typing.Optional[AddRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -657,12 +655,6 @@ class AsyncRawSupermemory:
         content : str
             The content to process. This may be plaintext or a URL to supported rich content.
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
         id : typing.Optional[str]
             An optional caller-defined document ID
 
@@ -678,6 +670,12 @@ class AsyncRawSupermemory:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[AddRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[AddRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -689,10 +687,6 @@ class AsyncRawSupermemory:
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "content": content,
                 "id": id,
@@ -704,6 +698,8 @@ class AsyncRawSupermemory:
                     object_=group, annotation=typing.Dict[str, MetadataValueParams], direction="write"
                 ),
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -801,10 +797,10 @@ class AsyncRawSupermemory:
         namespace: str,
         *,
         query: str,
-        limit: typing.Optional[int] = None,
-        search_mode: typing.Optional[SearchMode] = None,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
-        attach: typing.Optional[SearchRequestAttachParams] = OMIT,
+        search_mode: typing.Optional[SearchRequestSearchMode] = OMIT,
+        limit: typing.Optional[int] = OMIT,
+        include: typing.Optional[SearchRequestIncludeParams] = OMIT,
         threshold: typing.Optional[float] = OMIT,
         rerank: typing.Optional[SearchRequestRerank] = OMIT,
         rewrite_query: typing.Optional[bool] = OMIT,
@@ -825,16 +821,16 @@ class AsyncRawSupermemory:
         query : str
             Natural-language question, topic, or phrase to retrieve relevant context for. Replaces the v4 `q` field.
 
-        limit : typing.Optional[int]
-            Maximum number of results to return
-
-        search_mode : typing.Optional[SearchMode]
-            Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
-
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
 
-        attach : typing.Optional[SearchRequestAttachParams]
+        search_mode : typing.Optional[SearchRequestSearchMode]
+            Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
+
+        limit : typing.Optional[int]
+            Maximum number of results to return
+
+        include : typing.Optional[SearchRequestIncludeParams]
             Optional context to include alongside each matching result
 
         threshold : typing.Optional[float]
@@ -857,17 +853,15 @@ class AsyncRawSupermemory:
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/search",
             method="POST",
-            params={
-                "limit": limit,
-                "searchMode": search_mode,
-            },
             json={
                 "query": query,
                 "filter": convert_and_respect_annotation_metadata(
                     object_=filter, annotation=FilterExpressionParams, direction="write"
                 ),
-                "attach": convert_and_respect_annotation_metadata(
-                    object_=attach, annotation=SearchRequestAttachParams, direction="write"
+                "searchMode": search_mode,
+                "limit": limit,
+                "include": convert_and_respect_annotation_metadata(
+                    object_=include, annotation=SearchRequestIncludeParams, direction="write"
                 ),
                 "threshold": threshold,
                 "rerank": rerank,
@@ -1070,11 +1064,12 @@ class AsyncRawSupermemory:
         namespace: str,
         type: ListType,
         *,
-        page: typing.Optional[ListRequestPageParams] = None,
-        limit: typing.Optional[ListRequestLimitParams] = None,
+        page: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         sort: typing.Optional[ListSort] = None,
         order: typing.Optional[SortOrder] = None,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
+        include: typing.Optional[ListRequestIncludeParams] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1092,10 +1087,10 @@ class AsyncRawSupermemory:
         type : ListType
             Resource collection to list: source documents, extracted chunks, or learned memories
 
-        page : typing.Optional[ListRequestPageParams]
+        page : typing.Optional[int]
             One-based page number
 
-        limit : typing.Optional[ListRequestLimitParams]
+        limit : typing.Optional[int]
             Maximum resources to return per page
 
         sort : typing.Optional[ListSort]
@@ -1106,6 +1101,9 @@ class AsyncRawSupermemory:
 
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before pagination
+
+        include : typing.Optional[ListRequestIncludeParams]
+            Optional extras, matching search's include
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1119,18 +1117,17 @@ class AsyncRawSupermemory:
             f"ns/{encode_path_param(namespace)}/list/{encode_path_param(type)}",
             method="POST",
             params={
-                "page": convert_and_respect_annotation_metadata(
-                    object_=page, annotation=ListRequestPageParams, direction="write"
-                ),
-                "limit": convert_and_respect_annotation_metadata(
-                    object_=limit, annotation=ListRequestLimitParams, direction="write"
-                ),
+                "page": page,
+                "limit": limit,
                 "sort": sort,
                 "order": order,
             },
             json={
                 "filter": convert_and_respect_annotation_metadata(
                     object_=filter, annotation=FilterExpressionParams, direction="write"
+                ),
+                "include": convert_and_respect_annotation_metadata(
+                    object_=include, annotation=ListRequestIncludeParams, direction="write"
                 ),
             },
             headers={

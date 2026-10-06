@@ -25,9 +25,9 @@ class Memory(UncheckedBaseModel):
     Learned fact or context extracted from the document
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    metadata: typing.Dict[str, typing.Any] = pydantic.Field()
     """
-    Memory metadata, including temporal context when available
+    Memory metadata, including temporal context; empty object when none
     """
 
     is_static: typing_extensions.Annotated[

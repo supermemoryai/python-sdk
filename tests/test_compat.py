@@ -25,6 +25,8 @@ from supermemory.errors import NotFoundError as GeneratedNotFoundError
 
 Handler = Callable[[httpx.Request], httpx.Response]
 
+NS_PAGE = {"namespaces": [], "pagination": {"currentPage": 1, "limit": 10, "totalItems": 0, "totalPages": 0}}
+
 
 def _ok(captured: list[httpx.Request], body: Any = None) -> Handler:
     def handle(request: httpx.Request) -> httpx.Response:
@@ -135,7 +137,7 @@ def test_timeout_error() -> None:
 
 def test_timeout_object_is_forwarded_whole() -> None:
     captured: list[httpx.Request] = []
-    client = _client(_ok(captured, []), timeout=httpx.Timeout(10.0, connect=2.5))
+    client = _client(_ok(captured, NS_PAGE), timeout=httpx.Timeout(10.0, connect=2.5))
     client.namespaces.list()
     assert captured[0].extensions["timeout"] == {"connect": 2.5, "read": 10.0, "write": 10.0, "pool": 10.0}
 
@@ -150,13 +152,13 @@ def test_timeout_none_disables_timeouts() -> None:
     captured: list[httpx.Request] = []
     off = {"connect": None, "read": None, "write": None, "pool": None}
 
-    _client(_ok(captured, [])).namespaces.list()
+    _client(_ok(captured, NS_PAGE)).namespaces.list()
     assert captured[0].extensions["timeout"] == {"connect": 5.0, "read": 60.0, "write": 60.0, "pool": 60.0}
 
-    _client(_ok(captured, []), timeout=None).namespaces.list()
+    _client(_ok(captured, NS_PAGE), timeout=None).namespaces.list()
     assert captured[1].extensions["timeout"] == off
 
-    client = _client(_ok(captured, []), timeout=10.0)
+    client = _client(_ok(captured, NS_PAGE), timeout=10.0)
     client.namespaces.list(timeout=None)
     assert captured[2].extensions["timeout"] == off
     client.namespaces.list(timeout=NOT_GIVEN)
@@ -176,9 +178,9 @@ def test_read_timeout_is_retried(monkeypatch: pytest.MonkeyPatch) -> None:
         calls += 1
         if calls == 1:
             raise httpx.ReadTimeout("slow", request=request)
-        return httpx.Response(200, json=[])
+        return httpx.Response(200, json=NS_PAGE)
 
-    assert _client(handle, max_retries=2).namespaces.list() == []
+    assert _client(handle, max_retries=2).namespaces.list().namespaces == []
     assert calls == 2
 
 

@@ -75,10 +75,10 @@ class ConnectorParams(typing_extensions.TypedDict):
     created_at: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="createdAt")]
     syncs: typing_extensions.NotRequired[typing.Sequence[ConnectorSyncParams]]
     """
-    Present when attach=syncs
+    Present when include=syncs
     """
 
     picker: typing_extensions.NotRequired[typing.Optional[ConnectorPickerParams]]
     """
-    Present when attach=picker. Null for connectors that sync everything.
+    Present when include=picker. Null for connectors that sync everything.
     """

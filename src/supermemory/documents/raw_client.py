@@ -29,13 +29,22 @@ from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.batch_add_result import BatchAddResult
 from ..types.delete_documents_result import DeleteDocumentsResult
 from ..types.document import Document
-from ..types.document_attachment import DocumentAttachment
 from ..types.document_ref import DocumentRef
-from ..types.dreaming_mode import DreamingMode
 from ..types.error_response import ErrorResponse
-from ..types.file_type import FileType
-from ..types.file_upload_result import FileUploadResult
-from ..types.task_type import TaskType
+from .types.batch_add_documents_request_dreaming import BatchAddDocumentsRequestDreaming
+from .types.batch_add_documents_request_task_type import BatchAddDocumentsRequestTaskType
+from .types.get_documents_request_include_item import GetDocumentsRequestIncludeItem
+from .types.replace_with_file_documents_request_dreaming import ReplaceWithFileDocumentsRequestDreaming
+from .types.replace_with_file_documents_request_file_type import ReplaceWithFileDocumentsRequestFileType
+from .types.replace_with_file_documents_request_task_type import ReplaceWithFileDocumentsRequestTaskType
+from .types.update_documents_request_dreaming import UpdateDocumentsRequestDreaming
+from .types.update_documents_request_task_type import UpdateDocumentsRequestTaskType
+from .types.update_file_documents_request_dreaming import UpdateFileDocumentsRequestDreaming
+from .types.update_file_documents_request_file_type import UpdateFileDocumentsRequestFileType
+from .types.update_file_documents_request_task_type import UpdateFileDocumentsRequestTaskType
+from .types.upload_file_documents_request_dreaming import UploadFileDocumentsRequestDreaming
+from .types.upload_file_documents_request_file_type import UploadFileDocumentsRequestFileType
+from .types.upload_file_documents_request_task_type import UploadFileDocumentsRequestTaskType
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -156,8 +165,8 @@ class RawDocumentsClient:
         namespace: str,
         *,
         documents: typing.Sequence[DocumentInputParams],
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
+        task_type: typing.Optional[BatchAddDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[BatchAddDocumentsRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -175,10 +184,10 @@ class RawDocumentsClient:
         documents : typing.Sequence[DocumentInputParams]
             Documents to ingest or append in one request
 
-        task_type : typing.Optional[TaskType]
+        task_type : typing.Optional[BatchAddDocumentsRequestTaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[DreamingMode]
+        dreaming : typing.Optional[BatchAddDocumentsRequestDreaming]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -192,14 +201,12 @@ class RawDocumentsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/batch",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "documents": convert_and_respect_annotation_metadata(
                     object_=documents, annotation=typing.Sequence[DocumentInputParams], direction="write"
                 ),
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -286,7 +293,9 @@ class RawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[typing.Union[DocumentAttachment, typing.Sequence[DocumentAttachment]]] = None,
+        include: typing.Optional[
+            typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]
+        ] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -294,7 +303,7 @@ class RawDocumentsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[Document]:
         """
-        Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally attach its source chunks, derived memories, or both in the same response.
+        Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally include its source chunks, derived memories, or both in the same response.
 
         Parameters
         ----------
@@ -304,8 +313,8 @@ class RawDocumentsClient:
         id : str
             The public document ID
 
-        attach : typing.Optional[typing.Union[DocumentAttachment, typing.Sequence[DocumentAttachment]]]
-            Child resources to include. Repeat the parameter to attach chunks, memories, or both.
+        include : typing.Optional[typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]]
+            Comma-separated child resources to include: chunks, memories, or both.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -319,7 +328,7 @@ class RawDocumentsClient:
             f"ns/{encode_path_param(namespace)}/document/{encode_path_param(id)}",
             method="GET",
             params={
-                "attach": attach,
+                "include": include,
             },
             request_options=request_options,
         )
@@ -402,13 +411,13 @@ class RawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
         content: typing.Optional[str] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UpdateDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UpdateDocumentsRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -426,12 +435,6 @@ class RawDocumentsClient:
         id : str
             The public document ID
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
         content : typing.Optional[str]
             The content to process. This may be plaintext or a URL to supported rich content.
 
@@ -447,6 +450,12 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UpdateDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UpdateDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -458,10 +467,6 @@ class RawDocumentsClient:
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/{encode_path_param(id)}",
             method="PATCH",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "content": content,
                 "supportingContext": supporting_context,
@@ -472,6 +477,8 @@ class RawDocumentsClient:
                     object_=group, annotation=typing.Dict[str, MetadataValueParams], direction="write"
                 ),
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -580,20 +587,20 @@ class RawDocumentsClient:
         namespace: str,
         *,
         file: core.File,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UploadFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UploadFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[UploadFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> HttpResponse[FileUploadResult]:
+    ) -> HttpResponse[DocumentRef]:
         """
         Transform an uploaded file into searchable knowledge and learned memory. The response returns as soon as ingestion is safely queued while extraction and memory formation continue asynchronously.
 
@@ -604,18 +611,6 @@ class RawDocumentsClient:
 
         file : core.File
             See core.File for more documentation
-
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
 
         supporting_context : typing.Optional[str]
             Context used to guide memory extraction within this namespace. Max 1500 characters.
@@ -629,28 +624,38 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UploadFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UploadFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[UploadFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[FileUploadResult]
+        HttpResponse[DocumentRef]
             File accepted for processing
         """
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 "file": file,
@@ -662,9 +667,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -750,20 +755,20 @@ class RawDocumentsClient:
         id: str,
         *,
         file: core.File,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[ReplaceWithFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[ReplaceWithFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[ReplaceWithFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> HttpResponse[FileUploadResult]:
+    ) -> HttpResponse[DocumentRef]:
         """
         Replace an existing document with a new file while keeping its stable document ID. Content and caller metadata are overwritten, then the document is reprocessed asynchronously.
 
@@ -778,18 +783,6 @@ class RawDocumentsClient:
         file : core.File
             See core.File for more documentation
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
-
         supporting_context : typing.Optional[str]
             Context used to guide memory extraction within this namespace. Max 1500 characters.
 
@@ -802,28 +795,38 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[ReplaceWithFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[ReplaceWithFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[ReplaceWithFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[FileUploadResult]
+        HttpResponse[DocumentRef]
             Replacement accepted for processing
         """
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file/{encode_path_param(id)}",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 "file": file,
@@ -835,9 +838,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -933,21 +936,21 @@ class RawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         file: typing.Optional[core.File] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UpdateFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UpdateFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[UpdateFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> HttpResponse[FileUploadResult]:
+    ) -> HttpResponse[DocumentRef]:
         """
         Refresh only the file-backed fields you provide. Supplying a file replaces the canonical content; omitted metadata and processing context remain unchanged.
 
@@ -958,18 +961,6 @@ class RawDocumentsClient:
 
         id : str
             The public document ID
-
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
 
         file : typing.Optional[core.File]
             See core.File for more documentation
@@ -986,28 +977,38 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UpdateFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UpdateFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[UpdateFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[FileUploadResult]
+        HttpResponse[DocumentRef]
             Update accepted for processing
         """
         _response = self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file/{encode_path_param(id)}",
             method="PATCH",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -1019,9 +1020,9 @@ class RawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1227,8 +1228,8 @@ class AsyncRawDocumentsClient:
         namespace: str,
         *,
         documents: typing.Sequence[DocumentInputParams],
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
+        task_type: typing.Optional[BatchAddDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[BatchAddDocumentsRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1246,10 +1247,10 @@ class AsyncRawDocumentsClient:
         documents : typing.Sequence[DocumentInputParams]
             Documents to ingest or append in one request
 
-        task_type : typing.Optional[TaskType]
+        task_type : typing.Optional[BatchAddDocumentsRequestTaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[DreamingMode]
+        dreaming : typing.Optional[BatchAddDocumentsRequestDreaming]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -1263,14 +1264,12 @@ class AsyncRawDocumentsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/batch",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "documents": convert_and_respect_annotation_metadata(
                     object_=documents, annotation=typing.Sequence[DocumentInputParams], direction="write"
                 ),
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -1357,7 +1356,9 @@ class AsyncRawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[typing.Union[DocumentAttachment, typing.Sequence[DocumentAttachment]]] = None,
+        include: typing.Optional[
+            typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]
+        ] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1365,7 +1366,7 @@ class AsyncRawDocumentsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[Document]:
         """
-        Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally attach its source chunks, derived memories, or both in the same response.
+        Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally include its source chunks, derived memories, or both in the same response.
 
         Parameters
         ----------
@@ -1375,8 +1376,8 @@ class AsyncRawDocumentsClient:
         id : str
             The public document ID
 
-        attach : typing.Optional[typing.Union[DocumentAttachment, typing.Sequence[DocumentAttachment]]]
-            Child resources to include. Repeat the parameter to attach chunks, memories, or both.
+        include : typing.Optional[typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]]
+            Comma-separated child resources to include: chunks, memories, or both.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1390,7 +1391,7 @@ class AsyncRawDocumentsClient:
             f"ns/{encode_path_param(namespace)}/document/{encode_path_param(id)}",
             method="GET",
             params={
-                "attach": attach,
+                "include": include,
             },
             request_options=request_options,
         )
@@ -1473,13 +1474,13 @@ class AsyncRawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
         content: typing.Optional[str] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UpdateDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UpdateDocumentsRequestDreaming] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1497,12 +1498,6 @@ class AsyncRawDocumentsClient:
         id : str
             The public document ID
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
         content : typing.Optional[str]
             The content to process. This may be plaintext or a URL to supported rich content.
 
@@ -1518,6 +1513,12 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UpdateDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UpdateDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1529,10 +1530,6 @@ class AsyncRawDocumentsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/{encode_path_param(id)}",
             method="PATCH",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-            },
             json={
                 "content": content,
                 "supportingContext": supporting_context,
@@ -1543,6 +1540,8 @@ class AsyncRawDocumentsClient:
                     object_=group, annotation=typing.Dict[str, MetadataValueParams], direction="write"
                 ),
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
             },
             headers={
                 "content-type": "application/json",
@@ -1651,20 +1650,20 @@ class AsyncRawDocumentsClient:
         namespace: str,
         *,
         file: core.File,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UploadFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UploadFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[UploadFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AsyncHttpResponse[FileUploadResult]:
+    ) -> AsyncHttpResponse[DocumentRef]:
         """
         Transform an uploaded file into searchable knowledge and learned memory. The response returns as soon as ingestion is safely queued while extraction and memory formation continue asynchronously.
 
@@ -1675,18 +1674,6 @@ class AsyncRawDocumentsClient:
 
         file : core.File
             See core.File for more documentation
-
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
 
         supporting_context : typing.Optional[str]
             Context used to guide memory extraction within this namespace. Max 1500 characters.
@@ -1700,28 +1687,38 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UploadFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UploadFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[UploadFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[FileUploadResult]
+        AsyncHttpResponse[DocumentRef]
             File accepted for processing
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 "file": file,
@@ -1733,9 +1730,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1821,20 +1818,20 @@ class AsyncRawDocumentsClient:
         id: str,
         *,
         file: core.File,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[ReplaceWithFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[ReplaceWithFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[ReplaceWithFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AsyncHttpResponse[FileUploadResult]:
+    ) -> AsyncHttpResponse[DocumentRef]:
         """
         Replace an existing document with a new file while keeping its stable document ID. Content and caller metadata are overwritten, then the document is reprocessed asynchronously.
 
@@ -1849,18 +1846,6 @@ class AsyncRawDocumentsClient:
         file : core.File
             See core.File for more documentation
 
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
-
         supporting_context : typing.Optional[str]
             Context used to guide memory extraction within this namespace. Max 1500 characters.
 
@@ -1873,28 +1858,38 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[ReplaceWithFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[ReplaceWithFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[ReplaceWithFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[FileUploadResult]
+        AsyncHttpResponse[DocumentRef]
             Replacement accepted for processing
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file/{encode_path_param(id)}",
             method="POST",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 "file": file,
@@ -1906,9 +1901,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -2004,21 +1999,21 @@ class AsyncRawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        task_type: typing.Optional[TaskType] = None,
-        dreaming: typing.Optional[DreamingMode] = None,
-        file_type: typing.Optional[FileType] = None,
-        mime_type: typing.Optional[str] = None,
         file: typing.Optional[core.File] = OMIT,
         supporting_context: typing.Optional[str] = OMIT,
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
+        task_type: typing.Optional[UpdateFileDocumentsRequestTaskType] = OMIT,
+        dreaming: typing.Optional[UpdateFileDocumentsRequestDreaming] = OMIT,
+        file_type: typing.Optional[UpdateFileDocumentsRequestFileType] = OMIT,
+        mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> AsyncHttpResponse[FileUploadResult]:
+    ) -> AsyncHttpResponse[DocumentRef]:
         """
         Refresh only the file-backed fields you provide. Supplying a file replaces the canonical content; omitted metadata and processing context remain unchanged.
 
@@ -2029,18 +2024,6 @@ class AsyncRawDocumentsClient:
 
         id : str
             The public document ID
-
-        task_type : typing.Optional[TaskType]
-            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-
-        dreaming : typing.Optional[DreamingMode]
-            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-
-        file_type : typing.Optional[FileType]
-            Explicit source type used when automatic inference is insufficient
-
-        mime_type : typing.Optional[str]
-            Explicit MIME type used when upload metadata is insufficient
 
         file : typing.Optional[core.File]
             See core.File for more documentation
@@ -2057,28 +2040,38 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
+        task_type : typing.Optional[UpdateFileDocumentsRequestTaskType]
+            Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+
+        dreaming : typing.Optional[UpdateFileDocumentsRequestDreaming]
+            Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+
+        file_type : typing.Optional[UpdateFileDocumentsRequestFileType]
+            Explicit source type used when automatic inference is insufficient
+
+        mime_type : typing.Optional[str]
+            Explicit MIME type used when upload metadata is insufficient
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[FileUploadResult]
+        AsyncHttpResponse[DocumentRef]
             Update accepted for processing
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"ns/{encode_path_param(namespace)}/document/file/{encode_path_param(id)}",
             method="PATCH",
-            params={
-                "taskType": task_type,
-                "dreaming": dreaming,
-                "fileType": file_type,
-                "mimeType": mime_type,
-            },
             data={
                 "supportingContext": supporting_context,
                 "metadata": metadata,
                 "group": group,
                 "date": date,
+                "taskType": task_type,
+                "dreaming": dreaming,
+                "fileType": file_type,
+                "mimeType": mime_type,
             },
             files={
                 **({"file": file} if file is not None else {}),
@@ -2090,9 +2083,9 @@ class AsyncRawDocumentsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FileUploadResult,
+                    DocumentRef,
                     construct_type(
-                        type_=FileUploadResult,  # type: ignore
+                        type_=DocumentRef,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

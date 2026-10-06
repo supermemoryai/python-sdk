@@ -6,8 +6,11 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .add_request_dreaming import AddRequestDreaming
+    from .add_request_task_type import AddRequestTaskType
     from .bad_request_error_body import BadRequestErrorBody
     from .batch_add_item_result import BatchAddItemResult
+    from .batch_add_item_result_status import BatchAddItemResultStatus
     from .batch_add_result import BatchAddResult
     from .chunk import Chunk
     from .chunk_list_item import ChunkListItem
@@ -52,15 +55,14 @@ if typing.TYPE_CHECKING:
     from .delete_document_error import DeleteDocumentError
     from .delete_documents_result import DeleteDocumentsResult
     from .document import Document
-    from .document_attachment import DocumentAttachment
     from .document_input import DocumentInput
     from .document_list_item import DocumentListItem
+    from .document_list_item_system import DocumentListItemSystem
     from .document_ref import DocumentRef
+    from .document_ref_status import DocumentRefStatus
     from .document_system import DocumentSystem
-    from .dreaming_mode import DreamingMode
+    from .document_system_status import DocumentSystemStatus
     from .error_response import ErrorResponse
-    from .file_type import FileType
-    from .file_upload_result import FileUploadResult
     from .filter_and import FilterAnd
     from .filter_array_contains import FilterArrayContains
     from .filter_array_contains_operator import FilterArrayContainsOperator
@@ -82,8 +84,7 @@ if typing.TYPE_CHECKING:
     from .google_drive_config import GoogleDriveConfig
     from .google_drive_config_sync_scope import GoogleDriveConfigSyncScope
     from .granola_config import GranolaConfig
-    from .list_request_limit import ListRequestLimit
-    from .list_request_page import ListRequestPage
+    from .list_request_include import ListRequestInclude
     from .list_response import ListResponse
     from .list_sort import ListSort
     from .list_type import ListType
@@ -91,12 +92,11 @@ if typing.TYPE_CHECKING:
     from .memory_relation import MemoryRelation
     from .memory_system import MemorySystem
     from .metadata_value import MetadataValue
-    from .namespace import Namespace
     from .namespace_deleted import NamespaceDeleted, NamespaceDeleted_Deleted, NamespaceDeleted_Queued
     from .namespace_deleted_deleted import NamespaceDeletedDeleted
     from .namespace_deleted_queued import NamespaceDeletedQueued
     from .namespace_details import NamespaceDetails
-    from .namespace_system import NamespaceSystem
+    from .namespace_details_system import NamespaceDetailsSystem
     from .organization import Organization
     from .pagination import Pagination
     from .profile import Profile
@@ -107,23 +107,26 @@ if typing.TYPE_CHECKING:
     from .related_memory import RelatedMemory
     from .related_memory_system import RelatedMemorySystem
     from .s3config import S3Config
-    from .search_mode import SearchMode
-    from .search_request_attach import SearchRequestAttach
+    from .search_request_include import SearchRequestInclude
     from .search_request_rerank import SearchRequestRerank
+    from .search_request_search_mode import SearchRequestSearchMode
     from .search_response import SearchResponse
     from .search_result import SearchResult
     from .search_result_included import SearchResultIncluded
     from .search_result_included_document import SearchResultIncludedDocument
+    from .search_result_included_document_system import SearchResultIncludedDocumentSystem
     from .search_result_system import SearchResultSystem
     from .sort_order import SortOrder
-    from .task_type import TaskType
     from .validation_error_response import ValidationErrorResponse
     from .validation_error_response_error_item import ValidationErrorResponseErrorItem
     from .validation_error_response_error_item_path_item import ValidationErrorResponseErrorItemPathItem
     from .web_crawler_config import WebCrawlerConfig
 _dynamic_imports: typing.Dict[str, str] = {
+    "AddRequestDreaming": ".add_request_dreaming",
+    "AddRequestTaskType": ".add_request_task_type",
     "BadRequestErrorBody": ".bad_request_error_body",
     "BatchAddItemResult": ".batch_add_item_result",
+    "BatchAddItemResultStatus": ".batch_add_item_result_status",
     "BatchAddResult": ".batch_add_result",
     "Chunk": ".chunk",
     "ChunkListItem": ".chunk_list_item",
@@ -166,15 +169,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DeleteDocumentError": ".delete_document_error",
     "DeleteDocumentsResult": ".delete_documents_result",
     "Document": ".document",
-    "DocumentAttachment": ".document_attachment",
     "DocumentInput": ".document_input",
     "DocumentListItem": ".document_list_item",
+    "DocumentListItemSystem": ".document_list_item_system",
     "DocumentRef": ".document_ref",
+    "DocumentRefStatus": ".document_ref_status",
     "DocumentSystem": ".document_system",
-    "DreamingMode": ".dreaming_mode",
+    "DocumentSystemStatus": ".document_system_status",
     "ErrorResponse": ".error_response",
-    "FileType": ".file_type",
-    "FileUploadResult": ".file_upload_result",
     "FilterAnd": ".filter_and",
     "FilterArrayContains": ".filter_array_contains",
     "FilterArrayContainsOperator": ".filter_array_contains_operator",
@@ -196,8 +198,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GoogleDriveConfig": ".google_drive_config",
     "GoogleDriveConfigSyncScope": ".google_drive_config_sync_scope",
     "GranolaConfig": ".granola_config",
-    "ListRequestLimit": ".list_request_limit",
-    "ListRequestPage": ".list_request_page",
+    "ListRequestInclude": ".list_request_include",
     "ListResponse": ".list_response",
     "ListSort": ".list_sort",
     "ListType": ".list_type",
@@ -205,14 +206,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MemoryRelation": ".memory_relation",
     "MemorySystem": ".memory_system",
     "MetadataValue": ".metadata_value",
-    "Namespace": ".namespace",
     "NamespaceDeleted": ".namespace_deleted",
     "NamespaceDeletedDeleted": ".namespace_deleted_deleted",
     "NamespaceDeletedQueued": ".namespace_deleted_queued",
     "NamespaceDeleted_Deleted": ".namespace_deleted",
     "NamespaceDeleted_Queued": ".namespace_deleted",
     "NamespaceDetails": ".namespace_details",
-    "NamespaceSystem": ".namespace_system",
+    "NamespaceDetailsSystem": ".namespace_details_system",
     "Organization": ".organization",
     "Pagination": ".pagination",
     "Profile": ".profile",
@@ -223,16 +223,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RelatedMemory": ".related_memory",
     "RelatedMemorySystem": ".related_memory_system",
     "S3Config": ".s3config",
-    "SearchMode": ".search_mode",
-    "SearchRequestAttach": ".search_request_attach",
+    "SearchRequestInclude": ".search_request_include",
     "SearchRequestRerank": ".search_request_rerank",
+    "SearchRequestSearchMode": ".search_request_search_mode",
     "SearchResponse": ".search_response",
     "SearchResult": ".search_result",
     "SearchResultIncluded": ".search_result_included",
     "SearchResultIncludedDocument": ".search_result_included_document",
+    "SearchResultIncludedDocumentSystem": ".search_result_included_document_system",
     "SearchResultSystem": ".search_result_system",
     "SortOrder": ".sort_order",
-    "TaskType": ".task_type",
     "ValidationErrorResponse": ".validation_error_response",
     "ValidationErrorResponseErrorItem": ".validation_error_response_error_item",
     "ValidationErrorResponseErrorItemPathItem": ".validation_error_response_error_item_path_item",
@@ -262,8 +262,11 @@ def __dir__():
 
 
 __all__ = [
+    "AddRequestDreaming",
+    "AddRequestTaskType",
     "BadRequestErrorBody",
     "BatchAddItemResult",
+    "BatchAddItemResultStatus",
     "BatchAddResult",
     "Chunk",
     "ChunkListItem",
@@ -306,15 +309,14 @@ __all__ = [
     "DeleteDocumentError",
     "DeleteDocumentsResult",
     "Document",
-    "DocumentAttachment",
     "DocumentInput",
     "DocumentListItem",
+    "DocumentListItemSystem",
     "DocumentRef",
+    "DocumentRefStatus",
     "DocumentSystem",
-    "DreamingMode",
+    "DocumentSystemStatus",
     "ErrorResponse",
-    "FileType",
-    "FileUploadResult",
     "FilterAnd",
     "FilterArrayContains",
     "FilterArrayContainsOperator",
@@ -336,8 +338,7 @@ __all__ = [
     "GoogleDriveConfig",
     "GoogleDriveConfigSyncScope",
     "GranolaConfig",
-    "ListRequestLimit",
-    "ListRequestPage",
+    "ListRequestInclude",
     "ListResponse",
     "ListSort",
     "ListType",
@@ -345,14 +346,13 @@ __all__ = [
     "MemoryRelation",
     "MemorySystem",
     "MetadataValue",
-    "Namespace",
     "NamespaceDeleted",
     "NamespaceDeletedDeleted",
     "NamespaceDeletedQueued",
     "NamespaceDeleted_Deleted",
     "NamespaceDeleted_Queued",
     "NamespaceDetails",
-    "NamespaceSystem",
+    "NamespaceDetailsSystem",
     "Organization",
     "Pagination",
     "Profile",
@@ -363,16 +363,16 @@ __all__ = [
     "RelatedMemory",
     "RelatedMemorySystem",
     "S3Config",
-    "SearchMode",
-    "SearchRequestAttach",
+    "SearchRequestInclude",
     "SearchRequestRerank",
+    "SearchRequestSearchMode",
     "SearchResponse",
     "SearchResult",
     "SearchResultIncluded",
     "SearchResultIncludedDocument",
+    "SearchResultIncludedDocumentSystem",
     "SearchResultSystem",
     "SortOrder",
-    "TaskType",
     "ValidationErrorResponse",
     "ValidationErrorResponseErrorItem",
     "ValidationErrorResponseErrorItemPathItem",

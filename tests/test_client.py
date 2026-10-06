@@ -73,8 +73,8 @@ def test_body_uses_api_field_names() -> None:
     captured: Captured = []
     _client(captured).search("user_alex", query="meetings", limit=5, rewrite_query=True)
     (request,) = captured
-    assert request.url.params["limit"] == "5"
-    assert _body(request) == {"query": "meetings", "rewriteQuery": True}
+    assert "limit" not in request.url.params
+    assert _body(request) == {"query": "meetings", "limit": 5, "rewriteQuery": True}
 
 
 def test_nested_dict_params_use_api_field_names() -> None:

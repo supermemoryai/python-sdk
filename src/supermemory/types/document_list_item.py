@@ -5,7 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .document_system import DocumentSystem
+from .document_list_item_system import DocumentListItemSystem
 
 
 class DocumentListItem(UncheckedBaseModel):
@@ -43,7 +43,7 @@ class DocumentListItem(UncheckedBaseModel):
     Original source URL, when the document was ingested from the web
     """
 
-    system: DocumentSystem = pydantic.Field()
+    system: DocumentListItemSystem = pydantic.Field()
     """
     Processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """

@@ -10,11 +10,6 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class NamespaceDeletedQueued(UncheckedBaseModel):
-    success: typing.Literal[True] = pydantic.Field(default=True)
-    """
-    Confirms the namespace move was accepted
-    """
-
     operation_id: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="operationId"),

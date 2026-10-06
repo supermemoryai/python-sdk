@@ -8,6 +8,7 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .document_system_status import DocumentSystemStatus
 
 
 class DocumentSystem(UncheckedBaseModel):
@@ -15,7 +16,7 @@ class DocumentSystem(UncheckedBaseModel):
     Processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """
 
-    status: str = pydantic.Field()
+    status: DocumentSystemStatus = pydantic.Field()
     """
     Current extraction and memory-processing status
     """

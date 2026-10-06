@@ -8,6 +8,11 @@ from .related_memory_system import RelatedMemorySystemParams
 
 
 class RelatedMemoryParams(typing_extensions.TypedDict):
+    id: str
+    """
+    Related memory ID
+    """
+
     relation: MemoryRelation
     """
     How this memory is connected to the matched memory
@@ -23,7 +28,7 @@ class RelatedMemoryParams(typing_extensions.TypedDict):
     Related learned fact or context
     """
 
-    metadata: typing_extensions.NotRequired[typing.Optional[typing.Dict[str, typing.Any]]]
+    metadata: typing.Dict[str, typing.Any]
     """
     Public metadata associated with the related memory
     """

@@ -10,7 +10,7 @@ from .related_memory import RelatedMemory
 
 class RelatedMemories(UncheckedBaseModel):
     """
-    Memory relationships attached when requested
+    Memory relationships included when requested
     """
 
     parents: typing.List[RelatedMemory] = pydantic.Field()

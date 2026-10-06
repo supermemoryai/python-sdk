@@ -11,17 +11,17 @@ from .batch_add_item_result import BatchAddItemResult
 class BatchAddResult(UncheckedBaseModel):
     results: typing.List[BatchAddItemResult] = pydantic.Field()
     """
-    Array of results for each document in the batch
+    One result per submitted document: accepted documents first, in request order, then failed ones. Match results by id, or by url for a failed item with no id.
     """
 
-    failed: float = pydantic.Field()
+    count: int = pydantic.Field()
     """
-    Count of documents that failed to add
+    Number of documents accepted
     """
 
-    success: float = pydantic.Field()
+    failed: int = pydantic.Field()
     """
-    Count of documents successfully added
+    Number of documents that failed
     """
 
     if IS_PYDANTIC_V2:

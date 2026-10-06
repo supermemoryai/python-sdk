@@ -9,15 +9,15 @@ from .batch_add_item_result import BatchAddItemResultParams
 class BatchAddResultParams(typing_extensions.TypedDict):
     results: typing.Sequence[BatchAddItemResultParams]
     """
-    Array of results for each document in the batch
+    One result per submitted document: accepted documents first, in request order, then failed ones. Match results by id, or by url for a failed item with no id.
     """
 
-    failed: float
+    count: int
     """
-    Count of documents that failed to add
+    Number of documents accepted
     """
 
-    success: float
+    failed: int
     """
-    Count of documents successfully added
+    Number of documents that failed
     """

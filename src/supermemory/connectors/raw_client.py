@@ -33,6 +33,7 @@ from ..types.connector_provider import ConnectorProvider
 from ..types.connector_setup_result import ConnectorSetupResult
 from ..types.connector_sync_started import ConnectorSyncStarted
 from ..types.error_response import ErrorResponse
+from .types.get_connectors_request_include_item import GetConnectorsRequestIncludeItem
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -392,7 +393,9 @@ class RawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[str] = None,
+        include: typing.Optional[
+            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
+        ] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -401,7 +404,7 @@ class RawConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[Connector]:
         """
-        Read one connector. Add attach=syncs to include its recent sync runs and the items that failed. attach=picker needs an admin with write access, since the link changes what syncs.
+        Read one connector. Add include=syncs to include its recent sync runs and the items that failed. include=picker needs an admin with write access, since the link changes what syncs.
 
         Parameters
         ----------
@@ -411,7 +414,7 @@ class RawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        attach : typing.Optional[str]
+        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -429,7 +432,7 @@ class RawConnectorsClient:
             f"ns/{encode_path_param(namespace)}/connectors/{encode_path_param(id)}",
             method="GET",
             params={
-                "attach": attach,
+                "include": include,
                 "returnUrl": return_url,
             },
             request_options=request_options,
@@ -1247,7 +1250,9 @@ class AsyncRawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[str] = None,
+        include: typing.Optional[
+            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
+        ] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -1256,7 +1261,7 @@ class AsyncRawConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[Connector]:
         """
-        Read one connector. Add attach=syncs to include its recent sync runs and the items that failed. attach=picker needs an admin with write access, since the link changes what syncs.
+        Read one connector. Add include=syncs to include its recent sync runs and the items that failed. include=picker needs an admin with write access, since the link changes what syncs.
 
         Parameters
         ----------
@@ -1266,7 +1271,7 @@ class AsyncRawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        attach : typing.Optional[str]
+        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -1284,7 +1289,7 @@ class AsyncRawConnectorsClient:
             f"ns/{encode_path_param(namespace)}/connectors/{encode_path_param(id)}",
             method="GET",
             params={
-                "attach": attach,
+                "include": include,
                 "returnUrl": return_url,
             },
             request_options=request_options,

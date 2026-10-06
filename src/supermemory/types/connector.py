@@ -103,12 +103,12 @@ class Connector(UncheckedBaseModel):
     ]
     syncs: typing.Optional[typing.List[ConnectorSync]] = pydantic.Field(default=None)
     """
-    Present when attach=syncs
+    Present when include=syncs
     """
 
     picker: typing.Optional[ConnectorPicker] = pydantic.Field(default=None)
     """
-    Present when attach=picker. Null for connectors that sync everything.
+    Present when include=picker. Null for connectors that sync everything.
     """
 
     if IS_PYDANTIC_V2:

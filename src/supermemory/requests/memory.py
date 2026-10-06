@@ -22,9 +22,9 @@ class MemoryParams(typing_extensions.TypedDict):
     Learned fact or context extracted from the document
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]]
+    metadata: typing.Dict[str, typing.Any]
     """
-    Memory metadata, including temporal context when available
+    Memory metadata, including temporal context; empty object when none
     """
 
     is_static: typing_extensions.Annotated[bool, FieldMetadata(alias="isStatic")]

@@ -10,6 +10,8 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.forget_result import ForgetResult
 from .raw_client import AsyncRawMemoriesClient, RawMemoriesClient
+from .types.get_memories_request_include_item import GetMemoriesRequestIncludeItem
+from .types.get_memories_response import GetMemoriesResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -124,6 +126,63 @@ class MemoriesClient:
         """
         _response = self._raw_client.forget_matching(
             namespace, query=query, dry_run=dry_run, request_options=request_options
+        )
+        return _response.data
+
+    def get(
+        self,
+        namespace: str,
+        id: str,
+        *,
+        include: typing.Optional[
+            typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]
+        ] = None,
+        related_limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> GetMemoriesResponse:
+        """
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+
+        Parameters
+        ----------
+        namespace : str
+            Namespace containing the memories to forget. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope memories.
+
+        id : str
+            Memory identifier
+
+        include : typing.Optional[typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]]
+            Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+
+        related_limit : typing.Optional[int]
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetMemoriesResponse
+            Memory retrieved
+
+        Examples
+        --------
+        from supermemory import Supermemory
+
+        client = Supermemory(
+            api_key="YOUR_API_KEY",
+        )
+        client.memories.get(
+            namespace="user_alex",
+            id="mem_abc123",
+        )
+        """
+        _response = self._raw_client.get(
+            namespace, id, include=include, related_limit=related_limit, request_options=request_options
         )
         return _response.data
 
@@ -253,5 +312,70 @@ class AsyncMemoriesClient:
         """
         _response = await self._raw_client.forget_matching(
             namespace, query=query, dry_run=dry_run, request_options=request_options
+        )
+        return _response.data
+
+    async def get(
+        self,
+        namespace: str,
+        id: str,
+        *,
+        include: typing.Optional[
+            typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]
+        ] = None,
+        related_limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> GetMemoriesResponse:
+        """
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+
+        Parameters
+        ----------
+        namespace : str
+            Namespace containing the memories to forget. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope memories.
+
+        id : str
+            Memory identifier
+
+        include : typing.Optional[typing.Union[GetMemoriesRequestIncludeItem, typing.Sequence[GetMemoriesRequestIncludeItem]]]
+            Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+
+        related_limit : typing.Optional[int]
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetMemoriesResponse
+            Memory retrieved
+
+        Examples
+        --------
+        import asyncio
+
+        from supermemory import AsyncSupermemory
+
+        client = AsyncSupermemory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.memories.get(
+                namespace="user_alex",
+                id="mem_abc123",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get(
+            namespace, id, include=include, related_limit=related_limit, request_options=request_options
         )
         return _response.data

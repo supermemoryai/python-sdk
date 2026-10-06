@@ -12,10 +12,10 @@ class SearchResultIncludedParams(typing_extensions.TypedDict):
 
     related: typing_extensions.NotRequired[RelatedMemoriesParams]
     """
-    Memory relationships attached when requested
+    Memory relationships included when requested
     """
 
     document: typing_extensions.NotRequired[SearchResultIncludedDocumentParams]
     """
-    Source document attached when requested and available
+    Source document included when requested and available
     """

@@ -5,17 +5,18 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .document_ref_status import DocumentRefStatus
 
 
 class DocumentRef(UncheckedBaseModel):
     id: str = pydantic.Field()
     """
-    Unique identifier of the document
+    Document identifier to poll or retrieve
     """
 
-    status: str = pydantic.Field()
+    status: DocumentRefStatus = pydantic.Field()
     """
-    Status of the document
+    The document's processing state after this request. queued when new work was queued; otherwise its current state, e.g. done for an unchanged duplicate or failed for a metadata-only update to a failed document.
     """
 
     if IS_PYDANTIC_V2:

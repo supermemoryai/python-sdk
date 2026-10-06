@@ -7,7 +7,7 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .namespace_system import NamespaceSystem
+from .namespace_details_system import NamespaceDetailsSystem
 
 
 class NamespaceDetails(UncheckedBaseModel):
@@ -28,7 +28,7 @@ class NamespaceDetails(UncheckedBaseModel):
     Background that helps Supermemory interpret documents and form better memories in this namespace
     """
 
-    system: NamespaceSystem = pydantic.Field()
+    system: NamespaceDetailsSystem = pydantic.Field()
     """
     Namespace lifecycle timestamps
     """
