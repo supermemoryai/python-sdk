@@ -9,7 +9,7 @@ The official Python library for the [Supermemory](https://supermemory.ai) v5 API
 ## Installation
 
 ```sh
-pip install --pre supermemory   # 5.0 release candidates
+pip install supermemory
 ```
 
 ## Usage
