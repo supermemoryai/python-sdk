@@ -15,18 +15,15 @@
 # bodies stay inline because their fields become keyword arguments.
 
 # --- enums
-TaskType: POST /ns/{namespace}/document param:taskType
-DreamingMode: POST /ns/{namespace}/document param:dreaming
-FileType: POST /ns/{namespace}/document/file param:fileType
-SearchMode: POST /ns/{namespace}/search param:searchMode
+TaskType: POST /ns/{namespace}/document body.taskType
+DreamingMode: POST /ns/{namespace}/document body.dreaming
+FileType: POST /ns/{namespace}/document/file body.fileType
+SearchMode: POST /ns/{namespace}/search body.searchMode
 ListType: POST /ns/{namespace}/list/{type} param:type
 ListSort: POST /ns/{namespace}/list/{type} param:sort
 SortOrder: POST /ns/{namespace}/list/{type} param:order
 MemoryRelation: POST /ns/{namespace}/search 200.results[].included.related.parents[].relation
 ConnectorProvider: GET /connectors param:provider
-ConnectorStatus: GET /ns/{namespace}/connectors/{id} 200.status
-ConnectorSyncStatus: GET /ns/{namespace}/connectors/{id} 200.lastSync?.status
-ConnectorErrorCode: GET /ns/{namespace}/connectors/{id} 200.lastSync?.errorCode?
 ConnectorSyncTrigger: GET /ns/{namespace}/connectors/{id} 200.syncs[].trigger
 
 # --- filters
@@ -46,13 +43,17 @@ BatchAddResult: POST /ns/{namespace}/document/batch 200
 BatchAddItemResult: POST /ns/{namespace}/document/batch 200.results[]
 DeleteDocumentsResult: DELETE /ns/{namespace}/document 200
 DeleteDocumentError: DELETE /ns/{namespace}/document 200.errors[]
-DocumentAttachment: GET /ns/{namespace}/document/{id} param:attach[]
-FileUploadResult: POST /ns/{namespace}/document/file 200
+DocumentInclude: GET /ns/{namespace}/document/{id} param:include[]
+SearchInclude: POST /ns/{namespace}/search body.include
+MemoryInclude: GET /ns/{namespace}/memories/{id} param:include[]
+ConnectorInclude: GET /ns/{namespace}/connectors/{id} param:include[]
 Document: GET /ns/{namespace}/document/{id} 200
 DocumentSystem: GET /ns/{namespace}/document/{id} 200.system
 Chunk: GET /ns/{namespace}/document/{id} 200.chunks[]
 ChunkSystem: GET /ns/{namespace}/document/{id} 200.chunks[].system
 Memory: GET /ns/{namespace}/document/{id} 200.memories[]
+MemoryIncluded: GET /ns/{namespace}/memories/{id} 200.included
+MemoryDetails: GET /ns/{namespace}/memories/{id} 200
 MemorySystem: GET /ns/{namespace}/document/{id} 200.memories[].system
 
 # --- list
@@ -77,12 +78,16 @@ ForgetError: DELETE /ns/{namespace}/memories 200.errors[]
 ForgetMatch: DELETE /ns/{namespace}/memories 200.matches[]
 
 # --- connectors
+ConnectorStatus: GET /ns/{namespace}/connectors/{id} 200.system.status
+ConnectorRunStatus: GET /ns/{namespace}/connectors/{id} 200.latestRun?.system.status
+ConnectorErrorCode: GET /ns/{namespace}/connectors/{id} 200.latestRun?.errorCode?
+ConnectorRun: GET /ns/{namespace}/connectors/{id} 200.latestRun?
+ConnectorSystem: GET /ns/{namespace}/connectors/{id} 200.system
 Connector: GET /ns/{namespace}/connectors/{id} 200
 ConnectorList: GET /connectors 200
 ConnectorCapabilities: GET /ns/{namespace}/connectors/{id} 200.capabilities
-ConnectorPicker: GET /ns/{namespace}/connectors/{id} 200.picker?
+ConnectorLink: GET /ns/{namespace}/connectors/{id} 200.picker?  # same {url, expiresAt} shape as authorization
 ConnectorSelectionItem: GET /ns/{namespace}/connectors/{id} 200.selection?{}[]
-ConnectorLastSync: GET /ns/{namespace}/connectors/{id} 200.lastSync?
 ConnectorSync: GET /ns/{namespace}/connectors/{id} 200.syncs[]
 ConnectorSyncFailure: GET /ns/{namespace}/connectors/{id} 200.syncs[].failures[]
 ConnectorSelection: PATCH /ns/{namespace}/connectors/{id} body.selection
@@ -96,8 +101,9 @@ ConnectorSyncStarted: POST /ns/{namespace}/connectors/{id}/sync 202
 ConnectorDeleted: DELETE /ns/{namespace}/connectors/{id} 200
 
 # --- namespaces and organization
-Namespace: GET /ns 200[]
-NamespaceSystem: GET /ns 200[].system
+NamespaceList: GET /ns 200
+Namespace: GET /ns 200.namespaces[]
+NamespaceSystem: GET /ns 200.namespaces[].system
 NamespaceDetails: GET /ns/{namespace} 200
 NamespaceDeleted: DELETE /ns/{namespace} 200
 Organization: GET /organization 200

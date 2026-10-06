@@ -28,12 +28,12 @@ from ..requests.connector_setup import ConnectorSetupParams
 from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.connector import Connector
 from ..types.connector_deleted import ConnectorDeleted
+from ..types.connector_include import ConnectorInclude
 from ..types.connector_list import ConnectorList
 from ..types.connector_provider import ConnectorProvider
 from ..types.connector_setup_result import ConnectorSetupResult
 from ..types.connector_sync_started import ConnectorSyncStarted
 from ..types.error_response import ErrorResponse
-from .types.get_connectors_request_include_item import GetConnectorsRequestIncludeItem
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -274,7 +274,7 @@ class RawConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> HttpResponse[ConnectorSetupResult]:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -393,9 +393,7 @@ class RawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -414,7 +412,7 @@ class RawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -1131,7 +1129,7 @@ class AsyncRawConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> AsyncHttpResponse[ConnectorSetupResult]:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -1250,9 +1248,7 @@ class AsyncRawConnectorsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -1271,7 +1267,7 @@ class AsyncRawConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        include : typing.Optional[typing.Union[GetConnectorsRequestIncludeItem, typing.Sequence[GetConnectorsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]

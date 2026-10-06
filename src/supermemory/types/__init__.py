@@ -6,8 +6,6 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .add_request_dreaming import AddRequestDreaming
-    from .add_request_task_type import AddRequestTaskType
     from .bad_request_error_body import BadRequestErrorBody
     from .batch_add_item_result import BatchAddItemResult
     from .batch_add_item_result_status import BatchAddItemResultStatus
@@ -20,10 +18,13 @@ if typing.TYPE_CHECKING:
     from .connector_config_value import ConnectorConfigValue
     from .connector_deleted import ConnectorDeleted
     from .connector_error_code import ConnectorErrorCode
-    from .connector_last_sync import ConnectorLastSync
+    from .connector_include import ConnectorInclude
+    from .connector_link import ConnectorLink
     from .connector_list import ConnectorList
-    from .connector_picker import ConnectorPicker
     from .connector_provider import ConnectorProvider
+    from .connector_run import ConnectorRun
+    from .connector_run_status import ConnectorRunStatus
+    from .connector_run_system import ConnectorRunSystem
     from .connector_selection import ConnectorSelection
     from .connector_selection_item import ConnectorSelectionItem
     from .connector_setup import (
@@ -50,11 +51,13 @@ if typing.TYPE_CHECKING:
     from .connector_sync import ConnectorSync
     from .connector_sync_failure import ConnectorSyncFailure
     from .connector_sync_started import ConnectorSyncStarted
-    from .connector_sync_status import ConnectorSyncStatus
+    from .connector_sync_system import ConnectorSyncSystem
     from .connector_sync_trigger import ConnectorSyncTrigger
+    from .connector_system import ConnectorSystem
     from .delete_document_error import DeleteDocumentError
     from .delete_documents_result import DeleteDocumentsResult
     from .document import Document
+    from .document_include import DocumentInclude
     from .document_input import DocumentInput
     from .document_list_item import DocumentListItem
     from .document_list_item_system import DocumentListItemSystem
@@ -62,7 +65,9 @@ if typing.TYPE_CHECKING:
     from .document_ref_status import DocumentRefStatus
     from .document_system import DocumentSystem
     from .document_system_status import DocumentSystemStatus
+    from .dreaming_mode import DreamingMode
     from .error_response import ErrorResponse
+    from .file_type import FileType
     from .filter_and import FilterAnd
     from .filter_array_contains import FilterArrayContains
     from .filter_array_contains_operator import FilterArrayContainsOperator
@@ -89,14 +94,34 @@ if typing.TYPE_CHECKING:
     from .list_sort import ListSort
     from .list_type import ListType
     from .memory import Memory
+    from .memory_details import MemoryDetails
+    from .memory_include import MemoryInclude
+    from .memory_included import MemoryIncluded
+    from .memory_included_document import MemoryIncludedDocument
+    from .memory_included_document_system import MemoryIncludedDocumentSystem
+    from .memory_included_related import MemoryIncludedRelated
+    from .memory_included_related_children_item import MemoryIncludedRelatedChildrenItem
+    from .memory_included_related_children_item_document import MemoryIncludedRelatedChildrenItemDocument
+    from .memory_included_related_children_item_document_system import MemoryIncludedRelatedChildrenItemDocumentSystem
+    from .memory_included_related_children_item_system import MemoryIncludedRelatedChildrenItemSystem
+    from .memory_included_related_parents_item import MemoryIncludedRelatedParentsItem
+    from .memory_included_related_parents_item_document import MemoryIncludedRelatedParentsItemDocument
+    from .memory_included_related_parents_item_document_system import MemoryIncludedRelatedParentsItemDocumentSystem
+    from .memory_included_related_parents_item_system import MemoryIncludedRelatedParentsItemSystem
+    from .memory_included_related_siblings_item import MemoryIncludedRelatedSiblingsItem
+    from .memory_included_related_siblings_item_document import MemoryIncludedRelatedSiblingsItemDocument
+    from .memory_included_related_siblings_item_document_system import MemoryIncludedRelatedSiblingsItemDocumentSystem
+    from .memory_included_related_siblings_item_system import MemoryIncludedRelatedSiblingsItemSystem
     from .memory_relation import MemoryRelation
     from .memory_system import MemorySystem
     from .metadata_value import MetadataValue
+    from .namespace import Namespace
     from .namespace_deleted import NamespaceDeleted, NamespaceDeleted_Deleted, NamespaceDeleted_Queued
     from .namespace_deleted_deleted import NamespaceDeletedDeleted
     from .namespace_deleted_queued import NamespaceDeletedQueued
     from .namespace_details import NamespaceDetails
-    from .namespace_details_system import NamespaceDetailsSystem
+    from .namespace_list import NamespaceList
+    from .namespace_system import NamespaceSystem
     from .organization import Organization
     from .pagination import Pagination
     from .profile import Profile
@@ -107,9 +132,9 @@ if typing.TYPE_CHECKING:
     from .related_memory import RelatedMemory
     from .related_memory_system import RelatedMemorySystem
     from .s3config import S3Config
-    from .search_request_include import SearchRequestInclude
+    from .search_include import SearchInclude
+    from .search_mode import SearchMode
     from .search_request_rerank import SearchRequestRerank
-    from .search_request_search_mode import SearchRequestSearchMode
     from .search_response import SearchResponse
     from .search_result import SearchResult
     from .search_result_included import SearchResultIncluded
@@ -117,13 +142,12 @@ if typing.TYPE_CHECKING:
     from .search_result_included_document_system import SearchResultIncludedDocumentSystem
     from .search_result_system import SearchResultSystem
     from .sort_order import SortOrder
+    from .task_type import TaskType
     from .validation_error_response import ValidationErrorResponse
     from .validation_error_response_error_item import ValidationErrorResponseErrorItem
     from .validation_error_response_error_item_path_item import ValidationErrorResponseErrorItemPathItem
     from .web_crawler_config import WebCrawlerConfig
 _dynamic_imports: typing.Dict[str, str] = {
-    "AddRequestDreaming": ".add_request_dreaming",
-    "AddRequestTaskType": ".add_request_task_type",
     "BadRequestErrorBody": ".bad_request_error_body",
     "BatchAddItemResult": ".batch_add_item_result",
     "BatchAddItemResultStatus": ".batch_add_item_result_status",
@@ -136,10 +160,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorConfigValue": ".connector_config_value",
     "ConnectorDeleted": ".connector_deleted",
     "ConnectorErrorCode": ".connector_error_code",
-    "ConnectorLastSync": ".connector_last_sync",
+    "ConnectorInclude": ".connector_include",
+    "ConnectorLink": ".connector_link",
     "ConnectorList": ".connector_list",
-    "ConnectorPicker": ".connector_picker",
     "ConnectorProvider": ".connector_provider",
+    "ConnectorRun": ".connector_run",
+    "ConnectorRunStatus": ".connector_run_status",
+    "ConnectorRunSystem": ".connector_run_system",
     "ConnectorSelection": ".connector_selection",
     "ConnectorSelectionItem": ".connector_selection_item",
     "ConnectorSetup": ".connector_setup",
@@ -164,11 +191,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorSync": ".connector_sync",
     "ConnectorSyncFailure": ".connector_sync_failure",
     "ConnectorSyncStarted": ".connector_sync_started",
-    "ConnectorSyncStatus": ".connector_sync_status",
+    "ConnectorSyncSystem": ".connector_sync_system",
     "ConnectorSyncTrigger": ".connector_sync_trigger",
+    "ConnectorSystem": ".connector_system",
     "DeleteDocumentError": ".delete_document_error",
     "DeleteDocumentsResult": ".delete_documents_result",
     "Document": ".document",
+    "DocumentInclude": ".document_include",
     "DocumentInput": ".document_input",
     "DocumentListItem": ".document_list_item",
     "DocumentListItemSystem": ".document_list_item_system",
@@ -176,7 +205,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentRefStatus": ".document_ref_status",
     "DocumentSystem": ".document_system",
     "DocumentSystemStatus": ".document_system_status",
+    "DreamingMode": ".dreaming_mode",
     "ErrorResponse": ".error_response",
+    "FileType": ".file_type",
     "FilterAnd": ".filter_and",
     "FilterArrayContains": ".filter_array_contains",
     "FilterArrayContainsOperator": ".filter_array_contains_operator",
@@ -203,16 +234,36 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ListSort": ".list_sort",
     "ListType": ".list_type",
     "Memory": ".memory",
+    "MemoryDetails": ".memory_details",
+    "MemoryInclude": ".memory_include",
+    "MemoryIncluded": ".memory_included",
+    "MemoryIncludedDocument": ".memory_included_document",
+    "MemoryIncludedDocumentSystem": ".memory_included_document_system",
+    "MemoryIncludedRelated": ".memory_included_related",
+    "MemoryIncludedRelatedChildrenItem": ".memory_included_related_children_item",
+    "MemoryIncludedRelatedChildrenItemDocument": ".memory_included_related_children_item_document",
+    "MemoryIncludedRelatedChildrenItemDocumentSystem": ".memory_included_related_children_item_document_system",
+    "MemoryIncludedRelatedChildrenItemSystem": ".memory_included_related_children_item_system",
+    "MemoryIncludedRelatedParentsItem": ".memory_included_related_parents_item",
+    "MemoryIncludedRelatedParentsItemDocument": ".memory_included_related_parents_item_document",
+    "MemoryIncludedRelatedParentsItemDocumentSystem": ".memory_included_related_parents_item_document_system",
+    "MemoryIncludedRelatedParentsItemSystem": ".memory_included_related_parents_item_system",
+    "MemoryIncludedRelatedSiblingsItem": ".memory_included_related_siblings_item",
+    "MemoryIncludedRelatedSiblingsItemDocument": ".memory_included_related_siblings_item_document",
+    "MemoryIncludedRelatedSiblingsItemDocumentSystem": ".memory_included_related_siblings_item_document_system",
+    "MemoryIncludedRelatedSiblingsItemSystem": ".memory_included_related_siblings_item_system",
     "MemoryRelation": ".memory_relation",
     "MemorySystem": ".memory_system",
     "MetadataValue": ".metadata_value",
+    "Namespace": ".namespace",
     "NamespaceDeleted": ".namespace_deleted",
     "NamespaceDeletedDeleted": ".namespace_deleted_deleted",
     "NamespaceDeletedQueued": ".namespace_deleted_queued",
     "NamespaceDeleted_Deleted": ".namespace_deleted",
     "NamespaceDeleted_Queued": ".namespace_deleted",
     "NamespaceDetails": ".namespace_details",
-    "NamespaceDetailsSystem": ".namespace_details_system",
+    "NamespaceList": ".namespace_list",
+    "NamespaceSystem": ".namespace_system",
     "Organization": ".organization",
     "Pagination": ".pagination",
     "Profile": ".profile",
@@ -223,9 +274,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RelatedMemory": ".related_memory",
     "RelatedMemorySystem": ".related_memory_system",
     "S3Config": ".s3config",
-    "SearchRequestInclude": ".search_request_include",
+    "SearchInclude": ".search_include",
+    "SearchMode": ".search_mode",
     "SearchRequestRerank": ".search_request_rerank",
-    "SearchRequestSearchMode": ".search_request_search_mode",
     "SearchResponse": ".search_response",
     "SearchResult": ".search_result",
     "SearchResultIncluded": ".search_result_included",
@@ -233,6 +284,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SearchResultIncludedDocumentSystem": ".search_result_included_document_system",
     "SearchResultSystem": ".search_result_system",
     "SortOrder": ".sort_order",
+    "TaskType": ".task_type",
     "ValidationErrorResponse": ".validation_error_response",
     "ValidationErrorResponseErrorItem": ".validation_error_response_error_item",
     "ValidationErrorResponseErrorItemPathItem": ".validation_error_response_error_item_path_item",
@@ -262,8 +314,6 @@ def __dir__():
 
 
 __all__ = [
-    "AddRequestDreaming",
-    "AddRequestTaskType",
     "BadRequestErrorBody",
     "BatchAddItemResult",
     "BatchAddItemResultStatus",
@@ -276,10 +326,13 @@ __all__ = [
     "ConnectorConfigValue",
     "ConnectorDeleted",
     "ConnectorErrorCode",
-    "ConnectorLastSync",
+    "ConnectorInclude",
+    "ConnectorLink",
     "ConnectorList",
-    "ConnectorPicker",
     "ConnectorProvider",
+    "ConnectorRun",
+    "ConnectorRunStatus",
+    "ConnectorRunSystem",
     "ConnectorSelection",
     "ConnectorSelectionItem",
     "ConnectorSetup",
@@ -304,11 +357,13 @@ __all__ = [
     "ConnectorSync",
     "ConnectorSyncFailure",
     "ConnectorSyncStarted",
-    "ConnectorSyncStatus",
+    "ConnectorSyncSystem",
     "ConnectorSyncTrigger",
+    "ConnectorSystem",
     "DeleteDocumentError",
     "DeleteDocumentsResult",
     "Document",
+    "DocumentInclude",
     "DocumentInput",
     "DocumentListItem",
     "DocumentListItemSystem",
@@ -316,7 +371,9 @@ __all__ = [
     "DocumentRefStatus",
     "DocumentSystem",
     "DocumentSystemStatus",
+    "DreamingMode",
     "ErrorResponse",
+    "FileType",
     "FilterAnd",
     "FilterArrayContains",
     "FilterArrayContainsOperator",
@@ -343,16 +400,36 @@ __all__ = [
     "ListSort",
     "ListType",
     "Memory",
+    "MemoryDetails",
+    "MemoryInclude",
+    "MemoryIncluded",
+    "MemoryIncludedDocument",
+    "MemoryIncludedDocumentSystem",
+    "MemoryIncludedRelated",
+    "MemoryIncludedRelatedChildrenItem",
+    "MemoryIncludedRelatedChildrenItemDocument",
+    "MemoryIncludedRelatedChildrenItemDocumentSystem",
+    "MemoryIncludedRelatedChildrenItemSystem",
+    "MemoryIncludedRelatedParentsItem",
+    "MemoryIncludedRelatedParentsItemDocument",
+    "MemoryIncludedRelatedParentsItemDocumentSystem",
+    "MemoryIncludedRelatedParentsItemSystem",
+    "MemoryIncludedRelatedSiblingsItem",
+    "MemoryIncludedRelatedSiblingsItemDocument",
+    "MemoryIncludedRelatedSiblingsItemDocumentSystem",
+    "MemoryIncludedRelatedSiblingsItemSystem",
     "MemoryRelation",
     "MemorySystem",
     "MetadataValue",
+    "Namespace",
     "NamespaceDeleted",
     "NamespaceDeletedDeleted",
     "NamespaceDeletedQueued",
     "NamespaceDeleted_Deleted",
     "NamespaceDeleted_Queued",
     "NamespaceDetails",
-    "NamespaceDetailsSystem",
+    "NamespaceList",
+    "NamespaceSystem",
     "Organization",
     "Pagination",
     "Profile",
@@ -363,9 +440,9 @@ __all__ = [
     "RelatedMemory",
     "RelatedMemorySystem",
     "S3Config",
-    "SearchRequestInclude",
+    "SearchInclude",
+    "SearchMode",
     "SearchRequestRerank",
-    "SearchRequestSearchMode",
     "SearchResponse",
     "SearchResult",
     "SearchResultIncluded",
@@ -373,6 +450,7 @@ __all__ = [
     "SearchResultIncludedDocumentSystem",
     "SearchResultSystem",
     "SortOrder",
+    "TaskType",
     "ValidationErrorResponse",
     "ValidationErrorResponseErrorItem",
     "ValidationErrorResponseErrorItemPathItem",

@@ -16,9 +16,10 @@ if typing.TYPE_CHECKING:
     from .connector_capabilities import ConnectorCapabilitiesParams
     from .connector_config_value import ConnectorConfigValueParams
     from .connector_deleted import ConnectorDeletedParams
-    from .connector_last_sync import ConnectorLastSyncParams
+    from .connector_link import ConnectorLinkParams
     from .connector_list import ConnectorListParams
-    from .connector_picker import ConnectorPickerParams
+    from .connector_run import ConnectorRunParams
+    from .connector_run_system import ConnectorRunSystemParams
     from .connector_selection import ConnectorSelectionParams
     from .connector_selection_item import ConnectorSelectionItemParams
     from .connector_setup import (
@@ -44,6 +45,8 @@ if typing.TYPE_CHECKING:
     from .connector_sync import ConnectorSyncParams
     from .connector_sync_failure import ConnectorSyncFailureParams
     from .connector_sync_started import ConnectorSyncStartedParams
+    from .connector_sync_system import ConnectorSyncSystemParams
+    from .connector_system import ConnectorSystemParams
     from .delete_document_error import DeleteDocumentErrorParams
     from .delete_documents_result import DeleteDocumentsResultParams
     from .document import DocumentParams
@@ -71,13 +74,38 @@ if typing.TYPE_CHECKING:
     from .list_request_include import ListRequestIncludeParams
     from .list_response import ListResponseParams
     from .memory import MemoryParams
+    from .memory_details import MemoryDetailsParams
+    from .memory_included import MemoryIncludedParams
+    from .memory_included_document import MemoryIncludedDocumentParams
+    from .memory_included_document_system import MemoryIncludedDocumentSystemParams
+    from .memory_included_related import MemoryIncludedRelatedParams
+    from .memory_included_related_children_item import MemoryIncludedRelatedChildrenItemParams
+    from .memory_included_related_children_item_document import MemoryIncludedRelatedChildrenItemDocumentParams
+    from .memory_included_related_children_item_document_system import (
+        MemoryIncludedRelatedChildrenItemDocumentSystemParams,
+    )
+    from .memory_included_related_children_item_system import MemoryIncludedRelatedChildrenItemSystemParams
+    from .memory_included_related_parents_item import MemoryIncludedRelatedParentsItemParams
+    from .memory_included_related_parents_item_document import MemoryIncludedRelatedParentsItemDocumentParams
+    from .memory_included_related_parents_item_document_system import (
+        MemoryIncludedRelatedParentsItemDocumentSystemParams,
+    )
+    from .memory_included_related_parents_item_system import MemoryIncludedRelatedParentsItemSystemParams
+    from .memory_included_related_siblings_item import MemoryIncludedRelatedSiblingsItemParams
+    from .memory_included_related_siblings_item_document import MemoryIncludedRelatedSiblingsItemDocumentParams
+    from .memory_included_related_siblings_item_document_system import (
+        MemoryIncludedRelatedSiblingsItemDocumentSystemParams,
+    )
+    from .memory_included_related_siblings_item_system import MemoryIncludedRelatedSiblingsItemSystemParams
     from .memory_system import MemorySystemParams
     from .metadata_value import MetadataValueParams
+    from .namespace import NamespaceParams
     from .namespace_deleted import NamespaceDeletedParams, NamespaceDeleted_DeletedParams, NamespaceDeleted_QueuedParams
     from .namespace_deleted_deleted import NamespaceDeletedDeletedParams
     from .namespace_deleted_queued import NamespaceDeletedQueuedParams
     from .namespace_details import NamespaceDetailsParams
-    from .namespace_details_system import NamespaceDetailsSystemParams
+    from .namespace_list import NamespaceListParams
+    from .namespace_system import NamespaceSystemParams
     from .organization import OrganizationParams
     from .pagination import PaginationParams
     from .profile import ProfileParams
@@ -88,7 +116,7 @@ if typing.TYPE_CHECKING:
     from .related_memory import RelatedMemoryParams
     from .related_memory_system import RelatedMemorySystemParams
     from .s3config import S3ConfigParams
-    from .search_request_include import SearchRequestIncludeParams
+    from .search_include import SearchIncludeParams
     from .search_response import SearchResponseParams
     from .search_result import SearchResultParams
     from .search_result_included import SearchResultIncludedParams
@@ -109,10 +137,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorCapabilitiesParams": ".connector_capabilities",
     "ConnectorConfigValueParams": ".connector_config_value",
     "ConnectorDeletedParams": ".connector_deleted",
-    "ConnectorLastSyncParams": ".connector_last_sync",
+    "ConnectorLinkParams": ".connector_link",
     "ConnectorListParams": ".connector_list",
     "ConnectorParams": ".connector",
-    "ConnectorPickerParams": ".connector_picker",
+    "ConnectorRunParams": ".connector_run",
+    "ConnectorRunSystemParams": ".connector_run_system",
     "ConnectorSelectionItemParams": ".connector_selection_item",
     "ConnectorSelectionParams": ".connector_selection",
     "ConnectorSetupGithubParams": ".connector_setup_github",
@@ -136,6 +165,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorSyncFailureParams": ".connector_sync_failure",
     "ConnectorSyncParams": ".connector_sync",
     "ConnectorSyncStartedParams": ".connector_sync_started",
+    "ConnectorSyncSystemParams": ".connector_sync_system",
+    "ConnectorSystemParams": ".connector_system",
     "DeleteDocumentErrorParams": ".delete_document_error",
     "DeleteDocumentsResultParams": ".delete_documents_result",
     "DocumentInputParams": ".document_input",
@@ -162,6 +193,23 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GranolaConfigParams": ".granola_config",
     "ListRequestIncludeParams": ".list_request_include",
     "ListResponseParams": ".list_response",
+    "MemoryDetailsParams": ".memory_details",
+    "MemoryIncludedDocumentParams": ".memory_included_document",
+    "MemoryIncludedDocumentSystemParams": ".memory_included_document_system",
+    "MemoryIncludedParams": ".memory_included",
+    "MemoryIncludedRelatedChildrenItemDocumentParams": ".memory_included_related_children_item_document",
+    "MemoryIncludedRelatedChildrenItemDocumentSystemParams": ".memory_included_related_children_item_document_system",
+    "MemoryIncludedRelatedChildrenItemParams": ".memory_included_related_children_item",
+    "MemoryIncludedRelatedChildrenItemSystemParams": ".memory_included_related_children_item_system",
+    "MemoryIncludedRelatedParams": ".memory_included_related",
+    "MemoryIncludedRelatedParentsItemDocumentParams": ".memory_included_related_parents_item_document",
+    "MemoryIncludedRelatedParentsItemDocumentSystemParams": ".memory_included_related_parents_item_document_system",
+    "MemoryIncludedRelatedParentsItemParams": ".memory_included_related_parents_item",
+    "MemoryIncludedRelatedParentsItemSystemParams": ".memory_included_related_parents_item_system",
+    "MemoryIncludedRelatedSiblingsItemDocumentParams": ".memory_included_related_siblings_item_document",
+    "MemoryIncludedRelatedSiblingsItemDocumentSystemParams": ".memory_included_related_siblings_item_document_system",
+    "MemoryIncludedRelatedSiblingsItemParams": ".memory_included_related_siblings_item",
+    "MemoryIncludedRelatedSiblingsItemSystemParams": ".memory_included_related_siblings_item_system",
     "MemoryParams": ".memory",
     "MemorySystemParams": ".memory_system",
     "MetadataValueParams": ".metadata_value",
@@ -171,7 +219,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NamespaceDeleted_DeletedParams": ".namespace_deleted",
     "NamespaceDeleted_QueuedParams": ".namespace_deleted",
     "NamespaceDetailsParams": ".namespace_details",
-    "NamespaceDetailsSystemParams": ".namespace_details_system",
+    "NamespaceListParams": ".namespace_list",
+    "NamespaceParams": ".namespace",
+    "NamespaceSystemParams": ".namespace_system",
     "OrganizationParams": ".organization",
     "PaginationParams": ".pagination",
     "ProfileBucketsParams": ".profile_buckets",
@@ -182,7 +232,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RelatedMemoryParams": ".related_memory",
     "RelatedMemorySystemParams": ".related_memory_system",
     "S3ConfigParams": ".s3config",
-    "SearchRequestIncludeParams": ".search_request_include",
+    "SearchIncludeParams": ".search_include",
     "SearchResponseParams": ".search_response",
     "SearchResultIncludedDocumentParams": ".search_result_included_document",
     "SearchResultIncludedDocumentSystemParams": ".search_result_included_document_system",
@@ -227,10 +277,11 @@ __all__ = [
     "ConnectorCapabilitiesParams",
     "ConnectorConfigValueParams",
     "ConnectorDeletedParams",
-    "ConnectorLastSyncParams",
+    "ConnectorLinkParams",
     "ConnectorListParams",
     "ConnectorParams",
-    "ConnectorPickerParams",
+    "ConnectorRunParams",
+    "ConnectorRunSystemParams",
     "ConnectorSelectionItemParams",
     "ConnectorSelectionParams",
     "ConnectorSetupGithubParams",
@@ -254,6 +305,8 @@ __all__ = [
     "ConnectorSyncFailureParams",
     "ConnectorSyncParams",
     "ConnectorSyncStartedParams",
+    "ConnectorSyncSystemParams",
+    "ConnectorSystemParams",
     "DeleteDocumentErrorParams",
     "DeleteDocumentsResultParams",
     "DocumentInputParams",
@@ -280,6 +333,23 @@ __all__ = [
     "GranolaConfigParams",
     "ListRequestIncludeParams",
     "ListResponseParams",
+    "MemoryDetailsParams",
+    "MemoryIncludedDocumentParams",
+    "MemoryIncludedDocumentSystemParams",
+    "MemoryIncludedParams",
+    "MemoryIncludedRelatedChildrenItemDocumentParams",
+    "MemoryIncludedRelatedChildrenItemDocumentSystemParams",
+    "MemoryIncludedRelatedChildrenItemParams",
+    "MemoryIncludedRelatedChildrenItemSystemParams",
+    "MemoryIncludedRelatedParams",
+    "MemoryIncludedRelatedParentsItemDocumentParams",
+    "MemoryIncludedRelatedParentsItemDocumentSystemParams",
+    "MemoryIncludedRelatedParentsItemParams",
+    "MemoryIncludedRelatedParentsItemSystemParams",
+    "MemoryIncludedRelatedSiblingsItemDocumentParams",
+    "MemoryIncludedRelatedSiblingsItemDocumentSystemParams",
+    "MemoryIncludedRelatedSiblingsItemParams",
+    "MemoryIncludedRelatedSiblingsItemSystemParams",
     "MemoryParams",
     "MemorySystemParams",
     "MetadataValueParams",
@@ -289,7 +359,9 @@ __all__ = [
     "NamespaceDeleted_DeletedParams",
     "NamespaceDeleted_QueuedParams",
     "NamespaceDetailsParams",
-    "NamespaceDetailsSystemParams",
+    "NamespaceListParams",
+    "NamespaceParams",
+    "NamespaceSystemParams",
     "OrganizationParams",
     "PaginationParams",
     "ProfileBucketsParams",
@@ -300,7 +372,7 @@ __all__ = [
     "RelatedMemoryParams",
     "RelatedMemorySystemParams",
     "S3ConfigParams",
-    "SearchRequestIncludeParams",
+    "SearchIncludeParams",
     "SearchResponseParams",
     "SearchResultIncludedDocumentParams",
     "SearchResultIncludedDocumentSystemParams",

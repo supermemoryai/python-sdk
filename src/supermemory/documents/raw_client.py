@@ -29,22 +29,12 @@ from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.batch_add_result import BatchAddResult
 from ..types.delete_documents_result import DeleteDocumentsResult
 from ..types.document import Document
+from ..types.document_include import DocumentInclude
 from ..types.document_ref import DocumentRef
+from ..types.dreaming_mode import DreamingMode
 from ..types.error_response import ErrorResponse
-from .types.batch_add_documents_request_dreaming import BatchAddDocumentsRequestDreaming
-from .types.batch_add_documents_request_task_type import BatchAddDocumentsRequestTaskType
-from .types.get_documents_request_include_item import GetDocumentsRequestIncludeItem
-from .types.replace_with_file_documents_request_dreaming import ReplaceWithFileDocumentsRequestDreaming
-from .types.replace_with_file_documents_request_file_type import ReplaceWithFileDocumentsRequestFileType
-from .types.replace_with_file_documents_request_task_type import ReplaceWithFileDocumentsRequestTaskType
-from .types.update_documents_request_dreaming import UpdateDocumentsRequestDreaming
-from .types.update_documents_request_task_type import UpdateDocumentsRequestTaskType
-from .types.update_file_documents_request_dreaming import UpdateFileDocumentsRequestDreaming
-from .types.update_file_documents_request_file_type import UpdateFileDocumentsRequestFileType
-from .types.update_file_documents_request_task_type import UpdateFileDocumentsRequestTaskType
-from .types.upload_file_documents_request_dreaming import UploadFileDocumentsRequestDreaming
-from .types.upload_file_documents_request_file_type import UploadFileDocumentsRequestFileType
-from .types.upload_file_documents_request_task_type import UploadFileDocumentsRequestTaskType
+from ..types.file_type import FileType
+from ..types.task_type import TaskType
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -165,8 +155,8 @@ class RawDocumentsClient:
         namespace: str,
         *,
         documents: typing.Sequence[DocumentInputParams],
-        task_type: typing.Optional[BatchAddDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[BatchAddDocumentsRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -184,10 +174,10 @@ class RawDocumentsClient:
         documents : typing.Sequence[DocumentInputParams]
             Documents to ingest or append in one request
 
-        task_type : typing.Optional[BatchAddDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[BatchAddDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -293,9 +283,7 @@ class RawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -313,7 +301,7 @@ class RawDocumentsClient:
         id : str
             The public document ID
 
-        include : typing.Optional[typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]]
             Comma-separated child resources to include: chunks, memories, or both.
 
         request_options : typing.Optional[RequestOptions]
@@ -416,8 +404,8 @@ class RawDocumentsClient:
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UpdateDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UpdateDocumentsRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -450,10 +438,10 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UpdateDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UpdateDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -591,9 +579,9 @@ class RawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UploadFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UploadFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[UploadFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -624,13 +612,13 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UploadFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UploadFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[UploadFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]
@@ -759,9 +747,9 @@ class RawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[ReplaceWithFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[ReplaceWithFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[ReplaceWithFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -795,13 +783,13 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[ReplaceWithFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[ReplaceWithFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[ReplaceWithFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]
@@ -941,9 +929,9 @@ class RawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UpdateFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UpdateFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[UpdateFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -977,13 +965,13 @@ class RawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UpdateFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UpdateFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[UpdateFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]
@@ -1228,8 +1216,8 @@ class AsyncRawDocumentsClient:
         namespace: str,
         *,
         documents: typing.Sequence[DocumentInputParams],
-        task_type: typing.Optional[BatchAddDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[BatchAddDocumentsRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1247,10 +1235,10 @@ class AsyncRawDocumentsClient:
         documents : typing.Sequence[DocumentInputParams]
             Documents to ingest or append in one request
 
-        task_type : typing.Optional[BatchAddDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[BatchAddDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -1356,9 +1344,7 @@ class AsyncRawDocumentsClient:
         namespace: str,
         id: str,
         *,
-        include: typing.Optional[
-            typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]
-        ] = None,
+        include: typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1376,7 +1362,7 @@ class AsyncRawDocumentsClient:
         id : str
             The public document ID
 
-        include : typing.Optional[typing.Union[GetDocumentsRequestIncludeItem, typing.Sequence[GetDocumentsRequestIncludeItem]]]
+        include : typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]]
             Comma-separated child resources to include: chunks, memories, or both.
 
         request_options : typing.Optional[RequestOptions]
@@ -1479,8 +1465,8 @@ class AsyncRawDocumentsClient:
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UpdateDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UpdateDocumentsRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -1513,10 +1499,10 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UpdateDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UpdateDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -1654,9 +1640,9 @@ class AsyncRawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UploadFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UploadFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[UploadFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -1687,13 +1673,13 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UploadFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UploadFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[UploadFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]
@@ -1822,9 +1808,9 @@ class AsyncRawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[ReplaceWithFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[ReplaceWithFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[ReplaceWithFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -1858,13 +1844,13 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[ReplaceWithFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[ReplaceWithFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[ReplaceWithFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]
@@ -2004,9 +1990,9 @@ class AsyncRawDocumentsClient:
         metadata: typing.Optional[str] = OMIT,
         group: typing.Optional[str] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[UpdateFileDocumentsRequestTaskType] = OMIT,
-        dreaming: typing.Optional[UpdateFileDocumentsRequestDreaming] = OMIT,
-        file_type: typing.Optional[UpdateFileDocumentsRequestFileType] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
+        file_type: typing.Optional[FileType] = OMIT,
         mime_type: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -2040,13 +2026,13 @@ class AsyncRawDocumentsClient:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[UpdateFileDocumentsRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[UpdateFileDocumentsRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
-        file_type : typing.Optional[UpdateFileDocumentsRequestFileType]
+        file_type : typing.Optional[FileType]
             Explicit source type used when automatic inference is insufficient
 
         mime_type : typing.Optional[str]

@@ -17,18 +17,18 @@ from .raw_client import AsyncRawSupermemory, RawSupermemory
 from .requests.filter_expression import FilterExpressionParams
 from .requests.list_request_include import ListRequestIncludeParams
 from .requests.metadata_value import MetadataValueParams
-from .requests.search_request_include import SearchRequestIncludeParams
-from .types.add_request_dreaming import AddRequestDreaming
-from .types.add_request_task_type import AddRequestTaskType
+from .requests.search_include import SearchIncludeParams
 from .types.document_ref import DocumentRef
+from .types.dreaming_mode import DreamingMode
 from .types.list_response import ListResponse
 from .types.list_sort import ListSort
 from .types.list_type import ListType
 from .types.profile_response import ProfileResponse
+from .types.search_mode import SearchMode
 from .types.search_request_rerank import SearchRequestRerank
-from .types.search_request_search_mode import SearchRequestSearchMode
 from .types.search_response import SearchResponse
 from .types.sort_order import SortOrder
+from .types.task_type import TaskType
 
 if typing.TYPE_CHECKING:
     from .connectors.client import AsyncConnectorsClient, ConnectorsClient
@@ -158,8 +158,8 @@ class Supermemory:
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[AddRequestTaskType] = OMIT,
-        dreaming: typing.Optional[AddRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -192,10 +192,10 @@ class Supermemory:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[AddRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[AddRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -238,9 +238,9 @@ class Supermemory:
         *,
         query: str,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
-        search_mode: typing.Optional[SearchRequestSearchMode] = OMIT,
+        search_mode: typing.Optional[SearchMode] = OMIT,
         limit: typing.Optional[int] = OMIT,
-        include: typing.Optional[SearchRequestIncludeParams] = OMIT,
+        include: typing.Optional[SearchIncludeParams] = OMIT,
         threshold: typing.Optional[float] = OMIT,
         rerank: typing.Optional[SearchRequestRerank] = OMIT,
         rewrite_query: typing.Optional[bool] = OMIT,
@@ -264,13 +264,13 @@ class Supermemory:
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
 
-        search_mode : typing.Optional[SearchRequestSearchMode]
+        search_mode : typing.Optional[SearchMode]
             Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
 
         limit : typing.Optional[int]
             Maximum number of results to return
 
-        include : typing.Optional[SearchRequestIncludeParams]
+        include : typing.Optional[SearchIncludeParams]
             Optional context to include alongside each matching result
 
         threshold : typing.Optional[float]
@@ -632,8 +632,8 @@ class AsyncSupermemory:
         metadata: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         group: typing.Optional[typing.Dict[str, MetadataValueParams]] = OMIT,
         date: typing.Optional[str] = OMIT,
-        task_type: typing.Optional[AddRequestTaskType] = OMIT,
-        dreaming: typing.Optional[AddRequestDreaming] = OMIT,
+        task_type: typing.Optional[TaskType] = OMIT,
+        dreaming: typing.Optional[DreamingMode] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -666,10 +666,10 @@ class AsyncSupermemory:
         date : typing.Optional[str]
             When the source content is from, in ISO 8601 format
 
-        task_type : typing.Optional[AddRequestTaskType]
+        task_type : typing.Optional[TaskType]
             Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
 
-        dreaming : typing.Optional[AddRequestDreaming]
+        dreaming : typing.Optional[DreamingMode]
             Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
 
         request_options : typing.Optional[RequestOptions]
@@ -720,9 +720,9 @@ class AsyncSupermemory:
         *,
         query: str,
         filter: typing.Optional[FilterExpressionParams] = OMIT,
-        search_mode: typing.Optional[SearchRequestSearchMode] = OMIT,
+        search_mode: typing.Optional[SearchMode] = OMIT,
         limit: typing.Optional[int] = OMIT,
-        include: typing.Optional[SearchRequestIncludeParams] = OMIT,
+        include: typing.Optional[SearchIncludeParams] = OMIT,
         threshold: typing.Optional[float] = OMIT,
         rerank: typing.Optional[SearchRequestRerank] = OMIT,
         rewrite_query: typing.Optional[bool] = OMIT,
@@ -746,13 +746,13 @@ class AsyncSupermemory:
         filter : typing.Optional[FilterExpressionParams]
             Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
 
-        search_mode : typing.Optional[SearchRequestSearchMode]
+        search_mode : typing.Optional[SearchMode]
             Search surface. "hybrid" combines learned memories with source chunks, "memories" returns learned context, and "chunks" returns source passages.
 
         limit : typing.Optional[int]
             Maximum number of results to return
 
-        include : typing.Optional[SearchRequestIncludeParams]
+        include : typing.Optional[SearchIncludeParams]
             Optional context to include alongside each matching result
 
         threshold : typing.Optional[float]
