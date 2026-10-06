@@ -69,22 +69,6 @@ client.add(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **id:** `typing.Optional[str]` — An optional caller-defined document ID
     
 </dd>
@@ -118,6 +102,22 @@ client.add(
 <dd>
 
 **date:** `typing.Optional[str]` — When the source content is from, in ISO 8601 format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
     
 </dd>
 </dl>
@@ -174,7 +174,6 @@ client = Supermemory(
 
 client.search(
     namespace="user_alex",
-    limit=10,
     query="what are the API rate limits",
 )
 
@@ -208,7 +207,7 @@ client.search(
 <dl>
 <dd>
 
-**limit:** `typing.Optional[int]` — Maximum number of results to return
+**filter:** `typing.Optional[FilterExpression]` — Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
     
 </dd>
 </dl>
@@ -224,7 +223,7 @@ client.search(
 <dl>
 <dd>
 
-**filter:** `typing.Optional[FilterExpression]` — Type-safe metadata conditions applied before ranking results. Replaces the v4 `filters` field and unifies both legacy filter formats into one expression type.
+**limit:** `typing.Optional[int]` — Maximum number of results to return
     
 </dd>
 </dl>
@@ -232,7 +231,7 @@ client.search(
 <dl>
 <dd>
 
-**attach:** `typing.Optional[SearchRequestAttach]` — Optional context to include alongside each matching result
+**include:** `typing.Optional[SearchInclude]` — Optional context to include alongside each matching result
     
 </dd>
 </dl>
@@ -403,6 +402,8 @@ client = Supermemory(
 client.list(
     namespace="user_alex",
     type="documents",
+    page=1,
+    limit=10,
 )
 
 ```
@@ -435,7 +436,7 @@ client.list(
 <dl>
 <dd>
 
-**page:** `typing.Optional[ListRequestPage]` — One-based page number
+**page:** `typing.Optional[int]` — One-based page number
     
 </dd>
 </dl>
@@ -443,7 +444,7 @@ client.list(
 <dl>
 <dd>
 
-**limit:** `typing.Optional[ListRequestLimit]` — Maximum resources to return per page
+**limit:** `typing.Optional[int]` — Maximum resources to return per page
     
 </dd>
 </dl>
@@ -468,6 +469,14 @@ client.list(
 <dd>
 
 **filter:** `typing.Optional[FilterExpression]` — Type-safe metadata conditions applied before pagination
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[ListRequestInclude]` — Optional extras, matching search's include
     
 </dd>
 </dl>
@@ -686,7 +695,7 @@ client.documents.batch_add(
 <dl>
 <dd>
 
-Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally attach its source chunks, derived memories, or both in the same response.
+Retrieve a document's canonical content, metadata, and processing state by document ID or caller-defined ID. Optionally include its source chunks, derived memories, or both in the same response.
 </dd>
 </dl>
 </dd>
@@ -744,7 +753,7 @@ client.documents.get(
 <dl>
 <dd>
 
-**attach:** `typing.Optional[typing.Union[DocumentAttachment, typing.Sequence[DocumentAttachment]]]` — Child resources to include. Repeat the parameter to attach chunks, memories, or both.
+**include:** `typing.Optional[typing.Union[DocumentInclude, typing.Sequence[DocumentInclude]]]` — Comma-separated child resources to include: chunks, memories, or both.
     
 </dd>
 </dl>
@@ -834,22 +843,6 @@ client.documents.update(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **content:** `typing.Optional[str]` — The content to process. This may be plaintext or a URL to supported rich content.
     
 </dd>
@@ -890,6 +883,22 @@ client.documents.update(
 <dl>
 <dd>
 
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -902,7 +911,7 @@ client.documents.update(
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">upload_file</a>(...) -> FileUploadResult</code></summary>
+<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">upload_file</a>(...) -> DocumentRef</code></summary>
 <dl>
 <dd>
 
@@ -972,38 +981,6 @@ client.documents.upload_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **supporting_context:** `typing.Optional[str]` — Context used to guide memory extraction within this namespace. Max 1500 characters.
     
 </dd>
@@ -1036,6 +1013,38 @@ client.documents.upload_file(
 <dl>
 <dd>
 
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -1048,7 +1057,7 @@ client.documents.upload_file(
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">replace_with_file</a>(...) -> FileUploadResult</code></summary>
+<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">replace_with_file</a>(...) -> DocumentRef</code></summary>
 <dl>
 <dd>
 
@@ -1127,38 +1136,6 @@ client.documents.replace_with_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **supporting_context:** `typing.Optional[str]` — Context used to guide memory extraction within this namespace. Max 1500 characters.
     
 </dd>
@@ -1191,6 +1168,38 @@ client.documents.replace_with_file(
 <dl>
 <dd>
 
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -1203,7 +1212,7 @@ client.documents.replace_with_file(
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">update_file</a>(...) -> FileUploadResult</code></summary>
+<details><summary><code>client.documents.<a href="src/supermemory/documents/client.py">update_file</a>(...) -> DocumentRef</code></summary>
 <dl>
 <dd>
 
@@ -1274,38 +1283,6 @@ client.documents.update_file(
 <dl>
 <dd>
 
-**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **file:** `typing.Optional[core.File]` — File contents to upload
     
 </dd>
@@ -1339,6 +1316,38 @@ client.documents.update_file(
 <dd>
 
 **date:** `typing.Optional[str]` — When the source content is from, in ISO 8601 format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_type:** `typing.Optional[TaskType]` — Processing pipeline. "memory" builds durable learned context; "superrag" optimizes the document for retrieval without generating memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dreaming:** `typing.Optional[DreamingMode]` — Processing mode. "dynamic" (default) groups related documents so memories form from coherent context. "instant" processes each document independently right away and bills one extra operation per document.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_type:** `typing.Optional[FileType]` — Explicit source type used when automatic inference is insufficient
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mime_type:** `typing.Optional[str]` — Explicit MIME type used when upload metadata is insufficient
     
 </dd>
 </dl>
@@ -1776,6 +1785,104 @@ client.memories.forget_matching(
 </dl>
 </details>
 
+<details><summary><code>client.memories.<a href="src/supermemory/memories/client.py">get</a>(...) -> MemoryDetails</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from supermemory import Supermemory
+from supermemory.environment import SupermemoryEnvironment
+
+client = Supermemory(
+    api_key="<token>",
+    environment=SupermemoryEnvironment.DEFAULT,
+)
+
+client.memories.get(
+    namespace="user_alex",
+    id="mem_abc123",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**namespace:** `str` — Namespace containing the memories to forget. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope memories.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `str` — Memory identifier
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]` — Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**related_limit:** `typing.Optional[int]` — Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connectors
 <details><summary><code>client.connectors.<a href="src/supermemory/connectors/client.py">list_all</a>(...) -> ConnectorList</code></summary>
 <dl>
@@ -1973,7 +2080,7 @@ client.connectors.list(
 <dl>
 <dd>
 
-Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 </dd>
 </dl>
 </dd>
@@ -2057,7 +2164,7 @@ client.connectors.create(
 <dl>
 <dd>
 
-Read one connector. Add attach=syncs to include its recent sync runs and the items that failed. attach=picker needs an admin with write access, since the link changes what syncs.
+Read one connector. Add include=syncs to include its recent sync runs and the items that failed. include=picker needs an admin with write access, since the link changes what syncs.
 </dd>
 </dl>
 </dd>
@@ -2115,7 +2222,7 @@ client.connectors.get(
 <dl>
 <dd>
 
-**attach:** `typing.Optional[str]` — Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
+**include:** `typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]` — Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
     
 </dd>
 </dl>
@@ -2414,7 +2521,7 @@ client.connectors.sync(
 </details>
 
 ## Namespaces
-<details><summary><code>client.namespaces.<a href="src/supermemory/namespaces/client.py">list</a>() -> typing.List[Namespace]</code></summary>
+<details><summary><code>client.namespaces.<a href="src/supermemory/namespaces/client.py">list</a>(...) -> NamespaceList</code></summary>
 <dl>
 <dd>
 
@@ -2461,6 +2568,22 @@ client.namespaces.list()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — One-based page number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Maximum namespaces to return per page
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -2587,6 +2710,7 @@ client = Supermemory(
 
 client.namespaces.delete(
     namespace="user_alex",
+    move_to="project_archive",
 )
 
 ```

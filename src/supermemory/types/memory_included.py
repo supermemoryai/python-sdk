@@ -5,26 +5,23 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .memory_included_document import MemoryIncludedDocument
+from .memory_included_related import MemoryIncludedRelated
 
 
-class SearchRequestAttach(UncheckedBaseModel):
+class MemoryIncluded(UncheckedBaseModel):
     """
-    Optional context to include alongside each matching result
-    """
-
-    documents: typing.Optional[bool] = pydantic.Field(default=None)
-    """
-    Attach the source document for each result when one is available
+    Requested extras
     """
 
-    related: typing.Optional[bool] = pydantic.Field(default=None)
+    related: typing.Optional[MemoryIncludedRelated] = pydantic.Field(default=None)
     """
-    Attach parent, child, and sibling memories that explain how each memory evolved
+    Present when include has related
     """
 
-    forgotten: typing.Optional[bool] = pydantic.Field(default=None)
+    document: typing.Optional[MemoryIncludedDocument] = pydantic.Field(default=None)
     """
-    Allow forgotten memories to participate in recall
+    Source document; present when include has documents and one exists
     """
 
     if IS_PYDANTIC_V2:

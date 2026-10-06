@@ -8,9 +8,9 @@ from supermemory._types import NOT_GIVEN, NotGiven
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.namespace import Namespace
 from ..types.namespace_deleted import NamespaceDeleted
 from ..types.namespace_details import NamespaceDetails
+from ..types.namespace_list import NamespaceList
 from .raw_client import AsyncRawNamespacesClient, RawNamespacesClient
 
 # this is used as the default value for optional parameters
@@ -35,23 +35,31 @@ class NamespacesClient:
     def list(
         self,
         *,
+        page: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> typing.List[Namespace]:
+    ) -> NamespaceList:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
         Parameters
         ----------
+        page : typing.Optional[int]
+            One-based page number
+
+        limit : typing.Optional[int]
+            Maximum namespaces to return per page
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[Namespace]
+        NamespaceList
             Namespaces available to the caller
 
         Examples
@@ -63,7 +71,7 @@ class NamespacesClient:
         )
         client.namespaces.list()
         """
-        _response = self._raw_client.list(request_options=request_options)
+        _response = self._raw_client.list(page=page, limit=limit, request_options=request_options)
         return _response.data
 
     def get(
@@ -110,7 +118,7 @@ class NamespacesClient:
         self,
         namespace: str,
         *,
-        move_to: typing.Optional[str] = OMIT,
+        move_to: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -145,6 +153,7 @@ class NamespacesClient:
         )
         client.namespaces.delete(
             namespace="user_alex",
+            move_to="project_archive",
         )
         """
         _response = self._raw_client.delete(namespace, move_to=move_to, request_options=request_options)
@@ -215,23 +224,31 @@ class AsyncNamespacesClient:
     async def list(
         self,
         *,
+        page: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
-    ) -> typing.List[Namespace]:
+    ) -> NamespaceList:
         """
         Discover every namespace available to the caller, including its purpose, document volume, memory count, and lifecycle timestamps.
 
         Parameters
         ----------
+        page : typing.Optional[int]
+            One-based page number
+
+        limit : typing.Optional[int]
+            Maximum namespaces to return per page
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[Namespace]
+        NamespaceList
             Namespaces available to the caller
 
         Examples
@@ -251,7 +268,7 @@ class AsyncNamespacesClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list(request_options=request_options)
+        _response = await self._raw_client.list(page=page, limit=limit, request_options=request_options)
         return _response.data
 
     async def get(
@@ -306,7 +323,7 @@ class AsyncNamespacesClient:
         self,
         namespace: str,
         *,
-        move_to: typing.Optional[str] = OMIT,
+        move_to: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
         extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
@@ -346,6 +363,7 @@ class AsyncNamespacesClient:
         async def main() -> None:
             await client.namespaces.delete(
                 namespace="user_alex",
+                move_to="project_archive",
             )
 
 

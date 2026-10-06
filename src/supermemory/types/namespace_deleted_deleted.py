@@ -10,11 +10,6 @@ from ..core.unchecked_base_model import UncheckedBaseModel
 
 
 class NamespaceDeletedDeleted(UncheckedBaseModel):
-    success: typing.Literal[True] = pydantic.Field(default=True)
-    """
-    Confirms the namespace was deleted
-    """
-
     namespace: str = pydantic.Field()
     """
     Deleted namespace identifier

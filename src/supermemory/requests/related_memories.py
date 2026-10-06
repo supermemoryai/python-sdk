@@ -8,7 +8,7 @@ from .related_memory import RelatedMemoryParams
 
 class RelatedMemoriesParams(typing_extensions.TypedDict):
     """
-    Memory relationships attached when requested
+    Memory relationships included when requested
     """
 
     parents: typing.Sequence[RelatedMemoryParams]

@@ -3,19 +3,13 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
-from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .delete_document_error import DeleteDocumentError
 
 
 class DeleteDocumentsResult(UncheckedBaseModel):
-    deleted_count: typing_extensions.Annotated[
-        int,
-        FieldMetadata(alias="deletedCount"),
-        pydantic.Field(alias="deletedCount", description="Number of documents successfully deleted"),
-    ]
+    count: int = pydantic.Field()
     """
     Number of documents successfully deleted
     """

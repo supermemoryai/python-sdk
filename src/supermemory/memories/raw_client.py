@@ -17,10 +17,13 @@ from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.forbidden_error import ForbiddenError
 from ..errors.internal_server_error import InternalServerError
+from ..errors.not_found_error import NotFoundError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.bad_request_error_body import BadRequestErrorBody
 from ..types.error_response import ErrorResponse
 from ..types.forget_result import ForgetResult
+from ..types.memory_details import MemoryDetails
+from ..types.memory_include import MemoryInclude
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -246,6 +249,127 @@ class RawMemoriesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def get(
+        self,
+        namespace: str,
+        id: str,
+        *,
+        include: typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]] = None,
+        related_limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> HttpResponse[MemoryDetails]:
+        """
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+
+        Parameters
+        ----------
+        namespace : str
+            Namespace containing the memories to forget. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope memories.
+
+        id : str
+            Memory identifier
+
+        include : typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]
+            Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+
+        related_limit : typing.Optional[int]
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[MemoryDetails]
+            Memory retrieved
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"ns/{encode_path_param(namespace)}/memories/{encode_path_param(id)}",
+            method="GET",
+            params={
+                "include": include,
+                "relatedLimit": related_limit,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    MemoryDetails,
+                    construct_type(
+                        type_=MemoryDetails,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        BadRequestErrorBody,
+                        construct_type(
+                            type_=BadRequestErrorBody,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawMemoriesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -437,6 +561,127 @@ class AsyncRawMemoriesClient:
                 )
             if _response.status_code == 403:
                 raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get(
+        self,
+        namespace: str,
+        id: str,
+        *,
+        include: typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]] = None,
+        related_limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> AsyncHttpResponse[MemoryDetails]:
+        """
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+
+        Parameters
+        ----------
+        namespace : str
+            Namespace containing the memories to forget. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope memories.
+
+        id : str
+            Memory identifier
+
+        include : typing.Optional[typing.Union[MemoryInclude, typing.Sequence[MemoryInclude]]]
+            Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
+
+        related_limit : typing.Optional[int]
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[MemoryDetails]
+            Memory retrieved
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"ns/{encode_path_param(namespace)}/memories/{encode_path_param(id)}",
+            method="GET",
+            params={
+                "include": include,
+                "relatedLimit": related_limit,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    MemoryDetails,
+                    construct_type(
+                        type_=MemoryDetails,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        BadRequestErrorBody,
+                        construct_type(
+                            type_=BadRequestErrorBody,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        construct_type(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,

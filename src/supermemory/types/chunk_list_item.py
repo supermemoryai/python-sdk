@@ -31,9 +31,9 @@ class ChunkListItem(UncheckedBaseModel):
     Chunk content type
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    metadata: typing.Dict[str, typing.Any] = pydantic.Field()
     """
-    Chunk metadata, when available
+    Chunk metadata; empty object when none
     """
 
     system: ChunkSystem = pydantic.Field()

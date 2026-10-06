@@ -56,7 +56,7 @@ Only the API methods change. Everything around them works as before:
 | `custom_id` | `id` |
 | `q` | `query` |
 | `filters` | `filter` (typed filter expression) |
-| `include` | `attach` |
+| `include` | `include` (a list on GETs, a dict on search) |
 | search `timing` / `total` | `search_time` |
 
 ## Profile no longer searches

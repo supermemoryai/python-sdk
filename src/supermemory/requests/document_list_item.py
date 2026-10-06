@@ -3,7 +3,7 @@
 import typing
 
 import typing_extensions
-from .document_system import DocumentSystemParams
+from .document_list_item_system import DocumentListItemSystemParams
 
 
 class DocumentListItemParams(typing_extensions.TypedDict):
@@ -41,7 +41,7 @@ class DocumentListItemParams(typing_extensions.TypedDict):
     Original source URL, when the document was ingested from the web
     """
 
-    system: DocumentSystemParams
+    system: DocumentListItemSystemParams
     """
     Processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """

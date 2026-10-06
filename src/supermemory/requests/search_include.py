@@ -3,22 +3,22 @@
 import typing_extensions
 
 
-class SearchRequestAttachParams(typing_extensions.TypedDict):
+class SearchIncludeParams(typing_extensions.TypedDict):
     """
     Optional context to include alongside each matching result
     """
 
     documents: typing_extensions.NotRequired[bool]
     """
-    Attach the source document for each result when one is available
+    Include the source document for each result when one is available
     """
 
     related: typing_extensions.NotRequired[bool]
     """
-    Attach parent, child, and sibling memories that explain how each memory evolved
+    Include parent, child, and sibling memories that explain how each memory evolved
     """
 
     forgotten: typing_extensions.NotRequired[bool]
     """
-    Allow forgotten memories to participate in recall
+    Let forgotten and expired memories appear in results
     """

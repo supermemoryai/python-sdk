@@ -5,32 +5,33 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .batch_add_item_result_status import BatchAddItemResultStatus
 
 
 class BatchAddItemResult(UncheckedBaseModel):
     id: str = pydantic.Field()
     """
-    Unique identifier of the document (empty string for failed items)
+    Document identifier
     """
 
-    status: str = pydantic.Field()
+    status: BatchAddItemResultStatus = pydantic.Field()
     """
-    Status of the document (e.g. 'done', 'queued', 'error')
+    The document's processing state, as for a single add; error when this item failed
     """
 
     error: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Error message when status is 'error'
+    Failure reason
     """
 
     details: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Additional error details when status is 'error'
+    Human-readable explanation of the failure
     """
 
     url: typing.Optional[str] = pydantic.Field(default=None)
     """
-    URL of the failed item, when it had one. Only present on failed items, where it may be the only way to tell which input the error belongs to (the id falls back to 'unknown' when the input had neither an id nor a customId).
+    URL of the failed item, when it had one
     """
 
     if IS_PYDANTIC_V2:

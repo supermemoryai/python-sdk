@@ -12,7 +12,7 @@ from .memory import Memory
 
 class Document(UncheckedBaseModel):
     """
-    Namespace-scoped document. Attachment keys are omitted unless requested and are empty arrays when requested without results.
+    Namespace-scoped document. Included keys are omitted unless requested and are empty arrays when requested without results.
     """
 
     id: str = pydantic.Field()

@@ -10,6 +10,11 @@ from .related_memory_system import RelatedMemorySystem
 
 
 class RelatedMemory(UncheckedBaseModel):
+    id: str = pydantic.Field()
+    """
+    Related memory ID
+    """
+
     relation: MemoryRelation = pydantic.Field()
     """
     How this memory is connected to the matched memory
@@ -25,7 +30,7 @@ class RelatedMemory(UncheckedBaseModel):
     Related learned fact or context
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    metadata: typing.Dict[str, typing.Any] = pydantic.Field()
     """
     Public metadata associated with the related memory
     """

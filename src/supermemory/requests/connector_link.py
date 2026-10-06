@@ -6,7 +6,7 @@ import typing_extensions
 from ..core.serialization import FieldMetadata
 
 
-class ConnectorPickerParams(typing_extensions.TypedDict):
+class ConnectorLinkParams(typing_extensions.TypedDict):
     url: str
     """
     Send the user here to choose what syncs. Works once, in any browser.

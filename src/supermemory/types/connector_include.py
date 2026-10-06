@@ -2,4 +2,4 @@
 
 import typing
 
-ListRequestLimit = typing.Union[str, float]
+ConnectorInclude = typing.Union[typing.Literal["syncs", "picker"], typing.Any]

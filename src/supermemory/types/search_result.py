@@ -27,7 +27,7 @@ class SearchResult(UncheckedBaseModel):
     Source passage returned by chunk search (only present for chunk results from hybrid search)
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    metadata: typing.Dict[str, typing.Any] = pydantic.Field()
     """
     Public metadata attached to the result
     """
@@ -47,6 +47,18 @@ class SearchResult(UncheckedBaseModel):
     ]
     """
     Whether the memory is its latest version; false for recalled forgotten memories
+    """
+
+    is_inference: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="isInference"),
+        pydantic.Field(
+            alias="isInference",
+            description="Whether the memory was inferred rather than stated directly; false for chunks",
+        ),
+    ]
+    """
+    Whether the memory was inferred rather than stated directly; false for chunks
     """
 
     system: SearchResultSystem = pydantic.Field()

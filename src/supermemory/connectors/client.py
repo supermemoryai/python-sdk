@@ -12,6 +12,7 @@ from ..requests.connector_selection import ConnectorSelectionParams
 from ..requests.connector_setup import ConnectorSetupParams
 from ..types.connector import Connector
 from ..types.connector_deleted import ConnectorDeleted
+from ..types.connector_include import ConnectorInclude
 from ..types.connector_list import ConnectorList
 from ..types.connector_provider import ConnectorProvider
 from ..types.connector_setup_result import ConnectorSetupResult
@@ -151,7 +152,7 @@ class ConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ConnectorSetupResult:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -188,7 +189,7 @@ class ConnectorsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[str] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -197,7 +198,7 @@ class ConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Connector:
         """
-        Read one connector. Add attach=syncs to include its recent sync runs and the items that failed. attach=picker needs an admin with write access, since the link changes what syncs.
+        Read one connector. Add include=syncs to include its recent sync runs and the items that failed. include=picker needs an admin with write access, since the link changes what syncs.
 
         Parameters
         ----------
@@ -207,7 +208,7 @@ class ConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        attach : typing.Optional[str]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -234,7 +235,7 @@ class ConnectorsClient:
         )
         """
         _response = self._raw_client.get(
-            namespace, id, attach=attach, return_url=return_url, request_options=request_options
+            namespace, id, include=include, return_url=return_url, request_options=request_options
         )
         return _response.data
 
@@ -535,7 +536,7 @@ class AsyncConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> ConnectorSetupResult:
         """
-        Connect an external source to this namespace. OAuth providers return an authUrl to send the user to; providers that authenticate with config start syncing right away.
+        Connect an external source to this namespace. OAuth providers return an authorization url to send the user to; providers that authenticate with config start syncing right away.
 
         Parameters
         ----------
@@ -580,7 +581,7 @@ class AsyncConnectorsClient:
         namespace: str,
         id: str,
         *,
-        attach: typing.Optional[str] = None,
+        include: typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]] = None,
         return_url: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
@@ -589,7 +590,7 @@ class AsyncConnectorsClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> Connector:
         """
-        Read one connector. Add attach=syncs to include its recent sync runs and the items that failed. attach=picker needs an admin with write access, since the link changes what syncs.
+        Read one connector. Add include=syncs to include its recent sync runs and the items that failed. include=picker needs an admin with write access, since the link changes what syncs.
 
         Parameters
         ----------
@@ -599,7 +600,7 @@ class AsyncConnectorsClient:
         id : str
             Connector identifier returned when the connector was created
 
-        attach : typing.Optional[str]
+        include : typing.Optional[typing.Union[ConnectorInclude, typing.Sequence[ConnectorInclude]]]
             Comma-separated extras. syncs: the 10 most recent sync runs with their failed items. picker: a one-time hosted picker URL.
 
         return_url : typing.Optional[str]
@@ -634,7 +635,7 @@ class AsyncConnectorsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get(
-            namespace, id, attach=attach, return_url=return_url, request_options=request_options
+            namespace, id, include=include, return_url=return_url, request_options=request_options
         )
         return _response.data
 

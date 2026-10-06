@@ -5,17 +5,21 @@ import typing
 
 import typing_extensions
 from ..core.serialization import FieldMetadata
-from ..types.connector_error_code import ConnectorErrorCode
-from ..types.connector_sync_status import ConnectorSyncStatus
+from ..types.connector_run_status import ConnectorRunStatus
 
 
-class ConnectorLastSyncParams(typing_extensions.TypedDict):
-    status: ConnectorSyncStatus
-    error_code: typing_extensions.Annotated[typing.Optional[ConnectorErrorCode], FieldMetadata(alias="errorCode")]
-    error: typing.Optional[str]
+class ConnectorRunSystemParams(typing_extensions.TypedDict):
     """
-    Customer-safe error message
+    Run status and timestamps maintained by Supermemory
     """
 
+    status: ConnectorRunStatus
     started_at: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="startedAt")]
+    """
+    ISO 8601 timestamp when the run started
+    """
+
     completed_at: typing_extensions.Annotated[typing.Optional[dt.datetime], FieldMetadata(alias="completedAt")]
+    """
+    ISO 8601 timestamp when the run ended; null while running
+    """
