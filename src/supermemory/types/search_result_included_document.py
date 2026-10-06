@@ -3,15 +3,14 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
-from ..core.serialization import FieldMetadata
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .search_result_included_document_system import SearchResultIncludedDocumentSystem
 
 
 class SearchResultIncludedDocument(UncheckedBaseModel):
     """
-    Source document attached when requested and available
+    Source document included when requested and available
     """
 
     id: str = pydantic.Field()
@@ -29,7 +28,7 @@ class SearchResultIncludedDocument(UncheckedBaseModel):
     Detected source or content type
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    metadata: typing.Dict[str, typing.Any] = pydantic.Field()
     """
     Public metadata attached to the source document
     """
@@ -39,22 +38,9 @@ class SearchResultIncludedDocument(UncheckedBaseModel):
     Generated summary of the source document
     """
 
-    created_at: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="createdAt"),
-        pydantic.Field(alias="createdAt", description="ISO 8601 timestamp when the source document was created"),
-    ]
+    system: SearchResultIncludedDocumentSystem = pydantic.Field()
     """
-    ISO 8601 timestamp when the source document was created
-    """
-
-    updated_at: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="updatedAt"),
-        pydantic.Field(alias="updatedAt", description="ISO 8601 timestamp of the source document's latest update"),
-    ]
-    """
-    ISO 8601 timestamp of the source document's latest update
+    Lifecycle timestamps maintained by Supermemory
     """
 
     if IS_PYDANTIC_V2:

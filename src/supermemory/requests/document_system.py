@@ -4,6 +4,7 @@ import datetime as dt
 
 import typing_extensions
 from ..core.serialization import FieldMetadata
+from ..types.document_system_status import DocumentSystemStatus
 
 
 class DocumentSystemParams(typing_extensions.TypedDict):
@@ -11,7 +12,7 @@ class DocumentSystemParams(typing_extensions.TypedDict):
     Processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """
 
-    status: str
+    status: DocumentSystemStatus
     """
     Current extraction and memory-processing status
     """

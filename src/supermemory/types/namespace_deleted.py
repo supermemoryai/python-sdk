@@ -13,7 +13,6 @@ from ..core.unchecked_base_model import UncheckedBaseModel, UnionMetadata
 
 class NamespaceDeleted_Deleted(UncheckedBaseModel):
     status: typing.Literal["deleted"] = "deleted"
-    success: typing.Literal[True] = True
     namespace: str
     deleted_documents_count: typing_extensions.Annotated[
         int, FieldMetadata(alias="deletedDocumentsCount"), pydantic.Field(alias="deletedDocumentsCount")
@@ -34,7 +33,6 @@ class NamespaceDeleted_Deleted(UncheckedBaseModel):
 
 class NamespaceDeleted_Queued(UncheckedBaseModel):
     status: typing.Literal["queued"] = "queued"
-    success: typing.Literal[True] = True
     operation_id: typing_extensions.Annotated[
         str, FieldMetadata(alias="operationId"), pydantic.Field(alias="operationId")
     ]

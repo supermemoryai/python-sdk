@@ -2,3 +2,143 @@
 
 # isort: skip_file
 
+import typing
+from importlib import import_module
+
+if typing.TYPE_CHECKING:
+    from .types import (
+        GetMemoriesRequestIncludeItem,
+        GetMemoriesResponse,
+        GetMemoriesResponseIncluded,
+        GetMemoriesResponseIncludedDocument,
+        GetMemoriesResponseIncludedDocumentSystem,
+        GetMemoriesResponseIncludedRelated,
+        GetMemoriesResponseIncludedRelatedChildrenItem,
+        GetMemoriesResponseIncludedRelatedChildrenItemDocument,
+        GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystem,
+        GetMemoriesResponseIncludedRelatedChildrenItemSystem,
+        GetMemoriesResponseIncludedRelatedParentsItem,
+        GetMemoriesResponseIncludedRelatedParentsItemDocument,
+        GetMemoriesResponseIncludedRelatedParentsItemDocumentSystem,
+        GetMemoriesResponseIncludedRelatedParentsItemSystem,
+        GetMemoriesResponseIncludedRelatedSiblingsItem,
+        GetMemoriesResponseIncludedRelatedSiblingsItemDocument,
+        GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystem,
+        GetMemoriesResponseIncludedRelatedSiblingsItemSystem,
+    )
+    from .requests import (
+        GetMemoriesResponseIncludedDocumentParams,
+        GetMemoriesResponseIncludedDocumentSystemParams,
+        GetMemoriesResponseIncludedParams,
+        GetMemoriesResponseIncludedRelatedChildrenItemDocumentParams,
+        GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystemParams,
+        GetMemoriesResponseIncludedRelatedChildrenItemParams,
+        GetMemoriesResponseIncludedRelatedChildrenItemSystemParams,
+        GetMemoriesResponseIncludedRelatedParams,
+        GetMemoriesResponseIncludedRelatedParentsItemDocumentParams,
+        GetMemoriesResponseIncludedRelatedParentsItemDocumentSystemParams,
+        GetMemoriesResponseIncludedRelatedParentsItemParams,
+        GetMemoriesResponseIncludedRelatedParentsItemSystemParams,
+        GetMemoriesResponseIncludedRelatedSiblingsItemDocumentParams,
+        GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystemParams,
+        GetMemoriesResponseIncludedRelatedSiblingsItemParams,
+        GetMemoriesResponseIncludedRelatedSiblingsItemSystemParams,
+        GetMemoriesResponseParams,
+    )
+_dynamic_imports: typing.Dict[str, str] = {
+    "GetMemoriesRequestIncludeItem": ".types",
+    "GetMemoriesResponse": ".types",
+    "GetMemoriesResponseIncluded": ".types",
+    "GetMemoriesResponseIncludedDocument": ".types",
+    "GetMemoriesResponseIncludedDocumentParams": ".requests",
+    "GetMemoriesResponseIncludedDocumentSystem": ".types",
+    "GetMemoriesResponseIncludedDocumentSystemParams": ".requests",
+    "GetMemoriesResponseIncludedParams": ".requests",
+    "GetMemoriesResponseIncludedRelated": ".types",
+    "GetMemoriesResponseIncludedRelatedChildrenItem": ".types",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocument": ".types",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedChildrenItemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedChildrenItemSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedChildrenItemSystemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedParentsItem": ".types",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocument": ".types",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentSystemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedParentsItemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedParentsItemSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedParentsItemSystemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedSiblingsItem": ".types",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocument": ".types",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemParams": ".requests",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemSystem": ".types",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemSystemParams": ".requests",
+    "GetMemoriesResponseParams": ".requests",
+}
+
+
+def __getattr__(attr_name: str) -> typing.Any:
+    module_name = _dynamic_imports.get(attr_name)
+    if module_name is None:
+        raise AttributeError(f"No {attr_name} found in _dynamic_imports for module name -> {__name__}")
+    try:
+        module = import_module(module_name, __package__)
+        if module_name == f".{attr_name}":
+            return module
+        else:
+            return getattr(module, attr_name)
+    except ImportError as e:
+        raise ImportError(f"Failed to import {attr_name} from {module_name}: {e}") from e
+    except AttributeError as e:
+        raise AttributeError(f"Failed to get {attr_name} from {module_name}: {e}") from e
+
+
+def __dir__():
+    lazy_attrs = list(_dynamic_imports.keys())
+    return sorted(lazy_attrs)
+
+
+__all__ = [
+    "GetMemoriesRequestIncludeItem",
+    "GetMemoriesResponse",
+    "GetMemoriesResponseIncluded",
+    "GetMemoriesResponseIncludedDocument",
+    "GetMemoriesResponseIncludedDocumentParams",
+    "GetMemoriesResponseIncludedDocumentSystem",
+    "GetMemoriesResponseIncludedDocumentSystemParams",
+    "GetMemoriesResponseIncludedParams",
+    "GetMemoriesResponseIncludedRelated",
+    "GetMemoriesResponseIncludedRelatedChildrenItem",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocument",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentParams",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystem",
+    "GetMemoriesResponseIncludedRelatedChildrenItemDocumentSystemParams",
+    "GetMemoriesResponseIncludedRelatedChildrenItemParams",
+    "GetMemoriesResponseIncludedRelatedChildrenItemSystem",
+    "GetMemoriesResponseIncludedRelatedChildrenItemSystemParams",
+    "GetMemoriesResponseIncludedRelatedParams",
+    "GetMemoriesResponseIncludedRelatedParentsItem",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocument",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentParams",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentSystem",
+    "GetMemoriesResponseIncludedRelatedParentsItemDocumentSystemParams",
+    "GetMemoriesResponseIncludedRelatedParentsItemParams",
+    "GetMemoriesResponseIncludedRelatedParentsItemSystem",
+    "GetMemoriesResponseIncludedRelatedParentsItemSystemParams",
+    "GetMemoriesResponseIncludedRelatedSiblingsItem",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocument",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentParams",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystem",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemDocumentSystemParams",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemParams",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemSystem",
+    "GetMemoriesResponseIncludedRelatedSiblingsItemSystemParams",
+    "GetMemoriesResponseParams",
+]

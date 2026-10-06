@@ -31,9 +31,9 @@ class ChunkParams(typing_extensions.TypedDict):
     Chunk content type
     """
 
-    metadata: typing.Optional[typing.Dict[str, typing.Any]]
+    metadata: typing.Dict[str, typing.Any]
     """
-    Chunk metadata, when available
+    Chunk metadata; empty object when none
     """
 
     system: ChunkSystemParams

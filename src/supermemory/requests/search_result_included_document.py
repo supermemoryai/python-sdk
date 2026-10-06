@@ -3,12 +3,12 @@
 import typing
 
 import typing_extensions
-from ..core.serialization import FieldMetadata
+from .search_result_included_document_system import SearchResultIncludedDocumentSystemParams
 
 
 class SearchResultIncludedDocumentParams(typing_extensions.TypedDict):
     """
-    Source document attached when requested and available
+    Source document included when requested and available
     """
 
     id: str
@@ -16,32 +16,27 @@ class SearchResultIncludedDocumentParams(typing_extensions.TypedDict):
     Source document identifier
     """
 
-    title: typing_extensions.NotRequired[typing.Optional[str]]
+    title: typing.Optional[str]
     """
     Source document title
     """
 
-    type: typing_extensions.NotRequired[typing.Optional[str]]
+    type: typing.Optional[str]
     """
     Detected source or content type
     """
 
-    metadata: typing_extensions.NotRequired[typing.Optional[typing.Dict[str, typing.Any]]]
+    metadata: typing.Dict[str, typing.Any]
     """
     Public metadata attached to the source document
     """
 
-    summary: typing_extensions.NotRequired[typing.Optional[str]]
+    summary: typing.Optional[str]
     """
     Generated summary of the source document
     """
 
-    created_at: typing_extensions.Annotated[str, FieldMetadata(alias="createdAt")]
+    system: SearchResultIncludedDocumentSystemParams
     """
-    ISO 8601 timestamp when the source document was created
-    """
-
-    updated_at: typing_extensions.Annotated[str, FieldMetadata(alias="updatedAt")]
-    """
-    ISO 8601 timestamp of the source document's latest update
+    Lifecycle timestamps maintained by Supermemory
     """

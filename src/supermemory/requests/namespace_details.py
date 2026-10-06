@@ -4,7 +4,7 @@ import typing
 
 import typing_extensions
 from ..core.serialization import FieldMetadata
-from .namespace_system import NamespaceSystemParams
+from .namespace_details_system import NamespaceDetailsSystemParams
 
 
 class NamespaceDetailsParams(typing_extensions.TypedDict):
@@ -18,7 +18,7 @@ class NamespaceDetailsParams(typing_extensions.TypedDict):
     Background that helps Supermemory interpret documents and form better memories in this namespace
     """
 
-    system: NamespaceSystemParams
+    system: NamespaceDetailsSystemParams
     """
     Namespace lifecycle timestamps
     """

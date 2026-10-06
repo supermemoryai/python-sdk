@@ -16,12 +16,12 @@ class SearchResultIncluded(UncheckedBaseModel):
 
     related: typing.Optional[RelatedMemories] = pydantic.Field(default=None)
     """
-    Memory relationships attached when requested
+    Memory relationships included when requested
     """
 
     document: typing.Optional[SearchResultIncludedDocument] = pydantic.Field(default=None)
     """
-    Source document attached when requested and available
+    Source document included when requested and available
     """
 
     if IS_PYDANTIC_V2:

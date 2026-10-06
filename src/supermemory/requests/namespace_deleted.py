@@ -10,7 +10,6 @@ from ..core.serialization import FieldMetadata
 
 class NamespaceDeleted_DeletedParams(typing_extensions.TypedDict):
     status: typing.Literal["deleted"]
-    success: typing.Literal[True]
     namespace: str
     deleted_documents_count: typing_extensions.Annotated[int, FieldMetadata(alias="deletedDocumentsCount")]
     deleted_memories_count: typing_extensions.Annotated[int, FieldMetadata(alias="deletedMemoriesCount")]
@@ -18,7 +17,6 @@ class NamespaceDeleted_DeletedParams(typing_extensions.TypedDict):
 
 class NamespaceDeleted_QueuedParams(typing_extensions.TypedDict):
     status: typing.Literal["queued"]
-    success: typing.Literal[True]
     operation_id: typing_extensions.Annotated[str, FieldMetadata(alias="operationId")]
     namespace: str
     move_to: typing_extensions.Annotated[str, FieldMetadata(alias="moveTo")]

@@ -3,12 +3,11 @@
 import typing
 
 import typing_extensions
-from ..core.serialization import FieldMetadata
 from .delete_document_error import DeleteDocumentErrorParams
 
 
 class DeleteDocumentsResultParams(typing_extensions.TypedDict):
-    deleted_count: typing_extensions.Annotated[int, FieldMetadata(alias="deletedCount")]
+    count: int
     """
     Number of documents successfully deleted
     """
