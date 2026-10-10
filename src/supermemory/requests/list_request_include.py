@@ -5,7 +5,7 @@ import typing_extensions
 
 class ListRequestIncludeParams(typing_extensions.TypedDict):
     """
-    Optional extras, matching search's include
+    Optional extras
     """
 
     forgotten: typing_extensions.NotRequired[bool]
