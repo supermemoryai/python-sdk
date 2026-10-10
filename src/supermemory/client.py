@@ -33,6 +33,7 @@ from .types.task_type import TaskType
 if typing.TYPE_CHECKING:
     from .connectors.client import AsyncConnectorsClient, ConnectorsClient
     from .documents.client import AsyncDocumentsClient, DocumentsClient
+    from .feedback.client import AsyncFeedbackClient, FeedbackClient
     from .memories.client import AsyncMemoriesClient, MemoriesClient
     from .namespaces.client import AsyncNamespacesClient, NamespacesClient
     from .organization.client import AsyncOrganizationClient, OrganizationClient
@@ -136,6 +137,7 @@ class Supermemory:
         self._connectors: typing.Optional[ConnectorsClient] = None
         self._namespaces: typing.Optional[NamespacesClient] = None
         self._organization: typing.Optional[OrganizationClient] = None
+        self._feedback: typing.Optional[FeedbackClient] = None
 
     @property
     def with_raw_response(self) -> RawSupermemory:
@@ -408,7 +410,7 @@ class Supermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -492,6 +494,14 @@ class Supermemory:
 
             self._organization = OrganizationClient(client_wrapper=self._client_wrapper)
         return self._organization
+
+    @property
+    def feedback(self):
+        if self._feedback is None:
+            from .feedback.client import FeedbackClient  # noqa: E402
+
+            self._feedback = FeedbackClient(client_wrapper=self._client_wrapper)
+        return self._feedback
 
 
 def _make_default_async_client(
@@ -610,6 +620,7 @@ class AsyncSupermemory:
         self._connectors: typing.Optional[AsyncConnectorsClient] = None
         self._namespaces: typing.Optional[AsyncNamespacesClient] = None
         self._organization: typing.Optional[AsyncOrganizationClient] = None
+        self._feedback: typing.Optional[AsyncFeedbackClient] = None
 
     @property
     def with_raw_response(self) -> AsyncRawSupermemory:
@@ -908,7 +919,7 @@ class AsyncSupermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1000,6 +1011,14 @@ class AsyncSupermemory:
 
             self._organization = AsyncOrganizationClient(client_wrapper=self._client_wrapper)
         return self._organization
+
+    @property
+    def feedback(self):
+        if self._feedback is None:
+            from .feedback.client import AsyncFeedbackClient  # noqa: E402
+
+            self._feedback = AsyncFeedbackClient(client_wrapper=self._client_wrapper)
+        return self._feedback
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: SupermemoryEnvironment) -> str:

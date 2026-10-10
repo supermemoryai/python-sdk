@@ -150,14 +150,17 @@ if typing.TYPE_CHECKING:
         WebCrawlerConfig,
     )
     from .errors import (
+        BadGatewayError,
         ForbiddenError,
         PaymentRequiredError,
         ServiceUnavailableError,
+        TooManyRequestsError,
         UnauthorizedError,
     )
-    from . import connectors, documents, memories, namespaces, organization, profiles
+    from . import connectors, documents, feedback, memories, namespaces, organization, profiles
     from ._default_clients import DefaultAioHttpClient, DefaultAsyncHttpxClient
     from .environment import SupermemoryEnvironment
+    from .feedback import PostFeedbackRequestType, PostFeedbackResponse, PostFeedbackResponseParams
     from .requests import (
         BadRequestErrorBodyParams,
         BatchAddItemResultParams,
@@ -276,6 +279,7 @@ if typing.TYPE_CHECKING:
         WebCrawlerConfigParams,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "BadGatewayError": ".errors",
     "BadRequestErrorBody": ".types",
     "BadRequestErrorBodyParams": ".requests",
     "BatchAddItemResult": ".types",
@@ -494,6 +498,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Pagination": ".types",
     "PaginationParams": ".requests",
     "PaymentRequiredError": ".errors",
+    "PostFeedbackRequestType": ".feedback",
+    "PostFeedbackResponse": ".feedback",
+    "PostFeedbackResponseParams": ".feedback",
     "Profile": ".types",
     "ProfileBuckets": ".types",
     "ProfileBucketsParams": ".requests",
@@ -530,6 +537,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SortOrder": ".types",
     "SupermemoryEnvironment": ".environment",
     "TaskType": ".types",
+    "TooManyRequestsError": ".errors",
     "UnauthorizedError": ".errors",
     "ValidationErrorResponse": ".types",
     "ValidationErrorResponseErrorItem": ".types",
@@ -541,6 +549,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WebCrawlerConfigParams": ".requests",
     "connectors": ".connectors",
     "documents": ".documents",
+    "feedback": ".feedback",
     "memories": ".memories",
     "namespaces": ".namespaces",
     "organization": ".organization",
@@ -571,6 +580,7 @@ def __dir__():
 
 __all__ = [
     "AsyncSupermemory",
+    "BadGatewayError",
     "BadRequestError",
     "BadRequestErrorBody",
     "BadRequestErrorBodyParams",
@@ -793,6 +803,9 @@ __all__ = [
     "Pagination",
     "PaginationParams",
     "PaymentRequiredError",
+    "PostFeedbackRequestType",
+    "PostFeedbackResponse",
+    "PostFeedbackResponseParams",
     "Profile",
     "ProfileBuckets",
     "ProfileBucketsParams",
@@ -830,6 +843,7 @@ __all__ = [
     "Supermemory",
     "SupermemoryEnvironment",
     "TaskType",
+    "TooManyRequestsError",
     "UnauthorizedError",
     "ValidationErrorResponse",
     "ValidationErrorResponseErrorItem",
@@ -841,6 +855,7 @@ __all__ = [
     "WebCrawlerConfigParams",
     "connectors",
     "documents",
+    "feedback",
     "memories",
     "namespaces",
     "organization",

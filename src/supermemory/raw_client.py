@@ -525,7 +525,7 @@ class RawSupermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1103,7 +1103,7 @@ class AsyncRawSupermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

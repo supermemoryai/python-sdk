@@ -143,7 +143,7 @@ class MemoriesClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> MemoryDetails:
         """
-        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit) and its source document.
 
         Parameters
         ----------
@@ -157,7 +157,7 @@ class MemoriesClient:
             Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
 
         related_limit : typing.Optional[int]
-            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory until it reaches this many.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -327,7 +327,7 @@ class AsyncMemoriesClient:
         timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
     ) -> MemoryDetails:
         """
-        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+        Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit) and its source document.
 
         Parameters
         ----------
@@ -341,7 +341,7 @@ class AsyncMemoriesClient:
             Comma-separated extras. related: the memory's version history and connected memories. documents: the source document, also attached to each related memory when both are requested.
 
         related_limit : typing.Optional[int]
-            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+            Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory until it reaches this many.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

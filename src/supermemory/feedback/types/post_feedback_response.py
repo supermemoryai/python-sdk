@@ -3,18 +3,19 @@
 import typing
 
 import pydantic
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
-from ..core.unchecked_base_model import UncheckedBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class ListRequestInclude(UncheckedBaseModel):
+class PostFeedbackResponse(UncheckedBaseModel):
+    id: str = pydantic.Field()
     """
-    Optional extras
+    Feedback reference
     """
 
-    forgotten: typing.Optional[bool] = pydantic.Field(default=None)
+    remaining: float = pydantic.Field()
     """
-    List forgotten and expired memories too, with isForgotten: true. Applies to type memories only.
+    Submissions left for this caller until 00:00 UTC
     """
 
     if IS_PYDANTIC_V2:
