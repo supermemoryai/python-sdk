@@ -99,9 +99,9 @@ class RawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -110,9 +110,9 @@ class RawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -121,9 +121,9 @@ class RawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -193,9 +193,9 @@ class RawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -204,9 +204,9 @@ class RawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -226,9 +226,9 @@ class RawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -305,9 +305,9 @@ class RawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -316,9 +316,9 @@ class RawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -349,9 +349,9 @@ class RawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -432,9 +432,9 @@ class RawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -443,9 +443,9 @@ class RawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -465,9 +465,9 @@ class RawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -550,9 +550,9 @@ class AsyncRawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -561,9 +561,9 @@ class AsyncRawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -572,9 +572,9 @@ class AsyncRawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -644,9 +644,9 @@ class AsyncRawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -655,9 +655,9 @@ class AsyncRawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -677,9 +677,9 @@ class AsyncRawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -756,9 +756,9 @@ class AsyncRawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -767,9 +767,9 @@ class AsyncRawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -800,9 +800,9 @@ class AsyncRawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -883,9 +883,9 @@ class AsyncRawNamespacesClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -894,9 +894,9 @@ class AsyncRawNamespacesClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -916,9 +916,9 @@ class AsyncRawNamespacesClient:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

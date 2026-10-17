@@ -476,7 +476,7 @@ client.list(
 <dl>
 <dd>
 
-**include:** `typing.Optional[ListRequestInclude]` — Optional extras, matching search's include
+**include:** `typing.Optional[ListRequestInclude]` — Optional extras
     
 </dd>
 </dl>
@@ -1797,7 +1797,7 @@ client.memories.forget_matching(
 <dl>
 <dd>
 
-Retrieve one memory by ID. Optionally include its version history and connected memories (each list walks outward up to relatedLimit, nearest first) and its source document.
+Retrieve one memory by ID. Optionally include its versions (up to three steps away, nearest first), its direct extends and derives links, up to relatedLimit each, and its source document.
 </dd>
 </dl>
 </dd>
@@ -1863,7 +1863,7 @@ client.memories.get(
 <dl>
 <dd>
 
-**related_limit:** `typing.Optional[int]` — Maximum parents, children and siblings to return, applied to each list separately. Each list walks outward from the memory, nearest first, until it reaches this many.
+**related_limit:** `typing.Optional[int]` — Maximum parents, children and siblings to return, applied to each list separately. Parents and children are earlier and later versions up to three steps away, nearest first; siblings are direct extends or derives links.
     
 </dd>
 </dl>
@@ -2954,6 +2954,233 @@ client.organization.update(
 <dd>
 
 **organizational_context:** `typing.Optional[str]` — Shared background that guides memory formation across every namespace. Set null to clear it.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Content Management
+<details><summary><code>client.content_management.<a href="src/supermemory/content_management/client.py">post_ns_by_namespace_list_documents_memory_counts</a>(...) -> PostNsByNamespaceListDocumentsMemoryCountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Count live memories in this namespace for up to 100 public document IDs. Missing or inaccessible documents are omitted, not reported as zero.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from supermemory import Supermemory
+from supermemory.environment import SupermemoryEnvironment
+
+client = Supermemory(
+    api_key="<token>",
+    environment=SupermemoryEnvironment.DEFAULT,
+)
+
+client.content_management.post_ns_by_namespace_list_documents_memory_counts(
+    namespace="user_alex",
+    ids=[
+        "ids"
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**namespace:** `str` — The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.List[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Feedback
+<details><summary><code>client.feedback.<a href="src/supermemory/feedback/client.py">post_feedback</a>(...) -> PostFeedbackResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Report a bug, request a feature or flag a docs problem to the Supermemory team. Built for AI agents: send structured JSON and an engineer picks it up.
+
+Authentication is optional for requests with a usable client IP. Cross-zone Cloudflare Worker requests and requests without a client IP must provide an API key. With an API key the limit is 3 submissions per organization per UTC day; without one it is 3 per IPv4 address or IPv6 /64, shared with everyone behind that address. Authenticated submissions have a separate 200/day pool; anonymous submissions share a 20/day pool. Pass your API key to get your own quota.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from supermemory import Supermemory
+from supermemory.environment import SupermemoryEnvironment
+
+client = Supermemory(
+    api_key="<token>",
+    environment=SupermemoryEnvironment.DEFAULT,
+)
+
+client.feedback.post_feedback(
+    type="bug",
+    title="Search returns no results for documents still in indexing",
+    description="Documents added less than a minute ago are missing from /v4/search results even though GET /v3/documents/{id} reports status done.",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**type:** `PostFeedbackRequestType` — Kind of feedback
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `str` — One-line summary
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `str` — What happened, with enough detail for an engineer to act on it
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**endpoint:** `typing.Optional[str]` — API operation the feedback is about
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_id:** `typing.Optional[str]` — Request ID of a failing call, if there is one
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expected:** `typing.Optional[str]` — What you expected to happen
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**actual:** `typing.Optional[str]` — What actually happened
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client:** `typing.Optional[str]` — Agent, tool or SDK sending the feedback
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_email:** `typing.Optional[str]` — Where to reach you about this feedback
     
 </dd>
 </dl>

@@ -154,9 +154,9 @@ class RawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -176,9 +176,9 @@ class RawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -198,9 +198,9 @@ class RawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -320,9 +320,9 @@ class RawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -342,9 +342,9 @@ class RawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -353,9 +353,9 @@ class RawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -443,9 +443,9 @@ class RawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -454,9 +454,9 @@ class RawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -465,9 +465,9 @@ class RawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -525,7 +525,7 @@ class RawSupermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -583,9 +583,9 @@ class RawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -594,9 +594,9 @@ class RawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -605,9 +605,9 @@ class RawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -732,9 +732,9 @@ class AsyncRawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -754,9 +754,9 @@ class AsyncRawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -776,9 +776,9 @@ class AsyncRawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -898,9 +898,9 @@ class AsyncRawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -920,9 +920,9 @@ class AsyncRawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -931,9 +931,9 @@ class AsyncRawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1021,9 +1021,9 @@ class AsyncRawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1032,9 +1032,9 @@ class AsyncRawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1043,9 +1043,9 @@ class AsyncRawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1103,7 +1103,7 @@ class AsyncRawSupermemory:
             Type-safe metadata conditions applied before pagination
 
         include : typing.Optional[ListRequestIncludeParams]
-            Optional extras, matching search's include
+            Optional extras
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1161,9 +1161,9 @@ class AsyncRawSupermemory:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1172,9 +1172,9 @@ class AsyncRawSupermemory:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1183,9 +1183,9 @@ class AsyncRawSupermemory:
                 raise InternalServerError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ErrorResponse,
+                        typing.Any,
                         construct_type(
-                            type_=ErrorResponse,  # type: ignore
+                            type_=typing.Any,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
