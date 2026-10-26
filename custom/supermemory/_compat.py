@@ -430,14 +430,22 @@ class Supermemory(_GeneratedSupermemory):
         options = dict(self._options)
         if self._owned_http_client:
             options["http_client"] = self._http_client
-        options["default_headers"] = set_default_headers or {
-            **options["default_headers"],
-            **(overrides.pop("default_headers", None) or {}),
-        }
-        options["default_query"] = set_default_query or {
-            **options["default_query"],
-            **(overrides.pop("default_query", None) or {}),
-        }
+        options["default_headers"] = (
+            set_default_headers
+            if set_default_headers is not None
+            else {
+                **options["default_headers"],
+                **(overrides.pop("default_headers", None) or {}),
+            }
+        )
+        options["default_query"] = (
+            set_default_query
+            if set_default_query is not None
+            else {
+                **options["default_query"],
+                **(overrides.pop("default_query", None) or {}),
+            }
+        )
         options.update(overrides)
         return type(self)(**options)
 
@@ -515,14 +523,22 @@ class AsyncSupermemory(_GeneratedAsyncSupermemory):
         options = dict(self._options)
         if self._owned_http_client:
             options["http_client"] = self._http_client
-        options["default_headers"] = set_default_headers or {
-            **options["default_headers"],
-            **(overrides.pop("default_headers", None) or {}),
-        }
-        options["default_query"] = set_default_query or {
-            **options["default_query"],
-            **(overrides.pop("default_query", None) or {}),
-        }
+        options["default_headers"] = (
+            set_default_headers
+            if set_default_headers is not None
+            else {
+                **options["default_headers"],
+                **(overrides.pop("default_headers", None) or {}),
+            }
+        )
+        options["default_query"] = (
+            set_default_query
+            if set_default_query is not None
+            else {
+                **options["default_query"],
+                **(overrides.pop("default_query", None) or {}),
+            }
+        )
         options.update(overrides)
         return type(self)(**options)
 
