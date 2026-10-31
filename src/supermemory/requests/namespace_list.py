@@ -4,7 +4,7 @@ import typing
 
 import typing_extensions
 from .namespace import NamespaceParams
-from .pagination import PaginationParams
+from .namespace_list_pagination import NamespaceListPaginationParams
 
 
 class NamespaceListParams(typing_extensions.TypedDict):
@@ -13,7 +13,7 @@ class NamespaceListParams(typing_extensions.TypedDict):
     Namespaces on this page, newest first
     """
 
-    pagination: PaginationParams
+    pagination: NamespaceListPaginationParams
     """
     Pagination metadata
     """

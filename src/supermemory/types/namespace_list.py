@@ -6,7 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .namespace import Namespace
-from .pagination import Pagination
+from .namespace_list_pagination import NamespaceListPagination
 
 
 class NamespaceList(UncheckedBaseModel):
@@ -15,7 +15,7 @@ class NamespaceList(UncheckedBaseModel):
     Namespaces on this page, newest first
     """
 
-    pagination: Pagination = pydantic.Field()
+    pagination: NamespaceListPagination = pydantic.Field()
     """
     Pagination metadata
     """

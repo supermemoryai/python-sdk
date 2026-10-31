@@ -46,6 +46,27 @@ class Pagination(UncheckedBaseModel):
     Total pages available at the selected limit
     """
 
+    has_more: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="hasMore"),
+        pydantic.Field(alias="hasMore", description="Whether more items exist after this page"),
+    ]
+    """
+    Whether more items exist after this page
+    """
+
+    next_cursor: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="nextCursor"),
+        pydantic.Field(
+            alias="nextCursor",
+            description="Opaque cursor for the next page. Pass it back as `cursor` with the same filters, sort, order and limit. Null when there are no more items. Cursor requests skip the per-page count and avoid deep offsets.",
+        ),
+    ] = None
+    """
+    Opaque cursor for the next page. Pass it back as `cursor` with the same filters, sort, order and limit. Null when there are no more items. Cursor requests skip the per-page count and avoid deep offsets.
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:
