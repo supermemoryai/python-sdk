@@ -436,6 +436,14 @@ client.list(
 <dl>
 <dd>
 
+**cursor:** `typing.Optional[str]` — Opaque cursor from a previous response's `pagination.nextCursor`. When present, `page` is ignored and results continue after the last item of the previous page. Filters, sort, order and limit must match the request that produced the cursor.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page:** `typing.Optional[int]` — One-based page number
     
 </dd>
