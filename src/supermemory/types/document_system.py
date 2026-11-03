@@ -14,7 +14,12 @@ from .document_system_status import DocumentSystemStatus
 
 class DocumentSystem(UncheckedBaseModel):
     """
-    Processing status, lifecycle timestamps, and storage path maintained by Supermemory
+    Ingestion source, processing status, lifecycle timestamps, and storage path maintained by Supermemory
+    """
+
+    source: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Recorded ingestion source; null when unavailable
     """
 
     status: DocumentSystemStatus = pydantic.Field()
