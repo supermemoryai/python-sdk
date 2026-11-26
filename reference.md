@@ -436,6 +436,14 @@ client.list(
 <dl>
 <dd>
 
+**cursor:** `typing.Optional[str]` — Opaque cursor from a previous response's `pagination.nextCursor`. When present, `page` is ignored and results continue after the last item of the previous page. Filters, sort, order and limit must match the request that produced the cursor.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page:** `typing.Optional[int]` — One-based page number
     
 </dd>
@@ -3047,6 +3055,119 @@ client.content_management.post_ns_by_namespace_list_documents_memory_counts(
 <dd>
 
 **ids:** `typing.List[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.content_management.<a href="src/supermemory/content_management/client.py">post_ns_by_namespace_graph</a>(...) -> PostNsByNamespaceGraphResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Page through a namespace's documents with their memories as graph nodes and edges, for example to render @supermemory/memory-graph. Pass nextCursor back as cursor until it is null.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from supermemory import Supermemory
+from supermemory.environment import SupermemoryEnvironment
+
+client = Supermemory(
+    api_key="<token>",
+    environment=SupermemoryEnvironment.DEFAULT,
+)
+
+client.content_management.post_ns_by_namespace_graph(
+    namespace="user_alex",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**namespace:** `str` — The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `typing.Optional[FilterExpression]` — A type-safe metadata filter predicate or nested and/or expression with up to 5 levels of nesting
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `typing.Optional[PostNsByNamespaceGraphRequestSort]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**order:** `typing.Optional[SortOrder]` 
     
 </dd>
 </dl>

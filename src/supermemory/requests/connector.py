@@ -28,7 +28,7 @@ class ConnectorParams(typing_extensions.TypedDict):
 
     namespace: typing.Optional[str]
     """
-    Namespace the connector syncs into. Null only for connectors created before namespaces were required.
+    Namespace the connector syncs into. Connectors created without one report sm_project_default.
     """
 
     account: typing.Optional[str]

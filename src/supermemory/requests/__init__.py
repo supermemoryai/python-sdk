@@ -18,6 +18,7 @@ if typing.TYPE_CHECKING:
     from .connector_deleted import ConnectorDeletedParams
     from .connector_link import ConnectorLinkParams
     from .connector_list import ConnectorListParams
+    from .connector_list_pagination import ConnectorListPaginationParams
     from .connector_run import ConnectorRunParams
     from .connector_run_system import ConnectorRunSystemParams
     from .connector_selection import ConnectorSelectionParams
@@ -105,6 +106,7 @@ if typing.TYPE_CHECKING:
     from .namespace_deleted_queued import NamespaceDeletedQueuedParams
     from .namespace_details import NamespaceDetailsParams
     from .namespace_list import NamespaceListParams
+    from .namespace_list_pagination import NamespaceListPaginationParams
     from .namespace_system import NamespaceSystemParams
     from .organization import OrganizationParams
     from .pagination import PaginationParams
@@ -138,6 +140,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorConfigValueParams": ".connector_config_value",
     "ConnectorDeletedParams": ".connector_deleted",
     "ConnectorLinkParams": ".connector_link",
+    "ConnectorListPaginationParams": ".connector_list_pagination",
     "ConnectorListParams": ".connector_list",
     "ConnectorParams": ".connector",
     "ConnectorRunParams": ".connector_run",
@@ -219,6 +222,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NamespaceDeleted_DeletedParams": ".namespace_deleted",
     "NamespaceDeleted_QueuedParams": ".namespace_deleted",
     "NamespaceDetailsParams": ".namespace_details",
+    "NamespaceListPaginationParams": ".namespace_list_pagination",
     "NamespaceListParams": ".namespace_list",
     "NamespaceParams": ".namespace",
     "NamespaceSystemParams": ".namespace_system",
@@ -278,6 +282,7 @@ __all__ = [
     "ConnectorConfigValueParams",
     "ConnectorDeletedParams",
     "ConnectorLinkParams",
+    "ConnectorListPaginationParams",
     "ConnectorListParams",
     "ConnectorParams",
     "ConnectorRunParams",
@@ -359,6 +364,7 @@ __all__ = [
     "NamespaceDeleted_DeletedParams",
     "NamespaceDeleted_QueuedParams",
     "NamespaceDetailsParams",
+    "NamespaceListPaginationParams",
     "NamespaceListParams",
     "NamespaceParams",
     "NamespaceSystemParams",

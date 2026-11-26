@@ -8,7 +8,11 @@ from supermemory._types import NOT_GIVEN, NotGiven
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..requests.filter_expression import FilterExpressionParams
+from ..types.sort_order import SortOrder
 from .raw_client import AsyncRawContentManagementClient, RawContentManagementClient
+from .types.post_ns_by_namespace_graph_request_sort import PostNsByNamespaceGraphRequestSort
+from .types.post_ns_by_namespace_graph_response import PostNsByNamespaceGraphResponse
 from .types.post_ns_by_namespace_list_documents_memory_counts_response import (
     PostNsByNamespaceListDocumentsMemoryCountsResponse,
 )
@@ -75,6 +79,70 @@ class ContentManagementClient:
         """
         _response = self._raw_client.post_ns_by_namespace_list_documents_memory_counts(
             namespace, ids=ids, request_options=request_options
+        )
+        return _response.data
+
+    def post_ns_by_namespace_graph(
+        self,
+        namespace: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        filter: typing.Optional[FilterExpressionParams] = OMIT,
+        sort: typing.Optional[PostNsByNamespaceGraphRequestSort] = OMIT,
+        order: typing.Optional[SortOrder] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> PostNsByNamespaceGraphResponse:
+        """
+        Page through a namespace's documents with their memories as graph nodes and edges, for example to render @supermemory/memory-graph. Pass nextCursor back as cursor until it is null.
+
+        Parameters
+        ----------
+        namespace : str
+            The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        filter : typing.Optional[FilterExpressionParams]
+            A type-safe metadata filter predicate or nested and/or expression with up to 5 levels of nesting
+
+        sort : typing.Optional[PostNsByNamespaceGraphRequestSort]
+
+        order : typing.Optional[SortOrder]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PostNsByNamespaceGraphResponse
+            Graph page retrieved successfully
+
+        Examples
+        --------
+        from supermemory import Supermemory
+
+        client = Supermemory(
+            api_key="YOUR_API_KEY",
+        )
+        client.content_management.post_ns_by_namespace_graph(
+            namespace="user_alex",
+        )
+        """
+        _response = self._raw_client.post_ns_by_namespace_graph(
+            namespace,
+            cursor=cursor,
+            limit=limit,
+            filter=filter,
+            sort=sort,
+            order=order,
+            request_options=request_options,
         )
         return _response.data
 
@@ -145,5 +213,77 @@ class AsyncContentManagementClient:
         """
         _response = await self._raw_client.post_ns_by_namespace_list_documents_memory_counts(
             namespace, ids=ids, request_options=request_options
+        )
+        return _response.data
+
+    async def post_ns_by_namespace_graph(
+        self,
+        namespace: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        filter: typing.Optional[FilterExpressionParams] = OMIT,
+        sort: typing.Optional[PostNsByNamespaceGraphRequestSort] = OMIT,
+        order: typing.Optional[SortOrder] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> PostNsByNamespaceGraphResponse:
+        """
+        Page through a namespace's documents with their memories as graph nodes and edges, for example to render @supermemory/memory-graph. Pass nextCursor back as cursor until it is null.
+
+        Parameters
+        ----------
+        namespace : str
+            The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        filter : typing.Optional[FilterExpressionParams]
+            A type-safe metadata filter predicate or nested and/or expression with up to 5 levels of nesting
+
+        sort : typing.Optional[PostNsByNamespaceGraphRequestSort]
+
+        order : typing.Optional[SortOrder]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PostNsByNamespaceGraphResponse
+            Graph page retrieved successfully
+
+        Examples
+        --------
+        import asyncio
+
+        from supermemory import AsyncSupermemory
+
+        client = AsyncSupermemory(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.content_management.post_ns_by_namespace_graph(
+                namespace="user_alex",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.post_ns_by_namespace_graph(
+            namespace,
+            cursor=cursor,
+            limit=limit,
+            filter=filter,
+            sort=sort,
+            order=order,
+            request_options=request_options,
         )
         return _response.data

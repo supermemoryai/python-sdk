@@ -4,12 +4,12 @@ import typing
 
 import typing_extensions
 from .connector import ConnectorParams
-from .pagination import PaginationParams
+from .connector_list_pagination import ConnectorListPaginationParams
 
 
 class ConnectorListParams(typing_extensions.TypedDict):
     connectors: typing.Sequence[ConnectorParams]
-    pagination: PaginationParams
+    pagination: ConnectorListPaginationParams
     """
     Pagination metadata
     """

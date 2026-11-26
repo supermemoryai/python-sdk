@@ -31,7 +31,7 @@ class Connector(UncheckedBaseModel):
 
     namespace: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Namespace the connector syncs into. Null only for connectors created before namespaces were required.
+    Namespace the connector syncs into. Connectors created without one report sm_project_default.
     """
 
     account: typing.Optional[str] = pydantic.Field(default=None)

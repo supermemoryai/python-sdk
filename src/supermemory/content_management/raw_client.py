@@ -13,12 +13,17 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
 from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.forbidden_error import ForbiddenError
 from ..errors.internal_server_error import InternalServerError
 from ..errors.unauthorized_error import UnauthorizedError
+from ..requests.filter_expression import FilterExpressionParams
 from ..types.bad_request_error_body import BadRequestErrorBody
+from ..types.sort_order import SortOrder
+from .types.post_ns_by_namespace_graph_request_sort import PostNsByNamespaceGraphRequestSort
+from .types.post_ns_by_namespace_graph_response import PostNsByNamespaceGraphResponse
 from .types.post_ns_by_namespace_list_documents_memory_counts_response import (
     PostNsByNamespaceListDocumentsMemoryCountsResponse,
 )
@@ -136,6 +141,120 @@ class RawContentManagementClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def post_ns_by_namespace_graph(
+        self,
+        namespace: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        filter: typing.Optional[FilterExpressionParams] = OMIT,
+        sort: typing.Optional[PostNsByNamespaceGraphRequestSort] = OMIT,
+        order: typing.Optional[SortOrder] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> HttpResponse[PostNsByNamespaceGraphResponse]:
+        """
+        Page through a namespace's documents with their memories as graph nodes and edges, for example to render @supermemory/memory-graph. Pass nextCursor back as cursor until it is null.
+
+        Parameters
+        ----------
+        namespace : str
+            The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        filter : typing.Optional[FilterExpressionParams]
+            A type-safe metadata filter predicate or nested and/or expression with up to 5 levels of nesting
+
+        sort : typing.Optional[PostNsByNamespaceGraphRequestSort]
+
+        order : typing.Optional[SortOrder]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[PostNsByNamespaceGraphResponse]
+            Graph page retrieved successfully
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"ns/{encode_path_param(namespace)}/graph",
+            method="POST",
+            params={
+                "cursor": cursor,
+                "limit": limit,
+            },
+            json={
+                "filter": convert_and_respect_annotation_metadata(
+                    object_=filter, annotation=FilterExpressionParams, direction="write"
+                ),
+                "sort": sort,
+                "order": order,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    PostNsByNamespaceGraphResponse,
+                    construct_type(
+                        type_=PostNsByNamespaceGraphResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        BadRequestErrorBody,
+                        construct_type(
+                            type_=BadRequestErrorBody,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawContentManagementClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -227,6 +346,120 @@ class AsyncRawContentManagementClient:
                 )
             if _response.status_code == 500:
                 raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def post_ns_by_namespace_graph(
+        self,
+        namespace: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        filter: typing.Optional[FilterExpressionParams] = OMIT,
+        sort: typing.Optional[PostNsByNamespaceGraphRequestSort] = OMIT,
+        order: typing.Optional[SortOrder] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+        extra_headers: typing.Optional[typing.Mapping[str, str]] = None,
+        extra_query: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        extra_body: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+        timeout: typing.Union[float, httpx.Timeout, None, NotGiven] = NOT_GIVEN,
+    ) -> AsyncHttpResponse[PostNsByNamespaceGraphResponse]:
+        """
+        Page through a namespace's documents with their memories as graph nodes and edges, for example to render @supermemory/memory-graph. Pass nextCursor back as cursor until it is null.
+
+        Parameters
+        ----------
+        namespace : str
+            The isolated namespace. This can be an ID for your user, a project ID, or any other identifier you wish to use to scope documents.
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        filter : typing.Optional[FilterExpressionParams]
+            A type-safe metadata filter predicate or nested and/or expression with up to 5 levels of nesting
+
+        sort : typing.Optional[PostNsByNamespaceGraphRequestSort]
+
+        order : typing.Optional[SortOrder]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[PostNsByNamespaceGraphResponse]
+            Graph page retrieved successfully
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"ns/{encode_path_param(namespace)}/graph",
+            method="POST",
+            params={
+                "cursor": cursor,
+                "limit": limit,
+            },
+            json={
+                "filter": convert_and_respect_annotation_metadata(
+                    object_=filter, annotation=FilterExpressionParams, direction="write"
+                ),
+                "sort": sort,
+                "order": order,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    PostNsByNamespaceGraphResponse,
+                    construct_type(
+                        type_=PostNsByNamespaceGraphResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        BadRequestErrorBody,
+                        construct_type(
+                            type_=BadRequestErrorBody,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        typing.Any,
+                        construct_type(
+                            type_=typing.Any,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         typing.Any,
