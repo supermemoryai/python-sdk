@@ -6,12 +6,12 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 from .connector import Connector
-from .pagination import Pagination
+from .connector_list_pagination import ConnectorListPagination
 
 
 class ConnectorList(UncheckedBaseModel):
     connectors: typing.List[Connector]
-    pagination: Pagination = pydantic.Field()
+    pagination: ConnectorListPagination = pydantic.Field()
     """
     Pagination metadata
     """

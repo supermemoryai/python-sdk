@@ -27,10 +27,13 @@ class NamespaceSystem(UncheckedBaseModel):
     updated_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="updatedAt"),
-        pydantic.Field(alias="updatedAt", description="ISO 8601 timestamp of the latest namespace update"),
+        pydantic.Field(
+            alias="updatedAt",
+            description="ISO 8601 timestamp of the latest change to the namespace's settings, documents, or memories",
+        ),
     ]
     """
-    ISO 8601 timestamp of the latest namespace update
+    ISO 8601 timestamp of the latest change to the namespace's settings, documents, or memories
     """
 
     if IS_PYDANTIC_V2:

@@ -21,6 +21,7 @@ if typing.TYPE_CHECKING:
     from .connector_include import ConnectorInclude
     from .connector_link import ConnectorLink
     from .connector_list import ConnectorList
+    from .connector_list_pagination import ConnectorListPagination
     from .connector_provider import ConnectorProvider
     from .connector_run import ConnectorRun
     from .connector_run_status import ConnectorRunStatus
@@ -123,6 +124,7 @@ if typing.TYPE_CHECKING:
     from .namespace_deleted_queued import NamespaceDeletedQueued
     from .namespace_details import NamespaceDetails
     from .namespace_list import NamespaceList
+    from .namespace_list_pagination import NamespaceListPagination
     from .namespace_system import NamespaceSystem
     from .organization import Organization
     from .pagination import Pagination
@@ -165,6 +167,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectorInclude": ".connector_include",
     "ConnectorLink": ".connector_link",
     "ConnectorList": ".connector_list",
+    "ConnectorListPagination": ".connector_list_pagination",
     "ConnectorProvider": ".connector_provider",
     "ConnectorRun": ".connector_run",
     "ConnectorRunStatus": ".connector_run_status",
@@ -267,6 +270,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NamespaceDeleted_Queued": ".namespace_deleted",
     "NamespaceDetails": ".namespace_details",
     "NamespaceList": ".namespace_list",
+    "NamespaceListPagination": ".namespace_list_pagination",
     "NamespaceSystem": ".namespace_system",
     "Organization": ".organization",
     "Pagination": ".pagination",
@@ -333,6 +337,7 @@ __all__ = [
     "ConnectorInclude",
     "ConnectorLink",
     "ConnectorList",
+    "ConnectorListPagination",
     "ConnectorProvider",
     "ConnectorRun",
     "ConnectorRunStatus",
@@ -435,6 +440,7 @@ __all__ = [
     "NamespaceDeleted_Queued",
     "NamespaceDetails",
     "NamespaceList",
+    "NamespaceListPagination",
     "NamespaceSystem",
     "Organization",
     "Pagination",

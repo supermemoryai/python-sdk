@@ -373,6 +373,7 @@ class Supermemory:
         namespace: str,
         type: ListType,
         *,
+        cursor: typing.Optional[str] = None,
         page: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[ListSort] = None,
@@ -395,6 +396,9 @@ class Supermemory:
 
         type : ListType
             Resource collection to list: source documents, extracted chunks, or learned memories
+
+        cursor : typing.Optional[str]
+            Opaque cursor from a previous response's `pagination.nextCursor`. When present, `page` is ignored and results continue after the last item of the previous page. Filters, sort, order and limit must match the request that produced the cursor.
 
         page : typing.Optional[int]
             One-based page number
@@ -439,6 +443,7 @@ class Supermemory:
         _response = self._raw_client.list(
             namespace,
             type,
+            cursor=cursor,
             page=page,
             limit=limit,
             sort=sort,
@@ -891,6 +896,7 @@ class AsyncSupermemory:
         namespace: str,
         type: ListType,
         *,
+        cursor: typing.Optional[str] = None,
         page: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
         sort: typing.Optional[ListSort] = None,
@@ -913,6 +919,9 @@ class AsyncSupermemory:
 
         type : ListType
             Resource collection to list: source documents, extracted chunks, or learned memories
+
+        cursor : typing.Optional[str]
+            Opaque cursor from a previous response's `pagination.nextCursor`. When present, `page` is ignored and results continue after the last item of the previous page. Filters, sort, order and limit must match the request that produced the cursor.
 
         page : typing.Optional[int]
             One-based page number
@@ -965,6 +974,7 @@ class AsyncSupermemory:
         _response = await self._raw_client.list(
             namespace,
             type,
+            cursor=cursor,
             page=page,
             limit=limit,
             sort=sort,

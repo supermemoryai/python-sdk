@@ -45,7 +45,7 @@ class DocumentParams(typing_extensions.TypedDict):
 
     system: DocumentSystemParams
     """
-    Processing status, lifecycle timestamps, and storage path maintained by Supermemory
+    Ingestion source, processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """
 
     chunks: typing_extensions.NotRequired[typing.Sequence[ChunkParams]]

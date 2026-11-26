@@ -6,6 +6,23 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .post_ns_by_namespace_graph_response import PostNsByNamespaceGraphResponseParams
+    from .post_ns_by_namespace_graph_response_edges_item import PostNsByNamespaceGraphResponseEdgesItemParams
+    from .post_ns_by_namespace_graph_response_edges_item_one import PostNsByNamespaceGraphResponseEdgesItemOneParams
+    from .post_ns_by_namespace_graph_response_edges_item_source_added_at import (
+        PostNsByNamespaceGraphResponseEdgesItemSourceAddedAtParams,
+    )
+    from .post_ns_by_namespace_graph_response_nodes_item import (
+        PostNsByNamespaceGraphResponseNodesItemParams,
+        PostNsByNamespaceGraphResponseNodesItem_DocumentParams,
+        PostNsByNamespaceGraphResponseNodesItem_MemoryParams,
+    )
+    from .post_ns_by_namespace_graph_response_nodes_item_document import (
+        PostNsByNamespaceGraphResponseNodesItemDocumentParams,
+    )
+    from .post_ns_by_namespace_graph_response_nodes_item_memory import (
+        PostNsByNamespaceGraphResponseNodesItemMemoryParams,
+    )
     from .post_ns_by_namespace_list_documents_memory_counts_response import (
         PostNsByNamespaceListDocumentsMemoryCountsResponseParams,
     )
@@ -13,6 +30,15 @@ if typing.TYPE_CHECKING:
         PostNsByNamespaceListDocumentsMemoryCountsResponseCountsItemParams,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "PostNsByNamespaceGraphResponseEdgesItemOneParams": ".post_ns_by_namespace_graph_response_edges_item_one",
+    "PostNsByNamespaceGraphResponseEdgesItemParams": ".post_ns_by_namespace_graph_response_edges_item",
+    "PostNsByNamespaceGraphResponseEdgesItemSourceAddedAtParams": ".post_ns_by_namespace_graph_response_edges_item_source_added_at",
+    "PostNsByNamespaceGraphResponseNodesItemDocumentParams": ".post_ns_by_namespace_graph_response_nodes_item_document",
+    "PostNsByNamespaceGraphResponseNodesItemMemoryParams": ".post_ns_by_namespace_graph_response_nodes_item_memory",
+    "PostNsByNamespaceGraphResponseNodesItemParams": ".post_ns_by_namespace_graph_response_nodes_item",
+    "PostNsByNamespaceGraphResponseNodesItem_DocumentParams": ".post_ns_by_namespace_graph_response_nodes_item",
+    "PostNsByNamespaceGraphResponseNodesItem_MemoryParams": ".post_ns_by_namespace_graph_response_nodes_item",
+    "PostNsByNamespaceGraphResponseParams": ".post_ns_by_namespace_graph_response",
     "PostNsByNamespaceListDocumentsMemoryCountsResponseCountsItemParams": ".post_ns_by_namespace_list_documents_memory_counts_response_counts_item",
     "PostNsByNamespaceListDocumentsMemoryCountsResponseParams": ".post_ns_by_namespace_list_documents_memory_counts_response",
 }
@@ -40,6 +66,15 @@ def __dir__():
 
 
 __all__ = [
+    "PostNsByNamespaceGraphResponseEdgesItemOneParams",
+    "PostNsByNamespaceGraphResponseEdgesItemParams",
+    "PostNsByNamespaceGraphResponseEdgesItemSourceAddedAtParams",
+    "PostNsByNamespaceGraphResponseNodesItemDocumentParams",
+    "PostNsByNamespaceGraphResponseNodesItemMemoryParams",
+    "PostNsByNamespaceGraphResponseNodesItemParams",
+    "PostNsByNamespaceGraphResponseNodesItem_DocumentParams",
+    "PostNsByNamespaceGraphResponseNodesItem_MemoryParams",
+    "PostNsByNamespaceGraphResponseParams",
     "PostNsByNamespaceListDocumentsMemoryCountsResponseCountsItemParams",
     "PostNsByNamespaceListDocumentsMemoryCountsResponseParams",
 ]

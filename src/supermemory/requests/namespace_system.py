@@ -18,5 +18,5 @@ class NamespaceSystemParams(typing_extensions.TypedDict):
 
     updated_at: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="updatedAt")]
     """
-    ISO 8601 timestamp of the latest namespace update
+    ISO 8601 timestamp of the latest change to the namespace's settings, documents, or memories
     """

@@ -47,7 +47,7 @@ class Document(UncheckedBaseModel):
 
     system: DocumentSystem = pydantic.Field()
     """
-    Processing status, lifecycle timestamps, and storage path maintained by Supermemory
+    Ingestion source, processing status, lifecycle timestamps, and storage path maintained by Supermemory
     """
 
     chunks: typing.Optional[typing.List[Chunk]] = pydantic.Field(default=None)
